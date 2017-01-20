@@ -1,0 +1,112 @@
+|2017-01-20 14:58:36 |logger              |INFO      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|2017-01-20 14:58:36 |logger              |DEBUG     | Registed Engine: {'Configuration': {'get_value_from_configuration': <bound method Configuration.get_value_from_configuration of <engine.Configuration.Configuration object at 0x0000000002505E48>>}}
+|2017-01-20 14:58:36 |logger              |DEBUG     | Registed TestPoint: {'Security_002': {'run': <bound method Security_002.run of <testpoint.Security_002.Security_002 object at 0x0000000002505D68>>}, 'Security_001': {'run': <bound method Security_001.run of <testpoint.Security_001.Security_001 object at 0x0000000002505828>>}}
+|2017-01-20 14:58:36 |logger              |DEBUG     | Registed Case: {'SecurityCase': {'fix': <bound method SecurityCase.fix of <case.SecurityCase.SecurityCase object at 0x000000000250C080>>, 'run': <bound method SecurityCase.run of <case.SecurityCase.SecurityCase object at 0x000000000250C080>>}, 'SecurityCase2': {'fix': <bound method SecurityCase2.fix of <case.SecurityCase2.SecurityCase2 object at 0x000000000250C588>>, 'run': <bound method SecurityCase2.run of <case.SecurityCase2.SecurityCase2 object at 0x000000000250C588>>}}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-mf keystore path is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-proxy1 keystore path is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-proxy2 keystore path is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-proxy3 keystore path is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-simulator keystore path is:None
+|2017-01-20 14:58:36 |logger              |INFO      | TestPoint(Security_002) result is [PASS]
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:58:36 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-mf ssl support is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-proxy1 ssl support is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-proxy2 ssl support is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-proxy3 ssl support is:None
+|2017-01-20 14:58:36 |logger              |DEBUG     | nbi3gc-simulator ssl support is:None
+|2017-01-20 14:58:36 |logger              |INFO      | TestPoint(Security_001) result is [FAIL]
+|2017-01-20 14:58:36 |logger              |INFO      | Case(SecurityCase) Rule is `{Security_002} is True and {Security_001} is True`, result is [FAIL]
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties) item(jacorb.security.keystore) failed!configuration content is {}
+|2017-01-20 14:59:16 |logger              |DEBUG     | nbi3gc-mf keystore path is:None
+|2017-01-20 14:59:16 |logger              |DEBUG     | nbi3gc-proxy1 keystore path is:None
+|2017-01-20 14:59:16 |logger              |DEBUG     | nbi3gc-proxy2 keystore path is:None
+|2017-01-20 14:59:16 |logger              |DEBUG     | nbi3gc-proxy3 keystore path is:None
+|2017-01-20 14:59:16 |logger              |DEBUG     | nbi3gc-simulator keystore path is:None
+|2017-01-20 14:59:16 |logger              |INFO      | TestPoint(Security_002) result is [PASS]
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:59:16 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:16 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:59:17 |logger              |ERROR     | cat /etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:17 |logger              |ERROR     | get config(/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:59:17 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-01-20 14:59:17 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties) item(jacorb.security.support_ssl) failed!configuration content is {}
+|2017-01-20 14:59:17 |logger              |DEBUG     | nbi3gc-mf ssl support is:None
+|2017-01-20 14:59:17 |logger              |DEBUG     | nbi3gc-proxy1 ssl support is:None
+|2017-01-20 14:59:17 |logger              |DEBUG     | nbi3gc-proxy2 ssl support is:None
+|2017-01-20 14:59:17 |logger              |DEBUG     | nbi3gc-proxy3 ssl support is:None
+|2017-01-20 14:59:17 |logger              |DEBUG     | nbi3gc-simulator ssl support is:None
+|2017-01-20 14:59:17 |logger              |INFO      | TestPoint(Security_001) result is [FAIL]
+|2017-01-20 14:59:17 |logger              |INFO      | Case(SecurityCase2) Rule is `{Security_002} is True or {Security_001} is True`, result is [PASS]
+|2017-01-20 14:59:17 |logger              |DEBUG     | Case Report: {'SecurityCase': False, 'SecurityCase2': True}
+|2017-01-20 14:59:17 |logger              |DEBUG     | TestPoint Report : {'{Security_001}': False, '{Security_002}': True}
