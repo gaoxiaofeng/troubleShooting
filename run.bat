@@ -1,1 +1,1 @@
-python D:\\TAcase\\BravoTool\\troubleShooting\\runner.py
+python runner.py
