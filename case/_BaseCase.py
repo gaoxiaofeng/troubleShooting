@@ -62,10 +62,10 @@ class _BaseCase(object):
         self.logger.info("Case(%s) Rule is `%s`, result is [%s]"%(self.__class__.__name__,self.passCondition,self.status))
 
     def _interactive(self):
-        Ask = "|\n*Question: What do you want to do next?(select 1/2)"
+        Ask = "|\n*Question: What do you want to do next?(Yes/No)"
         Option = """
-        * [1] Continue to the next Case.
-        * [2] Re-Run the Case Again."""
+        * [Yes] Continue to the next Case.
+        * [No] ReRun the Case Again."""
         Answer = "[Input Selected]:"
         select = ""
         self._printf(Ask)
@@ -73,10 +73,11 @@ class _BaseCase(object):
         while 1:
             self._printf(Answer)
             answer = raw_input()
-            if answer.strip() == "1":
+            answer = answer.lower()
+            if answer.strip() == "yes" or answer.strip() == "y":
                 select = CONTINUE
                 break
-            elif answer.strip() == "2":
+            elif answer.strip() == "no" or answer.strip() == "n":
                 select = RUNAGAIN
                 break
             else:
