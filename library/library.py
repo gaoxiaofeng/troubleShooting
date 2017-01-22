@@ -1,5 +1,4 @@
 import sys,os,time
-from log.logger import logger
 from subprocess import Popen, PIPE
 from variable.variable import *
 import re

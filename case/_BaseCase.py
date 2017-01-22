@@ -1,5 +1,5 @@
 import re
-from manager import TestPointManager
+from manager import TestPointManagerInstance
 from log.logger import logger
 import pdb
 from variable.variable import *
@@ -22,7 +22,7 @@ class _BaseCase(object):
     def _check_status(self):
         checkPointList = parseRule(self.passCondition)
         if len(checkPointList) >= 1:
-            checkPointStatusDict = TestPointManager.run_test_points(checkPointList)
+            checkPointStatusDict = TestPointManagerInstance.run_test_points(checkPointList)
             passCondition = self.passCondition
             for checkPoint in checkPointList:
                 passCondition = passCondition.replace(checkPoint,str(checkPointStatusDict[checkPoint]))

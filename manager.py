@@ -1,23 +1,18 @@
-import sys,os
-import time
-import pdb
-from library.library import singleton
 from log.logger import logger
 from exception.exception import BaseManagerException
 import re
 from variable.variable import *
 
-#@singleton
 class BaseManager(object):
     '''
-    manager of Test Points
+    base manager
     '''
     def __init__(self):
-        super(self.__class__,self).__init__()
+        super(BaseManager,self).__init__()
         self.logger = logger()
         self.__registry = {}
-        self.__case_record = {}
-        self.__testPoint_record = {}
+
+
     def __str__(self):
         return "%s dict:%s"%(self.__class__.__name__,self.__dict__)
     __repr__ = __str__
@@ -52,9 +47,9 @@ class BaseManager(object):
                     instaceMethod[attr] = keyword
 
         return instaceMethod
-    def get_all_keyword(self):
-        return self._registry
-    def get_keyword(self,keywordName):
+    def get_keyword(self,keywordName=None):
+        if keywordName == None:
+            return  self._registry
         #pdb.set_trace()
         findNullError = "search keyword null, keyword:[%s]"%keywordName
 
@@ -83,6 +78,17 @@ class BaseManager(object):
             else:
                 findMultiError =  "search keyword multi, keyword:%s,result:%s"%(keywordName,keywordList)
                 raise BaseManagerException(findMultiError)
+
+
+
+
+
+
+
+class  TestPointManager(BaseManager):
+    def __init__(self):
+        super(TestPointManager,self).__init__()
+        self.__testPoint_record = {}
     def run_test_points(self,testPointList):
 
         statusDict = {}
@@ -101,7 +107,24 @@ class BaseManager(object):
         self.testPoint_record = statusDict
         return statusDict
 
+    @property
+    def testPoint_record(self):
+        return self.__testPoint_record
+    @testPoint_record.setter
+    def testPoint_record(self,testPoint_record):
+        for testPointName in testPoint_record:
+            self.__testPoint_record[testPointName] = testPoint_record[testPointName]
 
+
+class  EngineManager(BaseManager):
+    def __init__(self):
+        super(EngineManager,self).__init__()
+
+
+class CaseManager(BaseManager):
+    def __init__(self):
+        super(CaseManager,self).__init__()
+        self.__case_record = {}
     def run_case(self,case):
         caseRunnerEntry = "%s.%s"%(case,"run")
         caseRunner = self.get_keyword(caseRunnerEntry)
@@ -110,7 +133,6 @@ class BaseManager(object):
             if behavior == CONTINUE:
                 break
         self.case_record = {case:status}
-
     @property
     def case_record(self):
         return self.__case_record
@@ -123,21 +145,10 @@ class BaseManager(object):
             else:
                 self.__case_record[caseName] = case_record[caseName]
 
-    @property
-    def testPoint_record(self):
-        return self.__testPoint_record
-    @testPoint_record.setter
-    def testPoint_record(self,testPoint_record):
-        for testPointName in testPoint_record:
-            self.__testPoint_record[testPointName] = testPoint_record[testPointName]
+TestPointManagerInstance = TestPointManager()
+EngineManagerInstance =  EngineManager()
+CaseManagerInstance = CaseManager()
 
-
-
-
-
-TestPointManager = BaseManager()
-EngineManager = BaseManager()
-CaseManager = BaseManager()
 if __name__ == "__main__":
     pass
 

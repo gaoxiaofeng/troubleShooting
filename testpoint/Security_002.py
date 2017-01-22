@@ -1,5 +1,5 @@
 from library.library import singleton
-from manager import TestPointManager,EngineManager,CaseManager
+from manager import EngineManagerInstance
 from variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton
@@ -9,7 +9,7 @@ class Security_002(_BaseTestPoint):
         self.describe = "Verify nbi3gc mf/proxy-1/proxy-2/proxy-3 security certificate path config is correct"
 
     def _checkpoint(self):
-        get_value_from_configuration = EngineManager.get_keyword("get_value_from_configuration")
+        get_value_from_configuration = EngineManagerInstance.get_keyword("get_value_from_configuration")
         item = "jacorb.security.keystore"
         self._nbi3gc_mf_keystore_path = get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,item)
         self._nbi3gc_proxy1_keystore_path = get_value_from_configuration(NBI3GC_PROXY1_JACORB_PROPERTIES,item)

@@ -1,5 +1,5 @@
 import sys,os
-from manager import TestPointManager,EngineManager,CaseManager
+##from manager import TestPointManager,EngineManager,CaseManager
 import threading
 from Queue import Queue
 from library.library import singleton
@@ -13,54 +13,6 @@ class OutPut(threading.Thread):
         self.output = OutPutQueue
         self.running = True
         self.reservedWordList = ["Description:","TestPoints:","Result:","Fix Way:","Question:","|","--","\\","*",]
-
-##    def printf(self,content):
-##
-##        if content.strip():
-##            pattern = re.compile(r".*?((\s*\|\n)+\s*\\-+\*+).*?",re.MULTILINE|re.S)
-##            match = pattern.match(content)
-##
-##
-##            if "["+ PASS + "]" in content:
-##                if match:
-##                    flag = match.group(0)
-##                    content = content.replace(flag,PRINT_GREEN+flag+PRINT_END)
-##                    content = content.replace("["+ PASS + "]",PRINT_pass)
-##                else:
-##                    content = content.replace("["+ PASS + "]",PRINT_PASS)
-##
-##            elif "[" + FAIL + "]" in content:
-##
-##                if match:
-##                    flag = match.group(0)
-##                    content = content.replace(flag,PRINT_RED+flag+PRINT_END)
-##                    content = content.replace("[" + FAIL + "]",PRINT_fail)
-##                else:
-##                    content = content.replace("[" + FAIL + "]",PRINT_FAIL)
-##            else:
-##                if match:
-##                    flag = match.group(0)
-##                    content = content.replace(flag,PRINT_BLUE+flag+PRINT_END)
-##
-##            for reservedWord in self.reservedWordList:
-##                if reservedWord in content:
-##                    content = content.replace(reservedWord,PRINT_AMARANTH+reservedWord+PRINT_END)
-##            pattern_highLight = re.compile(r".*(\{.+\}).*",re.M|re.S)
-##            match_highLight = pattern_highLight.match(content)
-##            if match_highLight:
-##                highLight = match_highLight.group(1)
-##                highLight_strip = highLight.strip("{}")
-##                content = content.replace(highLight,PRINT_HIGHLIGHT+highLight_strip+PRINT_END)
-##
-##            pattern_step = re.compile(r".*?(Step\s*\d*\.).*?",re.M|re.S)
-##            match_step = pattern_step.match(content)
-##            if match_step:
-##                step =  match_step.group(1)
-##                content = content.replace(step,PRINT_BLUE+step+PRINT_END)
-##
-##
-##            print content
-
 
     def printf(self,content):
 
