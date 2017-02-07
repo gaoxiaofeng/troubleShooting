@@ -1,10 +1,12 @@
 import re
 from manager import TestPointManagerInstance
 from log.logger import logger
-import pdb
+import pdb,time
 from variable.variable import *
-from library.library import parseRule
+from library.library import parseRule,Getch
+from library.controlView import ControlView
 from output.output import OutPutQueue
+import  sys
 class _BaseCase(object):
     def __init__(self):
         super(_BaseCase,self).__init__()
@@ -18,7 +20,6 @@ class _BaseCase(object):
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)
-
     def _check_status(self):
         checkPointList = parseRule(self.passCondition)
         if len(checkPointList) >= 1:
@@ -42,7 +43,8 @@ class _BaseCase(object):
         self._check_status()
         self._processResult()
         if not self.passed:
-            selected = self.fix()
+            self.fix()
+            selected = self._interactive()
             return self.passed,selected
         else:
             return self.passed,CONTINUE
@@ -61,27 +63,55 @@ class _BaseCase(object):
         self._printf(Result)
         self.logger.info("Case(%s) Rule is `%s`, result is [%s]"%(self.__class__.__name__,self.passCondition,self.status))
 
-    def _interactive(self):
-        Ask = "|\n*Question: What do you want to do next?(Yes/No)"
+    def _interactive2(self):
+        commandList = []
+        Question = "|\n*Question: What do you want to do next?"
         Option = """
-        * [Yes] Continue to the next Case.
-        * [No] ReRun the Case Again."""
-        Answer = "[Input Selected]:"
+        [N] Next Case.    [R]ReRun this Case Again.   [E]Exit tool"""
         select = ""
-        self._printf(Ask)
+        self._printf(Question)
         self._printf(Option)
         while 1:
-            self._printf(Answer)
-            answer = raw_input()
-            answer = answer.lower()
-            if answer.strip() == "yes" or answer.strip() == "y":
+            ##answer = raw_input()
+            self._waitPrintfCompletely()
+            inkey = Getch()
+            answer = inkey()
+            answerOrd = ord(answer)
+            commandList.append(answerOrd)
+            answerStr = answer.lower()
+            if answerStr == "n":
                 select = CONTINUE
                 break
-            elif answer.strip() == "no" or answer.strip() == "n":
+            elif answerStr == "r":
                 select = RUNAGAIN
                 break
+            elif answerStr == "q" or answer == "e":
+                select = EXIT
+                break
+            elif answerOrd ==  65 and commandList[-2] == 91 and commandList[-3] == 27:
+                #up
+                pass
+
             else:
                 pass
+
+        return select
+    def _interactive(self):
+        commandList = []
+        Question = "|\n*Question: What do you want to do next?"
+        Option = """
+        [N] Next Case.    [R]ReRun this Case Again.   [E]Exit tool"""
+        self._printf(Question)
+        view = ControlView()
+        chLower = view("[N] Next Case ","[R]ReRun this Case Again ","[E]Exit tool ")
+        if chLower == "n":
+            select = CONTINUE
+        elif chLower == "r":
+            select = RUNAGAIN
+        elif chLower == "e":
+            select = EXIT
+
+
 
         return select
 
@@ -95,8 +125,8 @@ class _BaseCase(object):
 
             self._printf("|\t* Step %s. %s"%(i,Step))
             i += 1
-        selected = self._interactive()
-        return selected
+
+
 
 
 

@@ -18,13 +18,20 @@ class OutPut(threading.Thread):
 
         if content.strip():
 
+            if YES in content:
+                content = content.replace(YES,PRINT_BOLD+"Y"+PRINT_END+"ES")
 
+            if NO in content:
+                content = content.replace(NO,PRINT_BOLD + "N" + PRINT_END + "O")
+
+            if EXIT in content:
+                content = content.replace(EXIT,PRINT_BOLD + "E" + PRINT_END + "XIT")
 
             if  PASS in content:
                 if "--*" in content:
                     content = content.replace(PASS,PRINT_GREEN + OK + PRINT_END)
                 else:
-                    content = content.replace(PASS,PRINT_GREEN + PASS + PRINT_END)
+                    content = content.replace(PASS,PRINT_GREEN_BLOD + PASS + PRINT_END)
 
 
             elif  FAIL in content:
@@ -53,8 +60,10 @@ class OutPut(threading.Thread):
             print content
 
     def stop(self):
-        self.running = False
-
+        while 1:
+            if self.output.empty():
+                self.running = False
+                break
     def run(self):
         while 1:
             if self.running:

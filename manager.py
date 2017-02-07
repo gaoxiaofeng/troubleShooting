@@ -1,5 +1,5 @@
 from log.logger import logger
-from exception.exception import BaseManagerException
+from exception.exception import *
 import re
 from variable.variable import *
 
@@ -132,7 +132,15 @@ class CaseManager(BaseManager):
             status,behavior = caseRunner()
             if behavior == CONTINUE:
                 break
+            elif behavior == RUNAGAIN:
+                pass
+            elif behavior == EXIT:
+                break
+            else:
+                raise CaseManagerException("unsupport behavior : %s"%behavior)
+
         self.case_record = {case:status}
+        return  status,behavior
     @property
     def case_record(self):
         return self.__case_record

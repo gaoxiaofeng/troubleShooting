@@ -1,4 +1,5 @@
 import sys
+from variable.variable import *
 from builder import TestPointBuilder,EngineBuilder,CaseBuilder
 from manager import CaseManagerInstance
 from log.logger import logger
@@ -17,5 +18,7 @@ def onsignal_int(a,b):
 signal.signal(signal.SIGINT,onsignal_int)
 Logger = logger()
 for caseName in CaseManagerInstance.get_keyword():
-    CaseManagerInstance.run_case(caseName)
+    _,behavior =  CaseManagerInstance.run_case(caseName)
+    if behavior == EXIT:
+        break
 OutPut().stop()

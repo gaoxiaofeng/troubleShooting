@@ -88,6 +88,44 @@ class ExecuteCommond(object):
             message = '\n'.join([command,err])
             self.logger.error(message)
         return stdout
+class _GetchUnix(object):
+    def __init__(self):
+        super(_GetchUnix, self).__init__()
+        import tty,sys,termios
+    def __call__(self):
+        import tty, sys, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd,termios.TCSADRAIN,old_settings)
+        return ch
+##class _GetchWindows(object):
+##    def __init__(self):
+##        super(_GetchWindows, self).__init__()
+##        import msvcrt
+##    def __call__(self):
+##        import msvcrt
+##        return  msvcrt.getch()
+class _GetchWindows(object):
+    def __init__(self):
+        super(_GetchWindows, self).__init__()
+        import msvcrt
+    def __call__(self):
+        return raw_input()
+
+
+class Getch(object):
+    def __init__(self):
+        super(Getch,self).__init__()
+        try:
+            self.impl = _GetchWindows()
+        except ImportError:
+            self.impl = _GetchUnix()
+    def __call__(self):
+        return  self.impl()
 
 
 
