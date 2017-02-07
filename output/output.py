@@ -18,14 +18,6 @@ class OutPut(threading.Thread):
 
         if content.strip():
 
-            if YES in content:
-                content = content.replace(YES,PRINT_BOLD+"Y"+PRINT_END+"ES")
-
-            if NO in content:
-                content = content.replace(NO,PRINT_BOLD + "N" + PRINT_END + "O")
-
-            if EXIT in content:
-                content = content.replace(EXIT,PRINT_BOLD + "E" + PRINT_END + "XIT")
 
             if  PASS in content:
                 if "--*" in content:
@@ -53,6 +45,10 @@ class OutPut(threading.Thread):
                 content = content.replace(highLight,PRINT_HIGHLIGHT+highLight_strip+PRINT_END)
             if "[Input Selected]:" in content:
                 content =  content.replace("[Input Selected]:",PRINT_YELLOW+"[Input Selected]:"+PRINT_END)
+                sys.stdout.write(content)
+                sys.stdout.flush()
+                return
+            if  content[0] == "\r":
                 sys.stdout.write(content)
                 sys.stdout.flush()
                 return

@@ -3,10 +3,9 @@ from manager import TestPointManagerInstance
 from log.logger import logger
 import pdb,time
 from variable.variable import *
-from library.library import parseRule,Getch
+from library.library import parseRule
 from library.controlView import ControlView
 from output.output import OutPutQueue
-import  sys
 class _BaseCase(object):
     def __init__(self):
         super(_BaseCase,self).__init__()
@@ -63,53 +62,20 @@ class _BaseCase(object):
         self._printf(Result)
         self.logger.info("Case(%s) Rule is `%s`, result is [%s]"%(self.__class__.__name__,self.passCondition,self.status))
 
-    def _interactive2(self):
-        commandList = []
-        Question = "|\n*Question: What do you want to do next?"
-        Option = """
-        [N] Next Case.    [R]ReRun this Case Again.   [E]Exit tool"""
-        select = ""
-        self._printf(Question)
-        self._printf(Option)
-        while 1:
-            ##answer = raw_input()
-            self._waitPrintfCompletely()
-            inkey = Getch()
-            answer = inkey()
-            answerOrd = ord(answer)
-            commandList.append(answerOrd)
-            answerStr = answer.lower()
-            if answerStr == "n":
-                select = CONTINUE
-                break
-            elif answerStr == "r":
-                select = RUNAGAIN
-                break
-            elif answerStr == "q" or answer == "e":
-                select = EXIT
-                break
-            elif answerOrd ==  65 and commandList[-2] == 91 and commandList[-3] == 27:
-                #up
-                pass
 
-            else:
-                pass
-
-        return select
     def _interactive(self):
-        commandList = []
         Question = "|\n*Question: What do you want to do next?"
-        Option = """
-        [N] Next Case.    [R]ReRun this Case Again.   [E]Exit tool"""
         self._printf(Question)
         view = ControlView()
-        chLower = view("[N] Next Case ","[R]ReRun this Case Again ","[E]Exit tool ")
+        chLower = view("[N] Next Case ","[R] ReRun this Case Again ","[E] Exit tool ")
         if chLower == "n":
             select = CONTINUE
         elif chLower == "r":
             select = RUNAGAIN
         elif chLower == "e":
             select = EXIT
+        else:
+            raise BaseException("unkown selected result :%s"%chLower)
 
 
 
