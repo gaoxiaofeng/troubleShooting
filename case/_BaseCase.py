@@ -6,6 +6,7 @@ from variable.variable import *
 from library.library import parseRule
 from library.controlView import ControlView
 from output.output import OutPutQueue
+from configuration import ConfigManagerInstance
 class _BaseCase(object):
     def __init__(self):
         super(_BaseCase,self).__init__()
@@ -15,10 +16,14 @@ class _BaseCase(object):
         self.logger = logger()
         self.status = NOTRUN
         self._ToPrint = True
+        self._ToPrintTestPoint = True
 
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)
+        while 1:
+            if OutPutQueue.empty():
+                break
     def _check_status(self):
         checkPointList = parseRule(self.passCondition)
         if len(checkPointList) >= 1:
@@ -37,7 +42,12 @@ class _BaseCase(object):
     @property
     def passed(self):
         return self.status == PASS
+    def _readConfig(self):
+        self.runMode = ConfigManagerInstance.config["runMode"]
+        if self.runMode == SingleMode:
+            self._ToPrintTestPoint = False
     def run(self):
+        self._readConfig()
         self._introduceSelf()
         self._check_status()
         self._processResult()
@@ -52,10 +62,11 @@ class _BaseCase(object):
         self._printf(separator)
         Note = "{Driver start to run the %s}:"%(self.__class__.__name__,)
         describe = "|\n*Description:  %s"%self.describe
-        testPoint = "|\n*TestPoints:"
         self._printf(Note)
         self._printf(describe)
-        self._printf(testPoint)
+        if self._ToPrintTestPoint:
+            testPoint = "|\n*TestPoints:"
+            self._printf(testPoint)
     def _processResult(self):
         #Result = "*Result:  Driver checked all related TestPoints,We can judge the Case is [%s]"%self.status
         Result = "|\n*Result: [%s]"%self.status

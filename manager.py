@@ -156,7 +156,6 @@ class CaseManager(BaseManager):
 TestPointManagerInstance = TestPointManager()
 EngineManagerInstance =  EngineManager()
 CaseManagerInstance = CaseManager()
-
 if __name__ == "__main__":
     pass
 

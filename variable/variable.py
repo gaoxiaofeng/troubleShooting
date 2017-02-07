@@ -44,3 +44,6 @@ EXIT = "Exit"
 
 LINEMODE = 1
 LISTMODE = 2
+
+SingleMode = 1
+DetailMode = 2
