@@ -38,9 +38,9 @@ CONTINUE = "continue"
 RUNAGAIN = "runAgain"
 EXIT = "exit"
 
-YES = "YES"
-NO = "NO"
-EXIT = "EXIT"
+NEXT = "Next"
+RERUN = "ReRun"
+EXIT = "Exit"
 
 LINEMODE = 1
 LISTMODE = 2

@@ -64,7 +64,7 @@ class _BaseCase(object):
 
 
     def _interactive(self):
-        Question = "|\n*Question: What do you want to do next?"
+        Question = "|\n*Question: What's the next step?"
         self._printf(Question)
         view = ControlView()
         chLower = view("[N] Next Case ","[R] ReRun this Case Again ","[E] Exit tool ")

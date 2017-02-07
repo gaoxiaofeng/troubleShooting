@@ -65,11 +65,11 @@ class ControlView(object):
                 shortKeyList.append(match.group(1).strip().lower())
         i = 0
         while 1:
+            View = "\n".join(args).replace(args[offset],PRINT_REVERSE + args[offset] + PRINT_END) + "\33[K\33[?25l" + PRINT_END
             if i == 0:
-                View = "\r" + "\n".join(args).replace(args[offset],
-                                                                         PRINT_REVERSE + args[offset] + PRINT_END)
+                View = "\r" + View
             else:
-                View = "\r\33[%sA"%maxOffset+ "\n".join(args).replace(args[offset],PRINT_REVERSE+args[offset]+PRINT_END )
+                View = "\r\33[%sA"%maxOffset + View
             i += 1
             self.printf(View)
             inkey = Getch()
@@ -94,7 +94,7 @@ class ControlView(object):
                     offset += 1
             else:
                 pass
-
+        self.printf(chr(28))
         return  selected
     def __call__(self, *args):
         if self.mode == LINEMODE:

@@ -18,7 +18,6 @@ class OutPut(threading.Thread):
 
         if content.strip():
 
-
             if  PASS in content:
                 if "--*" in content:
                     content = content.replace(PASS,PRINT_GREEN + OK + PRINT_END)
