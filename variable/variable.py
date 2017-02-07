@@ -41,3 +41,6 @@ EXIT = "exit"
 YES = "YES"
 NO = "NO"
 EXIT = "EXIT"
+
+LINEMODE = 1
+LISTMODE = 2
