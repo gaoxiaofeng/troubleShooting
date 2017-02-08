@@ -41,9 +41,12 @@ EXIT = "exit"
 NEXT = "Next"
 RERUN = "ReRun"
 EXIT = "Exit"
-
+TRYFIXED = "Try To Fixed"
 LINEMODE = 1
 LISTMODE = 2
 
 SingleMode = 1
 DetailMode = 2
+
+DONEFIXED = "Done Fixed"
+NEVERFIXED = "Never Fixed"

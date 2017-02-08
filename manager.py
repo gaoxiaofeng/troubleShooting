@@ -94,6 +94,7 @@ class  TestPointManager(BaseManager):
         statusDict = {}
         if not isinstance(testPointList,list):
             testPointList = [testPointList]
+        firstTestPoint = True
         for testPoint in testPointList:
 
             if "{" in testPoint:
@@ -102,7 +103,9 @@ class  TestPointManager(BaseManager):
                 testPoint = testPoint.strip("}")
             testPointfull = "%s.%s"%(testPoint,"run")
             testPointRunner = self.get_keyword(testPointfull)
-            status = testPointRunner()
+            status = testPointRunner(firstTestPoint)
+            if firstTestPoint:
+                firstTestPoint = False
             statusDict["{%s}"%testPoint]=status
         self.testPoint_record = statusDict
         return statusDict
@@ -126,16 +129,20 @@ class CaseManager(BaseManager):
         super(CaseManager,self).__init__()
         self.__case_record = {}
     def run_case(self,case):
+        RERUN = False
         caseRunnerEntry = "%s.%s"%(case,"run")
         caseRunner = self.get_keyword(caseRunnerEntry)
         while 1:
-            status,behavior = caseRunner()
+            status,behavior = caseRunner(RERUN)
             if behavior == CONTINUE:
                 break
             elif behavior == RUNAGAIN:
-                pass
+                RERUN = True
             elif behavior == EXIT:
                 break
+            elif behavior == DONEFIXED:
+                RERUN = True
+
             else:
                 raise CaseManagerException("unsupport behavior : %s"%behavior)
 

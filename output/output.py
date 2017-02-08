@@ -12,7 +12,7 @@ class OutPut(threading.Thread):
         super(self.__class__,self).__init__()
         self.output = OutPutQueue
         self.running = True
-        self.reservedWordList = ["Description:","TestPoints:","Result:","Fix Way:","Question:","|","--","\\","*",]
+        self.reservedWordList = ["Description:","TestPoints:","Result:","Fixed Steps:","Question:","|","--","\\","*",]
 
     def printf(self,content):
 

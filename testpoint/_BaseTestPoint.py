@@ -12,6 +12,7 @@ class _BaseTestPoint(object):
         self.logger = logger()
         self.status = NOTRUN
         self._ToPrint = True
+        self._firstTestPoint = True
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)
@@ -25,13 +26,16 @@ class _BaseTestPoint(object):
 
     def _interactive(self):
         if self._ToPrint:
+            if self._firstTestPoint:
+                self._printf("|\n*TestPoints:")
             self._printf("|\t|\n|\t\\--*[%s] %s "%(self.status,self.describe,))
     def readConfig(self):
         self.runMode = ConfigManagerInstance.config["runMode"]
         if self.runMode == SingleMode:
             self._ToPrint = False
 
-    def run(self):
+    def run(self,firstTestPoint=True):
+        self._firstTestPoint = firstTestPoint
         self.readConfig()
         self._checkpoint()
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))

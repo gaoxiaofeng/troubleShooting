@@ -29,7 +29,8 @@ class Configuration(object):
             config_map = {}
             if content:
                 config_map = self._convert_to_map(content)
-                self._cache[configuration] = config_map
+                #self._cache[configuration] = config_map
+                #dont cache for Reload configuration
             return config_map
 
     def get_value_from_configuration(self,configuration,item):
