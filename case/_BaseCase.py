@@ -16,6 +16,7 @@ class _BaseCase(object):
         self.logger = logger()
         self.status = NOTRUN
         self._ToPrint = True
+        self._checkPointStatusDict = {}
 
     def _printf(self,message):
         if self._ToPrint:
@@ -27,9 +28,10 @@ class _BaseCase(object):
         checkPointList = parseRule(self.passCondition)
         if len(checkPointList) >= 1:
             checkPointStatusDict = TestPointManagerInstance.run_test_points(checkPointList)
+            self._checkPointStatusDict = checkPointStatusDict
             passCondition = self.passCondition
             for checkPoint in checkPointList:
-                passCondition = passCondition.replace(checkPoint,str(checkPointStatusDict[checkPoint]))
+                passCondition = passCondition.replace(checkPoint,str(checkPointStatusDict[checkPoint]["STATUS"]))
             status = eval(passCondition)
             if status:
                 self.status = PASS
@@ -58,6 +60,10 @@ class _BaseCase(object):
                     selected = self.fixManually()
                     if selected == DONEFIXED or selected == EXIT:
                         break
+                elif selected == RCA:
+                    self._InteractionClickedRCA()
+                elif selected == IMPACT:
+                    self._InteractionClickedImpact()
 
 
                 else:
@@ -100,28 +106,50 @@ class _BaseCase(object):
         Question = "|\n*Question: A Problem be observed, What's the next step?"
         self._printf(Question)
         view = ControlView()
-        chLower = view("[N] Ignore, Next Case ","[D] Detail Info","[F] Try To Fixed ","[R] Re-Check Again ","[E] Exit Tool ")
+        chLower = view("[N] Ignore, Next Case ","[I] What's the Impact?","[R] Root Cause Analyzer","[F] Try To Fixed ","[D] Double Check ","[E] Exit Tool ")
         if chLower == "n":
             select = CONTINUE
+        elif chLower == "i":
+            select = IMPACT
         elif chLower == "r":
-            select = RUNAGAIN
-        elif chLower == "e":
-            select = EXIT
+            select = RCA
         elif chLower == "f":
             select = TRYFIXED
         elif chLower == "d":
-            select = CONTINUE
+            select = RUNAGAIN
+        elif chLower == "e":
+            select = EXIT
         else:
             raise BaseException("unkown selected result :%s"%chLower)
 
         return select
+    def _InteractionClickedRCA(self):
+        RCA = []
+        for TestPointName in self._checkPointStatusDict:
+            RCA += self._checkPointStatusDict[TestPointName]["RCA"]
+        RCA = list(set(RCA))
+        RCAStr = "|\t\\--* " + "\n|\t\\--* ".join(RCA)
+        self._printf("|\n*Root Cause Analyse:")
+        self._printf(RCAStr)
+
+
+    def _InteractionClickedImpact(self):
+        IMPACT = []
+        for TestPointName in self._checkPointStatusDict:
+            IMPACT += self._checkPointStatusDict[TestPointName]["IMPACT"]
+        IMPACT = list(set(IMPACT))
+        IMPACTStr = "|\t\\--* " + "\n|\t\\--* ".join(IMPACT)
+        self._printf("|\n*Impact Analyzer:")
+        self._printf(IMPACTStr)
     def fixManually(self):
         i = 1
-        Steps = ""
-
+        FixStep = []
+        for TestPointName in self._checkPointStatusDict:
+            FixStep += self._checkPointStatusDict[TestPointName]["FIXSTEP"]
+        FixStep = list(set(FixStep))
         Note = "|\n*Fixed Steps: \n|"
         self._printf(Note)
-        for Step in self.fixStep:
+        for Step in FixStep:
 
             self._printf("|\t* Step %s. %s"%(i,Step))
             i += 1

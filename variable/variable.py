@@ -42,6 +42,10 @@ NEXT = "Next"
 RERUN = "ReRun"
 EXIT = "Exit"
 TRYFIXED = "Try To Fixed"
+IMPACT = "Impact"
+RCA = "Root Cause Analyzer"
+
+
 LINEMODE = 1
 LISTMODE = 2
 

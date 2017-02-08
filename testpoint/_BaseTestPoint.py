@@ -13,6 +13,9 @@ class _BaseTestPoint(object):
         self.status = NOTRUN
         self._ToPrint = True
         self._firstTestPoint = True
+        self.RCA = []
+        self.IMPACT = []
+        self.FIXSTEP = []
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)
@@ -40,7 +43,7 @@ class _BaseTestPoint(object):
         self._checkpoint()
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
         self._interactive()
-        return self.passed
+        return self.passed,self.RCA,self.IMPACT,self.FIXSTEP
 
 
 
