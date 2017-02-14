@@ -54,3 +54,6 @@ DetailMode = 2
 
 DONEFIXED = "Done Fixed"
 NEVERFIXED = "Never Fixed"
+
+CRITICAL = "critical"
+NOCRITICAL = "noCritical"

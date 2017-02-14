@@ -16,6 +16,7 @@ class _BaseTestPoint(object):
         self.RCA = []
         self.IMPACT = []
         self.FIXSTEP = []
+        self.level = NOCRITICAL
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)
@@ -36,14 +37,18 @@ class _BaseTestPoint(object):
         self.runMode = ConfigManagerInstance.config["runMode"]
         if self.runMode == SingleMode:
             self._ToPrint = False
-
+    def _initBeforeRun(self):
+        self.RCA = []
+        self.IMPACT = []
+        self.FIXSTEP = []
     def run(self,firstTestPoint=True):
         self._firstTestPoint = firstTestPoint
+        self._initBeforeRun()
         self.readConfig()
         self._checkpoint()
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
         self._interactive()
-        return self.passed,self.RCA,self.IMPACT,self.FIXSTEP
+        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP
 
 
 

@@ -127,7 +127,12 @@ class Getch(object):
     def __call__(self):
         return  self.impl()
 
-
+def RemoveDuplicates(list):
+    finalList = []
+    for elem in list:
+        if elem not in finalList:
+            finalList.append(elem)
+    return finalList
 
 if __name__ == "__main__":
     command = ExecuteCommond()
