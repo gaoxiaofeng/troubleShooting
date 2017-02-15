@@ -18,7 +18,7 @@ class Security_001(_BaseTestPoint):
         if self._nbi3gc_mf_ssl_support != "on":
             self.RCA.append("%s:jacorb.security.support_ssl current value is `%s`,Expect value is `on` ."%(NBI3GC_MF_JACORB_PROPERTIES,self._nbi3gc_mf_ssl_support))
             self.IMPACT.append("3GPP Corba FM worked on inSecurity mode.")
-            self.FIXSTEP.append("manual reset %s:jacorb.security.support_ssl current value is `on` ." % NBI3GC_MF_JACORB_PROPERTIES)
+            self.FIXSTEP.append("manual reset %s:jacorb.security.support_ssl  value to `on` ." % NBI3GC_MF_JACORB_PROPERTIES)
             self.status = FAIL
         else:
             self.status = PASS

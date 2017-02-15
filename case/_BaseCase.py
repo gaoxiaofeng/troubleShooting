@@ -169,7 +169,7 @@ class _BaseCase(object):
 
 
     def fixManually(self):
-        i = 1
+
         CriticalFixStep = []
         NoCriticalFixStep = []
         for TestPointName in self._checkPointStatusDict:
@@ -181,7 +181,8 @@ class _BaseCase(object):
         Note = "|\n*Fixed Steps: \n|"
         self._printf(Note)
         if CriticalFixStep:
-            self._printf("|\n|  \\--*Critical:")
+            self._printf("|\n|\\--*Mandatory:")
+            i = 1
             for Step in CriticalFixStep:
                 self._printf("|\n|  \\--*Fixing For %s:"%Step["TestPointName"])
                 for step in Step["FIXSTEP"]:
@@ -189,11 +190,12 @@ class _BaseCase(object):
                     self._printf("|\t* Step %s. %s"%(i,step))
                     i += 1
         if NoCriticalFixStep:
-            self._printf("|\n|  \\--*Minor:")
+            self._printf("|\n|\\--*Optional:")
+            i = 1
             for Step in NoCriticalFixStep:
                 self._printf("|\n|  \\--*Fixing For %s:" % Step["TestPointName"])
                 for step in Step["FIXSTEP"]:
-                    #self._printf("|\t* Step %s. %s" % (i, step))
+                    self._printf("|\t* Step %s. %s" % (i, step))
                     i += 1
 
 
