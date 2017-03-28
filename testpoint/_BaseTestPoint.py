@@ -48,7 +48,7 @@ class _BaseTestPoint(object):
         self._checkpoint()
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
         self._interactive()
-        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP
+        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.describe
 
 
 

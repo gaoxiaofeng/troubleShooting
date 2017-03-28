@@ -54,15 +54,15 @@ class Security_002(_BaseTestPoint):
             self.FIXSTEP.append(fixStepStr)
             fixStep = []
             fixStep.append("if you want 3GPP Corba FM working on InSecurity mode:")
-            if self._nbi3gc_mf_ssl_support == "on":
+            if self._nbi3gc_mf_ssl_support != "off":
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`."% NBI3GC_MF_JACORB_PROPERTIES)
-            if self._nbi3gc_proxy1_ssl_support == "on":
+            if self._nbi3gc_proxy1_ssl_support != "off":
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`." % NBI3GC_PROXY1_JACORB_PROPERTIES)
-            if self._nbi3gc_proxy2_ssl_support == "on":
+            if self._nbi3gc_proxy2_ssl_support != "off":
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`." % NBI3GC_PROXY2_JACORB_PROPERTIES)
-            if self._nbi3gc_proxy3_ssl_support == "on":
+            if self._nbi3gc_proxy3_ssl_support != "off":
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`." % NBI3GC_PROXY3_JACORB_PROPERTIES)
-            if self._nbi3gc_simulator_ssl_support == "on":
+            if self._nbi3gc_simulator_ssl_support != "off":
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`." % NBI3GC_SIMULATOR_PROPERTIES)
             fixStepStr = "\n\t\t".join(fixStep)
             self.FIXSTEP.append(fixStepStr)

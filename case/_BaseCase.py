@@ -127,43 +127,45 @@ class _BaseCase(object):
         CriticalRCA = []
         NoCriticalRCA = []
         for TestPointName in self._checkPointStatusDict:
-            if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
-                CriticalRCA.append({"TestPointName":TestPointName,"RCA":self._checkPointStatusDict[TestPointName]["RCA"]})
-            if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
-                NoCriticalRCA.append({"TestPointName":TestPointName,"RCA":self._checkPointStatusDict[TestPointName]["RCA"]})
+            if self._checkPointStatusDict[TestPointName]["RCA"]:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+                    CriticalRCA.append({"TestPointName":TestPointName,"RCA":self._checkPointStatusDict[TestPointName]["RCA"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+                    NoCriticalRCA.append({"TestPointName":TestPointName,"RCA":self._checkPointStatusDict[TestPointName]["RCA"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
 
 
         self._printf("|\n*Root Cause Analyzer:")
         if CriticalRCA:
-            self._printf("|\n|  \\--*Critical:")
+            self._printf("|\n  \\--*Critical:")
             for RCA in CriticalRCA:
 
-                self._printf("|\t\\--*For %s:"%RCA["TestPointName"] + "\n|\t\t\\--*" + "\n|\t\t\\--*".join(RCA["RCA"]))
+                self._printf("|\t\\--*For %s:"%RCA["TestPointName"] + "\n\t\t\\--*" + "\n\t\t\\--*".join(RCA["RCA"]))
 
         if NoCriticalRCA:
-            self._printf("|\n|  \\--*Minor:")
+            self._printf("|\n  \\--*Minor:")
             for RCA in NoCriticalRCA:
-                self._printf("|\t\\--*For %s:" % RCA["TestPointName"] + "\n|\t\t\\--*" + "\n|\t\t\\--*".join(RCA["RCA"]))
+                self._printf("|\t\\--*For %s:" % RCA["TestPointName"] + "\n\t\t\\--*" + "\n\t\t\\--*".join(RCA["RCA"]))
 
 
     def _InteractionClickedImpact(self):
         CriticalImpact = []
         NoCriticalImpact = []
         for TestPointName in self._checkPointStatusDict:
-            if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
-                CriticalImpact.append({"TestPointName":TestPointName,"IMPACT":self._checkPointStatusDict[TestPointName]["IMPACT"]})
-            if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
-                NoCriticalImpact.append({"TestPointName":TestPointName,"IMPACT":self._checkPointStatusDict[TestPointName]["IMPACT"]})
+            if self._checkPointStatusDict[TestPointName]["IMPACT"]:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+                    CriticalImpact.append({"TestPointName":TestPointName,"IMPACT":self._checkPointStatusDict[TestPointName]["IMPACT"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+                    NoCriticalImpact.append({"TestPointName":TestPointName,"IMPACT":self._checkPointStatusDict[TestPointName]["IMPACT"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
 
 
         self._printf("|\n*Impact Analyzer:")
         if CriticalImpact:
-            self._printf("|\n|  \\--*Critical:")
+            self._printf("|\n  \\--*Critical:")
             for Impact in CriticalImpact:
                 self._printf("|\t\\--*For %s:"%Impact["TestPointName"] + " ".join(Impact["IMPACT"]))
 
         if NoCriticalImpact:
-            self._printf("|\n|  \\--*Minor:")
+            self._printf("|\n  \\--*Minor:")
             for Impact in NoCriticalImpact:
                 self._printf("|\t\\--*For %s:" % Impact["TestPointName"] + " ".join(Impact["IMPACT"]))
 
@@ -173,27 +175,28 @@ class _BaseCase(object):
         CriticalFixStep = []
         NoCriticalFixStep = []
         for TestPointName in self._checkPointStatusDict:
-            if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
-                CriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
-            if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
-                NoCriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
+            if self._checkPointStatusDict[TestPointName]["FIXSTEP"]:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+                    CriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+                    NoCriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
 
-        Note = "|\n*Fixed Steps: \n|"
+        Note = "|\n*Fixed Steps: \n"
         self._printf(Note)
         if CriticalFixStep:
-            self._printf("|\n|\\--*Mandatory:")
+            self._printf("|\n\\--*Mandatory:")
             i = 1
             for Step in CriticalFixStep:
-                self._printf("|\n|  \\--*Fixing For %s:"%Step["TestPointName"])
+                self._printf("|\n  \\--*Fixing For %s:"%Step["TestPointName"])
                 for step in Step["FIXSTEP"]:
 
                     self._printf("|\t* Step %s. %s"%(i,step))
                     i += 1
         if NoCriticalFixStep:
-            self._printf("|\n|\\--*Optional:")
+            self._printf("|\n\\--*Optional:")
             i = 1
             for Step in NoCriticalFixStep:
-                self._printf("|\n|  \\--*Fixing For %s:" % Step["TestPointName"])
+                self._printf("|\n  \\--*Fixing For %s:" % Step["TestPointName"])
                 for step in Step["FIXSTEP"]:
                     self._printf("|\t* Step %s. %s" % (i, step))
                     i += 1

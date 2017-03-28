@@ -67,9 +67,9 @@ class ControlView(object):
         while 1:
             View = "\n".join(args).replace(args[offset],PRINT_REVERSE + args[offset] + PRINT_END) + "\33[K\33[?25l" + PRINT_END
             if i == 0:
-                View = "\r" + View
+                View = "\r|" + View
             else:
-                View = "\r\33[%sA"%maxOffset + View
+                View = "\r|\33[%sA"%maxOffset + View
             i += 1
             self.printf(View)
             inkey = Getch()

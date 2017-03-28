@@ -17,7 +17,8 @@ class OutPut(threading.Thread):
     def printf(self,content):
 
         if content.strip():
-
+            if "\n" in content:
+                content = content.replace("\n","\n|")
             if  PASS in content:
                 if "--*" in content:
                     content = content.replace(PASS,PRINT_GREEN + OK + PRINT_END)
@@ -42,11 +43,12 @@ class OutPut(threading.Thread):
                 highLight = match_highLight.group(1)
                 highLight_strip = highLight.strip("{}")
                 content = content.replace(highLight,PRINT_HIGHLIGHT+highLight_strip+PRINT_END)
-            if "[Input Selected]:" in content:
-                content =  content.replace("[Input Selected]:",PRINT_YELLOW+"[Input Selected]:"+PRINT_END)
-                sys.stdout.write(content)
-                sys.stdout.flush()
-                return
+            #if "[Input Selected]:" in content:
+            #    content =  content.replace("[Input Selected]:",PRINT_YELLOW+"[Input Selected]:"+PRINT_END)
+            #    sys.stdout.write(content)
+            #    sys.stdout.flush()
+            #    return
+
             if  content[0] == "\r":
                 sys.stdout.write(content)
                 sys.stdout.flush()
