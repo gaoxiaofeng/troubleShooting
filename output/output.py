@@ -12,13 +12,15 @@ class OutPut(threading.Thread):
         super(self.__class__,self).__init__()
         self.output = OutPutQueue
         self.running = True
-        self.reservedWordList = ["Description:","TestPoints:","Result:","Fixed Steps:","Question:","Root Cause Analyse:","Impact Analyzer:","Critical:","Minor:","Mandatory","Optional","|","--","\\","*",]
+        self.reservedWordList = ["Description:","TestPoints:","Result:","Fix Method:","Question:","Root Cause Analysis:",\
+                                 "Impact Analysis:","[Critical]","[Minor]","Mandatory","Optional","|","*","Fix Method for Critical Problems:",\
+                                 "Fix Method for Minor Problems:","Deailed Message:","ShortCut","CaseName","Result"]
 
     def printf(self,content):
 
         if content.strip():
-            if "\n" in content:
-                content = content.replace("\n","\n|")
+            # if "\n" in content:
+            #     content = content.replace("\n","\n|")
             if  PASS in content:
                 if "--*" in content:
                     content = content.replace(PASS,PRINT_GREEN + OK + PRINT_END)

@@ -57,3 +57,5 @@ NEVERFIXED = "Never Fixed"
 
 CRITICAL = "critical"
 NOCRITICAL = "noCritical"
+
+PROGREES_LENHTH = 50

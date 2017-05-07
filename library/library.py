@@ -1,6 +1,7 @@
 import sys,os,time
 from subprocess import Popen, PIPE
 from variable.variable import *
+import  threading
 import re
 from log.logger import logger
 Logger = logger()
@@ -133,6 +134,31 @@ def RemoveDuplicates(list):
         if elem not in finalList:
             finalList.append(elem)
     return finalList
+
+class ProgressDialog(threading.Thread):
+    def __init__(self,total):
+        super(ProgressDialog,self).__init__()
+        self._total = total
+        self._done = 0
+        self._ratio = 0
+    def set(self):
+        return self._done
+    def set(self,num):
+        if isinstance(num,int):
+            self._done = num
+            self._ratio = float(self._done)/float(self._total)
+        else:
+            print "Progress is not int",num
+    def run(self):
+        while 1:
+            done = "#"*int(self._ratio*PROGREES_LENHTH)
+            undone = " " *(PROGREES_LENHTH - int(self._ratio*PROGREES_LENHTH))
+            sys.stdout.write("\rProgress:[%s%s]  %s/%s"%(done,undone,self._done,self._total))
+            sys.stdout.flush()
+            if self._done == self._total:
+                break
+            time.sleep(0.1)
+        print "\tSuccess."
 
 if __name__ == "__main__":
     command = ExecuteCommond()

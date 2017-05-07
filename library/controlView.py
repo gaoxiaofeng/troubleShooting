@@ -4,9 +4,10 @@ from library import Getch
 import  time
 import  re
 class ControlView(object):
-    def __init__(self,mode = LISTMODE):
+    def __init__(self,mode = LISTMODE,width = 20):
         super(ControlView, self).__init__()
         self.mode = mode #LINEMODE,LISTMODE
+        self.width = width
     def printf(self,message):
         OutPutQueue.put(message)
         while 1:
@@ -53,7 +54,15 @@ class ControlView(object):
 
 
     def __ListMode__(self,*args):
-
+        _args = []
+        for option in args:
+            if len(option)  < self.width:
+                option = option + " "*(self.width - len(option))
+                _args.append(option)
+            else:
+                _args.append(option)
+        args = _args
+        KeyMap = {}
         offset = 0
         maxOffset = len(args) -1
         shortKeyList = []
@@ -62,14 +71,18 @@ class ControlView(object):
         for option in args:
             match =  pattern.match(option)
             if match:
-                shortKeyList.append(match.group(1).strip().lower())
+                shortKey = match.group(1).strip().lower()
+                shortKeyList.append(shortKey)
+                KeyMap[shortKey] = option
         i = 0
         while 1:
             View = "\n".join(args).replace(args[offset],PRINT_REVERSE + args[offset] + PRINT_END) + "\33[K\33[?25l" + PRINT_END
             if i == 0:
-                View = "\r|" + View
+                # View = "\r|" + View
+                View = "\r" + View
             else:
-                View = "\r|\33[%sA"%maxOffset + View
+                # View = "\r|\33[%sA"%maxOffset + View
+                View = "\r\33[%sA" % maxOffset + View
             i += 1
             self.printf(View)
             inkey = Getch()
@@ -79,11 +92,13 @@ class ControlView(object):
                 continue
 
             if key in shortKeyList:
-                selected = key
-                break
+                if "+" in KeyMap[key] or "Exit" in KeyMap[key]:
+                    selected = key
+                    break
             elif ord(key) == 10 or ord(key) == 13:
-                selected = shortKeyList[offset]
-                break
+                if "+" in KeyMap[shortKeyList[offset]] or "Exit" in KeyMap[shortKeyList[offset]]:
+                    selected = shortKeyList[offset]
+                    break
             elif ord(key) ==  65 or ord(key) == 68:
                 #up/left
                 if offset > 0:

@@ -135,7 +135,7 @@ class CaseManager(BaseManager):
         caseRunnerEntry = "%s.%s"%(case,"run")
         caseRunner = self.get_keyword(caseRunnerEntry)
         while 1:
-            status,behavior = caseRunner(RERUN)
+            result,behavior = caseRunner(RERUN)
             if behavior == CONTINUE:
                 break
             elif behavior == RUNAGAIN:
@@ -148,8 +148,8 @@ class CaseManager(BaseManager):
             else:
                 raise CaseManagerException("unsupport behavior : %s"%behavior)
 
-        self.case_record = {case:status}
-        return  status,behavior
+        self.case_record = {case:result}
+        return  behavior
     @property
     def case_record(self):
         return self.__case_record
