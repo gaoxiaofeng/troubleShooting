@@ -11,6 +11,7 @@ class report(object):
         self.printf = OutPut().printf
     def write(self):
         _width = 18
+        self._width = _width
         reportList = []
         _CaseList = []
         successReportList = []
@@ -72,7 +73,7 @@ class report(object):
 
         self.printf("*%s*%s*%s*"%(Tested,Passed,Failed))
         self.printf("*" * _width * 3 + "****")
-        self.printf(PRINT_YELLOW + "Cases List as Below:" + PRINT_END)
+        self.printf(PRINT_YELLOW + "Cases List: The item containing `+` can be expanded." + PRINT_END)
         self.printf("*" * _width * 3 + "****")
         ShortCut = "ShortCut"
         ShortCut = " " * ((_width - len(ShortCut)) / 2) + ShortCut + " " * (_width - len(ShortCut) - (_width - len(ShortCut)) / 2)
@@ -104,15 +105,8 @@ class report(object):
         CriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['CriticalFixMethod']
         NoCriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['NoCriticalFixMethod']
 
-        # print "NoCriticalImpact:",NoCriticalImpact
-        # print "CriticalImpact:",CriticalImpact
-        # print "Description:",Description
-        # print "CriticalRCA:",CriticalRCA
-        # print "NoCriticalRCA:",NoCriticalRCA
-        # print "CriticalFixMethod:",CriticalFixMethod
-        # print "NoCriticalFixMethod:",NoCriticalFixMethod
-        # self.printf("-"*200)
-        self.printf("|*CaseName:\t%s"%caseName)
+        self.printf("*"*(self._width*3+4))
+        self.printf("|*CaseName:\t{%s}"%caseName)
 
         if isinstance(Description,list):
             Description = "\n".join(Description)
@@ -156,7 +150,7 @@ class report(object):
                     _Method = _Method.replace("\n","\n|")
                 self.printf("|\t\tStep %s. %s"%(i,_Method))
                 i += 1
-        # self.printf("-" * 200)
+        self.printf("*" * (self._width * 3 + 4))
 
     def __del__(self):
         graph = "Bye-bye!"
