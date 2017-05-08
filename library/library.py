@@ -159,6 +159,27 @@ class ProgressDialog(threading.Thread):
                 break
             time.sleep(0.1)
         print "\tSuccess."
+def conversion(x):
+    # to bytes
+    pattern = re.compile("(\d+).*",re.I)
+    match = pattern.match(x)
+    if match:
+        y = int(match.group(1))
+    x = x.lower()
+    if "kb" in x:
+        y = y * 1024
+    elif "mb" in x:
+        y = y * 1024 * 1024
+    elif "gb" in x:
+        y = y * 1024 * 1024 * 1024
+    elif  "tb" in x:
+        y = y * 1024 * 1024 * 1024 * 1024
+    else :
+        pass
+    return  y
+
+
+
 
 if __name__ == "__main__":
     command = ExecuteCommond()

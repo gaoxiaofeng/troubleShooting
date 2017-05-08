@@ -175,32 +175,16 @@ class _BaseCase(object):
     def _LoadImpact(self):
         CriticalImpact = []
         NoCriticalImpact = []
-        # for TestPointName in self._checkPointStatusDict:
-        #     if self._checkPointStatusDict[TestPointName]["IMPACT"]:
-        #         if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
-        #             CriticalImpact.append({"TestPointName":TestPointName,"IMPACT":self._checkPointStatusDict[TestPointName]["IMPACT"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
-        #         if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
-        #             NoCriticalImpact.append({"TestPointName":TestPointName,"IMPACT":self._checkPointStatusDict[TestPointName]["IMPACT"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
-
         for TestPointName in self._checkPointStatusDict:
             if self._checkPointStatusDict[TestPointName]["IMPACT"]:
                 if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
                     CriticalImpact += self._checkPointStatusDict[TestPointName]["IMPACT"]
                 if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
                     NoCriticalImpact += self._checkPointStatusDict[TestPointName]["IMPACT"]
-
+        CriticalImpact = RemoveDuplicates(CriticalImpact)
+        NoCriticalImpact = RemoveDuplicates(NoCriticalImpact)
 
         self._Impact =  {"CriticalImpact":CriticalImpact,"NoCriticalImpact":NoCriticalImpact}
-        # self._printf("|\n*Impact Analyzer:")
-        # if CriticalImpact:
-        #     self._printf("|\n  \\--*Critical:")
-        #     for Impact in CriticalImpact:
-        #         self._printf("|\t\\--*For %s:"%Impact["TestPointName"] + " ".join(Impact["IMPACT"]))
-        #
-        # if NoCriticalImpact:
-        #     self._printf("|\n  \\--*Minor:")
-        #     for Impact in NoCriticalImpact:
-        #         self._printf("|\t\\--*For %s:" % Impact["TestPointName"] + " ".join(Impact["IMPACT"]))
     def _LoadFixMethod(self):
         CriticalFixMethod = []
         NoCriticalFixMethod = []
@@ -212,41 +196,41 @@ class _BaseCase(object):
                     NoCriticalFixMethod += self._checkPointStatusDict[TestPointName]["FIXSTEP"]
         self._FixMethod = {"CriticalFixMethod":CriticalFixMethod,"NoCriticalFixMethod":NoCriticalFixMethod}
 
-    def fixManually(self):
-
-        CriticalFixStep = []
-        NoCriticalFixStep = []
-        for TestPointName in self._checkPointStatusDict:
-            if self._checkPointStatusDict[TestPointName]["FIXSTEP"]:
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
-                    CriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
-                    NoCriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
-
-        Note = "|\n*Fixed Steps: \n"
-        self._printf(Note)
-        if CriticalFixStep:
-            self._printf("|\n\\--*Mandatory:")
-            i = 1
-            for Step in CriticalFixStep:
-                self._printf("|\n  \\--*Fixing For %s:"%Step["TestPointName"])
-                for step in Step["FIXSTEP"]:
-
-                    self._printf("|\t* Step %s. %s"%(i,step))
-                    i += 1
-        if NoCriticalFixStep:
-            self._printf("|\n\\--*Optional:")
-            i = 1
-            for Step in NoCriticalFixStep:
-                self._printf("|\n  \\--*Fixing For %s:" % Step["TestPointName"])
-                for step in Step["FIXSTEP"]:
-                    self._printf("|\t* Step %s. %s" % (i, step))
-                    i += 1
-
-
-        selected = self._InteractionAfterProblemBeFixed()
-
-        return  selected
+    # def fixManually(self):
+    #
+    #     CriticalFixStep = []
+    #     NoCriticalFixStep = []
+    #     for TestPointName in self._checkPointStatusDict:
+    #         if self._checkPointStatusDict[TestPointName]["FIXSTEP"]:
+    #             if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+    #                 CriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
+    #             if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+    #                 NoCriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
+    #
+    #     Note = "|\n*Fixed Steps: \n"
+    #     self._printf(Note)
+    #     if CriticalFixStep:
+    #         self._printf("|\n\\--*Mandatory:")
+    #         i = 1
+    #         for Step in CriticalFixStep:
+    #             self._printf("|\n  \\--*Fixing For %s:"%Step["TestPointName"])
+    #             for step in Step["FIXSTEP"]:
+    #
+    #                 self._printf("|\t* Step %s. %s"%(i,step))
+    #                 i += 1
+    #     if NoCriticalFixStep:
+    #         self._printf("|\n\\--*Optional:")
+    #         i = 1
+    #         for Step in NoCriticalFixStep:
+    #             self._printf("|\n  \\--*Fixing For %s:" % Step["TestPointName"])
+    #             for step in Step["FIXSTEP"]:
+    #                 self._printf("|\t* Step %s. %s" % (i, step))
+    #                 i += 1
+    #
+    #
+    #     selected = self._InteractionAfterProblemBeFixed()
+    #
+    #     return  selected
 
 
 

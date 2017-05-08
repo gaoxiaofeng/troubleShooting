@@ -154,7 +154,7 @@ class report(object):
             for _Method in NoCriticalFixMethod:
                 if "\n" in _Method:
                     _Method = _Method.replace("\n","\n|")
-                self.printf("|\t\t(Step %s). %s"%(i,_Method))
+                self.printf("|\t\tStep %s. %s"%(i,_Method))
                 i += 1
         # self.printf("-" * 200)
 
