@@ -31,19 +31,19 @@ class Proxy3Log4jCheck(_BaseTestPoint):
             self.IMPACT.append("disk /var usage over limit for 3GPP Corba FM.")
             self.RCA.append("The maxFileSize of proxy-3 Info logs over limit. (> 50MB)")
             self.FIXSTEP.append("reset configuration %s Info logs maxFileSize to under 50MB."%proxy_log4j)
-            self.logger.error("Proxy-3 info logs maxFileSize over limit, maxFileSize is %sbytes > 50MB" % proxy_info_log_maxSize)
+            self.logger.error("Proxy-3 info logs maxFileSize over limit, maxFileSize is: %s * %s > 50MB" % (proxy_info_log_size, proxy_info_log_index))
 
         if proxy_trace_log_maxSize > conversion("100MB"):
             self.status = FAIL
             self.IMPACT.append("disk /var usage over limit for 3GPP Corba FM.")
             self.RCA.append("The maxFileSize of proxy-3 Trace logs over limit. (> 100MB)")
             self.FIXSTEP.append("reset configuration %s Trace logs maxFileSize to under 100MB." % proxy_log4j)
-            self.logger.error("Proxy-3 trace logs maxFileSize over limit, maxFileSize is %sbytes > 100MB" % proxy_trace_log_maxSize)
+            self.logger.error("Proxy-2 trace logs maxFileSize over limit, maxFileSize is: %s * %s > 100MB" % (proxy_trace_log_size, proxy_trace_log_index))
         if proxy_error_log_maxSize > conversion("50MB"):
             self.status = FAIL
             self.IMPACT.append("disk /var usage over limit for 3GPP Corba FM.")
             self.RCA.append("The maxFileSize of proxy-3 Error logs over limit. (> 50MB)")
             self.FIXSTEP.append("reset configuration %s Error logs maxFileSize to under 50MB." % proxy_log4j)
-            self.logger.error("Proxy-3 error logs maxFileSize over limit, maxFileSize is %sbytes > 50MB" % proxy_error_log_maxSize)
+            self.logger.error("Proxy-3 error logs maxFileSize over limit, maxFileSize is: %s * %s > 50MB" % (proxy_error_log_size, proxy_error_log_index))
         if self.status is not FAIL:
             self.status = PASS

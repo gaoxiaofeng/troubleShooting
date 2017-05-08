@@ -8,7 +8,7 @@ class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()
         self.describe = "this is _BaseTestPoint"
-        self.ToPrint = False
+        # self.ToPrint = False
         self.logger = logger()
         self.status = NOTRUN
         self._ToPrint = True
@@ -17,6 +17,7 @@ class _BaseTestPoint(object):
         self.IMPACT = []
         self.FIXSTEP = []
         self.level = NOCRITICAL
+        self.needRestartNbi3gcAfterFixed = False
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)
@@ -48,6 +49,11 @@ class _BaseTestPoint(object):
         self._checkpoint()
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
         self._interactive()
+        if self.passed is False and self.needRestartNbi3gcAfterFixed:
+            restartNbi3gcStep = """restart 3GPP Corba FM by below command:
+\t\t\t#smanager.pl stop service nbi3gc
+\t\t\t#smanager.pl start service nbi3gc"""
+            self.FIXSTEP.append(restartNbi3gcStep)
         return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.describe
 
 

@@ -73,7 +73,10 @@ class report(object):
 
         self.printf("*%s*%s*%s*"%(Tested,Passed,Failed))
         self.printf("*" * _width * 3 + "****")
-        self.printf(PRINT_YELLOW + "Cases List: The item containing `+` can be expanded." + PRINT_END)
+        _title = "Case Deail List"
+        self.printf("*" + " "*((_width*3 +2 - len(_title))/2) + _title + " "*((_width*3 +2) - len(_title) - ((_width*3 +2 - len(_title))/2)) + "*")
+        _title = "The item containing `+` can be expanded."
+        self.printf("*" + PRINT_YELLOW + _title + PRINT_END + " "* +(_width*3+2-len(_title)) + "*")
         self.printf("*" * _width * 3 + "****")
         ShortCut = "ShortCut"
         ShortCut = " " * ((_width - len(ShortCut)) / 2) + ShortCut + " " * (_width - len(ShortCut) - (_width - len(ShortCut)) / 2)
@@ -138,7 +141,7 @@ class report(object):
             for _Method in CriticalFixMethod:
                 if "\n" in _Method:
                     _Method = _Method.replace("\n","\n|")
-                self.printf("|\t\t(Step %s). %s"%(i,_Method))
+                self.printf("|\t\tStep %s. %s"%(i,_Method))
                 i += 1
 
 

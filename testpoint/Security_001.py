@@ -8,6 +8,7 @@ class Security_001(_BaseTestPoint):
         super(self.__class__,self).__init__()
         self.describe = "IIOP Security should be enable"
         self.level = NOCRITICAL
+        self.needRestartNbi3gcAfterFixed = True
 
     def _checkpoint(self):
         get_value_from_configuration = EngineManagerInstance.get_keyword("get_value_from_configuration")

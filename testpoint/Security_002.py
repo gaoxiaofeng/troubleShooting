@@ -8,6 +8,7 @@ class Security_002(_BaseTestPoint):
         super(self.__class__,self).__init__()
         self.describe = "Item `jacorb.security.support_ssl` consistency should be guaranteed in nbi3gc-mf, proxy-x and simulator configuration."
         self.level = CRITICAL
+        self.needRestartNbi3gcAfterFixed = True
 
     def _checkpoint(self):
         get_value_from_configuration = EngineManagerInstance.get_keyword("get_value_from_configuration")
@@ -29,12 +30,11 @@ class Security_002(_BaseTestPoint):
             self.IMPACT.append("3GPP Corba FM Security mode is not working normally.")
             self.IMPACT.append("Both Operation and Notification Forwarding are not appropriate working.")
             RCA = """Items `jacorb.security.support_ssl` are not matched as below:
-            %s : jacorb.security.support_ssl current value is `%s`.
-            %s : jacorb.security.support_ssl current value is `%s`.
-            %s : jacorb.security.support_ssl current value is `%s`.
-            %s : jacorb.security.support_ssl current value is `%s`.
-            %s : jacorb.security.support_ssl current value is `%s`.
-            """%(NBI3GC_MF_JACORB_PROPERTIES,self._nbi3gc_mf_ssl_support,NBI3GC_PROXY1_JACORB_PROPERTIES, self._nbi3gc_proxy1_ssl_support,NBI3GC_PROXY2_JACORB_PROPERTIES, self._nbi3gc_proxy2_ssl_support,
+\t\t\t%s : jacorb.security.support_ssl current value is `%s`.
+\t\t\t%s : jacorb.security.support_ssl current value is `%s`.
+\t\t\t%s : jacorb.security.support_ssl current value is `%s`.
+\t\t\t%s : jacorb.security.support_ssl current value is `%s`.
+\t\t\t%s : jacorb.security.support_ssl current value is `%s`."""%(NBI3GC_MF_JACORB_PROPERTIES,self._nbi3gc_mf_ssl_support,NBI3GC_PROXY1_JACORB_PROPERTIES, self._nbi3gc_proxy1_ssl_support,NBI3GC_PROXY2_JACORB_PROPERTIES, self._nbi3gc_proxy2_ssl_support,
                  NBI3GC_PROXY3_JACORB_PROPERTIES, self._nbi3gc_proxy3_ssl_support,NBI3GC_SIMULATOR_PROPERTIES, self._nbi3gc_simulator_ssl_support )
             self.RCA.append(RCA)
 
@@ -50,7 +50,7 @@ class Security_002(_BaseTestPoint):
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `on`." % NBI3GC_PROXY3_JACORB_PROPERTIES)
             if self._nbi3gc_simulator_ssl_support != "on":
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `on`." % NBI3GC_SIMULATOR_PROPERTIES)
-            fixStepStr = "\n\t\t".join(fixStep)
+            fixStepStr = "\n\t\t\t".join(fixStep)
             self.FIXSTEP.append(fixStepStr)
             fixStep = []
             fixStep.append("if you want 3GPP Corba FM working on InSecurity mode:")
@@ -64,7 +64,7 @@ class Security_002(_BaseTestPoint):
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`." % NBI3GC_PROXY3_JACORB_PROPERTIES)
             if self._nbi3gc_simulator_ssl_support != "off":
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`." % NBI3GC_SIMULATOR_PROPERTIES)
-            fixStepStr = "\n\t\t".join(fixStep)
+            fixStepStr = "\n\t\t\t".join(fixStep)
             self.FIXSTEP.append(fixStepStr)
 
 
