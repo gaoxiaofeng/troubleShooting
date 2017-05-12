@@ -141,6 +141,7 @@ class ProgressDialog(threading.Thread):
         self._total = total
         self._done = 0
         self._ratio = 0
+        self._RUN = True
     def set(self):
         return self._done
     def set(self,num):
@@ -150,7 +151,7 @@ class ProgressDialog(threading.Thread):
         else:
             print "Progress is not int",num
     def run(self):
-        while 1:
+        while self._RUN:
             done = "#"*int(self._ratio*PROGREES_LENHTH)
             undone = " " *(PROGREES_LENHTH - int(self._ratio*PROGREES_LENHTH))
             sys.stdout.write("\rProgress:[%s%s]  %s/%s"%(done,undone,self._done,self._total))
@@ -158,7 +159,10 @@ class ProgressDialog(threading.Thread):
             if self._done == self._total:
                 break
             time.sleep(0.1)
-        print "\tSuccess."
+        if self._RUN:
+            print "\tSuccess."
+    def stop(self):
+        self._RUN = False
 def conversion(x):
     # to bytes
     pattern = re.compile("(\d+).*",re.I)

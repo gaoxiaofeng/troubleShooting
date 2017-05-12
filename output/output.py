@@ -22,6 +22,8 @@ class OutPut(threading.Thread):
         if content.strip():
             # if "\n" in content:
             #     content = content.replace("\n","\n|")
+            if "Exception" in content:
+                content = PRINT_RED  +  content + PRINT_END
             if  PASS in content:
                 if "--*" in content:
                     content = content.replace(PASS,PRINT_GREEN + OK + PRINT_END)

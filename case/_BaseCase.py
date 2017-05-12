@@ -7,6 +7,8 @@ from library.library import parseRule,RemoveDuplicates
 from library.controlView import ControlView
 from output.output import OutPutQueue
 from configuration import ConfigManagerInstance
+from exception.exception import CaseManagerException
+
 class _BaseCase(object):
     def __init__(self):
         super(_BaseCase,self).__init__()
@@ -20,7 +22,8 @@ class _BaseCase(object):
         self._Impact = {}
         self._RCA = {}
         self._FixMethod = {}
-
+        self._pageUrl = "https://confluence.int.net.nokia.com/pages/viewpage.action?spaceKey=Unify60&title=Bravo+Team+Status+Dashboard"
+        self.caseNumber = None
 
     def _printf(self,message):
         if self._ToPrint:
@@ -48,7 +51,10 @@ class _BaseCase(object):
     def passed(self):
         return self.status == PASS
     def _readConfig(self):
-        pass
+        if self.caseNumber is None:
+            raise CaseManagerException("Exception :Case %s attribute caseNumber  is not set"%self.__class__.__name__)
+
+
 
     # def run(self,RERUN=False):
     #     self._readConfig()

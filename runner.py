@@ -37,14 +37,20 @@ if __name__ == "__main__":
     PD = ProgressDialog(caseNameListLength)
     PD.start()
     i = 0
-    for caseName in caseNameList:
-        PD.set(i)
-        i += 1
-        behavior =  CaseManagerInstance.run_case(caseName)
-        PD.set(i)
-        if behavior == EXIT:
-            break
-        time.sleep(2)
-    report().write()
+    try:
+        for caseName in caseNameList:
+            PD.set(i)
+            i += 1
+            behavior =  CaseManagerInstance.run_case(caseName)
+            PD.set(i)
+            if behavior == EXIT:
+                break
+        report().write()
+    except Exception as e:
+
+        OutPut().printf("\n%s"%e)
+    PD.stop()
     OutPut().stop()
+
+
 
