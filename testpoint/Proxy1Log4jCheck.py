@@ -7,7 +7,7 @@ class Proxy1Log4jCheck(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         # self.describe = "proxy-1 logs size limit: info log 10M *5, trace log 10M *10, error log 10M *5. "
-        self.level = NOCRITICAL
+        # self.level = NOCRITICAL
 
     def _checkpoint(self):
         get_dict_from_xml = EngineManagerInstance.get_keyword("get_dict_from_xml")

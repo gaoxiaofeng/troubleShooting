@@ -1,6 +1,6 @@
-import sys,os
+# import sys,os
 from library.library import ExecuteCommond,singleton
-from log.logger import logger
+# from log.logger import logger
 import xml.etree.ElementTree as ET
 
 

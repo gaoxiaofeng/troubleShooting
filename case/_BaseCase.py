@@ -56,33 +56,7 @@ class _BaseCase(object):
 
 
 
-    # def run(self,RERUN=False):
-    #     self._readConfig()
-    #     if RERUN is False:
-    #         self._introduceSelf()
-    #     self._check_status()
-    #     self._processResult()
-    #     if not self.passed:
-    #         while 1:
-    #
-    #             selected = self._InteractionAfterProblemBeObserved()
-    #             if selected == TRYFIXED:
-    #                 selected = self.fixManually()
-    #                 if selected == DONEFIXED or selected == EXIT:
-    #                     break
-    #             elif selected == RCA:
-    #                 self._InteractionClickedRCA()
-    #             elif selected == IMPACT:
-    #                 self._InteractionClickedImpact()
-    #
-    #
-    #             else:
-    #                 break
-    #
-    #
-    #         return self.passed,selected
-    #     else:
-    #         return self.passed,CONTINUE
+
     def run(self,RERUN=False):
         self._readConfig()
         self._check_status()
@@ -93,56 +67,7 @@ class _BaseCase(object):
 
         return result,CONTINUE
 
-    # def _introduceSelf(self):
-    #     separator = "^"*80
-    #     self._printf(separator)
-    #     Note = "{Driver start to run the %s}:"%(self.__class__.__name__,)
-    #     describe = "|\n*Description:  %s"%self.describe
-    #     self._printf(Note)
-    #     self._printf(describe)
-    # def _processResult(self):
-    #     #Result = "*Result:  Driver checked all related TestPoints,We can judge the Case is [%s]"%self.status
-    #     Result = "|\n*Result: [%s]"%self.status
-    #     self._printf(Result)
-    #     self.logger.info("Case(%s) Rule is `%s`, result is [%s]"%(self.__class__.__name__,self.passCondition,self.status))
 
-
-    # def _InteractionAfterProblemBeFixed(self):
-    #     Question = "|\n*Question: Do you have performed the above fixed steps?"
-    #     self._printf(Question)
-    #     view = ControlView()
-    #     chLower = view("[Y] Yes ","[N] No ","[E] Exit Tool ")
-    #     if chLower == "y":
-    #         select = DONEFIXED
-    #     elif chLower == "n":
-    #         select = NEVERFIXED
-    #     elif chLower == "e":
-    #         select = EXIT
-    #     else:
-    #         raise BaseException("unkown selected result :%s"%chLower)
-    #
-    #     return select
-    # def _InteractionAfterProblemBeObserved(self):
-    #     Question = "|\n*Question: A Problem be observed, What's the next step?"
-    #     self._printf(Question)
-    #     view = ControlView()
-    #     chLower = view("[N] Ignore, Next Case ","[I] What's the Impact?","[R] Root Cause Analyzer","[F] Try To Fix ","[D] Double Check ","[E] Exit Tool ")
-    #     if chLower == "n":
-    #         select = CONTINUE
-    #     elif chLower == "i":
-    #         select = IMPACT
-    #     elif chLower == "r":
-    #         select = RCA
-    #     elif chLower == "f":
-    #         select = TRYFIXED
-    #     elif chLower == "d":
-    #         select = RUNAGAIN
-    #     elif chLower == "e":
-    #         select = EXIT
-    #     else:
-    #         raise BaseException("unkown selected result :%s"%chLower)
-    #
-    #     return select
     def _LoadRCA(self):
         CriticalRCA = []
         NoCriticalRCA = []
@@ -202,41 +127,6 @@ class _BaseCase(object):
                     NoCriticalFixMethod += self._checkPointStatusDict[TestPointName]["FIXSTEP"]
         self._FixMethod = {"CriticalFixMethod":CriticalFixMethod,"NoCriticalFixMethod":NoCriticalFixMethod}
 
-    # def fixManually(self):
-    #
-    #     CriticalFixStep = []
-    #     NoCriticalFixStep = []
-    #     for TestPointName in self._checkPointStatusDict:
-    #         if self._checkPointStatusDict[TestPointName]["FIXSTEP"]:
-    #             if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
-    #                 CriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
-    #             if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
-    #                 NoCriticalFixStep.append({"TestPointName":TestPointName,"FIXSTEP":self._checkPointStatusDict[TestPointName]["FIXSTEP"]})
-    #
-    #     Note = "|\n*Fixed Steps: \n"
-    #     self._printf(Note)
-    #     if CriticalFixStep:
-    #         self._printf("|\n\\--*Mandatory:")
-    #         i = 1
-    #         for Step in CriticalFixStep:
-    #             self._printf("|\n  \\--*Fixing For %s:"%Step["TestPointName"])
-    #             for step in Step["FIXSTEP"]:
-    #
-    #                 self._printf("|\t* Step %s. %s"%(i,step))
-    #                 i += 1
-    #     if NoCriticalFixStep:
-    #         self._printf("|\n\\--*Optional:")
-    #         i = 1
-    #         for Step in NoCriticalFixStep:
-    #             self._printf("|\n  \\--*Fixing For %s:" % Step["TestPointName"])
-    #             for step in Step["FIXSTEP"]:
-    #                 self._printf("|\t* Step %s. %s" % (i, step))
-    #                 i += 1
-    #
-    #
-    #     selected = self._InteractionAfterProblemBeFixed()
-    #
-    #     return  selected
 
 
 
