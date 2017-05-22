@@ -22,8 +22,8 @@ class _BaseCase(object):
         self._Impact = {}
         self._RCA = {}
         self._FixMethod = {}
-        self._pageUrl = "https://confluence.int.net.nokia.com/pages/viewpage.action?spaceKey=Unify60&title=Bravo+Team+Status+Dashboard"
         self.caseNumber = None
+        self._internalCase = False
 
     def _printf(self,message):
         if self._ToPrint:
@@ -51,7 +51,7 @@ class _BaseCase(object):
     def passed(self):
         return self.status == PASS
     def _readConfig(self):
-        if self.caseNumber is None:
+        if self.caseNumber is None and self._internalCase is False:
             raise CaseManagerException("Exception :Case %s attribute caseNumber  is not set"%self.__class__.__name__)
 
 
@@ -89,60 +89,60 @@ class _BaseCase(object):
         self._LoadImpact()
         self._LoadRCA()
         self._LoadFixMethod()
-        result = {"STATUS": self.passed,"IMPACT":self._Impact,"DESCRIPTION":self.describe,"RCA":self._RCA,"FIXMETHOD":self._FixMethod}
+        result = {"STATUS": self.passed,"IMPACT":self._Impact,"DESCRIPTION":self.describe,"RCA":self._RCA,"FIXMETHOD":self._FixMethod,"CASENUMBER":self.caseNumber}
 
         return result,CONTINUE
 
-    def _introduceSelf(self):
-        separator = "^"*80
-        self._printf(separator)
-        Note = "{Driver start to run the %s}:"%(self.__class__.__name__,)
-        describe = "|\n*Description:  %s"%self.describe
-        self._printf(Note)
-        self._printf(describe)
-    def _processResult(self):
-        #Result = "*Result:  Driver checked all related TestPoints,We can judge the Case is [%s]"%self.status
-        Result = "|\n*Result: [%s]"%self.status
-        self._printf(Result)
-        self.logger.info("Case(%s) Rule is `%s`, result is [%s]"%(self.__class__.__name__,self.passCondition,self.status))
+    # def _introduceSelf(self):
+    #     separator = "^"*80
+    #     self._printf(separator)
+    #     Note = "{Driver start to run the %s}:"%(self.__class__.__name__,)
+    #     describe = "|\n*Description:  %s"%self.describe
+    #     self._printf(Note)
+    #     self._printf(describe)
+    # def _processResult(self):
+    #     #Result = "*Result:  Driver checked all related TestPoints,We can judge the Case is [%s]"%self.status
+    #     Result = "|\n*Result: [%s]"%self.status
+    #     self._printf(Result)
+    #     self.logger.info("Case(%s) Rule is `%s`, result is [%s]"%(self.__class__.__name__,self.passCondition,self.status))
 
 
-    def _InteractionAfterProblemBeFixed(self):
-        Question = "|\n*Question: Do you have performed the above fixed steps?"
-        self._printf(Question)
-        view = ControlView()
-        chLower = view("[Y] Yes ","[N] No ","[E] Exit Tool ")
-        if chLower == "y":
-            select = DONEFIXED
-        elif chLower == "n":
-            select = NEVERFIXED
-        elif chLower == "e":
-            select = EXIT
-        else:
-            raise BaseException("unkown selected result :%s"%chLower)
-
-        return select
-    def _InteractionAfterProblemBeObserved(self):
-        Question = "|\n*Question: A Problem be observed, What's the next step?"
-        self._printf(Question)
-        view = ControlView()
-        chLower = view("[N] Ignore, Next Case ","[I] What's the Impact?","[R] Root Cause Analyzer","[F] Try To Fix ","[D] Double Check ","[E] Exit Tool ")
-        if chLower == "n":
-            select = CONTINUE
-        elif chLower == "i":
-            select = IMPACT
-        elif chLower == "r":
-            select = RCA
-        elif chLower == "f":
-            select = TRYFIXED
-        elif chLower == "d":
-            select = RUNAGAIN
-        elif chLower == "e":
-            select = EXIT
-        else:
-            raise BaseException("unkown selected result :%s"%chLower)
-
-        return select
+    # def _InteractionAfterProblemBeFixed(self):
+    #     Question = "|\n*Question: Do you have performed the above fixed steps?"
+    #     self._printf(Question)
+    #     view = ControlView()
+    #     chLower = view("[Y] Yes ","[N] No ","[E] Exit Tool ")
+    #     if chLower == "y":
+    #         select = DONEFIXED
+    #     elif chLower == "n":
+    #         select = NEVERFIXED
+    #     elif chLower == "e":
+    #         select = EXIT
+    #     else:
+    #         raise BaseException("unkown selected result :%s"%chLower)
+    #
+    #     return select
+    # def _InteractionAfterProblemBeObserved(self):
+    #     Question = "|\n*Question: A Problem be observed, What's the next step?"
+    #     self._printf(Question)
+    #     view = ControlView()
+    #     chLower = view("[N] Ignore, Next Case ","[I] What's the Impact?","[R] Root Cause Analyzer","[F] Try To Fix ","[D] Double Check ","[E] Exit Tool ")
+    #     if chLower == "n":
+    #         select = CONTINUE
+    #     elif chLower == "i":
+    #         select = IMPACT
+    #     elif chLower == "r":
+    #         select = RCA
+    #     elif chLower == "f":
+    #         select = TRYFIXED
+    #     elif chLower == "d":
+    #         select = RUNAGAIN
+    #     elif chLower == "e":
+    #         select = EXIT
+    #     else:
+    #         raise BaseException("unkown selected result :%s"%chLower)
+    #
+    #     return select
     def _LoadRCA(self):
         CriticalRCA = []
         NoCriticalRCA = []

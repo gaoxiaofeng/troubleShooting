@@ -6,7 +6,7 @@ from _BaseTestPoint import _BaseTestPoint
 class Proxy2Log4jCheck(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.describe = "proxy-2 logs size limit: info log 10M *5, trace log 10M *10, error log 10M *5. "
+        # self.describe = "proxy-2 logs size limit: info log 10M *5, trace log 10M *10, error log 10M *5. "
         self.level = NOCRITICAL
 
     def _checkpoint(self):
@@ -22,6 +22,9 @@ class Proxy2Log4jCheck(_BaseTestPoint):
         proxy_info_log_index = proxy_info_log["maxBackupIndex"]
         proxy_trace_log_index = proxy_trace_log["maxBackupIndex"]
         proxy_error_log_index = proxy_error_log["maxBackupIndex"]
+        self.logger.debug("proxy-2 info log maxFileSize is %s * %s"%(proxy_info_log_size,proxy_info_log_index))
+        self.logger.debug("proxy-2 trace log maxFileSize is %s * %s"%(proxy_trace_log_size, proxy_trace_log_index))
+        self.logger.debug("proxy-2 error log maxFileSize is %s * %s"%(proxy_error_log_size, proxy_error_log_index))
         proxy_info_log_maxSize = conversion(proxy_info_log_size) * int(proxy_info_log_index)
         proxy_trace_log_maxSize = conversion(proxy_trace_log_size) * int(proxy_trace_log_index)
         proxy_error_log_maxSize = conversion(proxy_error_log_size) * int(proxy_error_log_index)

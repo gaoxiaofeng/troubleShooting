@@ -45,11 +45,15 @@ if __name__ == "__main__":
             PD.set(i)
             if behavior == EXIT:
                 break
+        while 1:
+            #wait for PD thread exit
+            if PD.is_alive() is False:
+                break
         report().write()
     except Exception as e:
-
+        PD.stop()
         OutPut().printf("\n%s"%e)
-    PD.stop()
+
     OutPut().stop()
 
 

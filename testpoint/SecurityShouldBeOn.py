@@ -3,10 +3,10 @@ from manager import EngineManagerInstance
 from variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton
-class Security_001(_BaseTestPoint):
+class SecurityShouldBeOn(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.describe = "IIOP Security should be enable"
+        # self.describe = "IIOP Security should be enable"
         self.level = NOCRITICAL
         self.needRestartNbi3gcAfterFixed = True
 

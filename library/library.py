@@ -158,9 +158,9 @@ class ProgressDialog(threading.Thread):
             sys.stdout.flush()
             if self._done == self._total:
                 break
-            time.sleep(0.1)
+            time.sleep(0.01)
         if self._RUN:
-            print "\tSuccess."
+            sys.stdout.write( "\tSuccess.\n")
     def stop(self):
         self._RUN = False
 def conversion(x):

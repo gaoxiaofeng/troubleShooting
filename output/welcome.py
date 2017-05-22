@@ -24,6 +24,13 @@ class welcome(object):
 #    ██║   ╚██████╔╝██████╔╝   ██║   ██║ ╚████║
 #    ╚═╝    ╚═════╝ ╚═════╝    ╚═╝   ╚═╝  ╚═══╝
 #         """
+
+        graph = """
+     _  _  ____  __     ___  __   _  _  ____
+    / )( \(  __)(  )   / __)/  \ ( \/ )(  __)
+    \ /\ / ) _) / (_/\( (__(  O )/ \/ \ ) _)
+    (_/\_)(____)\____/ \___)\__/ \_)(_/(____)
+"""
         self.printf(graph)
     def loadCasePrint(self,caseNameList):
         graph = "Load %s cases..."%len(caseNameList)

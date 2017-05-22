@@ -14,8 +14,8 @@ class OutPut(threading.Thread):
         self.running = True
         self.reservedWordList = ["Description:","TestPoints:","Result:","Fix Method:","Question:","Root Cause Analysis:",\
                                  "Impact Analysis:","[Critical]","[Minor]","Mandatory","Optional","|","*","Fix Method for Critical Problems:",\
-                                 "Fix Method for Minor Problems:","Deailed Message:","ShortCut","CaseName","Result",\
-                                 "Case Deail List"]
+                                 "Fix Method for Minor Problems:","Deailed Message:","ShortCut","CaseName:","Result",\
+                                 "Case Deail List","Reference document:","index:"]
 
     def printf(self,content):
 
