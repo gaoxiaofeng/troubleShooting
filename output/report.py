@@ -43,7 +43,7 @@ class report(object):
                 failureReportList.append(caseName)
             reportList.append(report)
             i += 1
-        reportList.append("#" + " " * ((_width - 3) / 2) + "[E]" + " " * (_width - 3 - (_width - 3) / 2) + "#" + " "*((_width - 4)/2) + "Exit" + " "*(_width - 4 - ((_width - 4)/2)) + "#")
+        reportList.append("#" + " " * ((_width - 3) / 2) + "[E]" + " " * (_width - 3 - (_width - 3) / 2) + "#" + " "*((_width - 4)/2) + "Exit" + " "*(_width - 4 - ((_width - 4)/2)) + "#" + " "*_width + "#")
 
 
         self.printf("*" * _width * 3 + "****")

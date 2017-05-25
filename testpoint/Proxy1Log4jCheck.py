@@ -10,9 +10,8 @@ class Proxy1Log4jCheck(_BaseTestPoint):
         # self.level = NOCRITICAL
 
     def _checkpoint(self):
-        get_dict_from_xml = EngineManagerInstance.get_keyword("get_dict_from_xml")
         proxy_log4j = "/opt/oss/NSN-nbi3gc/proxy-1/etc/log4j.xml"
-        value = get_dict_from_xml(proxy_log4j)
+        value = self.get_dict_from_xml(proxy_log4j)
         proxy_info_log = value["mf-info"]
         proxy_trace_log = value["mf-trace"]
         proxy_error_log = value["mf-error"]

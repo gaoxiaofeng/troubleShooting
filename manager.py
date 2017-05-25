@@ -161,9 +161,8 @@ class CaseManager(BaseManager):
                 self.logger.info("repeat record case %s"%(caseName,))
             else:
                 self.__case_record[caseName] = case_record[caseName]
-
-TestPointManagerInstance = TestPointManager()
 EngineManagerInstance =  EngineManager()
+TestPointManagerInstance = TestPointManager()
 CaseManagerInstance = CaseManager()
 if __name__ == "__main__":
     pass

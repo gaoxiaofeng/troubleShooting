@@ -26,9 +26,8 @@ if __name__ == "__main__":
     ConfigManagerInstance.config = {"runMode":DetailMode if options.runMode == "detail" else SingleMode}
 
     welcome()
-
-    TestPointBuilder().builder()
     EngineBuilder().builder()
+    TestPointBuilder().builder()
     CaseBuilder().builder()
     OutPut().start()
     caseNameList = CaseManagerInstance.get_keyword()

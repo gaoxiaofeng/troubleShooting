@@ -4,6 +4,7 @@ from output.output import OutPutQueue
 from library.library import parseRule
 from manager import TestPointManager
 from configuration import  ConfigManagerInstance
+from manager import EngineManagerInstance
 class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()
@@ -18,6 +19,21 @@ class _BaseTestPoint(object):
         self.FIXSTEP = []
         self.level = NOCRITICAL
         self.needRestartNbi3gcAfterFixed = False
+        self._load_keyword()
+
+    def _load_keyword(self):
+        keywords = EngineManagerInstance.get_keyword()
+        for instanceName in keywords:
+            for keywordName in keywords[instanceName]:
+                if  vars(self).has_key(keywordName):
+                    pass
+                else:
+                    vars(self)[keywordName] = keywords[instanceName][keywordName]
+
+    def get_keyword(self,keywordName):
+        keyword = EngineManagerInstance.get_keyword(keywordName)
+        return  keyword
+
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)

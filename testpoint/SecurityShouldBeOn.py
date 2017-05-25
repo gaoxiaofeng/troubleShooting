@@ -11,9 +11,8 @@ class SecurityShouldBeOn(_BaseTestPoint):
         self.needRestartNbi3gcAfterFixed = True
 
     def _checkpoint(self):
-        get_value_from_configuration = EngineManagerInstance.get_keyword("get_value_from_configuration")
         item = "jacorb.security.support_ssl"
-        self._nbi3gc_mf_ssl_support = get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,item)
+        self._nbi3gc_mf_ssl_support = self.get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,item)
         self.logger.debug("nbi3gc-mf ssl support is:%s"%self._nbi3gc_mf_ssl_support)
 
         if self._nbi3gc_mf_ssl_support != "on":
