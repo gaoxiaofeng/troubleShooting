@@ -10,20 +10,22 @@ from configuration import ConfigManagerInstance
 from exception.exception import CaseManagerException
 
 class _BaseCase(object):
+    """
+    this is basecase class.
+    """
     def __init__(self):
         super(_BaseCase,self).__init__()
-        self.passCondition = ""
-        self.describe = "this is _BaseCase"
+        self.passCondition = None
         #self.fixStep = ""
         self.logger = logger()
-        self.status = NOTRUN
+        self.status = STATUS.NOTRUN
         self._ToPrint = True
         self._checkPointStatusDict = {}
         self._Impact = {}
         self._RCA = {}
         self._FixMethod = {}
         self.caseNumber = None
-        self._internalCase = False
+        self.referenceDocument = None
 
     def _printf(self,message):
         if self._ToPrint:
@@ -41,18 +43,18 @@ class _BaseCase(object):
                 passCondition = passCondition.replace(checkPoint,str(checkPointStatusDict[checkPoint]["STATUS"]))
             status = eval(passCondition)
             if status:
-                self.status = PASS
+                self.status = STATUS.PASS
             else:
-                self.status = FAIL
+                self.status = STATUS.FAIL
         else:
             self.logger.error("Case(%s) has not related testpoint"%self.__class__.__name__)
 
     @property
     def passed(self):
-        return self.status == PASS
+        return self.status == STATUS.PASS
     def _readConfig(self):
-        if self.caseNumber is None and self._internalCase is False:
-            raise CaseManagerException("Exception :Case %s attribute caseNumber  is not set"%self.__class__.__name__)
+        if self.passCondition is None:
+            raise CaseManagerException("Case(%s) has not define passCondition! "%self.__class__.__name__)
 
 
 
@@ -63,9 +65,9 @@ class _BaseCase(object):
         self._LoadImpact()
         self._LoadRCA()
         self._LoadFixMethod()
-        result = {"STATUS": self.passed,"IMPACT":self._Impact,"DESCRIPTION":self.describe,"RCA":self._RCA,"FIXMETHOD":self._FixMethod,"CASENUMBER":self.caseNumber}
+        result = {"STATUS": self.passed,"IMPACT":self._Impact,"DESCRIPTION":self.__doc__.strip() if self.__doc__ is not None else self.__doc__,"RCA":self._RCA,"FIXMETHOD":self._FixMethod,"REFERENCE":self.referenceDocument}
 
-        return result,CONTINUE
+        return result,BEHAVIOR.CONTINUE
 
 
     def _LoadRCA(self):
@@ -73,9 +75,9 @@ class _BaseCase(object):
         NoCriticalRCA = []
         for TestPointName in self._checkPointStatusDict:
             if self._checkPointStatusDict[TestPointName]["RCA"]:
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.CRITICAL:
                     CriticalRCA += self._checkPointStatusDict[TestPointName]["RCA"]
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.NOCRITICAL:
                     NoCriticalRCA += self._checkPointStatusDict[TestPointName]["RCA"]
 
         self._RCA = {"CriticalRCA":CriticalRCA,"NoCriticalRCA":NoCriticalRCA}
@@ -84,9 +86,9 @@ class _BaseCase(object):
         NoCriticalRCA = []
         for TestPointName in self._checkPointStatusDict:
             if self._checkPointStatusDict[TestPointName]["RCA"]:
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.CRITICAL:
                     CriticalRCA.append({"TestPointName":TestPointName,"RCA":self._checkPointStatusDict[TestPointName]["RCA"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.NOCRITICAL:
                     NoCriticalRCA.append({"TestPointName":TestPointName,"RCA":self._checkPointStatusDict[TestPointName]["RCA"],"DESCRIBE":self._checkPointStatusDict[TestPointName]["DESCRIBE"]})
 
 
@@ -108,9 +110,9 @@ class _BaseCase(object):
         NoCriticalImpact = []
         for TestPointName in self._checkPointStatusDict:
             if self._checkPointStatusDict[TestPointName]["IMPACT"]:
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.CRITICAL:
                     CriticalImpact += self._checkPointStatusDict[TestPointName]["IMPACT"]
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.NOCRITICAL:
                     NoCriticalImpact += self._checkPointStatusDict[TestPointName]["IMPACT"]
         CriticalImpact = RemoveDuplicates(CriticalImpact)
         NoCriticalImpact = RemoveDuplicates(NoCriticalImpact)
@@ -121,9 +123,9 @@ class _BaseCase(object):
         NoCriticalFixMethod = []
         for TestPointName in self._checkPointStatusDict:
             if self._checkPointStatusDict[TestPointName]["FIXSTEP"]:
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == CRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.CRITICAL:
                     CriticalFixMethod  += self._checkPointStatusDict[TestPointName]["FIXSTEP"]
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] == NOCRITICAL:
+                if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.NOCRITICAL:
                     NoCriticalFixMethod += self._checkPointStatusDict[TestPointName]["FIXSTEP"]
         self._FixMethod = {"CriticalFixMethod":CriticalFixMethod,"NoCriticalFixMethod":NoCriticalFixMethod}
 

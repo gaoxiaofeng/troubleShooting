@@ -9,7 +9,6 @@ class report(object):
         self.view = ControlView(width=58)
         self.caseResult =  CaseManagerInstance.case_record
         self.printf = OutPut().printf
-        self.DashboardUrl = "https://confluence.int.net.nokia.com/pages/viewpage.action?spaceKey=Unify60&title=Bravo+Team+Status+Dashboard"
     def write(self):
         _width = 18
         self._width = _width
@@ -32,9 +31,9 @@ class report(object):
                 # report = "    [%s]    %sSuccess"%(i,_caseName)
                 successReportList.append(caseName)
             else:
-                level = CRITICAL if self.caseResult[caseName]["IMPACT"]["CriticalImpact"] else NOCRITICAL
+                level = LEVEL.CRITICAL if self.caseResult[caseName]["IMPACT"]["CriticalImpact"] else LEVEL.NOCRITICAL
 
-                _Failure = "(+)Fail" if level is CRITICAL else "(+)Warn"
+                _Failure = "(+)Fail" if level is LEVEL.CRITICAL else "(+)Warn"
                 # report = "    [%s]    %sFailure (+)" % (i, _caseName)
                 _ShortCut = " "*((_width - 3)/2) + "[%s]"%i + " "*(_width - 3 - (_width - 3)/2)
                 _CaseName = " "*((_width - len(caseName))/2) +  caseName + " "*(_width - len(caseName) - (_width - len(caseName))/2)
@@ -117,15 +116,14 @@ class report(object):
         NoCriticalRCA =  self.caseResult[caseName]['RCA']['NoCriticalRCA']
         CriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['CriticalFixMethod']
         NoCriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['NoCriticalFixMethod']
-        CaseNumber = self.caseResult[caseName]['CASENUMBER']
+        ReferenceDocument = self.caseResult[caseName]['REFERENCE']
         self.printf("*"*(self._width*3+4))
         self.printf("|*CaseName:\t{%s}"%caseName)
 
-        if isinstance(Description,list):
-            Description = "\n".join(Description)
-        if CaseNumber:
-            self.printf("|*Reference document: %s ,index: %s."%(self.DashboardUrl,CaseNumber))
-        self.printf("|*Description:  %s" % Description)
+        if ReferenceDocument:
+            self.printf("|*Reference document: %s ."%ReferenceDocument)
+        if Description is not None:
+            self.printf("|*Description:  %s" % Description)
         self.printf("|*Impact Analysis:")
         if CriticalImpact or NoCriticalImpact:
             for _Impact in CriticalImpact:

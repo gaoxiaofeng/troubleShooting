@@ -6,8 +6,6 @@ from _BaseTestPoint import _BaseTestPoint
 class SecurityShouldBeOn(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
-        # self.describe = "IIOP Security should be enable"
-        self.level = NOCRITICAL
         self.needRestartNbi3gcAfterFixed = True
 
     def _checkpoint(self):
@@ -19,9 +17,9 @@ class SecurityShouldBeOn(_BaseTestPoint):
             self.RCA.append("%s:jacorb.security.support_ssl current value is `%s`,Expect value is `on` ."%(NBI3GC_MF_JACORB_PROPERTIES,self._nbi3gc_mf_ssl_support))
             self.IMPACT.append("3GPP Corba FM worked on inSecurity mode.")
             self.FIXSTEP.append("manual reset %s:jacorb.security.support_ssl  value to `on` ." % NBI3GC_MF_JACORB_PROPERTIES)
-            self.status = FAIL
+            self.status = STATUS.FAIL
         else:
-            self.status = PASS
+            self.status = STATUS.PASS
 
 
 

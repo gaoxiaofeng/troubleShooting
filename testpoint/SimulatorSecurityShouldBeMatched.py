@@ -6,9 +6,6 @@ from _BaseTestPoint import _BaseTestPoint
 class SimulatorSecurityShouldBeMatched(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
-        # self.describe = "Item `jacorb.security.support_ssl` consistency should be guaranteed in nbi3gc-mf ,simulator configuration."
-        self.level = NOCRITICAL
-        self.needRestartNbi3gcAfterFixed = False
 
     def _checkpoint(self):
         item = "jacorb.security.support_ssl"
@@ -17,9 +14,9 @@ class SimulatorSecurityShouldBeMatched(_BaseTestPoint):
         self.logger.debug("nbi3gc-mf ssl support is:%s"%self._nbi3gc_mf_ssl_support)
         self.logger.debug("nbi3gc-simulator ssl support is:%s"%self._nbi3gc_simulator_ssl_support)
         if self._nbi3gc_simulator_ssl_support == self._nbi3gc_mf_ssl_support :
-            self.status = PASS
+            self.status = STATUS.PASS
         else:
-            self.status = FAIL
+            self.status = STATUS.FAIL
             self.IMPACT.append("Simulators are not working normally which are under /opt/oss/NSN-nbi3gc/simulator folder.")
             RCA = """Items `jacorb.security.support_ssl` are not matched as below:
 \t\t\t%s : jacorb.security.support_ssl current value is `%s`.

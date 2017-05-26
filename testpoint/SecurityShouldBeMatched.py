@@ -6,8 +6,7 @@ from _BaseTestPoint import _BaseTestPoint
 class SecurityShouldBeMatched(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
-        # self.describe = "Item `jacorb.security.support_ssl` consistency should be guaranteed in nbi3gc-mf, proxy-x"
-        self.level = CRITICAL
+        self.level = LEVEL.CRITICAL
         self.needRestartNbi3gcAfterFixed = True
 
     def _checkpoint(self):
@@ -23,9 +22,9 @@ class SecurityShouldBeMatched(_BaseTestPoint):
         self.logger.debug("nbi3gc-proxy3 ssl support is:%s"%self._nbi3gc_proxy3_ssl_support)
         # self.logger.debug("nbi3gc-simulator ssl support is:%s"%self._nbi3gc_simulator_ssl_support)
         if  self._nbi3gc_mf_ssl_support == self._nbi3gc_proxy1_ssl_support == self._nbi3gc_proxy2_ssl_support == self._nbi3gc_proxy3_ssl_support:
-            self.status = PASS
+            self.status = STATUS.PASS
         else:
-            self.status = FAIL
+            self.status = STATUS.FAIL
             self.IMPACT.append("3GPP Corba FM Security mode is not working normally.")
             # self.IMPACT.append("Both Operation and Notification Forwarding are not appropriate working.")
             RCA = """Items `jacorb.security.support_ssl` are not matched as below:

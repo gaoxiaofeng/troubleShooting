@@ -35,25 +35,36 @@ if __name__ == "__main__":
     welcome().loadCasePrint(caseNameList)
     PD = ProgressDialog(caseNameListLength)
     PD.start()
-    i = 0
-    try:
-        for caseName in caseNameList:
-            PD.set(i)
-            i += 1
-            behavior =  CaseManagerInstance.run_case(caseName)
-            PD.set(i)
-            if behavior == EXIT:
-                break
-        while 1:
-            #wait for PD thread exit
-            if PD.is_alive() is False:
-                break
-        report().write()
-    except Exception as e:
-        PD.stop()
-        OutPut().printf("\n%s"%e)
+    # i = 0
+    # try:
+    #     for caseName in caseNameList:
+    #         PD.set(i)
+    #         i += 1
+    #         behavior =  CaseManagerInstance.run_case(caseName)
+    #         PD.set(i)
+    #         if behavior == EXIT:
+    #             break
+    #     while 1:
+    #         #wait for PD thread exit
+    #         if PD.is_alive() is False:
+    #             break
+    #     report().write()
+    # except Exception as e:
+    #     PD.stop()
+    #     OutPut().printf("\n%s"%e)
+    #
+    # OutPut().stop()
 
+    for i,caseName in enumerate(caseNameList):
+        i += 1
+        PD.set(i)
+        behavior =  CaseManagerInstance.run_case(caseName)
+        if behavior == BEHAVIOR.EXIT:
+            break
+    while 1:
+        #wait for PD thread exit
+        if PD.is_alive() is False:
+            break
+    report().write()
     OutPut().stop()
-
-
 

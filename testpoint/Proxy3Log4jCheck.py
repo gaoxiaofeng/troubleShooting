@@ -6,8 +6,6 @@ from _BaseTestPoint import _BaseTestPoint
 class Proxy3Log4jCheck(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
-        # self.describe = "proxy-3 logs size limit: info log 10M *5, trace log 10M *10, error log 10M *5. "
-        # self.level = NOCRITICAL
 
     def _checkpoint(self):
         proxy_log4j = "/opt/oss/NSN-nbi3gc/proxy-3/etc/log4j.xml"
@@ -29,23 +27,23 @@ class Proxy3Log4jCheck(_BaseTestPoint):
         proxy_error_log_maxSize = conversion(proxy_error_log_size) * int(proxy_error_log_index)
 
         if proxy_info_log_maxSize > conversion("50MB"):
-            self.status = FAIL
+            self.status = STATUS.FAIL
             self.IMPACT.append("disk /var usage over limit for 3GPP Corba FM.")
             self.RCA.append("The maxFileSize of proxy-3 Info logs over limit. (> 50MB)")
             self.FIXSTEP.append("reset configuration %s Info logs maxFileSize to under 50MB."%proxy_log4j)
             self.logger.error("Proxy-3 info logs maxFileSize over limit, maxFileSize is: %s * %s > 50MB" % (proxy_info_log_size, proxy_info_log_index))
 
         if proxy_trace_log_maxSize > conversion("100MB"):
-            self.status = FAIL
+            self.status = STATUS.FAIL
             self.IMPACT.append("disk /var usage over limit for 3GPP Corba FM.")
             self.RCA.append("The maxFileSize of proxy-3 Trace logs over limit. (> 100MB)")
             self.FIXSTEP.append("reset configuration %s Trace logs maxFileSize to under 100MB." % proxy_log4j)
             self.logger.error("Proxy-2 trace logs maxFileSize over limit, maxFileSize is: %s * %s > 100MB" % (proxy_trace_log_size, proxy_trace_log_index))
         if proxy_error_log_maxSize > conversion("50MB"):
-            self.status = FAIL
+            self.status = STATUS.FAIL
             self.IMPACT.append("disk /var usage over limit for 3GPP Corba FM.")
             self.RCA.append("The maxFileSize of proxy-3 Error logs over limit. (> 50MB)")
             self.FIXSTEP.append("reset configuration %s Error logs maxFileSize to under 50MB." % proxy_log4j)
             self.logger.error("Proxy-3 error logs maxFileSize over limit, maxFileSize is: %s * %s > 50MB" % (proxy_error_log_size, proxy_error_log_index))
-        if self.status is not FAIL:
-            self.status = PASS
+        if self.status is not STATUS.FAIL:
+            self.status = STATUS.PASS

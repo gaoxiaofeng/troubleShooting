@@ -8,16 +8,14 @@ from manager import EngineManagerInstance
 class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()
-        self.describe = "this is _BaseTestPoint"
-        # self.ToPrint = False
         self.logger = logger()
-        self.status = NOTRUN
+        self.status = STATUS.NOTRUN
         self._ToPrint = True
         self._firstTestPoint = True
         self.RCA = []
         self.IMPACT = []
         self.FIXSTEP = []
-        self.level = NOCRITICAL
+        self.level = LEVEL.NOCRITICAL
         self.needRestartNbi3gcAfterFixed = False
         self._load_keyword()
 
@@ -43,35 +41,19 @@ class _BaseTestPoint(object):
 
     @property
     def passed(self):
-        return self.status == PASS
+        return self.status == STATUS.PASS
 
-    def _interactive(self):
-        if self._ToPrint:
-            if self._firstTestPoint:
-                self._printf("|\n*TestPoints:")
-            self._printf("|\t|\n|\t\\--*[%s] %s "%(self.status,self.describe,))
-    def readConfig(self):
-        self.runMode = ConfigManagerInstance.config["runMode"]
-        if self.runMode == SingleMode:
-            self._ToPrint = False
-    def _initBeforeRun(self):
-        self.RCA = []
-        self.IMPACT = []
-        self.FIXSTEP = []
+
     def run(self,firstTestPoint=True):
-        self._firstTestPoint = firstTestPoint
-        self._initBeforeRun()
-        self.readConfig()
+
         self._checkpoint()
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
-        self._interactive()
         if self.passed is False and self.needRestartNbi3gcAfterFixed:
             restartNbi3gcStep = """restart 3GPP Corba FM by below command:
 \t\t\t#smanager.pl stop service nbi3gc
 \t\t\t#smanager.pl start service nbi3gc"""
             self.FIXSTEP.append(restartNbi3gcStep)
-        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.describe
-
+        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.__doc__
 
 
 

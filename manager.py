@@ -106,7 +106,6 @@ class  TestPointManager(BaseManager):
             status,level,rcaList,impactList,fixStepList,describe = testPointRunner(firstTestPoint)
             if firstTestPoint:
                 firstTestPoint = False
-            #statusDict["{%s}"%testPoint]=status
             statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":level,"DESCRIBE":describe}
             #{"Security_001":{"STATUS":True,"RCA":[,],"IMPACT":[,],"FIXSTEP":[],"LEVEL":"XXXX","DESCRIBE":"xxxx"}}
         self.testPoint_record = statusDict
@@ -136,15 +135,12 @@ class CaseManager(BaseManager):
         caseRunner = self.get_keyword(caseRunnerEntry)
         while 1:
             result,behavior = caseRunner(RERUN)
-            if behavior == CONTINUE:
+            if behavior == BEHAVIOR.CONTINUE:
                 break
-            elif behavior == RUNAGAIN:
+            elif behavior == BEHAVIOR.RUNAGAIN:
                 RERUN = True
-            elif behavior == EXIT:
+            elif behavior == BEHAVIOR.EXIT:
                 break
-            elif behavior == DONEFIXED:
-                RERUN = True
-
             else:
                 raise CaseManagerException("unsupport behavior : %s"%behavior)
 

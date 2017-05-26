@@ -1,3 +1,4 @@
+
 NBI3GC_SIMULATOR_PATH = "/opt/oss/NSN-nbi3gc/simulator"
 NBI3GC_BIN_PATH = "/opt/oss/NSN-nbi3gc/bin/smx-clt"
 NBI3GC_MF_JACORB_PROPERTIES = "/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties"
@@ -6,12 +7,6 @@ NBI3GC_PROXY2_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/j
 NBI3GC_PROXY3_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties"
 JACORB_PROPERTIES = "/opt/JacORB/classes/jacorb.properties"
 NBI3GC_SIMULATOR_PROPERTIES = "/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties"
-NOTRUN = "NOT_RUN"
-PASS = "PASS"
-FAIL = "FAIL"
-
-OK = "OK"
-ERROR = "ERROR"
 
 PRINT_AMARANTH = "\033[35m"
 PRINT_BLUE = "\033[36m"
@@ -29,22 +24,7 @@ PRINT_BOLD = "\033[1m"
 #PRINT_PASS = PRINT_GREEN +  PASS + PRINT_END
 #PRINT_FAIL = PRINT_RED + FAIL + PRINT_END
 
-
-
-
 NOEXIST = "NOEXIST"
-
-CONTINUE = "continue"
-RUNAGAIN = "runAgain"
-EXIT = "exit"
-
-NEXT = "Next"
-RERUN = "ReRun"
-EXIT = "Exit"
-TRYFIXED = "Try To Fixed"
-IMPACT = "Impact"
-RCA = "Root Cause Analyzer"
-
 
 LINEMODE = 1
 LISTMODE = 2
@@ -52,10 +32,30 @@ LISTMODE = 2
 SingleMode = 1
 DetailMode = 2
 
-DONEFIXED = "Done Fixed"
-NEVERFIXED = "Never Fixed"
-
-CRITICAL = "critical"
-NOCRITICAL = "noCritical"
-
 PROGREES_LENHTH = 50
+
+try:
+    from enum import Enum,unique
+    @unique
+    class LEVEL(Enum):
+        CRITICAL = "critical"
+        NOCRITICAL = "noCritical"
+    @unique
+    class STATUS(Enum):
+        PASS = "PASS"
+        FAIL = "FAIL"
+        NOTRUN = "NOT_RUN"
+    @unique
+    class BEHAVIOR(Enum):
+        CONTINUE = "continue"
+        RUNAGAIN = "runAgain"
+        EXIT = "exit"
+        NEXT = "Next"
+
+except:
+    # python dont support enum lib
+    def enum(**enums):
+        return  type("Enum",(),enums)
+    LEVEL = enum(CRITICAL = "critical",NOCRITICAL = "noCritical")
+    STATUS = enum(PASS = "PASS",FAIL = "FAIL",NOTRUN = "NOT_RUN")
+    BEHAVIOR = enum(CONTINUE = "continue",RUNAGAIN = "runAgain",EXIT = "exit",NEXT = "Next")
