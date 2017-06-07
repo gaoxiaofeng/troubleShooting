@@ -1,6 +1,6 @@
-from library.library import singleton
-from manager import EngineManagerInstance
-from variable.variable import *
+from framework.library.library import singleton
+from framework.manager import EngineManagerInstance
+from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton
 class SecurityShouldBeMatched(_BaseTestPoint):

@@ -1,10 +1,10 @@
-from log.logger import logger
-from variable.variable import *
-from output.output import OutPutQueue
-from library.library import parseRule
-from manager import TestPointManager
-from configuration import  ConfigManagerInstance
-from manager import EngineManagerInstance
+from framework.log.logger import logger
+from framework.variable.variable import *
+from framework.output.output import OutPutQueue
+from framework.library.library import parseRule
+from framework.manager import TestPointManager
+from framework.configuration import  ConfigManagerInstance
+from framework.manager import EngineManagerInstance
 class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()

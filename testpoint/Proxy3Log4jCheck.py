@@ -1,6 +1,6 @@
-from library.library import singleton,conversion
-from manager import EngineManagerInstance
-from variable.variable import *
+from framework.library.library import singleton,conversion
+from framework.manager import EngineManagerInstance
+from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton
 class Proxy3Log4jCheck(_BaseTestPoint):

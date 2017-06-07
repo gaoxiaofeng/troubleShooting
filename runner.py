@@ -1,17 +1,17 @@
 import sys
-from variable.variable import *
-from builder import TestPointBuilder,EngineBuilder,CaseBuilder
-from manager import CaseManagerInstance
-from log.logger import logger
-from output.output import OutPut
-from output.welcome import welcome
-from configuration import  ConfigManagerInstance
-import time
+from framework.variable.variable import *
+from framework.builder import TestPointBuilder,EngineBuilder,CaseBuilder
+from framework.manager import CaseManagerInstance
+# from framework.log.logger import logger
+from framework.output.output import OutPut
+from framework.output.welcome import welcome
+from framework.configuration import  ConfigManagerInstance
+# import time
 import signal
 from  optparse import OptionParser
-from library.library import  ProgressDialog
-from output.report import report
-
+from framework.library.library import  ProgressDialog
+from framework.output.report import report
+import traceback
 def onsignal_int(a,b):
     OutPut().stop()
     print '\nExit'
@@ -35,36 +35,20 @@ if __name__ == "__main__":
     welcome().loadCasePrint(caseNameList)
     PD = ProgressDialog(caseNameListLength)
     PD.start()
-    # i = 0
-    # try:
-    #     for caseName in caseNameList:
-    #         PD.set(i)
-    #         i += 1
-    #         behavior =  CaseManagerInstance.run_case(caseName)
-    #         PD.set(i)
-    #         if behavior == EXIT:
-    #             break
-    #     while 1:
-    #         #wait for PD thread exit
-    #         if PD.is_alive() is False:
-    #             break
-    #     report().write()
-    # except Exception as e:
-    #     PD.stop()
-    #     OutPut().printf("\n%s"%e)
-    #
-    # OutPut().stop()
+    try:
 
-    for i,caseName in enumerate(caseNameList):
-        i += 1
-        PD.set(i)
-        behavior =  CaseManagerInstance.run_case(caseName)
-        if behavior == BEHAVIOR.EXIT:
-            break
+        for i,caseName in enumerate(caseNameList):
+            i += 1
+            PD.set(i)
+            behavior =  CaseManagerInstance.run_case(caseName)
+            if behavior == BEHAVIOR.EXIT:
+                break
+    except Exception,e:
+        traceback.print_exc()
     while 1:
         #wait for PD thread exit
         if PD.is_alive() is False:
             break
-    report().write()
+    report().console()
     OutPut().stop()
 

@@ -1,0 +1,5 @@
+|2017-06-07 13:40:34 |logger              |INFO      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+|2017-06-07 13:40:34 |logger              |ERROR     | cat /opt/oss/NSN-nbi3gc/smx/mf-conf/nbi-3gpp-corba.properties |grep -v '#'
+The system cannot find the path specified.
+
+|2017-06-07 13:40:34 |logger              |ERROR     | get config(/opt/oss/NSN-nbi3gc/smx/mf-conf/nbi-3gpp-corba.properties) item(com.nsn.oss.nbi.epirp.systemDn) failed!configuration content is {}

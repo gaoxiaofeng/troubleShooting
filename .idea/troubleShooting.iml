@@ -6,6 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="robot" />
     <orderEntry type="module" module-name="test" />
+    <orderEntry type="module" module-name="robot" />
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="py.test" />
