@@ -3,6 +3,8 @@ from framework.output.output import OutPut
 from framework.library.controlView import ControlView
 from framework.manager import CaseManagerInstance
 from framework.variable.variable import  *
+from framework.configuration import ConfigManagerInstance
+from framework.output.writehtml import html
 class report(object):
     def __init__(self):
         super(report,self).__init__()
@@ -10,7 +12,7 @@ class report(object):
         self.caseResult =  CaseManagerInstance.case_record
         self.printf = OutPut().printf
     def console(self):
-        _width = 18
+        _width = ConfigManagerInstance.config["report_table_width"]
         self._width = _width
         reportList = []
         _CaseList = []
@@ -166,6 +168,7 @@ class report(object):
         self.printf("*" * (self._width * 3 + 4))
 
     def __del__(self):
+        html().write()
         graph = "Bye-bye!"
         self.printf(graph)
 

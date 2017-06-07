@@ -40,6 +40,8 @@ class OutPut(threading.Thread):
                 return
 
             print content
+    def echo(self,content):
+        print content
 
     def stop(self):
         while 1:

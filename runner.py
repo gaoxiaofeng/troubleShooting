@@ -1,11 +1,12 @@
 import sys
+from framework.configuration import  ConfigManagerInstance
 from framework.variable.variable import *
 from framework.builder import TestPointBuilder,EngineBuilder,CaseBuilder
 from framework.manager import CaseManagerInstance
 # from framework.log.logger import logger
 from framework.output.output import OutPut
 from framework.output.welcome import welcome
-from framework.configuration import  ConfigManagerInstance
+
 # import time
 import signal
 from  optparse import OptionParser

@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 from framework.output.output import OutPut
 from framework.library.library import  singleton
+from framework.configuration import  ConfigManagerInstance
 @singleton
 class welcome(object):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.printf = OutPut().printf
+        self.printf = OutPut().echo
+        self._totalWidth =  ConfigManagerInstance.config["report_total_width"]
         self._welcome()
     def _welcome(self):
-        graph = """
+        graph = r"""
 ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗
 ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝
 ██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗
@@ -16,7 +18,7 @@ class welcome(object):
 ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗
  ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
         """
-#         graph = """
+#         graph = r"""
 # ████████╗ ██████╗ ██████╗ ██╗   ██╗███╗   ██╗
 # ╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝████╗  ██║
 #    ██║   ██║   ██║██████╔╝ ╚████╔╝ ██╔██╗ ██║
@@ -30,6 +32,24 @@ class welcome(object):
 #     \ /\ / ) _) / (_/\( (__(  O )/ \/ \ ) _)
 #     (_/\_)(____)\____/ \___)\__/ \_)(_/(____)
 # """
+        graph = "*" * self._totalWidth
+        self.printf(graph)
+        graph = r"""
+           ____
+         / |   |\
+  _____/ @ |   | \
+ |> . .    |   |   \
+  \  .     |||||     \________________________
+   |||||||\                                    )
+            \                                 |
+             \                                |
+               \                             /
+                |   ____________------\     |
+                |  | |                ||    /
+                |  | |                ||  |
+                |  | |                ||  |
+                |  | |                ||  |     3GPP Corba FM Sniffer
+               (__/_/                ((__/"""
         self.printf(graph)
     def loadCasePrint(self,caseNameList):
         graph = "Load %s cases..."%len(caseNameList)

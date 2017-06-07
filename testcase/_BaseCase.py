@@ -65,7 +65,7 @@ class _BaseCase(object):
         self._LoadImpact()
         self._LoadRCA()
         self._LoadFixMethod()
-        result = {"STATUS": self.passed,"IMPACT":self._Impact,"DESCRIPTION":self.__doc__.strip() if self.__doc__ is not None else self.__doc__,"RCA":self._RCA,"FIXMETHOD":self._FixMethod,"REFERENCE":self.referenceDocument}
+        result = {"STATUS": self.passed,"IMPACT":self._Impact,"DESCRIPTION":self.__doc__.strip() if self.__doc__ is not None else self.__doc__,"RCA":self._RCA,"FIXMETHOD":self._FixMethod,"REFERENCE":self.referenceDocument,"TESTPOINT":self._checkPointStatusDict}
 
         return result,BEHAVIOR.CONTINUE
 
