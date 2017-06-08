@@ -181,6 +181,14 @@ def conversion(x):
     else :
         pass
     return  y
+def list2stringAndFormat(List):
+    result = []
+    for i,line in enumerate(List):
+        i += 1
+        line = "%s. %s"%(i,line)
+        result.append(line)
+    return "\n".join(result)
+
 
 
 

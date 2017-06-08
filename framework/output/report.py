@@ -123,7 +123,7 @@ class report(object):
         self.printf("|*CaseName:\t{%s}"%caseName)
 
         if ReferenceDocument:
-            self.printf("|*Reference document: %s ."%ReferenceDocument)
+            self.printf("|*Reference document: %s"%ReferenceDocument)
         if Description is not None:
             self.printf("|*Description:  %s" % Description)
         self.printf("|*Impact Analysis:")
@@ -169,6 +169,8 @@ class report(object):
 
     def __del__(self):
         html().write()
+        graph = """The Report Be saved as ./report.html"""
+        self.printf(graph)
         graph = "Bye-bye!"
         self.printf(graph)
 
