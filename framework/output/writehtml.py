@@ -50,16 +50,25 @@ $(this)
         for i,caseName in enumerate(self.caseResult):
             i += 1
             caseStatus = self.caseResult[caseName]["STATUS"]
-            caseStatusHtml = '<td colspan="1" bgcolor="#00FF00">%s</td>'%STATUS.PASS if caseStatus else '<td colspan="1" bgcolor="#FF0000">%s</td>'%STATUS.FAIL
             DESCRIPTION = self.caseResult[caseName]["DESCRIPTION"]
             REFERENCE = self.caseResult[caseName]["REFERENCE"]
             REFERENCEHtml = '<a href="%s">reference document</>'%REFERENCE if REFERENCE else REFERENCE
             TESTPOINT = self.caseResult[caseName]["TESTPOINT"]
             parent_pass = """
-            <tr  bgcolor="#00FF00" class="parent" id="row_0%s"><td colspan="1">%s</td>%s<td colspan="1"></td></tr>"""%(i,caseName,caseStatusHtml,)
+            <tr  bgcolor="#00FF00" class="parent" id="row_0%s"><td colspan="1">%s</td><td>%s</td><td colspan="1"></td></tr>"""%(i,caseName,caseStatus,)
             parent_fail = """
-            <tr  bgcolor="#FF0000" class="parent" id="row_0%s"><td colspan="1">%s</td>%s<td colspan="1"></td></tr>"""%(i,caseName,caseStatusHtml,)
-            data += parent_pass if caseStatus else parent_fail
+            <tr  bgcolor="#FF0000" class="parent" id="row_0%s"><td colspan="1">%s</td><td>%s</td><td colspan="1"></td></tr>"""%(i,caseName,caseStatus,)
+            parent_warn = """
+            <tr  bgcolor="#FFFF00" class="parent" id="row_0%s"><td colspan="1">%s</td><td>WARN</td><td colspan="1"></td></tr>"""%(i,caseName,)
+            if caseStatus:
+                data += parent_pass
+            else:
+                _level = LEVEL.CRITICAL if self.caseResult[caseName]["IMPACT"]["CriticalImpact"] else LEVEL.NOCRITICAL
+                if _level is LEVEL.CRITICAL:
+                    data += parent_fail
+                else:
+                    data += parent_warn
+
             data += """
 			<tr class="child_row_0%s"><td>Description</td><td></td><td>%s</td></tr>
 			<tr class="child_row_0%s"><td>Reference</td><td></td><td>%s</td></tr>
@@ -74,13 +83,15 @@ $(this)
                 testpointStatusHtml = '<font color="green"><b><i>%s</i></b></font>' % STATUS.PASS.lower() if testpointStatus else '<font color="red"><b><i>%s</i></b></font>' % STATUS.FAIL.lower()
                 testpointImpact = TESTPOINT[testpoint]["IMPACT"]
                 testpointImpact = list2stringAndFormat(testpointImpact)
+                testpointImpactHtml = testpointImpact.replace("\n","</br>")
                 testpointLevel =  TESTPOINT[testpoint]["LEVEL"]
-                testpointLevel = "<i>%s</i>"%testpointLevel
                 testpointDescribe = TESTPOINT[testpoint]["DESCRIBE"]
                 testpointRCA = TESTPOINT[testpoint]["RCA"]
                 testpointRCA = list2stringAndFormat(testpointRCA)
+                testpointRCAHtml = testpointRCA.replace("\n","</br>")
                 testpointFIXSTEP = TESTPOINT[testpoint]["FIXSTEP"]
                 testpointFIXSTEP = list2stringAndFormat(testpointFIXSTEP)
+                testpointFIXSTEPHtml = testpointFIXSTEP.replace("\n","</br>")
                 testpointHtml = "<i>%s<i>"%testpoint.strip("{}")
                 attribute_fail = """
             <tr class="child_row_0%s">
@@ -89,37 +100,37 @@ $(this)
             <td>
                 <table border="1"  width="100%%" style="margin:20px">
                     <tr>
-                            <th width="10%%">
+                            <th width="5%%">
                                 <b>Level</b>
                             </th>
-                            <th width="30%%">
+                            <th width="15%%">
                                <b>Impact</b>
                             </th>
-                            <th width="30%%">
+                            <th width="40%%">
                                <b>Root Cause</b>
                             </th>
-                            <th width="30%%">
+                            <th width="40%%">
                                <b>Fix Method</b>
                             </th>
                     </tr>
                     <tr>
                             <td>
-                                <b>%s</b>
+                                <i>%s</i>
                             </td>
                             <td>
-                               <b>%s</b>
+                               <i>%s</i>
                             </td>
                             <td>
-                               <b>%s</b>
+                               <i>%s</i>
                             </td>
                             <td>
-                               <b>%s</b>
+                               <i>%s</i>
                             </td>
                     </tr>
                 </table>
             </td>
             </tr>
-"""%(i,testpointHtml,testpointStatusHtml,testpointLevel,testpointImpact,testpointRCA,testpointFIXSTEP)
+"""%(i,testpointHtml,testpointStatusHtml,testpointLevel,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml)
                 attribute_pass = """
             <tr class="child_row_0%s">
             <td>%s</td>

@@ -4,6 +4,9 @@ from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton
 class SimulatorSecurityShouldBeMatched(_BaseTestPoint):
+    """
+    verify simulator and nbi3gc security mode are matched.
+    """
     def __init__(self):
         super(self.__class__,self).__init__()
 

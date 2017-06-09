@@ -5,7 +5,7 @@ NBI3GC_MF_JACORB_PROPERTIES = "/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.pr
 NBI3GC_PROXY1_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties"
 NBI3GC_PROXY2_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties"
 NBI3GC_PROXY3_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties"
-JACORB_PROPERTIES = "/opt/JacORB/classes/jacorb.properties"
+NBI3GCOM_PROPERTIES = "/opt/oss/Nokia-nbi3gcom/etc/jacorb.properties"
 NBI3GC_SIMULATOR_PROPERTIES = "/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties"
 
 PRINT_AMARANTH = "\033[35m"
