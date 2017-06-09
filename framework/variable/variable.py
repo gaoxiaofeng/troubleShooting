@@ -8,22 +8,6 @@ NBI3GC_PROXY3_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/j
 NBI3GCOM_PROPERTIES = "/opt/oss/Nokia-nbi3gcom/etc/jacorb.properties"
 NBI3GC_SIMULATOR_PROPERTIES = "/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties"
 
-PRINT_AMARANTH = "\033[35m"
-PRINT_BLUE = "\033[36m"
-PRINT_RED = "\033[31m"
-PRINT_RED_FLASH = "\033[1;5;31m"
-PRINT_FLASH = "\033[5m"
-PRINT_GREEN = "\033[32m"
-PRINT_GREEN_BLOD = "\033[1;32m"
-PRINT_YELLOW = "\033[33m"
-PRINT_REVERSE = "\33[7m"
-PRINT_END = "\033[0m"
-PRINT_HIGHLIGHT = "\033[43;30m"
-PRINT_HIGHLIGHT = "\033[1;35m"
-PRINT_BOLD = "\033[1m"
-#PRINT_PASS = PRINT_GREEN +  PASS + PRINT_END
-#PRINT_FAIL = PRINT_RED + FAIL + PRINT_END
-
 NOEXIST = "NOEXIST"
 
 LINEMODE = 1
@@ -51,7 +35,15 @@ try:
         RUNAGAIN = "runAgain"
         EXIT = "exit"
         NEXT = "Next"
-
+    class COLOUR(Enum):
+        Blue = "\033[36m"
+        Red = "\033[31m"
+        RedFlash = "\033[1;5;31m"
+        Green = "\033[32m"
+        Yellow = "\033[33m"
+        End = "\033[0m"
+        Reverse =  "\33[7m"
+        HighLight = "\033[1;35m"
 except:
     # python dont support enum lib
     def enum(**enums):
@@ -59,3 +51,12 @@ except:
     LEVEL = enum(CRITICAL = "critical",NOCRITICAL = "noCritical")
     STATUS = enum(PASS = "PASS",FAIL = "FAIL",NOTRUN = "NOT_RUN")
     BEHAVIOR = enum(CONTINUE = "continue",RUNAGAIN = "runAgain",EXIT = "exit",NEXT = "Next")
+    COLOUR = enum(Blue = "\033[36m",\
+                  Red = "\033[31m",\
+                  RedFlash = "\033[1;5;31m",\
+                  Green = "\033[32m",\
+                  Yellow = "\033[33m",\
+                  End = "\033[0m", \
+                  Reverse="\33[7m", \
+                  HighLight = "\033[1;35m"
+                          )

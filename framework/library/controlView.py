@@ -25,7 +25,7 @@ class ControlView(object):
                 shortKeyList.append(match.group(1).strip().lower())
 
         while 1:
-            View = "\r\33[K"+ "".join(args).replace(args[offset],PRINT_REVERSE+args[offset]+PRINT_END)
+            View = "\r\33[K"+ "".join(args).replace(args[offset],COLOUR.Reverse+args[offset]+COLOUR.End)
             self.printf(View)
             inkey = Getch()
             key = inkey()
@@ -76,7 +76,7 @@ class ControlView(object):
                 KeyMap[shortKey] = option
         i = 0
         while 1:
-            View = "\n".join(args).replace(args[offset],PRINT_REVERSE + args[offset] + PRINT_END) + "\33[K\33[?25l" + PRINT_END
+            View = "\n".join(args).replace(args[offset],COLOUR.Reverse + args[offset] + COLOUR.End) + "\33[K\33[?25l" + COLOUR.End
             if i == 0:
                 # View = "\r|" + View
                 View = "\r" + View

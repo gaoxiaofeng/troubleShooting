@@ -22,17 +22,17 @@ class OutPut(threading.Thread):
         if content.strip():
 
             if "Exception" in content:
-                content = PRINT_RED  +  content + PRINT_END
+                content = COLOUR.Red  +  content + COLOUR.End
 
             for reservedWord in self.reservedWordList:
                 if reservedWord in content:
-                    content = content.replace(reservedWord,PRINT_BLUE+reservedWord+PRINT_END)
+                    content = content.replace(reservedWord,COLOUR.Blue+reservedWord+COLOUR.End)
             pattern_highLight = re.compile(r".*(\{.+\}).*",re.M|re.S)
             match_highLight = pattern_highLight.match(content)
             if match_highLight:
                 highLight = match_highLight.group(1)
                 highLight_strip = highLight.strip("{}")
-                content = content.replace(highLight,PRINT_HIGHLIGHT+highLight_strip+PRINT_END)
+                content = content.replace(highLight,COLOUR.HighLight+highLight_strip+COLOUR.End)
 
             if  content[0] == "\r":
                 sys.stdout.write(content)
