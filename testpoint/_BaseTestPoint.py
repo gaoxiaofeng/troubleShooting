@@ -4,10 +4,11 @@ from framework.output.output import OutPutQueue
 from framework.library.library import parseRule
 from framework.manager import TestPointManager
 from framework.configuration import  ConfigManagerInstance
-from framework.manager import KeywordManagerInstance
+from framework.manager import ManagerFactory
 class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()
+        self.keywordManager = ManagerFactory().getManager(LAYER.KeyWords)
         self.logger = logger()
         self.status = STATUS.NOTRUN
         self._ToPrint = True
@@ -20,7 +21,7 @@ class _BaseTestPoint(object):
         self._load_keyword()
 
     def _load_keyword(self):
-        keywords = KeywordManagerInstance.get_keyword()
+        keywords = self.keywordManager.get_keyword()
         for instanceName in keywords:
             for keywordName in keywords[instanceName]:
                 if  vars(self).has_key(keywordName):
@@ -29,7 +30,7 @@ class _BaseTestPoint(object):
                     vars(self)[keywordName] = keywords[instanceName][keywordName]
 
     def get_keyword(self,keywordName):
-        keyword = KeywordManagerInstance.get_keyword(keywordName)
+        keyword = self.keywordManager.get_keyword(keywordName)
         return  keyword
 
     def _printf(self,message):

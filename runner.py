@@ -2,10 +2,10 @@ import sys
 from framework.configuration import  ConfigManagerInstance
 from framework.variable.variable import *
 from framework.builder import BuilderFactory
-from framework.manager import CaseManagerInstance
 # from framework.log.logger import logger
 from framework.output.output import OutPut
 from framework.output.welcome import welcome
+from framework.manager import ManagerFactory
 
 # import time
 import signal
@@ -25,12 +25,13 @@ if __name__ == "__main__":
     parser.add_option("-m",dest="runMode",help="support simple/detail,default is simple",default="simple")
     options, args = parser.parse_args()
     ConfigManagerInstance.config = {"runMode":DetailMode if options.runMode == "detail" else SingleMode}
-
+    CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
     welcome()
     builderfactory = BuilderFactory()
-    builderfactory.getBuilder("keyword").builder()
+    builderfactory.getBuilder("keywords").builder()
     builderfactory.getBuilder("testpoint").builder()
     builderfactory.getBuilder("case").builder()
+
 
     OutPut().start()
     caseNameList = CaseManagerInstance.get_keyword()

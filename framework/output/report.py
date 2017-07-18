@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from framework.output.output import OutPut
 from framework.library.controlView import ControlView
-from framework.manager import CaseManagerInstance
+from framework.manager import ManagerFactory
 from framework.variable.variable import  *
 from framework.configuration import ConfigManagerInstance
 from framework.output.writehtml import html
@@ -9,7 +9,7 @@ class report(object):
     def __init__(self):
         super(report,self).__init__()
         self.view = ControlView(width=58)
-        self.caseResult =  CaseManagerInstance.case_record
+        self.caseResult =  ManagerFactory().getManager(LAYER.Case).case_record
         self.printf = OutPut().printf
     def console(self):
         _width = ConfigManagerInstance.config["report_table_width"]

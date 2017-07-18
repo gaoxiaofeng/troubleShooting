@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from framework.manager import CaseManagerInstance
+from framework.manager import ManagerFactory
 from framework.variable.variable import *
 from framework.library.library import list2stringAndFormat
 import time
 class html(object):
     def __init__(self):
         super(html,self).__init__()
-        self.caseResult = CaseManagerInstance.case_record
+        self.caseResult = ManagerFactory().getManager(LAYER.Case).case_record
         self.currenttime = time.strftime("%Y-%m-%d %X %Z",time.localtime())
     def write(self):
         data = """

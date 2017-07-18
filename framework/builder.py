@@ -1,7 +1,8 @@
-from framework.manager import KeywordManagerInstance,TestPointManagerInstance,CaseManagerInstance
+from framework.manager import ManagerFactory
 import os,sys
 from framework.Import import Import
 from framework.log.logger import logger
+from variable.variable import  *
 
 
 class Builder(object):
@@ -31,34 +32,34 @@ class Builder(object):
             self.Manager.register(Object)
         self.logger.debug("%s be registered keyWord :%s"%(self.Manager.__class__.__name__,self.Manager.get_keyword()))
 
+class KeywordBuilder(Builder):
+    def __init__(self,folder):
+        super(KeywordBuilder,self).__init__()
+        self.import_dict = folder
+        self.Manager =  ManagerFactory().getManager(LAYER.KeyWords)
 
 class TestPointBuilder(Builder):
-    def __init__(self):
+    def __init__(self,folder):
         super(TestPointBuilder,self).__init__()
-        self.import_dict = "testpoint"
-        self.Manager =  TestPointManagerInstance
+        self.import_dict = folder
+        self.Manager =  ManagerFactory().getManager(LAYER.TestPoint)
 
-class KeywordBuilder(Builder):
-    def __init__(self):
-        super(KeywordBuilder,self).__init__()
-        self.import_dict = "testlibrary"
-        self.Manager =  KeywordManagerInstance
 class CaseBuilder(Builder):
-    def __init__(self):
+    def __init__(self,folder):
         super(CaseBuilder,self).__init__()
-        self.import_dict = "testcase"
-        self.Manager = CaseManagerInstance
+        self.import_dict = folder
+        self.Manager = ManagerFactory().getManager(LAYER.Case)
 
 class BuilderFactory(object):
     def __init__(self):
         super(BuilderFactory,self).__init__()
     def getBuilder(self,name):
-        if name == "keyword":
-            return KeywordBuilder()
-        elif name == "testpoint":
-            return TestPointBuilder()
-        elif name == "case":
-            return  CaseBuilder()
+        if name == LAYER.KeyWords:
+            return KeywordBuilder(name)
+        elif name ==  LAYER.TestPoint:
+            return TestPointBuilder(name)
+        elif name == LAYER.Case:
+            return  CaseBuilder(name)
         else :
             return  None
 

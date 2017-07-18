@@ -35,6 +35,7 @@ try:
         RUNAGAIN = "runAgain"
         EXIT = "exit"
         NEXT = "Next"
+    @unique
     class COLOUR(Enum):
         Blue = "\033[36m"
         Red = "\033[31m"
@@ -44,6 +45,12 @@ try:
         End = "\033[0m"
         Reverse =  "\33[7m"
         HighLight = "\033[1;35m"
+    @unique
+    class LAYER(Enum):
+        Case = "case"
+        TestPoint = "testpoint"
+        KeyWords = "keywords"
+
 except:
     # python dont support enum lib
     def enum(**enums):
@@ -60,3 +67,6 @@ except:
                   Reverse="\33[7m", \
                   HighLight = "\033[1;35m"
                           )
+    LAYER = enum(Case = "case",\
+                TestPoint = "testpoint",\
+                KeyWords = "keywords")

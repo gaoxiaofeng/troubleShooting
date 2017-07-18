@@ -79,7 +79,7 @@ class BaseManager(object):
                 findMultiError =  "search keyword multi, keyword:%s,result:%s"%(keywordName,keywordList)
                 raise BaseManagerException(findMultiError)
 
-
+@singleton
 class  TestPointManager(BaseManager):
     def __init__(self):
         super(self.__class__,self).__init__()
@@ -113,12 +113,12 @@ class  TestPointManager(BaseManager):
     def testPoint_record(self,testPoint_record):
         for testPointName in testPoint_record:
             self.__testPoint_record[testPointName] = testPoint_record[testPointName]
-
+@singleton
 class  KeywordManager(BaseManager):
     def __init__(self):
         super(self.__class__,self).__init__()
 
-
+@singleton
 class CaseManager(BaseManager):
     def __init__(self):
         super(self.__class__,self).__init__()
@@ -156,19 +156,15 @@ class ManagerFactory(object):
     def __init__(self):
         super(ManagerFactory,self).__init__()
     def getManager(self,name):
-        if name == "keyword":
+        if name == LAYER.KeyWords:
             return  KeywordManager()
-        elif name == "testpoint":
+        elif name == LAYER.TestPoint:
             return  TestPointManager()
-        elif name == "case":
+        elif name == LAYER.Case:
             return  CaseManager()
         else:
             return  None
 
-managerfactory = ManagerFactory()
-KeywordManagerInstance = managerfactory.getManager("keyword")
-TestPointManagerInstance = managerfactory.getManager("testpoint")
-CaseManagerInstance = managerfactory.getManager("case")
 if __name__ == "__main__":
     pass
 

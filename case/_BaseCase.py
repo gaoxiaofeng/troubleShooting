@@ -1,5 +1,5 @@
 import re
-from framework.manager import TestPointManagerInstance
+from framework.manager import ManagerFactory
 from framework.log.logger import logger
 import pdb,time
 from framework.variable.variable import *
@@ -36,6 +36,7 @@ class _BaseCase(object):
     def _check_status(self):
         checkPointList = parseRule(self.passCondition)
         if len(checkPointList) >= 1:
+            TestPointManagerInstance = ManagerFactory().getManager(LAYER.TestPoint)
             checkPointStatusDict = TestPointManagerInstance.run_test_points(checkPointList)
             self._checkPointStatusDict = checkPointStatusDict
             passCondition = self.passCondition
