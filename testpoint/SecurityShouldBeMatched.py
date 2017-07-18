@@ -1,5 +1,4 @@
 from framework.library.library import singleton
-from framework.manager import EngineManagerInstance
 from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton

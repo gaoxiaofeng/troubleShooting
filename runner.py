@@ -1,7 +1,7 @@
 import sys
 from framework.configuration import  ConfigManagerInstance
 from framework.variable.variable import *
-from framework.builder import TestPointBuilder,EngineBuilder,CaseBuilder
+from framework.builder import BuilderFactory
 from framework.manager import CaseManagerInstance
 # from framework.log.logger import logger
 from framework.output.output import OutPut
@@ -27,9 +27,11 @@ if __name__ == "__main__":
     ConfigManagerInstance.config = {"runMode":DetailMode if options.runMode == "detail" else SingleMode}
 
     welcome()
-    EngineBuilder().builder()
-    TestPointBuilder().builder()
-    CaseBuilder().builder()
+    builderfactory = BuilderFactory()
+    builderfactory.getBuilder("keyword").builder()
+    builderfactory.getBuilder("testpoint").builder()
+    builderfactory.getBuilder("case").builder()
+
     OutPut().start()
     caseNameList = CaseManagerInstance.get_keyword()
     caseNameListLength = len(caseNameList)

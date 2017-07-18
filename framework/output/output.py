@@ -13,14 +13,18 @@ class Handler(object):
     def __init__(self):
         super(Handler,self).__init__()
         self._successor = None
+        self.content = None
     @property
     def successor(self):
         return  self._successor
     @successor.setter
     def successor(self,successor):
         self._successor = successor
-    def handle(self):
-        pass
+    def handle(self,content):
+        self.content = content
+        if self.successor is not None:
+            self.successor.handle(content)
+
 
 class ExceptionHandler(Handler):
     def __init__(self):
@@ -28,7 +32,7 @@ class ExceptionHandler(Handler):
     def handle(self,content):
         if "Exception" in content:
             content = COLOUR.Red + content + COLOUR.End
-        self.successor.handle(content)
+        super(ExceptionHandler,self).handle(content)
 
 
 
@@ -43,7 +47,7 @@ class ReservedWordHandler(Handler):
         for reservedWord in self.reservedWordList:
             if reservedWord in content:
                 content = content.replace(reservedWord, COLOUR.Blue + reservedWord + COLOUR.End)
-        self.successor.handle(content)
+        super(ReservedWordHandler, self).handle(content)
 
 
 class HighLightHandler(Handler):
@@ -57,19 +61,8 @@ class HighLightHandler(Handler):
             highLight = match_highLight.group(1)
             highLight_strip = highLight.strip("{}")
             content = content.replace(highLight, COLOUR.HighLight + highLight_strip + COLOUR.End)
-        self.successor.handle(content)
-class FinalHandler(Handler):
-    def __init__(self):
-        super(FinalHandler,self).__init__()
-        self._content = None
-    def handle(self,content):
-        self._content = content
-    @property
-    def content(self):
-        return self._content
-    @content.setter
-    def content(self,content):
-        pass
+        super(HighLightHandler, self).handle(content)
+
 class Client(object):
     def __init__(self):
         super(Client,self).__init__()
@@ -78,12 +71,10 @@ class Client(object):
         h1 = ExceptionHandler()
         h2 = ReservedWordHandler()
         h3 = HighLightHandler()
-        final = FinalHandler()
         h1.successor = h2
         h2.successor = h3
-        h3.successor = final
         h1.handle(content)
-        return final.content
+        return h3.content
 
 @singleton
 class OutPut(threading.Thread):

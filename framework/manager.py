@@ -2,6 +2,7 @@ from framework.log.logger import logger
 from framework.exception.exception import *
 import re
 from variable.variable import *
+from library.library import singleton
 
 class BaseManager(object):
     '''
@@ -79,14 +80,9 @@ class BaseManager(object):
                 raise BaseManagerException(findMultiError)
 
 
-
-
-
-
-
 class  TestPointManager(BaseManager):
     def __init__(self):
-        super(TestPointManager,self).__init__()
+        super(self.__class__,self).__init__()
         self.__testPoint_record = {}
     def run_test_points(self,testPointList):
 
@@ -118,15 +114,14 @@ class  TestPointManager(BaseManager):
         for testPointName in testPoint_record:
             self.__testPoint_record[testPointName] = testPoint_record[testPointName]
 
-
-class  EngineManager(BaseManager):
+class  KeywordManager(BaseManager):
     def __init__(self):
-        super(EngineManager,self).__init__()
+        super(self.__class__,self).__init__()
 
 
 class CaseManager(BaseManager):
     def __init__(self):
-        super(CaseManager,self).__init__()
+        super(self.__class__,self).__init__()
         self.__case_record = {}
     def run_case(self,case):
         RERUN = False
@@ -156,9 +151,24 @@ class CaseManager(BaseManager):
                 self.logger.info("repeat record case %s"%(caseName,))
             else:
                 self.__case_record[caseName] = case_record[caseName]
-EngineManagerInstance =  EngineManager()
-TestPointManagerInstance = TestPointManager()
-CaseManagerInstance = CaseManager()
+
+class ManagerFactory(object):
+    def __init__(self):
+        super(ManagerFactory,self).__init__()
+    def getManager(self,name):
+        if name == "keyword":
+            return  KeywordManager()
+        elif name == "testpoint":
+            return  TestPointManager()
+        elif name == "case":
+            return  CaseManager()
+        else:
+            return  None
+
+managerfactory = ManagerFactory()
+KeywordManagerInstance = managerfactory.getManager("keyword")
+TestPointManagerInstance = managerfactory.getManager("testpoint")
+CaseManagerInstance = managerfactory.getManager("case")
 if __name__ == "__main__":
     pass
 

@@ -4,7 +4,7 @@ from framework.output.output import OutPutQueue
 from framework.library.library import parseRule
 from framework.manager import TestPointManager
 from framework.configuration import  ConfigManagerInstance
-from framework.manager import EngineManagerInstance
+from framework.manager import KeywordManagerInstance
 class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()
@@ -20,7 +20,7 @@ class _BaseTestPoint(object):
         self._load_keyword()
 
     def _load_keyword(self):
-        keywords = EngineManagerInstance.get_keyword()
+        keywords = KeywordManagerInstance.get_keyword()
         for instanceName in keywords:
             for keywordName in keywords[instanceName]:
                 if  vars(self).has_key(keywordName):
@@ -29,7 +29,7 @@ class _BaseTestPoint(object):
                     vars(self)[keywordName] = keywords[instanceName][keywordName]
 
     def get_keyword(self,keywordName):
-        keyword = EngineManagerInstance.get_keyword(keywordName)
+        keyword = KeywordManagerInstance.get_keyword(keywordName)
         return  keyword
 
     def _printf(self,message):

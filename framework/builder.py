@@ -1,4 +1,4 @@
-from framework.manager import TestPointManagerInstance,EngineManagerInstance,CaseManagerInstance
+from framework.manager import KeywordManagerInstance,TestPointManagerInstance,CaseManagerInstance
 import os,sys
 from framework.Import import Import
 from framework.log.logger import logger
@@ -38,17 +38,27 @@ class TestPointBuilder(Builder):
         self.import_dict = "testpoint"
         self.Manager =  TestPointManagerInstance
 
-class EngineBuilder(Builder):
+class KeywordBuilder(Builder):
     def __init__(self):
-        super(EngineBuilder,self).__init__()
+        super(KeywordBuilder,self).__init__()
         self.import_dict = "testlibrary"
-        self.Manager =  EngineManagerInstance
-
+        self.Manager =  KeywordManagerInstance
 class CaseBuilder(Builder):
     def __init__(self):
         super(CaseBuilder,self).__init__()
         self.import_dict = "testcase"
         self.Manager = CaseManagerInstance
 
-
+class BuilderFactory(object):
+    def __init__(self):
+        super(BuilderFactory,self).__init__()
+    def getBuilder(self,name):
+        if name == "keyword":
+            return KeywordBuilder()
+        elif name == "testpoint":
+            return TestPointBuilder()
+        elif name == "case":
+            return  CaseBuilder()
+        else :
+            return  None
 
