@@ -46,10 +46,15 @@ class _BaseTestPoint(object):
 
 
     def run(self,firstTestPoint=True):
+        try:
+            self._checkpoint()
+        except Exception,e:
+            self.logger.error("testPoint `%s` failed, reason is %s"%(self.__class__.__name__,e))
+            self.RCA.append(e)
+            self.status = STATUS.FAIL
 
-        self._checkpoint()
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
-        if self.passed is False and self.needRestartNbi3gcAfterFixed:
+        if self.passed is False and self.needRestartNbi3gcAfterFixed and self.FIXSTEP:
             restartNbi3gcStep = """restart 3GPP Corba FM by below command:
 \t\t\t#smanager.pl stop service nbi3gc
 \t\t\t#smanager.pl start service nbi3gc"""

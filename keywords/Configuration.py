@@ -11,6 +11,13 @@ class Configuration(object):
     def _get_config_content(self,configuration):
         command = "cat %s |grep -v '#'"%configuration
         result = self._command(command)
+        with open(configuration,"r") as f:
+            _lines = f.readlines()
+        lines = []
+        for line in _lines:
+            if "#" not in line:
+                lines.append(line)
+        result = "".join(lines)
         return result
     def _convert_to_map(self,content):
         config_map = {}
