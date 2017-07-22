@@ -50,6 +50,7 @@ class _BaseTestPoint(object):
             self._checkpoint()
         except Exception,e:
             self.logger.error("testPoint `%s` failed, reason is %s"%(self.__class__.__name__,e))
+            self.IMPACT.append("Throw Exception...")
             self.RCA.append(e)
             self.status = STATUS.FAIL
 

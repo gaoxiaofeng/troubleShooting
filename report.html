@@ -1,15 +1,4 @@
-# -*- coding: utf-8 -*-
-from framework.manager import ManagerFactory
-from framework.variable.variable import *
-from framework.library.library import list2stringAndFormat
-import time
-class html(object):
-    def __init__(self):
-        super(html,self).__init__()
-        self.caseResult = ManagerFactory().getManager(LAYER.Case).case_record
-        self.currenttime = time.strftime("%Y-%m-%d %X %Z",time.localtime())
-    def write(self):
-        data = """
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -179,50 +168,25 @@ $(this)
 
 
 </head>
-"""
-        data +="""
+
 <body>
 <h1 align="center">3GPP Corba FM Sniffer Report</h1>
-<p><i>%s</i></p>
-	<table width="100%%" border="1" class="bordered">
+<p><i>2017-07-22 22:51:06 DST</i></p>
+	<table width="100%" border="1" class="bordered">
 		<thead>
-			<tr bgcolor="#1E90FF"><th width="15%%">CaseName</th><th width="5%%" >Status</th><th width="80%%">Attribute</th></tr>
+			<tr bgcolor="#1E90FF"><th width="15%">CaseName</th><th width="5%" >Status</th><th width="80%">Attribute</th></tr>
 		</thead>
 		<tbody>
 		
-"""%self.currenttime
-        for i,caseName in enumerate(self.caseResult):
-            i += 1
-            caseStatus = self.caseResult[caseName]["STATUS"]
-            DESCRIPTION = self.caseResult[caseName]["DESCRIPTION"]
-            REFERENCE = self.caseResult[caseName]["REFERENCE"]
-            REFERENCEHtml = '<a href="%s">reference document</>'%REFERENCE if REFERENCE else REFERENCE
-            TESTPOINT = self.caseResult[caseName]["TESTPOINT"]
-            parent_pass = """
-            <tr  bgcolor="#90EE90" class="parent" id="row_0%s"><td colspan="1">%s</td><td>PASS</td><td colspan="1"></td></tr>"""%(i,caseName,)
-            parent_fail = """
-            <tr  bgcolor="#FF3030" class="parent" id="row_0%s"><td colspan="1">%s</td><td>FAIL</td><td colspan="1"></td></tr>"""%(i,caseName,)
-            parent_warn = """
-            <tr  bgcolor="#FF7F00" class="parent" id="row_0%s"><td colspan="1">%s</td><td>WARN</td><td colspan="1"></td></tr>"""%(i,caseName,)
-            if caseStatus:
-                data += parent_pass
-            else:
-                _level = LEVEL.CRITICAL if self.caseResult[caseName]["IMPACT"]["CriticalImpact"] else LEVEL.NOCRITICAL
-                if _level is LEVEL.CRITICAL:
-                    data += parent_fail
-                else:
-                    data += parent_warn
 
-            data += """
-            <tr class="child_row_0%s" style="display:none"><td>Description</td><td></td><td>%s</td></tr>
-            <tr class="child_row_0%s" style="display:none"><td>Reference</td><td></td><td>%s</td></tr>
-"""%(i,DESCRIPTION,i,REFERENCEHtml)
-            data += """
-            <tr class="child_row_0%s" style="display:none">
+            <tr  bgcolor="#FF7F00" class="parent" id="row_01"><td colspan="1">ProxyLogSizeLimit</td><td>WARN</td><td colspan="1"></td></tr>
+            <tr class="child_row_01" style="display:none"><td>Description</td><td></td><td>To Check configuration maxFileSize for Proxy-1,Proxy-2 and Proxy-3.</td></tr>
+            <tr class="child_row_01" style="display:none"><td>Reference</td><td></td><td><a href="https://pronto.int.net.nokia.com/pronto/problemReportSearch.html?freeTextdropDownID=prId&searchTopText=PR222307&HomeFlag=true">reference document</></td></tr>
+
+            <tr class="child_row_01" style="display:none">
             <td colspan="3" >
-                <table border="1"  width="100%%" style="margin:0px">            
-            """%i
-            data += """
+                <table border="1"  width="100%" style="margin:0px">            
+            
                     <tr>
                             <th width="5%%">
                                 <b>TestPoint</b>
@@ -243,65 +207,160 @@ $(this)
                                <b>Fix Method</b>
                             </th>
                     </tr>            
-                    """
-            for testpoint in TESTPOINT:
-                testpointStatus = TESTPOINT[testpoint]["STATUS"]
-                testpointStatusHtml = '<font color="green"><b><i>%s</i></b></font>' % STATUS.PASS.lower() if testpointStatus else '<font color="red"><b><i>%s</i></b></font>' % STATUS.FAIL.lower()
-                testpointImpact = TESTPOINT[testpoint]["IMPACT"]
-                testpointImpact = list2stringAndFormat(testpointImpact)
-                testpointImpactHtml = testpointImpact.replace("\n","</br>")
-                testpointLevel =  TESTPOINT[testpoint]["LEVEL"]
-                testpointDescribe = TESTPOINT[testpoint]["DESCRIBE"]
-                testpointRCA = TESTPOINT[testpoint]["RCA"]
-                testpointRCA = list2stringAndFormat(testpointRCA)
-                testpointRCAHtml = testpointRCA.replace("\n","</br>")
-                testpointFIXSTEP = TESTPOINT[testpoint]["FIXSTEP"]
-                testpointFIXSTEP = list2stringAndFormat(testpointFIXSTEP)
-                testpointFIXSTEPHtml = testpointFIXSTEP.replace("\n","</br>")
-                testpointHtml = "<i>%s<i>"%testpoint.strip("{}")
-                attribute_fail = """
+                    
                     
                     <tr>
                             <td>
-                                <i>%s</i>
+                                <i><i>Proxy3Log4jCheck<i></i>
                             </td>
                             <td>
-                                <i>%s</i>
+                                <i><font color="red"><b><i>fail</i></b></font></i>
                             </td>                                                
                             <td>
-                                <i>%s</i>
+                                <i>noCritical</i>
                             </td>
                             <td>
-                               <i>%s</i>
+                               <i>1. Throw Exception...</i>
                             </td>
                             <td>
-                               <i>%s</i>
+                               <i>1. [Errno 2] No such file or directory: '/opt/oss/NSN-nbi3gc/proxy-3/etc/log4j.xml'</i>
                             </td>
                             <td>
-                               <i>%s</i>
+                               <i></i>
                             </td>
                     </tr>
 
-"""%(testpointHtml,testpointStatusHtml,testpointLevel,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml)
 
-                attribute_pass = """
-                    <tr class="child_row_0%s">
-                        <td>%s</td>
-                        <td>%s</td>
-                        <td>%s</td>
+                    
+                    <tr>
+                            <td>
+                                <i><i>Proxy2Log4jCheck<i></i>
+                            </td>
+                            <td>
+                                <i><font color="red"><b><i>fail</i></b></font></i>
+                            </td>                                                
+                            <td>
+                                <i>noCritical</i>
+                            </td>
+                            <td>
+                               <i>1. Throw Exception...</i>
+                            </td>
+                            <td>
+                               <i>1. [Errno 2] No such file or directory: '/opt/oss/NSN-nbi3gc/proxy-2/etc/log4j.xml'</i>
+                            </td>
+                            <td>
+                               <i></i>
+                            </td>
                     </tr>
-"""%(i,testpointHtml,testpointStatusHtml,testpointLevel,)
-                data += attribute_pass if testpointStatus else attribute_fail
-            data += """
+
+
+                    
+                    <tr>
+                            <td>
+                                <i><i>Proxy1Log4jCheck<i></i>
+                            </td>
+                            <td>
+                                <i><font color="red"><b><i>fail</i></b></font></i>
+                            </td>                                                
+                            <td>
+                                <i>noCritical</i>
+                            </td>
+                            <td>
+                               <i>1. Throw Exception...</i>
+                            </td>
+                            <td>
+                               <i>1. [Errno 2] No such file or directory: '/opt/oss/NSN-nbi3gc/proxy-1/etc/log4j.xml'</i>
+                            </td>
+                            <td>
+                               <i></i>
+                            </td>
+                    </tr>
+
+
                 </table>
             </td>
             </tr>      
-        """
-        data += """
+        
+            <tr  bgcolor="#FF3030" class="parent" id="row_02"><td colspan="1">SecurityCheck</td><td>FAIL</td><td colspan="1"></td></tr>
+            <tr class="child_row_02" style="display:none"><td>Description</td><td></td><td>To Check NBI3GC Function with IIOP Security.</td></tr>
+            <tr class="child_row_02" style="display:none"><td>Reference</td><td></td><td>None</td></tr>
+
+            <tr class="child_row_02" style="display:none">
+            <td colspan="3" >
+                <table border="1"  width="100%" style="margin:0px">            
+            
+                    <tr>
+                            <th width="5%%">
+                                <b>TestPoint</b>
+                            </th>  
+                            <th width="5%%">
+                                <b>Status</b>
+                            </th>                                               
+                            <th width="5%%">
+                                <b>Level</b>
+                            </th>
+                            <th width="15%%">
+                               <b>Impact</b>
+                            </th>
+                            <th width="35%%">
+                               <b>Root Cause</b>
+                            </th>
+                            <th width="35%%">
+                               <b>Fix Method</b>
+                            </th>
+                    </tr>            
+                    
+                    
+                    <tr>
+                            <td>
+                                <i><i>SimulatorSecurityShouldBeMatched<i></i>
+                            </td>
+                            <td>
+                                <i><font color="red"><b><i>fail</i></b></font></i>
+                            </td>                                                
+                            <td>
+                                <i>noCritical</i>
+                            </td>
+                            <td>
+                               <i>1. Throw Exception...</i>
+                            </td>
+                            <td>
+                               <i>1. [Errno 2] No such file or directory: '/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties'</i>
+                            </td>
+                            <td>
+                               <i></i>
+                            </td>
+                    </tr>
+
+
+                    
+                    <tr>
+                            <td>
+                                <i><i>SecurityShouldBeMatched<i></i>
+                            </td>
+                            <td>
+                                <i><font color="red"><b><i>fail</i></b></font></i>
+                            </td>                                                
+                            <td>
+                                <i>critical</i>
+                            </td>
+                            <td>
+                               <i>1. Throw Exception...</i>
+                            </td>
+                            <td>
+                               <i>1. [Errno 2] No such file or directory: '/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties'</i>
+                            </td>
+                            <td>
+                               <i></i>
+                            </td>
+                    </tr>
+
+
+                </table>
+            </td>
+            </tr>      
+        
 		</tbody>
 	</table>
 </body>
 </html>
-"""
-        with open("report.html","w") as f:
-            f.write(data)
