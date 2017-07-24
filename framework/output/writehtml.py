@@ -196,7 +196,7 @@ $(this)
             caseStatus = self.caseResult[caseName]["STATUS"]
             DESCRIPTION = self.caseResult[caseName]["DESCRIPTION"]
             REFERENCE = self.caseResult[caseName]["REFERENCE"]
-            REFERENCEHtml = '<a href="%s">reference document</>'%REFERENCE if REFERENCE else REFERENCE
+            REFERENCEHtml = '<a href="%s">reference document</>'%REFERENCE if REFERENCE else '<font color="#d0d0d0">NA</font>'
             TESTPOINT = self.caseResult[caseName]["TESTPOINT"]
             parent_pass = """
             <tr  bgcolor="#90EE90" class="parent" id="row_0%s"><td colspan="1">%s</td><td>PASS</td><td colspan="1"></td></tr>"""%(i,caseName,)
@@ -207,7 +207,7 @@ $(this)
             if caseStatus:
                 data += parent_pass
             else:
-                _level = LEVEL.CRITICAL if self.caseResult[caseName]["IMPACT"]["CriticalImpact"] else LEVEL.NOCRITICAL
+                _level = self.caseResult[caseName]["FAILURELEVEL"]
                 if _level is LEVEL.CRITICAL:
                     data += parent_fail
                 else:
@@ -249,17 +249,23 @@ $(this)
                 testpointStatusHtml = '<font color="green"><b><i>%s</i></b></font>' % STATUS.PASS.lower() if testpointStatus else '<font color="red"><b><i>%s</i></b></font>' % STATUS.FAIL.lower()
                 testpointImpact = TESTPOINT[testpoint]["IMPACT"]
                 testpointImpact = list2stringAndFormat(testpointImpact)
+                if not testpointImpact:
+                    testpointImpact = '<font color="#d0d0d0">NA</font>'
                 testpointImpactHtml = testpointImpact.replace("\n","</br>")
                 testpointLevel =  TESTPOINT[testpoint]["LEVEL"]
                 testpointDescribe = TESTPOINT[testpoint]["DESCRIBE"]
                 testpointRCA = TESTPOINT[testpoint]["RCA"]
                 testpointRCA = list2stringAndFormat(testpointRCA)
+                if not testpointRCA:
+                    testpointRCA = '<font color="#d0d0d0">NA</font>'
                 testpointRCAHtml = testpointRCA.replace("\n","</br>")
                 testpointFIXSTEP = TESTPOINT[testpoint]["FIXSTEP"]
                 testpointFIXSTEP = list2stringAndFormat(testpointFIXSTEP)
+                if not testpointFIXSTEP:
+                    testpointFIXSTEP = '<font color="#d0d0d0">NA</font>'
                 testpointFIXSTEPHtml = testpointFIXSTEP.replace("\n","</br>")
                 testpointHtml = "<i>%s<i>"%testpoint.strip("{}")
-                attribute_fail = """
+                attribute = """
                     
                     <tr>
                             <td>
@@ -284,14 +290,18 @@ $(this)
 
 """%(testpointHtml,testpointStatusHtml,testpointLevel,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml)
 
-                attribute_pass = """
-                    <tr class="child_row_0%s">
-                        <td>%s</td>
-                        <td>%s</td>
-                        <td>%s</td>
-                    </tr>
-"""%(i,testpointHtml,testpointStatusHtml,testpointLevel,)
-                data += attribute_pass if testpointStatus else attribute_fail
+#                 attribute_pass = """
+#                     <tr class="child_row_0%s">
+#                         <td>%s</td>
+#                         <td>%s</td>
+#                         <td>%s</td>
+#                         <td>%s</td>
+#                         <td>%s</td>
+#                         <td>%s</td>
+#                     </tr>
+# """%(i,testpointHtml,testpointStatusHtml,testpointLevel,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml)
+#                 data += attribute_pass if testpointStatus else attribute_fail
+                data += attribute
             data += """
                 </table>
             </td>

@@ -33,7 +33,7 @@ class report(object):
                 # report = "    [%s]    %sSuccess"%(i,_caseName)
                 successReportList.append(caseName)
             else:
-                level = LEVEL.CRITICAL if self.caseResult[caseName]["IMPACT"]["CriticalImpact"] else LEVEL.NOCRITICAL
+                level = self.caseResult[caseName]["FAILURELEVEL"]
 
                 _Failure = "(+)Fail" if level is LEVEL.CRITICAL else "(+)Warn"
                 # report = "    [%s]    %sFailure (+)" % (i, _caseName)
