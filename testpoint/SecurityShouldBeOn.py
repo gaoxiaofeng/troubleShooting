@@ -10,7 +10,7 @@ class SecurityShouldBeOn(_BaseTestPoint):
     def _checkpoint(self):
         item = "jacorb.security.support_ssl"
         self._nbi3gc_mf_ssl_support = self.get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,item)
-        self.logger.debug("nbi3gc-mf ssl support is:%s"%self._nbi3gc_mf_ssl_support)
+        print "nbi3gc-mf ssl support is:%s"%self._nbi3gc_mf_ssl_support
 
         if self._nbi3gc_mf_ssl_support != "on":
             self.RCA.append("%s:jacorb.security.support_ssl current value is `%s`,Expect value is `on` ."%(NBI3GC_MF_JACORB_PROPERTIES,self._nbi3gc_mf_ssl_support))

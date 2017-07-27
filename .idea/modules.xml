@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../trunk/ci2.0/NBI_NBI3GC/nbi3gc/implementation/robot/remote-test/src/conf/ta_nbi3gc_testdata/Tools/Security_Tool/.idea/Security_Tool.iml" filepath="$PROJECT_DIR$/../../trunk/ci2.0/NBI_NBI3GC/nbi3gc/implementation/robot/remote-test/src/conf/ta_nbi3gc_testdata/Tools/Security_Tool/.idea/Security_Tool.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/troubleShooting.iml" filepath="$PROJECT_DIR$/.idea/troubleShooting.iml" />
     </modules>
   </component>

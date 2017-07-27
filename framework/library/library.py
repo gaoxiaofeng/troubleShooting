@@ -1,7 +1,7 @@
 import sys,os,time
 from subprocess import Popen, PIPE
 from framework.variable.variable import *
-import  threading
+# import  threading
 import re
 from framework.log.logger import logger
 Logger = logger()
@@ -135,34 +135,35 @@ def RemoveDuplicates(list):
             finalList.append(elem)
     return finalList
 
-class ProgressDialog(threading.Thread):
-    def __init__(self,total):
-        super(ProgressDialog,self).__init__()
-        self._total = total
-        self._done = 0
-        self._ratio = 0
-        self._RUN = True
-    def set(self):
-        return self._done
-    def set(self,num):
-        if isinstance(num,int):
-            self._done = num
-            self._ratio = float(self._done)/float(self._total)
-        else:
-            print "Progress is not int",num
-    def run(self):
-        while self._RUN:
-            done = "#"*int(self._ratio*PROGREES_LENHTH)
-            undone = " " *(PROGREES_LENHTH - int(self._ratio*PROGREES_LENHTH))
-            sys.stdout.write("\rProgress:[%s%s]  %s/%s"%(done,undone,self._done,self._total))
-            sys.stdout.flush()
-            if self._done == self._total:
-                break
-            time.sleep(0.01)
-        if self._RUN:
-            sys.stdout.write( "\tSuccess.\n")
-    def stop(self):
-        self._RUN = False
+# class ProgressDialog(threading.Thread):
+#     def __init__(self,total):
+#         super(ProgressDialog,self).__init__()
+#         self._total = total
+#         self._done = 0
+#         self._ratio = 0
+#         self._RUN = True
+#         self.printf =
+#     def set(self):
+#         return self._done
+#     def set(self,num):
+#         if isinstance(num,int):
+#             self._done = num
+#             self._ratio = float(self._done)/float(self._total)
+#         else:
+#             print "Progress is not int",num
+#     def run(self):
+#         while self._RUN:
+#             done = "#"*int(self._ratio*PROGREES_LENHTH)
+#             undone = " " *(PROGREES_LENHTH - int(self._ratio*PROGREES_LENHTH))
+#             sys.stdout.write("\rProgress:[%s%s]  %s/%s"%(done,undone,self._done,self._total))
+#             sys.stdout.flush()
+#             if self._done == self._total:
+#                 break
+#             time.sleep(0.01)
+#         if self._RUN:
+#             sys.stdout.write( "\tSuccess.\n")
+#     def stop(self):
+#         self._RUN = False
 def conversion(x):
     # to bytes
     pattern = re.compile("(\d+).*",re.I)

@@ -6,7 +6,7 @@ from framework.library.library import singleton
 from framework.variable.variable import *
 OutPutQueue = Queue()
 import re
-
+from framework.output.Print import CONSOLE
 
 
 class Handler(object):
@@ -89,12 +89,17 @@ class OutPut(threading.Thread):
             client = Client()
             content = client.handle(content)
             if  content[0] == "\r":
-                sys.stdout.write(content)
-                sys.stdout.flush()
+                # sys.stdout.write(content)
+                # sys.stdout.flush()
+                CONSOLE.write(content)
+                CONSOLE.flush()
             else:
-                print content
+                self._print(content)
+    def _print(self,content):
+        CONSOLE.write(content + "\n")
+        CONSOLE.flush()
     def echo(self,content):
-        print content
+        self._print(content)
 
     def stop(self):
         while 1:
