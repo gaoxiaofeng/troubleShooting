@@ -30,7 +30,7 @@ class Builder(object):
             className = "%s"%pyFile[:-3]
             Object = self.Import.importClass(packageName,className)
             self.Manager.register(Object)
-        self.logger.debug("%s be registered keyWord :%s"%(self.Manager.__class__.__name__,self.Manager.get_keyword()))
+        # self.logger.debug("%s be registered keyWord :%s"%(self.Manager.__class__.__name__,self.Manager.get_keyword()))
 
 class KeywordBuilder(Builder):
     def __init__(self,folder):

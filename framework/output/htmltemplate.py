@@ -1,28 +1,6 @@
 # -*- coding: utf-8 -*-
-HTML_HEAD = """
 
-<head>
-<title>3GPP Corba FM Sniffer Report</title>
-<style>
-table{ border:1;border-collapse:collapse;}
-td{ font:normal 12px/17px Arial;padding:2px;}
-th{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;}
-tr{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;}
-//.parent{ background:#FFF38F;cursor:pointer;}  /* 偶数行样式*/
-.odd{ background:#FFFFEE;}  /* 奇数行样式*/
-.selected{ background:#FF6500;color:#fff;}
-</style>
-<!--   引入jQuery -->
-<script src="http://www.codefans.net/ajaxjs/jquery1.3.2.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(function(){
-$('tr.parent').click(function(){   // 获取父行
-$(this)
-//	.toggleClass("selected")   // 添加/删除高亮
-	.siblings('.child_'+this.id).toggle();  // 隐藏/显示所谓的子行
-	});
-})
-</script>
+MAINCSS = """
 
 <style type="text/css">
 			*{margin: 0;padding: 0;}
@@ -164,12 +142,144 @@ $(this)
 				border-radius: 0 0 6px 0;
 			}
 </style>
+"""
+BUTTON ="""
+<section class="model-1">
+    <div class="checkbox">
+        <input type="checkbox"  onclick="checkboxOnclick(this)"/>
+        <label></label>
+    </div>
+</section>"""
 
 
+BUTTONCSS = """
+<style type="text/css">
+.checkbox {
+  position: relative;
+  display: inline-block;
+}
+.checkbox:after, .checkbox:before {
+  font-family: FontAwesome;
+  -webkit-font-feature-settings: normal;
+     -moz-font-feature-settings: normal;
+          font-feature-settings: normal;
+  -webkit-font-kerning: auto;
+     -moz-font-kerning: auto;
+          font-kerning: auto;
+  -webkit-font-language-override: normal;
+     -moz-font-language-override: normal;
+          font-language-override: normal;
+  font-stretch: normal;
+  font-style: normal;
+  font-synthesis: weight style;
+  font-variant: normal;
+  font-weight: normal;
+  text-rendering: auto;
+}
+.checkbox label {
+  width: 75px;
+  height: 25px;
+  background: #ccc;
+  position: relative;
+  display: inline-block;
+  border-radius: 46px;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+.checkbox label:after {
+  content: '';
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  left: 0;
+  top: -5px;
+  z-index: 2;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+.checkbox input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkbox input:hover + label:after {
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+.checkbox input:checked + label:after {
+  left: 40px;
+}
 
+.model-1 .checkbox input:checked + label {
+  background: #376ecb;
+}
+.model-1 .checkbox input:checked + label:after {
+  background: #4285F4;
+}
+</style>
+"""
+BUTTONJS = """
+<script>
+function checkboxOnclick(checkbox){
+
+if ( checkbox.checked == true){
+
+//Action for checked
+document.getElementById("log").style.display="";//显示
+
+}else{
+
+//Action for not checked
+document.getElementById("log").style.display="none";//隐藏
+
+}}
+
+</script>
+"""
+
+
+HTML_HEAD = """
+
+<head>
+<title>3GPP Corba FM Sniffer Report</title>
+<style>
+table{ border:1;border-collapse:collapse;}
+td{ font:normal 12px/17px Arial;padding:2px;}
+th{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;}
+tr{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px solid #333;}
+//.parent{ background:#FFF38F;cursor:pointer;}  /* 偶数行样式*/
+.odd{ background:#FFFFEE;}  /* 奇数行样式*/
+.selected{ background:#FF6500;color:#fff;}
+</style>
+<!--   引入jQuery -->
+<script src="http://www.codefans.net/ajaxjs/jquery1.3.2.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+$('tr.parent').click(function(){   // 获取父行
+$(this)
+//	.toggleClass("selected")   // 添加/删除高亮
+	.siblings('.child_'+this.id).toggle();  // 隐藏/显示所谓的子行
+	});
+})
+</script>
+%s
+%s
+%s
 </head>
 
-"""
+"""%(MAINCSS,BUTTONCSS,BUTTONJS)
+
+
+
+
+
 
 
 HTML_BEFORE= """

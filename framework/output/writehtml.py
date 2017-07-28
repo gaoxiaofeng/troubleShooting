@@ -23,7 +23,7 @@ class html(object):
 			<tr bgcolor="#1E90FF"><th width="15%%">CaseName</th><th width="5%%" >Status</th><th width="80%%">Attribute</th></tr>
 		</thead>
 		<tbody>
-"""%self.currenttime
+"""%(self.currenttime,)
         for i,caseName in enumerate(self.caseResult):
             i += 1
             caseStatus = self.caseResult[caseName]["STATUS"]
@@ -133,11 +133,25 @@ class html(object):
 		</tbody>
 	</table>
 """
+        from framework.output.Print import CONSOLE
         with open("troubleshooting.log", "r") as f:
-            content = "".join(f.readlines())
-        content = content.replace("\n\n", "<p>")
+            _lines = f.readlines()
+            lines = []
+            for line in _lines:
+                if "^^^^" in line:
+                    continue
+                if line.startswith("|"):
+                    line = line[1:]
+                if "|logger" in line:
+                    line = line.replace("|logger","")
+                lines.append(line)
+
+
+        content = "".join(lines)
         content = content.replace("\n", "</br>")
-        HTML_LOG = content
+        content = content.replace("|","&nbsp;&nbsp;&nbsp;&nbsp;")
+        HTML_LOG = '<div style="display:none" id="log" style="font-size:12px"><i>' + content + '</i></div>'
+        data += BUTTON
         data += HTML_LOG
         data += BODY_AFTER
         data += HTML_AFTER

@@ -5,7 +5,7 @@ class Keytool(object):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.execute_command = ExecuteCommond().shell_command
-    def get_cert_from_keystore(self,keystore,passwd):
+    def get_cert_and_key_from_keystore(self,keystore,passwd):
         return  self._keytool_list(keystore,passwd)
     def _keytool_list(self,keystore,passwd):
         command = "keytool -v -list -keystore %s -storepass %s" % (keystore, passwd)
@@ -20,10 +20,14 @@ class Keytool(object):
             if "Alias name" in cert_key:
                 __list.append(cert_key)
         certs_map = {}
+        key_map = {}
         for content in __list:
             if "trustedCertEntry" in content:
                 certs_map.update(self._parse_cert(content))
-        return  certs_map
+            if "PrivateKeyEntry" in content:
+                key_map.update(self._parse_cert(content))
+
+        return  certs_map,key_map
 
 
     def _parse_cert(self,content):

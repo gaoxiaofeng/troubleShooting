@@ -1,7 +1,7 @@
 from framework.log.logger import logger
 from framework.variable.variable import *
 from framework.output.output import OutPutQueue
-from framework.library.library import parseRule
+from framework.library.library import parseRule,RemoveDuplicates
 from framework.manager import TestPointManager
 from framework.configuration import  ConfigManagerInstance
 from framework.manager import ManagerFactory
@@ -18,6 +18,7 @@ class _BaseTestPoint(object):
         self.FIXSTEP = []
         self.level = LEVEL.NOCRITICAL
         self.needRestartNbi3gcAfterFixed = False
+        self.needRestartNbi3gcomAfterFixed = False
         self._load_keyword()
 
     def _load_keyword(self):
@@ -55,11 +56,22 @@ class _BaseTestPoint(object):
             self.status = STATUS.FAIL
 
         self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
+
+        if self.passed is False and self.needRestartNbi3gcomAfterFixed and self.FIXSTEP:
+
+            restartNbi3gcomStep = """restart Jacorb by below command:
+\t\t\t#smanager.pl stop service nbi3gcom
+\t\t\t#smanager.pl start service nbi3gcom"""
+            self.FIXSTEP.append(restartNbi3gcomStep)
+
         if self.passed is False and self.needRestartNbi3gcAfterFixed and self.FIXSTEP:
             restartNbi3gcStep = """restart 3GPP Corba FM by below command:
 \t\t\t#smanager.pl stop service nbi3gc
 \t\t\t#smanager.pl start service nbi3gc"""
             self.FIXSTEP.append(restartNbi3gcStep)
+
+        self.RCA = RemoveDuplicates(self.RCA)
+        self.IMPACT = RemoveDuplicates(self.IMPACT)
         return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.__doc__
 
 

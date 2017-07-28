@@ -8,21 +8,46 @@ class SimulatorSecurityShouldBeMatched(_BaseTestPoint):
     """
     def __init__(self):
         super(self.__class__,self).__init__()
-
+        self._simulator_ssl_mode = None
+        self._nbi3gc_ssl_mode = None
     def _checkpoint(self):
-        item = "jacorb.security.support_ssl"
-        self._nbi3gc_mf_ssl_support = self.get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,item)
-        self._nbi3gc_simulator_ssl_support = self.get_value_from_configuration(NBI3GC_SIMULATOR_PROPERTIES,item)
-        print "nbi3gc-mf ssl support is:%s"%self._nbi3gc_mf_ssl_support
-        print "nbi3gc-simulator ssl support is:%s"%self._nbi3gc_simulator_ssl_support
-        if self._nbi3gc_simulator_ssl_support == self._nbi3gc_mf_ssl_support :
+        support_ssl = "jacorb.security.support_ssl"
+
+        self._nbi3gc_mf_ssl_support = self.get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,support_ssl)
+        self._simulator_ssl_support = self.get_value_from_configuration(NBI3GC_SIMULATOR_PROPERTIES,support_ssl)
+        self._simulator_client_supported_options = self.get_value_from_configuration(NBI3GC_SIMULATOR_PROPERTIES,"jacorb.security.ssl.client.supported_options")
+        self._simulator_client_required_options = self.get_value_from_configuration(NBI3GC_SIMULATOR_PROPERTIES,"jacorb.security.ssl.client.required_options")
+        self._simulator_server_supported_options = self.get_value_from_configuration(NBI3GC_SIMULATOR_PROPERTIES,"jacorb.security.ssl.server.supported_options")
+        self._simulator_server_required_options = self.get_value_from_configuration(NBI3GC_SIMULATOR_PROPERTIES,"jacorb.security.ssl.server.required_options")
+
+        if self._simulator_ssl_support == "off":
+            self._simulator_ssl_mode = SECUREMOD.INSECURE
+        else:
+            if self._simulator_client_supported_options == "60" and \
+            self._simulator_client_required_options == "0" and \
+            self._simulator_server_supported_options == "60" and \
+            self._simulator_server_required_options == "0":
+                self._simulator_ssl_mode = SECUREMOD.COMPATIBLE
+            else:
+                self._simulator_ssl_mode = SECUREMOD.SECURE
+        if self._nbi3gc_mf_ssl_support == "off":
+            self._nbi3gc_ssl_mode = SECUREMOD.INSECURE
+        else:
+            self._nbi3gc_ssl_mode = SECUREMOD.SECURE
+
+
+
+
+        print "nbi3gc-mf secure mode is:%s"%self._nbi3gc_ssl_mode
+        print "nbi3gc-simulator secure mode is:%s"%self._simulator_ssl_mode
+        if self._simulator_ssl_mode == SECUREMOD.COMPATIBLE or self._simulator_ssl_mode == self._nbi3gc_ssl_mode :
             self.status = STATUS.PASS
         else:
             self.status = STATUS.FAIL
-            self.IMPACT.append("Simulators are not working normally which are under /opt/oss/NSN-nbi3gc/simulator folder.")
-            RCA = """Items `jacorb.security.support_ssl` are not matched as below:
-\t\t\t%s : jacorb.security.support_ssl current value is `%s`.
-\t\t\t%s : jacorb.security.support_ssl current value is `%s`."""%(NBI3GC_MF_JACORB_PROPERTIES,self._nbi3gc_mf_ssl_support,NBI3GC_SIMULATOR_PROPERTIES, self._nbi3gc_simulator_ssl_support )
+            self.IMPACT.append("Simulators could not operate nbi3gc service.")
+            RCA = """The secure mode is different between simualtors and nbi3gc service:
+\t\t\tsimulators secure mode is `%s`.
+\t\t\tnbi3gc service secure mode is `%s`."""%(self._simulator_ssl_mode,self._nbi3gc_ssl_mode)
             self.RCA.append(RCA)
 
             fixStep = []

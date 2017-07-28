@@ -10,7 +10,9 @@ class nbiKeyStoreShouldBeMatched(_BaseTestPoint):
         super(self.__class__,self).__init__()
         self.level = LEVEL.CRITICAL
         self.needRestartNbi3gcAfterFixed = True
-
+        self.needRestartNbi3gcomAfterFixed = True
+        self.nbi3gc_cert = "/d/oss/global/certificate/nbi3gc/nbi3gc.crt"
+        self.nbi3gcom_cert = "/d/oss/global/certificate/nbi3gcom/nbi3gcom.crt"
     def _checkpoint(self):
         keystorePathItem = "jacorb.security.keystore"
         keystorePasswdItem = "jacorb.security.keystore_password"
@@ -18,4 +20,31 @@ class nbiKeyStoreShouldBeMatched(_BaseTestPoint):
         self._nbi3gcom_keystore_path = self.get_value_from_configuration(NBI3GCOM_PROPERTIES,keystorePathItem)
         self._nbi3gc_keystore_passwd = self.get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,keystorePasswdItem)
         self._nbi3gcom_keystore_passwd = self.get_value_from_configuration(NBI3GCOM_PROPERTIES,keystorePasswdItem)
-        print self.get_cert_from_keystore(self._nbi3gc_keystore_path,self._nbi3gc_keystore_passwd)
+        nbi3gc_keystore_cert,nbi3gc_keystore_key = self.get_cert_and_key_from_keystore(self._nbi3gc_keystore_path,self._nbi3gc_keystore_passwd)
+        nbi3gc_key_alias = nbi3gc_keystore_key.keys()[0]
+        nbi3gc_key_value =  nbi3gc_keystore_key[nbi3gc_key_alias]
+        print "nbi3gc keystore contain certificate : %s"%nbi3gc_keystore_cert
+        print "nbi3gc keystore contain key:%s"%nbi3gc_keystore_key
+        nbi3gcom_keystore_cert,nbi3gcom_keystore_key = self.get_cert_and_key_from_keystore(self._nbi3gcom_keystore_path,self._nbi3gcom_keystore_passwd)
+        print "nbi3gcom keystore contain certificate : %s"%nbi3gcom_keystore_cert
+        print "nbi3gcom keystore contain key:%s"%nbi3gcom_keystore_key
+        nbi3gcom_key_alias = nbi3gcom_keystore_key.keys()[0]
+        nbi3gcom_key_value = nbi3gcom_keystore_key[nbi3gcom_key_alias]
+
+        if nbi3gc_keystore_cert.has_key(nbi3gcom_key_alias) and nbi3gc_keystore_cert[nbi3gcom_key_alias] == nbi3gcom_key_value:
+            pass
+        else:
+            self.status = STATUS.FAIL
+            self.IMPACT.append("nbi3gc could not work normally.")
+            self.RCA.append("nbi3gc keystore has not contain nbi3gcom certificate")
+            self.FIXSTEP.append("keytool -import -alias %s -keystore %s -file %s -storepass %s"%(nbi3gcom_key_alias,self._nbi3gc_keystore_path,self.nbi3gcom_cert,self._nbi3gc_keystore_passwd))
+
+        if nbi3gcom_keystore_cert.has_key(nbi3gc_key_alias) and nbi3gcom_keystore_cert[nbi3gc_key_alias] == nbi3gc_key_value:
+            pass
+        else:
+            self.status = STATUS.FAIL
+            self.IMPACT.append("nbi3gc could not work normally.")
+            self.RCA.append("nbi3gcom keystore has not contain nbi3gc certificate")
+            self.FIXSTEP.append("keytool -import -alias %s -keystore %s -file %s -storepass %s"%(nbi3gc_key_alias,self._nbi3gcom_keystore_path,self.nbi3gc_cert,self._nbi3gcom_keystore_passwd))
+        if self.status is not STATUS.FAIL:
+            self.status = STATUS.PASS

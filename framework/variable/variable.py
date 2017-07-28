@@ -50,7 +50,11 @@ try:
         Case = "case"
         TestPoint = "testpoint"
         KeyWords = "keywords"
-
+    @unique
+    class SECUREMOD(Enum):
+        SECURE = "secure"
+        INSECURE = "insecure"
+        COMPATIBLE = "compatible"
 except:
     # python dont support enum lib
     def enum(**enums):
@@ -65,8 +69,10 @@ except:
                   Yellow = "\033[33m",\
                   End = "\033[0m", \
                   Reverse="\33[7m", \
-                  HighLight = "\033[1;35m"
-                          )
+                  HighLight = "\033[1;35m")
     LAYER = enum(Case = "case",\
                 TestPoint = "testpoint",\
                 KeyWords = "keywords")
+    SECUREMOD = enum(SECURE = "secure",\
+        INSECURE = "insecure",\
+        COMPATIBLE = "compatible")
