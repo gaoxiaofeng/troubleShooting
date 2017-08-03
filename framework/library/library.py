@@ -38,22 +38,23 @@ class ExecuteCommond(object):
 
     def _check_simulator_exist(self,simulator_path):
         if not os.path.isfile(simulator_path):
-            message = "Simulator %s is not Found"%simulator_path
-            self.logger.error(message)
-            return NOEXIST
+            err = "Simulator %s is not Found"%simulator_path
+            # self.logger.error(message)
+            # return NOEXIST
+            raise Exception(err)
     def jar_command(self,PATH,simulator,*args):
 
         simulator_path = os.path.join(PATH,simulator)
-        if self._check_simulator_exist(simulator_path) == NOEXIST:
-            return None
+        self._check_simulator_exist(simulator_path)
 
         command =['java','-jar',simulator] + list(args)
         command_str = ' '.join(command)
         java =Popen(command,cwd =PATH,stdout=PIPE, stdin=PIPE,stderr = PIPE)
         stdout, err = java.communicate()
         if err:
-            message = '\n'.join([command_str,err])
-            self.logger.error(message)
+            # message = '\n'.join([command_str,err])
+            # self.logger.error(message)
+            raise Exception(err)
         return stdout
     def java_command(self,*args):
 
@@ -62,32 +63,33 @@ class ExecuteCommond(object):
         java =Popen(command,cwd ="/home",stdout=PIPE, stdin=PIPE,stderr = PIPE)
         stdout, err = java.communicate()
         if err:
-            message = '\n'.join([command_str,err])
-            self.logger.error(message)
+            # message = '\n'.join([command_str,err])
+            # self.logger.error(message)
+            raise Exception(err)
         return stdout
 
     def shell_script(self,PATH,scriptname,*args,**kw):
 
         simulator_path = os.path.join(PATH,scriptname)
-        if self._check_simulator_exist(simulator_path) == NOEXIST:
-            return None
-
+        self._check_simulator_exist(simulator_path)
         command =['sh',scriptname] + list(args)
         command_str = ' '.join(command)
         shell =Popen(command ,cwd =PATH,stdout=PIPE, stdin=PIPE,stderr = PIPE)
         stdout, err = shell.communicate()
 
         if  err:
-            message = '\n'.join([command_str,err])
-            self.logger.error(message)
+            # message = '\n'.join([command_str,err])
+            # self.logger.error(message)
+            raise Exception(err)
         return stdout
 
     def shell_command(self,command):
         shell =Popen([command] ,stdout=PIPE, stdin=PIPE,stderr = PIPE,shell = True)
         stdout, err = shell.communicate()
         if err:
-            message = '\n'.join([command,err])
-            self.logger.error(message)
+            # message = '\n'.join([command,err])
+            # self.logger.error(message)
+            raise Exception(err)
         return stdout
 class _GetchUnix(object):
     def __init__(self):
@@ -190,7 +192,11 @@ def list2stringAndFormat(List):
         result.append(line)
     return "\n".join(result)
 
-
+def dict_value_contain_content(dict,content):
+    for key in dict:
+        if dict[key] == content:
+            return  True
+    return  False
 
 
 

@@ -5,7 +5,7 @@ class SecurityCheck(_BaseCase):
     """
     def __init__(self):
         super(SecurityCheck,self).__init__()
-        self.passCondition = "{SecurityShouldBeMatched} is True and {SimulatorSecurityShouldBeMatched} is True and {Nbi3gcProxyKeyStoreConfigShouldBeSame} is True and {nbiKeyStoreShouldBeMatched} is True"
+        self.passCondition = "{SecurityShouldBeMatched} and {SimulatorSecurityShouldBeMatched} and {Nbi3gcProxyKeyStoreConfigShouldBeSame} and {nbiKeyStoreShouldBeMatched} and {nbiCodesetShouldBeMatch}"
 
 
 
