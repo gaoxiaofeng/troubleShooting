@@ -2,11 +2,11 @@ from framework.library.library import singleton
 from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton
-class Proxy1RegistedInNS(_BaseTestPoint):
+class Proxy2RegistedInNS(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.needRestartNbi3gcAfterFixed = True
-        self._proxyId = PROXY.PROXY1
+        self._proxyId = PROXY.PROXY2
 
     def _checkpoint(self):
         proxyDeployedStatus = self.get_proxy_deploy_status(self._proxyId)

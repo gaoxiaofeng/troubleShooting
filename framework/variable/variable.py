@@ -55,6 +55,11 @@ try:
         SECURE = "secure"
         INSECURE = "insecure"
         COMPATIBLE = "compatible"
+    @unique
+    class PROXY(Enum):
+        PROXY1 = "proxy-1"
+        PROXY2 = "proxy-2"
+        PROXY3 = "proxy-3"
 except:
     # python dont support enum lib
     def enum(**enums):
@@ -76,3 +81,6 @@ except:
     SECUREMOD = enum(SECURE = "secure",\
         INSECURE = "insecure",\
         COMPATIBLE = "compatible")
+    PROXY = enum(PROXY1 = "proxy-1",\
+        PROXY2 = "proxy-2",\
+        PROXY3 = "proxy-3")

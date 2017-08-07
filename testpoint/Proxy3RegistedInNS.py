@@ -2,11 +2,11 @@ from framework.library.library import singleton
 from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton
-class Proxy1RegistedInNS(_BaseTestPoint):
+class Proxy3RegistedInNS(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.needRestartNbi3gcAfterFixed = True
-        self._proxyId = PROXY.PROXY1
+        self._proxyId = PROXY.PROXY3
 
     def _checkpoint(self):
         proxyDeployedStatus = self.get_proxy_deploy_status(self._proxyId)
@@ -14,7 +14,6 @@ class Proxy1RegistedInNS(_BaseTestPoint):
             print "%s was undeployed."%self._proxyId
             self.status = STATUS.PASS
             return
-
         irp_list = self.get_irp_from_ns(self._proxyId)
         print "%s IOR :%s"%(self._proxyId,irp_list)
         expert_irp_list = ["AlarmIRP","KernelCMIRP","BasicCMIRP","NotificationIRP",\

@@ -50,10 +50,14 @@ if __name__ == "__main__":
                 break
     except Exception,e:
         traceback.print_exc()
-    while 1:
-        #wait for PD thread exit
-        if PD.is_alive() is False:
-            break
-    report().console()
-    OutPut().stop()
+        PD.stop()
+
+    else:
+        report().console()
+    finally:
+        while 1:
+            #wait for PD thread exit
+            if PD.is_alive() is False:
+                break
+        OutPut().stop()
 
