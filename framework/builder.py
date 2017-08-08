@@ -3,6 +3,7 @@ import os,sys
 from framework.Import import Import
 from framework.log.logger import logger
 from variable.variable import  *
+from framework.output.Print import CONSOLE
 
 
 class Builder(object):

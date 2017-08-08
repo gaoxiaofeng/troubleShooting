@@ -29,9 +29,9 @@ if __name__ == "__main__":
     CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
     welcome()
     builderfactory = BuilderFactory()
-    builderfactory.getBuilder("keywords").builder()
-    builderfactory.getBuilder("testpoint").builder()
-    builderfactory.getBuilder("case").builder()
+    builderfactory.getBuilder(LAYER.KeyWords).builder()
+    builderfactory.getBuilder(LAYER.TestPoint).builder()
+    builderfactory.getBuilder(LAYER.Case).builder()
 
 
     OutPut().start()
