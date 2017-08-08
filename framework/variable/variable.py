@@ -84,3 +84,4 @@ except:
     PROXY = enum(PROXY1 = "proxy-1",\
         PROXY2 = "proxy-2",\
         PROXY3 = "proxy-3")
+
