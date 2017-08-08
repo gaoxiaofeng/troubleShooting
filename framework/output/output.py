@@ -42,7 +42,7 @@ class ReservedWordHandler(Handler):
         self.reservedWordList = ["Description:","TestPoints:","Result:","Fix Method:","Question:","Root Cause Analysis:",\
                                  "Impact Analysis:","[Critical]","[Minor]","Mandatory","Optional","|","*","Fix Method for Critical Problems:",\
                                  "Fix Method for Minor Problems:","Deailed Message:","ShortCut","CaseName:","Result",\
-                                 "Case Deail List","Reference document:","index:"]
+                                 "Case Deail List","Reference document:","index:","The Report Be saved as"]
     def handle(self,content):
         for reservedWord in self.reservedWordList:
             if reservedWord in content:

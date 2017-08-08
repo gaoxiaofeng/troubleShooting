@@ -147,24 +147,25 @@ class report(object):
 
 
         self.printf("|*Fix Method:")
-        if CriticalFixMethod:
-            self.printf("|\t*Fix Method for Critical Problems:")
-            i = 1
-            for _Method in CriticalFixMethod:
-                if "\n" in _Method:
-                    _Method = _Method.replace("\n","\n|")
-                self.printf("|\t\tStep %s. %s"%(i,_Method))
-                i += 1
-
-
-        if NoCriticalFixMethod:
-            self.printf("|\t*Fix Method for Minor Problems:")
-            i = 1
-            for _Method in NoCriticalFixMethod:
-                if "\n" in _Method:
-                    _Method = _Method.replace("\n","\n|")
-                self.printf("|\t\tStep %s. %s"%(i,_Method))
-                i += 1
+        self.printf("|\t*Please refer to ./report.html")
+        # if CriticalFixMethod:
+        #     self.printf("|\t*Fix Method for Critical Problems:")
+        #     i = 1
+        #     for _Method in CriticalFixMethod:
+        #         if "\n" in _Method:
+        #             _Method = _Method.replace("\n","\n|")
+        #         self.printf("|\t\tStep %s. %s"%(i,_Method))
+        #         i += 1
+        #
+        #
+        # if NoCriticalFixMethod:
+        #     self.printf("|\t*Fix Method for Minor Problems:")
+        #     i = 1
+        #     for _Method in NoCriticalFixMethod:
+        #         if "\n" in _Method:
+        #             _Method = _Method.replace("\n","\n|")
+        #         self.printf("|\t\tStep %s. %s"%(i,_Method))
+        #         i += 1
         self.printf("*" * (self._width * 3 + 4))
 
     def __del__(self):

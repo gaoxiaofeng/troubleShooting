@@ -140,6 +140,8 @@ class _BaseCase(object):
                     CriticalFixMethod  += self._checkPointStatusDict[TestPointName]["FIXSTEP"]
                 if self._checkPointStatusDict[TestPointName]["LEVEL"] == LEVEL.NOCRITICAL:
                     NoCriticalFixMethod += self._checkPointStatusDict[TestPointName]["FIXSTEP"]
+
+
         self._FixMethod = {"CriticalFixMethod":CriticalFixMethod,"NoCriticalFixMethod":NoCriticalFixMethod}
 
 

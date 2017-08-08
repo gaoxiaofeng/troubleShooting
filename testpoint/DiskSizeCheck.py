@@ -1,4 +1,4 @@
-from framework.library.library import singleton,conversion
+from framework.library.library import singleton
 from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton

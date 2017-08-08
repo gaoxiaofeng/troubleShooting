@@ -30,9 +30,14 @@ class nbiCodesetShouldBeMatch(_BaseTestPoint):
             else:
                 self.status = STATUS.FAIL
                 self.IMPACT.append("nbi3gc can not work normally")
-                self.RCA.append("codeset are not match between nbi3gc and nbi3gcom")
-                self.RCA.append("nbi3gc codeset is %s"%self._nbi3gc_codeSet)
-                self.RCA.append("nbi3gcom codeset is %s"%self._nbi3gcom_codeSet)
+                rca = """codeset are not match between nbi3gc and nbi3gcom:
+\t\t\tnbi3gc codeset is %s
+\t\t\tnbi3gcom codeset is %s
+                """%(self._nbi3gc_codeSet,self._nbi3gcom_codeSet)
+                # self.RCA.append("codeset are not match between nbi3gc and nbi3gcom")
+                # self.RCA.append("nbi3gc codeset is %s"%self._nbi3gc_codeSet)
+                # self.RCA.append("nbi3gcom codeset is %s"%self._nbi3gcom_codeSet)
+                self.RCA.append(rca)
                 self.FIXSTEP.append("""reset codeset as below configuration:
                 %s:jacorb.native_char_codeset
                 %s:jacorb.native_char_codeset

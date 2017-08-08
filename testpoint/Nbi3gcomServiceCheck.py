@@ -14,6 +14,6 @@ class Nbi3gcomServiceCheck(_BaseTestPoint):
         else:
             print "nbi3gcom service was not started"
             self.status = STATUS.FAIL
-            self.IMPACT.append("nbi3gcom is not running.")
-            self.RCA.append("nbi3gcom process is not running")
+            self.IMPACT.append("nbi3gcom was not started.")
+            self.RCA.append("nbi3gcom was not started.")
             self.FIXSTEP.append("#smanager.pl start service nbi3gcom")
