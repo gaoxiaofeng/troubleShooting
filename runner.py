@@ -43,9 +43,10 @@ if __name__ == "__main__":
     try:
 
         for i,caseName in enumerate(caseNameList):
-            i += 1
+            # i += 1
             PD.set(i)
             behavior =  CaseManagerInstance.run_case(caseName)
+            PD.set(i+1)
             if behavior == BEHAVIOR.EXIT:
                 break
     except Exception,e:
@@ -53,6 +54,10 @@ if __name__ == "__main__":
         PD.stop()
 
     else:
+        while 1:
+            #wait for PD thread exit
+            if PD.is_alive() is False:
+                break
         report().console()
     finally:
         while 1:

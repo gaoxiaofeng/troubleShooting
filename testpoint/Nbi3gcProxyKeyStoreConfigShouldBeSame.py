@@ -9,7 +9,7 @@ class Nbi3gcProxyKeyStoreConfigShouldBeSame(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.level = LEVEL.CRITICAL
-        self.needRestartNbi3gcAfterFixed = True
+        # self.needRestartNbi3gcAfterFixed = True
 
     def _checkpoint(self):
         keystorePathItem = "jacorb.security.keystore"
@@ -33,3 +33,5 @@ class Nbi3gcProxyKeyStoreConfigShouldBeSame(_BaseTestPoint):
                                                                             NBI3GC_PROXY3_JACORB_PROPERTIES,self._nbi3gc_proxy3_keystore_path)
             self.RCA.append(RCA)
             self.FIXSTEP.append("please reset the jacorb.security.keystore in relevant configuration.")
+            self.FIXSTEP.append("#smanager.pl stop service nbi3gc")
+            self.FIXSTEP.append("#smanager.pl start service nbi3gc")

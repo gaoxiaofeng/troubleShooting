@@ -9,8 +9,8 @@ class nbiCodesetShouldBeMatch(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.level = LEVEL.NOCRITICAL
-        self.needRestartNbi3gcAfterFixed = True
-        self.needRestartNbi3gcomAfterFixed = True
+        # self.needRestartNbi3gcAfterFixed = True
+        # self.needRestartNbi3gcomAfterFixed = True
 
     def _checkpoint(self):
         codeSetenableItem = "jacorb.codeset"
@@ -37,6 +37,11 @@ class nbiCodesetShouldBeMatch(_BaseTestPoint):
                 %s:jacorb.native_char_codeset
                 %s:jacorb.native_char_codeset
                 """%(NBI3GC_MF_JACORB_PROPERTIES,NBI3GCOM_PROPERTIES))
+                self.FIXSTEP.append("#smanager.pl stop service nbi3gc")
+                self.FIXSTEP.append("#smanager.pl stop service nbi3gcom")
+                self.FIXSTEP.append("#smanager.pl start service nbi3gcom")
+                self.FIXSTEP.append("#smanager.pl start service nbi3gc")
+
         else:
             self.status = STATUS.PASS
 

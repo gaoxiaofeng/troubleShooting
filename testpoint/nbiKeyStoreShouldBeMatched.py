@@ -9,8 +9,8 @@ class nbiKeyStoreShouldBeMatched(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.level = LEVEL.CRITICAL
-        self.needRestartNbi3gcAfterFixed = True
-        self.needRestartNbi3gcomAfterFixed = True
+        # self.needRestartNbi3gcAfterFixed = True
+        # self.needRestartNbi3gcomAfterFixed = True
         self.nbi3gc_cert = "/d/oss/global/certificate/nbi3gc/nbi3gc.crt"
         self.nbi3gcom_cert = "/d/oss/global/certificate/nbi3gcom/nbi3gcom.crt"
     def _checkpoint(self):
@@ -42,7 +42,6 @@ class nbiKeyStoreShouldBeMatched(_BaseTestPoint):
             self.RCA.append("nbi3gc keystore has not contain nbi3gcom certificate")
             self.FIXSTEP.append("keytool -import -alias %s -keystore %s -file %s -storepass %s"%(nbi3gcom_private_key_alias,self._nbi3gc_keystore_path,self.nbi3gcom_cert,self._nbi3gc_keystore_passwd))
 
-
         if dict_value_contain_content(nbi3gcom_keystore_cert_dict,nbi3gc_cert_sha1):
             pass
         else:
@@ -52,3 +51,9 @@ class nbiKeyStoreShouldBeMatched(_BaseTestPoint):
             self.FIXSTEP.append("keytool -import -alias %s -keystore %s -file %s -storepass %s"%(nbi3gc_private_key_alias,self._nbi3gcom_keystore_path,self.nbi3gc_cert,self._nbi3gcom_keystore_passwd))
         if self.status is not STATUS.FAIL:
             self.status = STATUS.PASS
+
+        if self.FIXSTEP:
+            self.FIXSTEP.append("#smanager.pl stop service nbi3gcom")
+            self.FIXSTEP.append("#smanager.pl stop service nbi3gc")
+            self.FIXSTEP.append("#smanager.pl start service nbi3gcom")
+            self.FIXSTEP.append("#smanager.pl start service nbi3gc")

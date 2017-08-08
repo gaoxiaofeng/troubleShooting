@@ -9,7 +9,7 @@ class SecurityShouldBeMatched(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.level = LEVEL.CRITICAL
-        self.needRestartNbi3gcAfterFixed = True
+        # self.needRestartNbi3gcAfterFixed = True
 
     def _checkpoint(self):
         item = "jacorb.security.support_ssl"
@@ -69,6 +69,8 @@ class SecurityShouldBeMatched(_BaseTestPoint):
                 fixStep.append("manual reset %s:jacorb.security.support_ssl to `off`." % NBI3GCOM_PROPERTIES )
             fixStepStr = "\n\t\t\t".join(fixStep)
             self.FIXSTEP.append(fixStepStr)
+            self.FIXSTEP.append("#smanager.pl stop service nbi3gc")
+            self.FIXSTEP.append("#smanager.pl start service nbi3gc")
 
 
 

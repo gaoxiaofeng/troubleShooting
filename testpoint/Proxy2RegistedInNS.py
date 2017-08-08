@@ -5,7 +5,7 @@ from _BaseTestPoint import _BaseTestPoint
 class Proxy2RegistedInNS(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.needRestartNbi3gcAfterFixed = True
+        # self.needRestartNbi3gcAfterFixed = True
         self._proxyId = PROXY.PROXY2
 
     def _checkpoint(self):
@@ -18,8 +18,10 @@ class Proxy2RegistedInNS(_BaseTestPoint):
         irp_list = self.get_irp_from_ns(self._proxyId)
         print "%s IOR :%s"%(self._proxyId,irp_list)
         expert_irp_list = ["AlarmIRP","KernelCMIRP","BasicCMIRP","NotificationIRP",\
-                               "EPIRP","CSIRP","FTIRP","BulkCmIRP"]
+                               "EPIRP","CSIRP","FTIRP"]
         lost_irp_list = list(set(expert_irp_list) ^ set(irp_list) )
+        if  "BulkCmIRP" in lost_irp_list :
+            lost_irp_list.remove("BulkCmIRP")
         if lost_irp_list != []:
             print "%s missing %s IOR" % (self._proxyId, lost_irp_list)
             self.status = STATUS.FAIL
@@ -27,6 +29,8 @@ class Proxy2RegistedInNS(_BaseTestPoint):
 
             for lost_irp in lost_irp_list:
                 self.RCA.append("%s IORs was lost in namingService"%lost_irp)
+            self.FIXSTEP.append("#smanager.pl stop service nbi3gc")
+            self.FIXSTEP.append("#smanager.pl start service nbi3gc")
         else:
             self.status = STATUS.PASS
 

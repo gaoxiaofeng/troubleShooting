@@ -89,6 +89,6 @@ class ProgressDialog(Thread):
             time.sleep(0.01)
         if self._RUN:
             # sys.stdout.write( "\tSuccess.\n")
-            self.printf("\tSuccess.\n")
+            self.printf("\tDone.\n")
     def stop(self):
         self._RUN = False
