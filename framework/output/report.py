@@ -167,10 +167,10 @@ class report(object):
         #         self.printf("|\t\tStep %s. %s"%(i,_Method))
         #         i += 1
         self.printf("*" * (self._width * 3 + 4))
-
-    def __del__(self):
+    def writeReport(self):
         html().write()
-        graph = """The Report Be saved as ./report.html"""
+    def __del__(self):
+        graph = """The Report was saved as ./report.html"""
         self.printf(graph)
         graph = "Bye-bye!"
         self.printf(graph)

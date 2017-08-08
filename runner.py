@@ -13,6 +13,7 @@ from framework.output.welcome import  ProgressDialog
 from framework.output.report import report
 import traceback
 from framework.output.Print import *
+import platform
 
 def onsignal_int(a,b):
     OutPut().stop()
@@ -22,47 +23,64 @@ signal.signal(signal.SIGINT, onsignal_int)
 
 #Logger = logger()
 if __name__ == "__main__":
+    _system_ =  platform.system().lower()
+    print "current system is %s"%_system_
     parser = OptionParser()
     parser.add_option("-m",dest="runMode",help="support simple/detail,default is simple",default="simple")
     options, args = parser.parse_args()
     ConfigManagerInstance.config = {"runMode":DetailMode if options.runMode == "detail" else SingleMode}
     CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
-    welcome()
-    builderfactory = BuilderFactory()
-    builderfactory.getBuilder("keywords").builder()
-    builderfactory.getBuilder("testpoint").builder()
-    builderfactory.getBuilder("case").builder()
 
+    builderfactory = BuilderFactory()
+    builderfactory.getBuilder(LAYER.KeyWords).builder()
+    builderfactory.getBuilder(LAYER.TestPoint).builder()
+    builderfactory.getBuilder(LAYER.Case).builder()
 
     OutPut().start()
     caseNameList = CaseManagerInstance.get_keyword()
     caseNameListLength = len(caseNameList)
-    welcome().loadCasePrint(caseNameList)
-    PD = ProgressDialog(caseNameListLength)
-    PD.start()
-    try:
+    if _system_ == SYSTEM.LINUX:
+        welcome()
+        welcome().loadCasePrint(caseNameList)
+        PD = ProgressDialog(caseNameListLength)
+        PD.start()
+        try:
 
-        for i,caseName in enumerate(caseNameList):
-            # i += 1
-            PD.set(i)
-            behavior =  CaseManagerInstance.run_case(caseName)
-            PD.set(i+1)
-            if behavior == BEHAVIOR.EXIT:
-                break
-    except Exception,e:
-        traceback.print_exc()
-        PD.stop()
+            for i,caseName in enumerate(caseNameList):
+                # i += 1
+                PD.set(i)
+                behavior =  CaseManagerInstance.run_case(caseName)
+                PD.set(i+1)
+                if behavior == BEHAVIOR.EXIT:
+                    break
+        except Exception,e:
+            traceback.print_exc()
+            PD.stop()
 
+        else:
+            while 1:
+                #wait for PD thread exit
+                if PD.is_alive() is False:
+                    break
+            report().console()
+            report().writeReport()
+        finally:
+            while 1:
+                #wait for PD thread exit
+                if PD.is_alive() is False:
+                    break
+            OutPut().stop()
+    elif _system_ == SYSTEM.WINDOWS:
+        try:
+
+            for caseName in caseNameList:
+                behavior =  CaseManagerInstance.run_case(caseName)
+                if behavior == BEHAVIOR.EXIT:
+                    break
+            report().writeReport()
+        except Exception,e:
+            traceback.print_exc()
+        finally:
+            OutPut().stop()
     else:
-        while 1:
-            #wait for PD thread exit
-            if PD.is_alive() is False:
-                break
-        report().console()
-    finally:
-        while 1:
-            #wait for PD thread exit
-            if PD.is_alive() is False:
-                break
-        OutPut().stop()
-
+        print "unsupport system %s"%_system_
