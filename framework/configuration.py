@@ -11,8 +11,9 @@ class ConfigManager(object):
         return  self.__config
     @config.setter
     def config(self,Map):
-        for key in Map:
-            self.__config[key] = Map[key]
+        # for key in Map:
+        #     self.__config[key] = Map[key]
+        self.__config.update(Map)
 
 
 

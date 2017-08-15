@@ -13,6 +13,8 @@ class welcome(object):
         self._totalWidth =  ConfigManagerInstance.config["report_total_width"]
         self._welcome()
     def _welcome(self):
+        if not ConfigManagerInstance.config["Print"]:
+            return
         graph = r"""
 ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗
 ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝
@@ -55,6 +57,8 @@ class welcome(object):
                (__/_/                ((__/"""
         self.printf(graph)
     def loadCasePrint(self,caseNameList):
+        if not ConfigManagerInstance.config["Print"]:
+            return
         graph = "Load %s cases..."%len(caseNameList)
         self.printf(graph)
         graph = "Running..."
@@ -66,7 +70,7 @@ class ProgressDialog(Thread):
         self._total = total
         self._done = 0
         self._ratio = 0
-        self._RUN = True
+        self._RUN = ConfigManagerInstance.config["Print"]
         self.printf = OutPut().printf
     def set(self):
         return self._done

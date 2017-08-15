@@ -8,12 +8,12 @@ OutPutQueue = Queue()
 import re
 from framework.output.Print import CONSOLE
 
-
 class Handler(object):
     def __init__(self):
         super(Handler,self).__init__()
         self._successor = None
         self.content = None
+
     @property
     def successor(self):
         return  self._successor
@@ -84,6 +84,7 @@ class OutPut(threading.Thread):
         self.running = True
 
     def printf(self,content):
+
 
         if content.strip():
             client = Client()

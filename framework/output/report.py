@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
 from framework.output.output import OutPut
 from framework.library.controlView import ControlView
+from framework.library.library import singleton
 from framework.manager import ManagerFactory
 from framework.variable.variable import  *
 from framework.configuration import ConfigManagerInstance
 from framework.output.writehtml import html
+@singleton
 class report(object):
     def __init__(self):
-        super(report,self).__init__()
+        super(self.__class__,self).__init__()
         self.view = ControlView(width=58)
         self.caseResult =  ManagerFactory().getManager(LAYER.Case).case_record
         self.printf = OutPut().printf
     def console(self):
+        if not ConfigManagerInstance.config["Print"]:
+            return
         _width = ConfigManagerInstance.config["report_table_width"]
         self._width = _width
         reportList = []
@@ -169,10 +173,8 @@ class report(object):
         self.printf("*" * (self._width * 3 + 4))
     def writeReport(self):
         html().write()
-    def __del__(self):
         graph = """The Report was saved as ./report.html"""
         self.printf(graph)
-        graph = "Bye-bye!"
-        self.printf(graph)
+
 
 

@@ -2,6 +2,7 @@ import sys,os,time
 from subprocess import Popen, PIPE
 from framework.variable.variable import *
 # import  threading
+import hashlib
 import re
 from framework.log.logger import logger
 Logger = logger()
@@ -198,6 +199,14 @@ def dict_value_contain_content(dict,content):
             return  True
     return  False
 
+def  getFileMd5(filename):
+    if not os.path.isfile(filename):
+        raise Exception("failed to get file md5, reason :%s is not a file"%filename)
+    myhash = hashlib.md5()
+    with open(filename,"rb") as f:
+        content = f.read()
+        myhash.update(content)
+    return  myhash.hexdigest()
 
 
 if __name__ == "__main__":
