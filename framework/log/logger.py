@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging,os
 def singleton(cls,*args,**kw):
     instances = {}

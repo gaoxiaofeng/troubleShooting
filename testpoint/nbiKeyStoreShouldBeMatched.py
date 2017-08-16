@@ -1,4 +1,4 @@
-from framework.library.library import singleton,dict_value_contain_content
+from framework.libraries.library import singleton,dict_value_contain_content
 from framework.variable.variable import *
 from _BaseTestPoint import _BaseTestPoint
 @singleton

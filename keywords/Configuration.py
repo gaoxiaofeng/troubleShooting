@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 import sys,os
-from framework.library.library import ExecuteCommond,singleton
+from framework.libraries.library import ExecuteCommond,singleton
 from framework.log.logger import logger
 @singleton
 class Configuration(object):

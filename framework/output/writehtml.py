@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from framework.manager import ManagerFactory
 from framework.variable.variable import *
-from framework.library.library import list2stringAndFormat
+from framework.libraries.library import list2stringAndFormat
 import time
 from htmltemplate import *
 class html(object):

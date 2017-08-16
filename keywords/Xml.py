@@ -1,6 +1,5 @@
-# import sys,os
-from framework.library.library import ExecuteCommond,singleton
-# from log.logger import logger
+# -*- coding: utf-8 -*-
+from framework.libraries.library import ExecuteCommond,singleton
 import xml.etree.ElementTree as ET
 
 

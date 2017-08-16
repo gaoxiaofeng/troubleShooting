@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from framework.output.output import OutPut
-from framework.library.controlView import ControlView
-from framework.library.library import singleton
+from framework.libraries.controlView import ControlView
+from framework.libraries.library import singleton
 from framework.manager import ManagerFactory
 from framework.variable.variable import  *
 from framework.configuration import ConfigManagerInstance

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import  paramiko
 import os
 from framework.library.library import getFileMd5

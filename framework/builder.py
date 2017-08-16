@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from framework.manager import ManagerFactory
 import os,sys
 from framework.Import import Import

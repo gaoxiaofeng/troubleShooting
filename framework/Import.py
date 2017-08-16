@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from framework.log.logger import logger
 class Import(object):
     def __init__(self):

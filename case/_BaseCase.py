@@ -3,8 +3,8 @@ from framework.manager import ManagerFactory
 from framework.log.logger import logger
 import pdb,time
 from framework.variable.variable import *
-from framework.library.library import parseRule,RemoveDuplicates
-from framework.library.controlView import ControlView
+from framework.libraries.library import parseRule,RemoveDuplicates
+from framework.libraries.controlView import ControlView
 from framework.output.output import OutPutQueue
 from framework.configuration import ConfigManagerInstance
 from framework.exception.exception import CaseManagerException

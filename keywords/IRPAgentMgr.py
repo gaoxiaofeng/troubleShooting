@@ -1,8 +1,6 @@
-from framework.library.library import ExecuteCommond,singleton
+# -*- coding: utf-8 -*-
+from framework.libraries.library import ExecuteCommond,singleton
 from framework.variable.variable import *
-import  sys,os
-from framework.output.Print import CONSOLE
-import re
 @singleton
 class IRPAgentMgr(object):
     def __init__(self):

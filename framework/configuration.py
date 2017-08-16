@@ -1,4 +1,4 @@
-# from  library.library import  singleton
+# -*- coding: utf-8 -*-
 import ConfigParser
 import os,sys
 #@singleton

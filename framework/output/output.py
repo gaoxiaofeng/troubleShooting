@@ -1,8 +1,7 @@
-import sys,os
-##from manager import TestPointManager,EngineManager,CaseManager
+# -*- coding: utf-8 -*-
 import threading
 from Queue import Queue
-from framework.library.library import singleton
+from framework.libraries.library import singleton
 from framework.variable.variable import *
 OutPutQueue = Queue()
 import re

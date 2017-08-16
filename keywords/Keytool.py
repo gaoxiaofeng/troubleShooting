@@ -1,4 +1,5 @@
-from framework.library.library import ExecuteCommond,singleton
+# -*- coding: utf-8 -*-
+from framework.libraries.library import ExecuteCommond,singleton
 import  sys,os
 @singleton
 class Keytool(object):

@@ -1,7 +1,7 @@
+# -*- coding: utf-8 -*-
 from framework.output.output import OutPutQueue
 from framework.variable.variable import *
-from framework.library.library import Getch
-# import  time
+from framework.libraries.library import Getch
 import  re
 class ControlView(object):
     def __init__(self,mode = LISTMODE,width = 20):

@@ -1,15 +1,14 @@
-import sys
+
 from framework.configuration import  ConfigManagerInstance
 from framework.variable.variable import *
 from framework.builder import BuilderFactory
-# from framework.log.logger import logger
 from framework.output.output import OutPut
 from framework.output.welcome import welcome
 from framework.manager import ManagerFactory
 # import time
 import signal
 from optparse import OptionParser
-from framework.output.welcome import  ProgressDialog
+from framework.output.progressDialog import  ProgressDialog
 from framework.output.report import report
 import traceback
 from framework.output.Print import *
