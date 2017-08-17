@@ -1,11 +1,11 @@
-
+# -*- coding: utf-8 -*-
 from framework.configuration import  ConfigManagerInstance
 from framework.variable.variable import *
 from framework.builder import BuilderFactory
 from framework.output.output import OutPut
 from framework.output.welcome import welcome
 from framework.manager import ManagerFactory
-# import time
+import time
 import signal
 from optparse import OptionParser
 from framework.output.progressDialog import  ProgressDialog
@@ -22,6 +22,7 @@ signal.signal(signal.SIGINT, onsignal_int)
 
 #Logger = logger()
 if __name__ == "__main__":
+    _startTime = time.time()
     _system_ =  platform.system().lower()
     opt = OptionParser()
     opt.add_option("--print",dest="Print",help="support yes/no,default is yes",default="yes")
@@ -54,6 +55,8 @@ if __name__ == "__main__":
         remote.open_connection(host,port=port, username=user, password=password)
         remote.remoteRunning()
         remote.close_connection()
+        _endTime = time.time()
+        print "Total cost time: %.3f s"%(_endTime-_startTime)
     else:
         redirection()
         print "current system is %s" % _system_

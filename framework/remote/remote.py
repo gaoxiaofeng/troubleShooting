@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import  paramiko
 import os
-from framework.library.library import getFileMd5
+from framework.libraries.library import getFileMd5
+import sys
 class Remote(object):
     def __init__(self):
         super(Remote,self).__init__()
@@ -64,7 +65,7 @@ class Remote(object):
             if remoteFileMd5:
                 remoteFileMd5 = remoteFileMd5.split(" ")[0]
             if remoteFileMd5 != localFileMd5:
-                print "upload local file  %s" % localFile
+                # print "upload local file  %s" % localFile
                 self._sftp_put(localFile,remoteFile)
         else:
             raise Exception("fail to sftp put file(%s) due to this file Not Found. "%localFile)
@@ -78,9 +79,14 @@ class Remote(object):
         for _folder in self._localFolder:
             _folderConverted = self._pathConvert(_folder)
             self._mkdir(_folderConverted)
+        count = len(self._localFile)
         for i,_file in enumerate(self._localFile):
             _fileConverted = self._pathConvert(_file)
             self.put(_file,_fileConverted)
+            sys.stdout.write( "\rsync remote files (%s/%s)"%((i+1),count))
+            sys.stdout.flush()
+        print ""
+
 
 
     def _upload_tool(self):
