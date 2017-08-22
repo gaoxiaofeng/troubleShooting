@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from framework.manager import ManagerFactory
+from framework.modules.manager import ManagerFactory
 import os,sys
-from framework.Import import Import
+from framework.modules.Import import Import
 from framework.log.logger import logger
-from variable.variable import  *
+from framework.variable.variable import  *
 from framework.output.Print import CONSOLE
 
 

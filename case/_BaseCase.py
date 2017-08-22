@@ -1,12 +1,13 @@
-import re
-from framework.manager import ManagerFactory
+# -*- coding: utf-8 -*-
+# import re
+from framework.modules.manager import ManagerFactory
 from framework.log.logger import logger
-import pdb,time
+# import pdb,time
 from framework.variable.variable import *
 from framework.libraries.library import parseRule,RemoveDuplicates
-from framework.libraries.controlView import ControlView
+# from framework.libraries.controlView import ControlView
 from framework.output.output import OutPutQueue
-from framework.configuration import ConfigManagerInstance
+# from framework.modules.configuration import ConfigManagerInstance
 from framework.exception.exception import CaseManagerException
 
 class _BaseCase(object):

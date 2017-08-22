@@ -2,9 +2,9 @@
 from framework.output.output import OutPut
 from framework.libraries.controlView import ControlView
 from framework.libraries.library import singleton
-from framework.manager import ManagerFactory
+from framework.modules.manager import ManagerFactory
 from framework.variable.variable import  *
-from framework.configuration import ConfigManagerInstance
+from framework.modules.configuration import ConfigManagerInstance
 from framework.output.writehtml import html
 @singleton
 class report(object):

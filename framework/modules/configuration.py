@@ -20,7 +20,7 @@ class ConfigManager(object):
 ConfigManagerInstance = ConfigManager()
 
 CP = ConfigParser.SafeConfigParser()
-configFilePath = os.path.join(os.path.dirname(os.path.abspath(__file__)),"conf","init.conf")
+configFilePath = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"conf","init.conf")
 with open(configFilePath,"r") as f:
     CP.readfp(f)
 ConfigManagerInstance.config["report_total_width"] =  CP.getint("report","total_width")

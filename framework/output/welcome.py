@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from framework.output.output import OutPut
 from framework.libraries.library import  singleton
-from framework.configuration import  ConfigManagerInstance
+from framework.modules.configuration import  ConfigManagerInstance
 
 @singleton
 class welcome(object):

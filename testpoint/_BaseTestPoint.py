@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 from framework.log.logger import logger
 from framework.variable.variable import *
 from framework.output.output import OutPutQueue
 from framework.libraries.library import parseRule,RemoveDuplicates
-from framework.manager import TestPointManager
-from framework.configuration import  ConfigManagerInstance
-from framework.manager import ManagerFactory
+# from framework.modules.manager import TestPointManager
+# from framework.modules.configuration import  ConfigManagerInstance
+from framework.modules.manager import ManagerFactory
 class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()

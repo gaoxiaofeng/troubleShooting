@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from framework.output.output import OutPut
-from framework.configuration import  ConfigManagerInstance
+from framework.modules.configuration import  ConfigManagerInstance
 from threading import  Thread
 from framework.variable.variable import *
 class ProgressDialog(Thread):

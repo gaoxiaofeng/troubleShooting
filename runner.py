@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from framework.configuration import  ConfigManagerInstance
+from framework.modules.configuration import  ConfigManagerInstance
 from framework.variable.variable import *
-from framework.builder import BuilderFactory
+from framework.modules.builder import BuilderFactory
 from framework.output.output import OutPut
 from framework.output.welcome import welcome
-from framework.manager import ManagerFactory
+from framework.modules.manager import ManagerFactory
 import time
 import signal
 from optparse import OptionParser

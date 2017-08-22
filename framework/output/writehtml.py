@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from framework.manager import ManagerFactory
+from framework.modules.manager import ManagerFactory
 from framework.variable.variable import *
 from framework.libraries.library import list2stringAndFormat
 import time

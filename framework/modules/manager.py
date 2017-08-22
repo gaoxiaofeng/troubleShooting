@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from framework.log.logger import logger
 from framework.exception.exception import *
-from variable.variable import *
-from libraries.library import singleton
+from framework.variable.variable import *
+from framework.libraries.library import singleton
 
 class BaseManager(object):
     '''
