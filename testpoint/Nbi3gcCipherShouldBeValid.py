@@ -39,40 +39,68 @@ class Nbi3gcCipherShouldBeValid(_BaseTestPoint):
         self._nbi3gc_proxy3_client_cipher= set(self.get_value_from_configuration(NBI3GC_PROXY3_JACORB_PROPERTIES,client_cipher_key).split(","))
         self._nbi3gc_proxy3_server_cipher = set(self.get_value_from_configuration(NBI3GC_PROXY3_JACORB_PROPERTIES, server_cipher_key).split(","))
 
+        nbi3gc_mf_client_strong_cipher = self._nbi3gc_mf_client_cipher & _strongCipher
+        nbi3gc_mf_client_weak_cipher = self._nbi3gc_mf_client_cipher & _weakCipher
+        nbi3gc_mf_client_invalid_cipher = self._nbi3gc_mf_client_cipher.difference(_allCipher)
+        nbi3gc_mf_server_strong_cipher = self._nbi3gc_mf_server_cipher & _strongCipher
+        nbi3gc_mf_server_weak_cipher = self._nbi3gc_mf_server_cipher & _weakCipher
+        nbi3gc_mf_server_invalid_cipher = self._nbi3gc_mf_server_cipher.difference(_allCipher)
 
 
-        print "nbi3gc-mr client strong ciphers : %s"%",".join(self._nbi3gc_mf_client_cipher & _strongCipher)
-        print "nbi3gc-mr client weak ciphers : %s" % ",".join(self._nbi3gc_mf_client_cipher & _weakCipher)
-        print "nbi3gc-mr client invalid ciphers : %s" % ",".join(self._nbi3gc_mf_client_cipher.difference(_allCipher))
+        nbi3gc_proxy1_client_strong_cipher = self._nbi3gc_proxy1_client_cipher & _strongCipher
+        nbi3gc_proxy1_client_weak_cipher = self._nbi3gc_proxy1_client_cipher & _weakCipher
+        nbi3gc_proxy1_client_invalid_cipher = self._nbi3gc_proxy1_client_cipher.difference(_allCipher)
+        nbi3gc_proxy1_server_strong_cipher = self._nbi3gc_proxy1_server_cipher & _strongCipher
+        nbi3gc_proxy1_server_weak_cipher = self._nbi3gc_proxy1_server_cipher & _weakCipher
+        nbi3gc_proxy1_server_invalid_cipher = self._nbi3gc_proxy1_server_cipher.difference(_allCipher)
 
-        print "nbi3gc-mr server strong ciphers : %s"%",".join(self._nbi3gc_mf_server_cipher & _strongCipher)
-        print "nbi3gc-mr server weak ciphers : %s" % ",".join(self._nbi3gc_mf_server_cipher & _weakCipher)
-        print "nbi3gc-mr server invalid ciphers : %s" % ",".join(self._nbi3gc_mf_server_cipher.difference(_allCipher))
+        nbi3gc_proxy2_client_strong_cipher = self._nbi3gc_proxy2_client_cipher & _strongCipher
+        nbi3gc_proxy2_client_weak_cipher = self._nbi3gc_proxy2_client_cipher & _weakCipher
+        nbi3gc_proxy2_client_invalid_cipher = self._nbi3gc_proxy2_client_cipher.difference(_allCipher)
+        nbi3gc_proxy2_server_strong_cipher = self._nbi3gc_proxy2_server_cipher & _strongCipher
+        nbi3gc_proxy2_server_weak_cipher = self._nbi3gc_proxy2_server_cipher & _weakCipher
+        nbi3gc_proxy2_server_invalid_cipher = self._nbi3gc_proxy2_server_cipher.difference(_allCipher)
 
-        print "nbi3gc-proxy1 client strong ciphers : %s"%",".join(self._nbi3gc_proxy1_client_cipher & _strongCipher)
-        print "nbi3gc-proxy1 client weak ciphers : %s" % ",".join(self._nbi3gc_proxy1_client_cipher & _weakCipher)
-        print "nbi3gc-proxy1 client invalid ciphers : %s" % ",".join(self._nbi3gc_proxy1_client_cipher.difference(_allCipher))
+        nbi3gc_proxy3_client_strong_cipher = self._nbi3gc_proxy3_client_cipher & _strongCipher
+        nbi3gc_proxy3_client_weak_cipher = self._nbi3gc_proxy3_client_cipher & _weakCipher
+        nbi3gc_proxy3_client_invalid_cipher = self._nbi3gc_proxy3_client_cipher.difference(_allCipher)
+        nbi3gc_proxy3_server_strong_cipher = self._nbi3gc_proxy3_server_cipher & _strongCipher
+        nbi3gc_proxy3_server_weak_cipher = self._nbi3gc_proxy3_server_cipher & _weakCipher
+        nbi3gc_proxy3_server_invalid_cipher = self._nbi3gc_proxy3_server_cipher.difference(_allCipher)
 
-        print "nbi3gc-proxy1 server strong ciphers : %s"%",".join(self._nbi3gc_proxy1_server_cipher & _strongCipher)
-        print "nbi3gc-proxy1 server weak ciphers : %s" % ",".join(self._nbi3gc_proxy1_server_cipher & _weakCipher)
-        print "nbi3gc-proxy1 server invalid ciphers : %s" % ",".join(self._nbi3gc_proxy1_server_cipher.difference(_allCipher))
 
-        print "nbi3gc-proxy2 client strong ciphers : %s"%",".join(self._nbi3gc_proxy2_client_cipher & _strongCipher)
-        print "nbi3gc-proxy2 client weak ciphers : %s" % ",".join(self._nbi3gc_proxy2_client_cipher & _weakCipher)
-        print "nbi3gc-proxy2 client invalid ciphers : %s" % ",".join(self._nbi3gc_proxy2_client_cipher.difference(_allCipher))
 
-        print "nbi3gc-proxy2 server strong ciphers : %s"%",".join(self._nbi3gc_proxy2_server_cipher & _strongCipher)
-        print "nbi3gc-proxy2 server weak ciphers : %s" % ",".join(self._nbi3gc_proxy2_server_cipher & _weakCipher)
-        print "nbi3gc-proxy2 server invalid ciphers : %s" % ",".join(self._nbi3gc_proxy2_server_cipher.difference(_allCipher))
+        print "nbi3gc-mr client has %s strong ciphers : %s"%(len(nbi3gc_mf_client_strong_cipher)," , ".join(nbi3gc_mf_client_strong_cipher))
+        print "nbi3gc-mr client has %s weak ciphers : %s" % (len(nbi3gc_mf_client_weak_cipher), " , ".join(nbi3gc_mf_client_weak_cipher))
+        print "nbi3gc-mr client has %s invalid ciphers : %s" % (len(nbi3gc_mf_client_invalid_cipher), " , ".join(nbi3gc_mf_client_invalid_cipher))
 
-        print "nbi3gc-proxy3 client strong ciphers : %s"%",".join(self._nbi3gc_proxy3_client_cipher & _strongCipher)
-        print "nbi3gc-proxy3 client weak ciphers : %s" % ",".join(self._nbi3gc_proxy3_client_cipher & _weakCipher)
-        print "nbi3gc-proxy3 client invalid ciphers : %s" % ",".join(self._nbi3gc_proxy3_client_cipher.difference(_allCipher))
+        print "nbi3gc-mr server has %s strong ciphers : %s"%(len(nbi3gc_mf_server_strong_cipher)," , ".join(nbi3gc_mf_server_strong_cipher))
+        print "nbi3gc-mr server has %s weak ciphers : %s" % (len(nbi3gc_mf_server_weak_cipher), " , ".join(nbi3gc_mf_server_weak_cipher))
+        print "nbi3gc-mr server has %s invalid ciphers : %s" % (len(nbi3gc_mf_server_invalid_cipher), " , ".join(nbi3gc_mf_server_invalid_cipher))
 
-        print "nbi3gc-proxy3 server strong ciphers : %s"%",".join(self._nbi3gc_proxy3_server_cipher & _strongCipher)
-        print "nbi3gc-proxy3 server weak ciphers : %s" % ",".join(self._nbi3gc_proxy3_server_cipher & _weakCipher)
-        print "nbi3gc-proxy3 server invalid ciphers : %s" % ",".join(self._nbi3gc_proxy3_server_cipher.difference(_allCipher))
+        print "nbi3gc-proxy1 client has %s strong ciphers : %s"%(len(nbi3gc_proxy1_client_strong_cipher)," , ".join(nbi3gc_proxy1_client_strong_cipher))
+        print "nbi3gc-proxy1 client has %s weak ciphers : %s" % (len(nbi3gc_proxy1_client_weak_cipher), " , ".join(nbi3gc_proxy1_client_weak_cipher))
+        print "nbi3gc-proxy1 client has %s invalid ciphers : %s" % (len(nbi3gc_proxy1_client_invalid_cipher), " , ".join(nbi3gc_proxy1_client_invalid_cipher))
 
+        print "nbi3gc-proxy1 server has %s strong ciphers : %s"%(len(nbi3gc_proxy1_server_strong_cipher)," , ".join(nbi3gc_proxy1_server_strong_cipher))
+        print "nbi3gc-proxy1 server has %s weak ciphers : %s" % (len(nbi3gc_proxy1_server_weak_cipher), " , ".join(nbi3gc_proxy1_server_weak_cipher))
+        print "nbi3gc-proxy1 server has %s invalid ciphers : %s" % (len(nbi3gc_proxy1_server_invalid_cipher), " , ".join(nbi3gc_proxy1_server_invalid_cipher))
+
+        print "nbi3gc-proxy2 client has %s strong ciphers : %s"%(len(nbi3gc_proxy2_client_strong_cipher)," , ".join(nbi3gc_proxy2_client_strong_cipher))
+        print "nbi3gc-proxy2 client has %s weak ciphers : %s" % (len(nbi3gc_proxy2_client_weak_cipher), " , ".join(nbi3gc_proxy2_client_weak_cipher))
+        print "nbi3gc-proxy2 client has %s invalid ciphers : %s" % (len(nbi3gc_proxy2_client_invalid_cipher), " , ".join(nbi3gc_proxy2_client_invalid_cipher))
+
+        print "nbi3gc-proxy2 server has %s strong ciphers : %s"%(len(nbi3gc_proxy2_server_strong_cipher)," , ".join(nbi3gc_proxy2_server_strong_cipher))
+        print "nbi3gc-proxy2 server has %s weak ciphers : %s" % (len(nbi3gc_proxy2_server_weak_cipher), " , ".join(nbi3gc_proxy2_server_weak_cipher))
+        print "nbi3gc-proxy2 server has %s invalid ciphers : %s" % (len(nbi3gc_proxy2_server_invalid_cipher), " , ".join(nbi3gc_proxy2_server_invalid_cipher))
+
+        print "nbi3gc-proxy3 client has %s strong ciphers : %s"%(len(nbi3gc_proxy3_client_strong_cipher)," , ".join(nbi3gc_proxy3_client_strong_cipher))
+        print "nbi3gc-proxy3 client has %s weak ciphers : %s" % (len(nbi3gc_proxy3_client_weak_cipher), " , ".join(nbi3gc_proxy3_client_weak_cipher))
+        print "nbi3gc-proxy3 client has %s invalid ciphers : %s" % (len(nbi3gc_proxy3_client_invalid_cipher), " , ".join(nbi3gc_proxy3_client_invalid_cipher))
+
+        print "nbi3gc-proxy3 server has %s strong ciphers : %s"%(len(nbi3gc_proxy3_server_strong_cipher)," , ".join(nbi3gc_proxy3_server_strong_cipher))
+        print "nbi3gc-proxy3 server has %s weak ciphers : %s" % (len(nbi3gc_proxy3_server_weak_cipher), " , ".join(nbi3gc_proxy3_server_weak_cipher))
+        print "nbi3gc-proxy3 server has %s invalid ciphers : %s" % (len(nbi3gc_proxy3_server_invalid_cipher), " , ".join(nbi3gc_proxy3_server_invalid_cipher))
 
 
 
@@ -81,31 +109,31 @@ class Nbi3gcCipherShouldBeValid(_BaseTestPoint):
         self.status = STATUS.PASS
         if not self._nbi3gc_mf_client_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-mf client cipher contain invalid cipher %s"%",".join(self._nbi3gc_mf_client_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-mf client cipher contain invalid cipher %s"%",".join(nbi3gc_mf_client_invalid_cipher))
         if not self._nbi3gc_mf_server_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-mf server cipher contain invalid cipher %s"%",".join(self._nbi3gc_mf_server_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-mf server cipher contain invalid cipher %s"%",".join(nbi3gc_mf_server_invalid_cipher))
 
         if not self._nbi3gc_proxy1_client_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-proxy1 client cipher contain invalid cipher %s"%",".join(self._nbi3gc_proxy1_client_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-proxy1 client cipher contain invalid cipher %s"%",".join(nbi3gc_proxy1_client_invalid_cipher))
         if not self._nbi3gc_proxy1_server_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-proxy1 server cipher contain invalid cipher %s"%",".join(self._nbi3gc_proxy1_server_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-proxy1 server cipher contain invalid cipher %s"%",".join(nbi3gc_proxy1_server_invalid_cipher))
 
         if not self._nbi3gc_proxy2_client_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-proxy2 client cipher contain invalid cipher %s"%",".join(self._nbi3gc_proxy2_client_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-proxy2 client cipher contain invalid cipher %s"%",".join(nbi3gc_proxy2_client_invalid_cipher))
         if not self._nbi3gc_proxy2_server_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-proxy2 server cipher contain invalid cipher %s"%",".join(self._nbi3gc_proxy2_server_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-proxy2 server cipher contain invalid cipher %s"%",".join(nbi3gc_proxy2_server_invalid_cipher))
 
 
         if not self._nbi3gc_proxy3_client_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-proxy3 client cipher contain invalid cipher %s"%",".join(self._nbi3gc_proxy3_client_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-proxy3 client cipher contain invalid cipher %s"%",".join(nbi3gc_proxy3_client_invalid_cipher))
         if not self._nbi3gc_proxy3_server_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gc-proxy3 server cipher contain invalid cipher %s"%",".join(self._nbi3gc_proxy3_server_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gc-proxy3 server cipher contain invalid cipher %s"%",".join(nbi3gc_proxy3_server_invalid_cipher))
 
 

@@ -66,14 +66,17 @@ class html(object):
                             <th width="5%%">
                                 <b>Level</b>
                             </th>
-                            <th width="15%%">
+                            <th width="15%%" name="nolog">
                                <b>Impact</b>
                             </th>
-                            <th width="35%%">
+                            <th width="35%%" name="nolog">
                                <b>Root Cause</b>
                             </th>
-                            <th width="35%%">
+                            <th width="35%%" name="nolog">
                                <b>Fix Method</b>
+                            </th>
+                            <th style="display:none;" width="85%%" name="log">
+                               <b>LOG</b>
                             </th>
                     </tr>            
                     """
@@ -97,6 +100,8 @@ class html(object):
                 if not testpointFIXSTEP:
                     testpointFIXSTEP = '<font color="#d0d0d0">NA</font>'
                 testpointFIXSTEPHtml = testpointFIXSTEP.replace("\n","</br>")
+                testpointLog = TESTPOINT[testpoint]["LOG"]
+                testpointLogHtml = testpointLog
                 testpointHtml = "<i>%s<i>"%testpoint.strip("{}")
                 attribute = """
                     
@@ -110,18 +115,21 @@ class html(object):
                             <td>
                                 <i>%s</i>
                             </td>
-                            <td>
+                            <td name="nolog">
                                <i>%s</i>
                             </td>
-                            <td>
+                            <td name="nolog">
                                <i>%s</i>
                             </td>
-                            <td>
+                            <td name="nolog">
+                               <i>%s</i>
+                            </td>
+                            <td style="display:none" name="log">
                                <i>%s</i>
                             </td>
                     </tr>
 
-"""%(testpointHtml,testpointStatusHtml,testpointLevel,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml)
+"""%(testpointHtml,testpointStatusHtml,testpointLevel,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml,testpointLogHtml)
 
                 data += attribute
             data += """

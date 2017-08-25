@@ -6,6 +6,8 @@ from framework.libraries.library import parseRule,RemoveDuplicates
 # from framework.modules.manager import TestPointManager
 # from framework.modules.configuration import  ConfigManagerInstance
 from framework.modules.manager import ManagerFactory
+from framework.log.internalLog import internalLog
+import sys
 class _BaseTestPoint(object):
     def __init__(self):
         super(_BaseTestPoint,self).__init__()
@@ -18,10 +20,14 @@ class _BaseTestPoint(object):
         self.IMPACT = []
         self.FIXSTEP = []
         self.level = LEVEL.NOCRITICAL
-        # self.needRestartNbi3gcAfterFixed = False
-        # self.needRestartNbi3gcomAfterFixed = False
         self._load_keyword()
-
+        self.log = internalLog()
+    def _redirect(self):
+        self._stdout = sys.stdout
+        sys.stdout = self.log
+    def _recover(self):
+        if self._stdout:
+            sys.stdout = self._stdout
     def _load_keyword(self):
         keywords = self.keywordManager.get_keyword()
         for instanceName in keywords:
@@ -48,6 +54,7 @@ class _BaseTestPoint(object):
 
 
     def run(self,firstTestPoint=True):
+        self._redirect()
         try:
             self._checkpoint()
         except Exception,e:
@@ -55,25 +62,14 @@ class _BaseTestPoint(object):
             self.IMPACT.append("Throw Exception...")
             self.RCA.append(e)
             self.status = STATUS.FAIL
-
-        self.logger.info("TestPoint(%s) result is [%s]"%(self.__class__.__name__,self.status))
-
-#         if self.passed is False and self.needRestartNbi3gcomAfterFixed and self.FIXSTEP:
-#
-#             restartNbi3gcomStep = """restart Jacorb by below command:
-# \t\t\t#smanager.pl stop service nbi3gcom
-# \t\t\t#smanager.pl start service nbi3gcom"""
-#             self.FIXSTEP.append(restartNbi3gcomStep)
-#
-#         if self.passed is False and self.needRestartNbi3gcAfterFixed and self.FIXSTEP:
-#             restartNbi3gcStep = """restart 3GPP Corba FM by below command:
-# \t\t\t#smanager.pl stop service nbi3gc
-# \t\t\t#smanager.pl start service nbi3gc"""
-#             self.FIXSTEP.append(restartNbi3gcStep)
+        finally:
+            self.logger.info("TestPoint(%s) result is [%s]" % (self.__class__.__name__, self.status))
+            self._recover()
 
         self.RCA = RemoveDuplicates(self.RCA)
         self.IMPACT = RemoveDuplicates(self.IMPACT)
-        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.__doc__
+        internalLog = self.log.getContent()
+        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.__doc__,internalLog
 
 
 

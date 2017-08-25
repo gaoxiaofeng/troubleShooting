@@ -98,10 +98,10 @@ class  TestPointManager(BaseManager):
                 testPoint = testPoint.strip("}")
             testPointfull = "%s.%s"%(testPoint,"run")
             testPointRunner = self.get_keyword(testPointfull)
-            status,level,rcaList,impactList,fixStepList,describe = testPointRunner(firstTestPoint)
+            status,level,rcaList,impactList,fixStepList,describe,internalLog = testPointRunner(firstTestPoint)
             if firstTestPoint:
                 firstTestPoint = False
-            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":level,"DESCRIBE":describe}
+            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":level,"DESCRIBE":describe,"LOG":internalLog}
             #{"Security_001":{"STATUS":True,"RCA":[,],"IMPACT":[,],"FIXSTEP":[],"LEVEL":"XXXX","DESCRIBE":"xxxx"}}
         self.testPoint_record = statusDict
         return statusDict

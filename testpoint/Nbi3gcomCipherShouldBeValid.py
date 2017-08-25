@@ -39,13 +39,13 @@ class Nbi3gcomCipherShouldBeValid(_BaseTestPoint):
         nbi3gcom_server_weak_cipher = self._nbi3gcom_server_cipher & _weakCipher
         nbi3gcom_server_invalid_cipher = self._nbi3gcom_server_cipher.difference(_allCipher)
 
-        print "nbi3gcom client strong ciphers(%s) : %s"%(len(nbi3gcom_client_strong_cipher)," , ".join(nbi3gcom_client_strong_cipher))
-        print "nbi3gcom client weak ciphers(%s) : %s" %(len(nbi3gcom_client_weak_cipher)," , ".join(nbi3gcom_client_weak_cipher))
-        print "nbi3gcom client invalid ciphers(%s) : %s" %(len(nbi3gcom_client_invalid_cipher)," , ".join(nbi3gcom_client_invalid_cipher))
+        print "nbi3gcom client has %s strong ciphers : %s"%(len(nbi3gcom_client_strong_cipher)," , ".join(nbi3gcom_client_strong_cipher))
+        print "nbi3gcom client has %s weak ciphers : %s" %(len(nbi3gcom_client_weak_cipher)," , ".join(nbi3gcom_client_weak_cipher))
+        print "nbi3gcom client has %s invalid ciphers : %s" %(len(nbi3gcom_client_invalid_cipher)," , ".join(nbi3gcom_client_invalid_cipher))
 
-        print "nbi3gcom server strong ciphers(%s) : %s"%(len(nbi3gcom_server_strong_cipher)," , ".join(nbi3gcom_server_strong_cipher))
-        print "nbi3gcom server weak ciphers(%s) : %s"%(len(nbi3gcom_server_weak_cipher)," , ".join(nbi3gcom_server_weak_cipher))
-        print "nbi3gcom server invalid ciphers(%s) : %s" %(len(nbi3gcom_server_invalid_cipher)," , ".join(nbi3gcom_server_invalid_cipher))
+        print "nbi3gcom server has %s strong ciphers : %s"%(len(nbi3gcom_server_strong_cipher)," , ".join(nbi3gcom_server_strong_cipher))
+        print "nbi3gcom server has %s weak ciphers : %s"%(len(nbi3gcom_server_weak_cipher)," , ".join(nbi3gcom_server_weak_cipher))
+        print "nbi3gcom server has %s invalid ciphers : %s" %(len(nbi3gcom_server_invalid_cipher)," , ".join(nbi3gcom_server_invalid_cipher))
 
 
 

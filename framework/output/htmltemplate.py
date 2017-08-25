@@ -232,13 +232,36 @@ function checkboxOnclick(checkbox){
 if ( checkbox.checked == true){
 
 //Action for checked
-document.getElementById("log").style.display="";//显示
+//document.getElementsById("log").style.display="";//显示
+var logs = document.getElementsByName("log")
+var nologs = document.getElementsByName("nolog")
+for(var i=0;i<logs.length;i++)
+    {
+ logs[i].style.display="";
+    }
+
+for(var i=0;i<nologs.length;i++)
+    {
+ nologs[i].style.display="none";
+    }
 
 }else{
 
-//Action for not checked
-document.getElementById("log").style.display="none";//隐藏
+var logs = document.getElementsByName("log")
+var nologs = document.getElementsByName("nolog")
+for(var i=0;i<logs.length;i++)
+    {
+ logs[i].style.display="none";
+    }
 
+for(var i=0;i<nologs.length;i++)
+    {
+ nologs[i].style.display="";
+    }
+
+
+//Action for not checked
+//document.getElementsById("log").style.display="none";//隐藏
 }}
 
 </script>
