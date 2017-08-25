@@ -101,7 +101,7 @@ class html(object):
                     testpointFIXSTEP = '<font color="#d0d0d0">NA</font>'
                 testpointFIXSTEPHtml = testpointFIXSTEP.replace("\n","</br>")
                 testpointLog = TESTPOINT[testpoint]["LOG"]
-                testpointLogHtml = testpointLog
+                testpointLogHtml = testpointLog.replace("\n","</br>")
                 testpointHtml = "<i>%s<i>"%testpoint.strip("{}")
                 attribute = """
                     
@@ -158,7 +158,7 @@ class html(object):
         content = "".join(lines)
         content = content.replace("\n", "</br>")
         content = content.replace("|","&nbsp;&nbsp;&nbsp;&nbsp;")
-        HTML_LOG = '<div style="display:none" id="log" style="font-size:12px"><i>' + content + '</i></div>'
+        HTML_LOG = '<div style="display:none" name="log" style="font-size:12px"><i>' + content + '</i></div>'
         data += BUTTON
         data += HTML_LOG
         data += BODY_AFTER

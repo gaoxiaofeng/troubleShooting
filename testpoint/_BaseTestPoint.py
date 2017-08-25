@@ -58,12 +58,12 @@ class _BaseTestPoint(object):
         try:
             self._checkpoint()
         except Exception,e:
-            self.logger.error("testPoint `%s` failed, reason is %s"%(self.__class__.__name__,e))
-            self.IMPACT.append("Throw Exception...")
+            # self.logger.error("testPoint `%s` failed, reason is %s"%(self.__class__.__name__,e))
+            self.IMPACT.append("Throw Exception,reason is %s"%e)
             self.RCA.append(e)
             self.status = STATUS.FAIL
         finally:
-            self.logger.info("TestPoint(%s) result is [%s]" % (self.__class__.__name__, self.status))
+            # self.logger.info("TestPoint(%s) result is [%s]" % (self.__class__.__name__, self.status))
             self._recover()
 
         self.RCA = RemoveDuplicates(self.RCA)
