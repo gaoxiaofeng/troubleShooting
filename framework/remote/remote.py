@@ -3,6 +3,7 @@ import  paramiko
 import os
 from framework.libraries.library import getFileMd5
 import sys
+from framework.modules.configuration import ConfigManagerInstance
 class Remote(object):
     def __init__(self):
         super(Remote,self).__init__()
@@ -14,6 +15,7 @@ class Remote(object):
         self._password = None
         self._localFile = []
         self._localFolder = []
+        self._sync = ConfigManagerInstance.config["Sync"]
     def _connect(self):
         self._ssh = paramiko.SSHClient()
         self._ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -92,7 +94,8 @@ class Remote(object):
     def _upload_tool(self):
         self._localHomeDir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         self._remoteHomeDir = self._localHomeDir.split(os.path.sep)[-1]
-        self.put_folder(self._localHomeDir)
+        if self._sync:
+            self.put_folder(self._localHomeDir)
     def _list_local_folder(self,folder):
         child_folders = os.listdir(folder)
         for child_folder in child_folders:
@@ -133,6 +136,7 @@ class Remote(object):
         local_report = os.path.join(self._localHomeDir,"report_remote_%s.html"%self._host)
         self.get(remote_report,local_report)
     def remoteRunning(self):
+
         self._upload_tool()
         self._remote_running()
         self._get_report()

@@ -30,8 +30,10 @@ if __name__ == "__main__":
     opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default=22)
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
     opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="arthur")
+    opt.add_option("--sync",dest="sync",help="yes/no,default is yes",default="yes")
     options, args = opt.parse_args()
     ConfigManagerInstance.config = {"Print":True if options.Print == "yes" else False}
+    ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
     if options.Host:
         #remote mode
         host = options.Host
