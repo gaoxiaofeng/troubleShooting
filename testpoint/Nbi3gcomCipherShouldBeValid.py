@@ -28,29 +28,33 @@ class Nbi3gcomCipherShouldBeValid(_BaseTestPoint):
         client_cipher_key = "jacorb.security.ssl.server.cipher_suites"
         server_cipher_key = "jacorb.security.ssl.client.cipher_suites"
 
-        self._nbi3gcom_mf_client_cipher = set(self.get_value_from_configuration(NBI3GCOM_PROPERTIES,client_cipher_key).split(","))
-        self._nbi3gcom_mf_server_cipher = set(self.get_value_from_configuration(NBI3GCOM_PROPERTIES,server_cipher_key).split(","))
+        self._nbi3gcom_client_cipher = set(self.get_value_from_configuration(NBI3GCOM_PROPERTIES,client_cipher_key).split(","))
+        self._nbi3gcom_server_cipher = set(self.get_value_from_configuration(NBI3GCOM_PROPERTIES,server_cipher_key).split(","))
 
+        nbi3gcom_client_strong_cipher = self._nbi3gcom_client_cipher & _strongCipher
+        nbi3gcom_client_weak_cipher = self._nbi3gcom_client_cipher & _weakCipher
+        nbi3gcom_client_invalid_cipher = self._nbi3gcom_client_cipher.difference(_allCipher)
 
+        nbi3gcom_server_strong_cipher = self._nbi3gcom_server_cipher & _strongCipher
+        nbi3gcom_server_weak_cipher = self._nbi3gcom_server_cipher & _weakCipher
+        nbi3gcom_server_invalid_cipher = self._nbi3gcom_server_cipher.difference(_allCipher)
 
-        print "nbi3gcom client strong ciphers : %s"%",".join(self._nbi3gcom_mf_client_cipher & _strongCipher)
-        print "nbi3gcom client weak ciphers : %s" % ",".join(self._nbi3gcom_mf_client_cipher & _weakCipher)
-        print "nbi3gcom client invalid ciphers : %s" % ",".join(self._nbi3gcom_mf_client_cipher.difference(_allCipher))
+        print "nbi3gcom client strong ciphers(%s) : %s"%(len(nbi3gcom_client_strong_cipher)," , ".join(nbi3gcom_client_strong_cipher))
+        print "nbi3gcom client weak ciphers(%s) : %s" %(len(nbi3gcom_client_weak_cipher)," , ".join(nbi3gcom_client_weak_cipher))
+        print "nbi3gcom client invalid ciphers(%s) : %s" %(len(nbi3gcom_client_invalid_cipher)," , ".join(nbi3gcom_client_invalid_cipher))
 
-        print "nbi3gcom server strong ciphers : %s"%",".join(self._nbi3gcom_mf_server_cipher & _strongCipher)
-        print "nbi3gcom server weak ciphers : %s" % ",".join(self._nbi3gcom_mf_server_cipher & _weakCipher)
-        print "nbi3gcom server invalid ciphers : %s" % ",".join(self._nbi3gcom_mf_server_cipher.difference(_allCipher))
-
-
+        print "nbi3gcom server strong ciphers(%s) : %s"%(len(nbi3gcom_server_strong_cipher)," , ".join(nbi3gcom_server_strong_cipher))
+        print "nbi3gcom server weak ciphers(%s) : %s"%(len(nbi3gcom_server_weak_cipher)," , ".join(nbi3gcom_server_weak_cipher))
+        print "nbi3gcom server invalid ciphers(%s) : %s" %(len(nbi3gcom_server_invalid_cipher)," , ".join(nbi3gcom_server_invalid_cipher))
 
 
 
 
         self.status = STATUS.PASS
-        if not self._nbi3gcom_mf_client_cipher.issubset(_allCipher):
+        if not self._nbi3gcom_client_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gcom client cipher contain invalid cipher %s"%",".join(self._nbi3gcom_mf_client_cipher.difference(_allCipher)))
-        if not self._nbi3gcom_mf_server_cipher.issubset(_allCipher):
+            self.RCA.append("nbi3gcom client cipher contain invalid cipher %s"%",".join(self._nbi3gcom_client_cipher.difference(_allCipher)))
+        if not self._nbi3gcom_server_cipher.issubset(_allCipher):
             self.status = STATUS.FAIL
-            self.RCA.append("nbi3gcom server cipher contain invalid cipher %s"%",".join(self._nbi3gcom_mf_server_cipher.difference(_allCipher)))
+            self.RCA.append("nbi3gcom server cipher contain invalid cipher %s"%",".join(self._nbi3gcom_server_cipher.difference(_allCipher)))
 
