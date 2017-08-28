@@ -22,7 +22,7 @@ MAINCSS = """
 			}
 			/*========bordered table========*/
 			.bordered {
-				border: solid #ccc 1px;
+				border: solid #ccc 3px;
 				-moz-border-radius: 6px;
 				-webkit-border-radius: 6px;
 				border-radius: 6px;
@@ -39,17 +39,18 @@ MAINCSS = """
 				transition: all 0.1s ease-in-out;
 			}
 			.bordered .highlight,
-		//	.bordered tr:hover {
-		//		background: #fbf8e9;
-		//	}
+			.bordered tr:hover {
+				background: #FCFDFE;
+			}
 			.bordered td,
 			.bordered th {
-				border-left: 1px solid #ccc;
-				border-top: 1px solid #ccc;
+				border-left: 2px solid #ccc;
+				border-top: 2px solid #ccc;
 				padding: 10px;
 				text-align: left;
 			}
 			.bordered th {
+				//background-color: #dce9f9;
 				background-color: #dce9f9;
 				background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
 				background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);

@@ -10,7 +10,7 @@ class ProgressDialog(Thread):
         self._total = total
         self._done = 0
         self._ratio = 0
-        self._RUN = ConfigManagerInstance.config["Print"]
+        self._RUN = ConfigManagerInstance.config["Console"]
         self.printf = OutPut().printf
     def set(self):
         return self._done

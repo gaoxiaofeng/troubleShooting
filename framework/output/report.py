@@ -14,7 +14,7 @@ class report(object):
         self.caseResult =  ManagerFactory().getManager(LAYER.Case).case_record
         self.printf = OutPut().printf
     def console(self):
-        if not ConfigManagerInstance.config["Print"]:
+        if not ConfigManagerInstance.config["Console"]:
             return
         _width = ConfigManagerInstance.config["report_table_width"]
         self._width = _width

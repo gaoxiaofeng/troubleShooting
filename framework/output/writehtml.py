@@ -13,14 +13,13 @@ class html(object):
         data = ""
         data += HTML_BEFORE
         data += HTML_HEAD
-
         data +="""
-<body>
+<body bgcolor = "#E9EAEE">
 <h1 align="center">3GPP Corba FM Sniffer Report</h1>
 <p><i>%s</i></p>
-	<table width="100%%" border="1" class="bordered">
+	<table width="100%%" border="2" class="bordered">
 		<thead>
-			<tr bgcolor="#1E90FF"><th width="15%%">CaseName</th><th width="5%%" >Status</th><th width="80%%">Attribute</th></tr>
+			<tr ><th width="15%%">CaseName</th><th width="5%%" >Status</th><th width="80%%">Attribute</th></tr>
 		</thead>
 		<tbody>
 """%(self.currenttime,)
@@ -32,7 +31,7 @@ class html(object):
             REFERENCEHtml = '<a href="%s">reference document</>'%REFERENCE if REFERENCE else '<font color="#d0d0d0">NA</font>'
             TESTPOINT = self.caseResult[caseName]["TESTPOINT"]
             parent_pass = """
-            <tr  bgcolor="#90EE90" class="parent" id="row_0%s"><td colspan="1">%s</td><td>PASS</td><td colspan="1"></td></tr>"""%(i,caseName,)
+            <tr  bgcolor="#53C579" class="parent" id="row_0%s"><td colspan="1">%s</td><td>PASS</td><td colspan="1"></td></tr>"""%(i,caseName,)
             parent_fail = """
             <tr  bgcolor="#FF3030" class="parent" id="row_0%s"><td colspan="1">%s</td><td>FAIL</td><td colspan="1"></td></tr>"""%(i,caseName,)
             parent_warn = """

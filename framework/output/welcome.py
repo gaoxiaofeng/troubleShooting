@@ -11,7 +11,7 @@ class welcome(object):
         self._totalWidth =  ConfigManagerInstance.config["report_total_width"]
         self._welcome()
     def _welcome(self):
-        if not ConfigManagerInstance.config["Print"]:
+        if not ConfigManagerInstance.config["Console"]:
             return
         graph = r"""
 ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗
@@ -41,7 +41,7 @@ class welcome(object):
                (__/_/                ((__/"""
         self.printf(graph)
     def loadCasePrint(self,caseNameList):
-        if not ConfigManagerInstance.config["Print"]:
+        if not ConfigManagerInstance.config["Console"]:
             return
         graph = "Load %s cases..."%len(caseNameList)
         self.printf(graph)

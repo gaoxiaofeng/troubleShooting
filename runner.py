@@ -24,15 +24,17 @@ signal.signal(signal.SIGINT, onsignal_int)
 if __name__ == "__main__":
     _startTime = time.time()
     _system_ =  platform.system().lower()
-    opt = OptionParser()
-    opt.add_option("--print",dest="Print",help="support yes/no,default is yes",default="yes")
+    version = "1.0.1"
+    opt = OptionParser(version=version)
+
     opt.add_option("--host",dest="Host",help="host for remote connection")
     opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default=22)
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
     opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="arthur")
     opt.add_option("--sync",dest="sync",help="yes/no,default is yes",default="yes")
+    opt.add_option("--console", dest="console", help="support on/off,default is on", default="on")
     options, args = opt.parse_args()
-    ConfigManagerInstance.config = {"Print":True if options.Print == "yes" else False}
+    ConfigManagerInstance.config = {"Console":True if options.console == "on" else False}
     ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
     if options.Host:
         #remote mode
@@ -40,6 +42,8 @@ if __name__ == "__main__":
         port = options.Port
         user = options.User
         password = options.Password
+        if user != "root":
+            print "WARN: Access right is not enough."
         try:
             port = int(port)
         except:
