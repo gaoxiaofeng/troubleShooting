@@ -17,7 +17,6 @@ class _BaseCase(object):
     def __init__(self):
         super(_BaseCase,self).__init__()
         self.passCondition = None
-        #self.fixStep = ""
         self.logger = logger()
         self.status = STATUS.NOTRUN
         self._ToPrint = True
@@ -25,8 +24,8 @@ class _BaseCase(object):
         self._Impact = {}
         self._RCA = {}
         self._FixMethod = {}
-        self.caseNumber = None
         self.referenceDocument = None
+        self.tag = ""
 
     def _printf(self,message):
         if self._ToPrint:

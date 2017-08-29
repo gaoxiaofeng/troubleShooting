@@ -127,7 +127,12 @@ class Remote(object):
         self._execute_command(command)
     def _remote_running(self):
         print "running tool in remote machine"
-        command = "cd %s;python runner.py  --console=off"%self._remoteHomeDir
+        args = []
+        args.append("--console=off")
+        if ConfigManagerInstance.config["Name"]:
+            args.append("--name=%s"%ConfigManagerInstance.config["Name"])
+        args = "  ".join(args)
+        command = "cd %s;python runner.py  %s"%(self._remoteHomeDir,args)
         self._execute_command(command)
 
 

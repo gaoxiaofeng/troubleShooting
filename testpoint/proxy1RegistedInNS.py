@@ -7,6 +7,7 @@ class Proxy1RegistedInNS(_BaseTestPoint):
         super(self.__class__,self).__init__()
         # self.needRestartNbi3gcAfterFixed = True
         self._proxyId = PROXY.PROXY1
+        self.level = LEVEL.CRITICAL
 
     def _checkpoint(self):
         proxyDeployedStatus = self.get_proxy_deploy_status(self._proxyId)

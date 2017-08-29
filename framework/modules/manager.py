@@ -3,7 +3,7 @@ from framework.log.logger import logger
 from framework.exception.exception import *
 from framework.variable.variable import *
 from framework.libraries.library import singleton
-
+from framework.modules.configuration import ConfigManagerInstance
 class BaseManager(object):
     '''
     base manager
@@ -125,6 +125,9 @@ class CaseManager(BaseManager):
         self.__case_record = {}
     def run_case(self,case):
         RERUN = False
+        if ConfigManagerInstance.config["Name"]:
+            if ConfigManagerInstance.config["Name"] != case:
+                return  BEHAVIOR.CONTINUE
         caseRunnerEntry = "%s.%s"%(case,"run")
         caseRunner = self.get_keyword(caseRunnerEntry)
         while 1:

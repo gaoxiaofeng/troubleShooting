@@ -2,6 +2,7 @@
 from framework.modules.manager import ManagerFactory
 from framework.variable.variable import *
 from framework.libraries.library import list2stringAndFormat
+from framework.modules.configuration import ConfigManagerInstance
 import time
 from htmltemplate import *
 class html(object):
@@ -162,5 +163,5 @@ class html(object):
         data += HTML_LOG
         data += BODY_AFTER
         data += HTML_AFTER
-        with open("report.html","w") as f:
+        with open(ConfigManagerInstance.config["Report"],"w") as f:
             f.write(data)

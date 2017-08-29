@@ -173,7 +173,7 @@ class report(object):
         self.printf("*" * (self._width * 3 + 4))
     def writeReport(self):
         html().write()
-        graph = """The Report was saved as ./report.html"""
+        graph = """The Report was saved as ./%s"""%ConfigManagerInstance.config["Report"]
         self.printf(graph)
 
 
