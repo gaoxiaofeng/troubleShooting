@@ -34,8 +34,10 @@ if __name__ == "__main__":
     opt.add_option("--sync",dest="sync",help="yes/no,default is yes",default="yes")
     opt.add_option("--console", dest="console", help="set console to on/off,default is on", default="on")
     opt.add_option("--name",dest="name",help="select the case to run by name")
-    opt.add_option("--include",dest="include",help="select cases to run by tag")
-    opt.add_option("--exclude",dest="exclude",help="select cases not to run by tag.")
+    opt.add_option("--include",dest="include",help="""select cases to run by tag, Tags can also be combined together with  `AND` and `OR` .
+    Example: --include=coolANDhot""")
+    opt.add_option("--exclude",dest="exclude",help="""select cases not to run by tag. Tags can also be combined together with  `AND` and `OR` .
+    Example: --include=coolORhot""")
     opt.add_option("--report",dest="report",help="HTML report file, default is report.html",default="report.html")
 
     options, args = opt.parse_args()
@@ -44,6 +46,8 @@ if __name__ == "__main__":
     ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
     ConfigManagerInstance.config = {"Name":options.name}
     ConfigManagerInstance.config = {"Report":options.report}
+    ConfigManagerInstance.config = {"Include":options.include}
+    ConfigManagerInstance.config = {"Exclude":options.exclude}
     if options.Host:
         #remote mode
         host = options.Host

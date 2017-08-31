@@ -4,6 +4,7 @@ from framework.exception.exception import *
 from framework.variable.variable import *
 from framework.libraries.library import singleton
 from framework.modules.configuration import ConfigManagerInstance
+from framework.modules.tags import TagPattern
 class BaseManager(object):
     '''
     base manager
@@ -128,6 +129,19 @@ class CaseManager(BaseManager):
         if ConfigManagerInstance.config["Name"]:
             if ConfigManagerInstance.config["Name"] != case:
                 return  BEHAVIOR.CONTINUE
+        if ConfigManagerInstance.config["Include"]:
+            #process include tags
+            patterns = ConfigManagerInstance.config["Include"]
+            tags = self.get_keyword("%s.getTags"%case)()
+            if not TagPattern(patterns).match(tags):
+                return BEHAVIOR.CONTINUE
+
+        if ConfigManagerInstance.config["Exclude"]:
+            #process exclude tags
+            patterns = ConfigManagerInstance.config["Exclude"]
+            tags = self.get_keyword("%s.getTags"%case)()
+            if TagPattern(patterns).match(tags):
+                return BEHAVIOR.CONTINUE
         caseRunnerEntry = "%s.%s"%(case,"run")
         caseRunner = self.get_keyword(caseRunnerEntry)
         while 1:

@@ -131,6 +131,10 @@ class Remote(object):
         args.append("--console=off")
         if ConfigManagerInstance.config["Name"]:
             args.append("--name=%s"%ConfigManagerInstance.config["Name"])
+        if ConfigManagerInstance.config["Include"]:
+            args.append("--include=%s" % ConfigManagerInstance.config["Include"])
+        if ConfigManagerInstance.config["Exclude"]:
+            args.append("--exclude=%s" % ConfigManagerInstance.config["Exclude"])
         args = "  ".join(args)
         command = "cd %s;python runner.py  %s"%(self._remoteHomeDir,args)
         self._execute_command(command)

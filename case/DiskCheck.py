@@ -6,7 +6,7 @@ class DiskCheck(_BaseCase):
     def __init__(self):
         super(DiskCheck,self).__init__()
         self.passCondition = "{DiskSizeCheck} and {DiskInodesCheck}"
-        self.tag = "General NotRun"
+        self.tags = "n17.8 regression"
 
 
 

@@ -30,6 +30,7 @@ class html(object):
             DESCRIPTION = self.caseResult[caseName]["DESCRIPTION"]
             REFERENCE = self.caseResult[caseName]["REFERENCE"]
             REFERENCEHtml = '<a href="%s">reference document</>'%REFERENCE if REFERENCE else '<font color="#d0d0d0">NA</font>'
+            TAGS = self.caseResult[caseName]["TAGS"]
             TESTPOINT = self.caseResult[caseName]["TESTPOINT"]
             parent_pass = """
             <tr  bgcolor="#53C579" class="parent" id="row_0%s"><td colspan="1">%s</td><td>PASS</td><td colspan="1"></td></tr>"""%(i,caseName,)
@@ -49,7 +50,9 @@ class html(object):
             data += """
             <tr class="child_row_0%s" style="display:none"><td>Description</td><td></td><td>%s</td></tr>
             <tr class="child_row_0%s" style="display:none"><td>Reference</td><td></td><td>%s</td></tr>
-"""%(i,DESCRIPTION,i,REFERENCEHtml)
+            <tr class="child_row_0%s" style="display:none"><td>Tags</td><td></td><td>%s</td></tr>
+"""%(i,DESCRIPTION,i,REFERENCEHtml,i,TAGS)
+
             data += """
             <tr class="child_row_0%s" style="display:none">
             <td colspan="3" >

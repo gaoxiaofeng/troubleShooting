@@ -7,5 +7,6 @@ class ProxyLogSizeLimit(_BaseCase):
         super(ProxyLogSizeLimit,self).__init__()
         self.passCondition = "{Proxy1Log4jCheck} is True and {Proxy2Log4jCheck} is True  and {Proxy3Log4jCheck} is True"
         self.referenceDocument = "https://pronto.int.net.nokia.com/pronto/problemReportSearch.html?freeTextdropDownID=prId&searchTopText=PR222307&HomeFlag=true"
+        self.tags="n17.8 pronto"
 
 

@@ -25,7 +25,7 @@ class _BaseCase(object):
         self._RCA = {}
         self._FixMethod = {}
         self.referenceDocument = None
-        self.tag = ""
+        self.tags = ""
 
     def _printf(self,message):
         if self._ToPrint:
@@ -67,7 +67,10 @@ class _BaseCase(object):
         self._LoadImpact()
         self._LoadRCA()
         self._LoadFixMethod()
-        result = {"STATUS": self.passed,"FAILURELEVEL":self.FailureLevel,"IMPACT":self._Impact,"DESCRIPTION":self.__doc__.strip() if self.__doc__ is not None else self.__doc__,"RCA":self._RCA,"FIXMETHOD":self._FixMethod,"REFERENCE":self.referenceDocument,"TESTPOINT":self._checkPointStatusDict}
+        result = {"STATUS": self.passed,"FAILURELEVEL":self.FailureLevel,"IMPACT":self._Impact,\
+                  "DESCRIPTION":self.__doc__.strip() if self.__doc__ is not None else self.__doc__,\
+                  "RCA":self._RCA,"FIXMETHOD":self._FixMethod,"REFERENCE":self.referenceDocument,\
+                  "TESTPOINT":self._checkPointStatusDict,"TAGS":self.tags}
 
         return result,BEHAVIOR.CONTINUE
     def _SetFailureLevel(self):
@@ -145,7 +148,8 @@ class _BaseCase(object):
         self._FixMethod = {"CriticalFixMethod":CriticalFixMethod,"NoCriticalFixMethod":NoCriticalFixMethod}
 
 
-
+    def getTags(self):
+        return self.tags
 
 
 

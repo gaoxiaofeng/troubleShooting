@@ -9,6 +9,7 @@ class SecurityCheck(_BaseCase):
                      "{Nbi3gcCipherShouldBeValid}","{SecurityShouldBeMatched}","{Nbi3gcCipherShouldBeMatched}",\
                      "{nbiKeyStoreShouldBeMatched}","{Nbi3gcomCipherShouldBeValid}"]
         self.passCondition = " and ".join(condition)
+        self.tags = "n17.8 regression"
 
 
 

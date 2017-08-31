@@ -6,6 +6,7 @@ class ServiceStatusCheck(_BaseCase):
     def __init__(self):
         super(ServiceStatusCheck,self).__init__()
         self.passCondition = "{Nbi3gcServiceCheck} and {Nbi3gcomServiceCheck}"
+        self.tags = "n17.8 regression basic"
 
 
 
