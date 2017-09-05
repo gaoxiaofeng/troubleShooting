@@ -46,7 +46,7 @@ class Configuration(object):
         if config_map.has_key(item):
             return config_map[item]
         else:
-            self.logger.error("get config(%s) item(%s) failed!configuration content is %s"%(configuration,item,config_map))
+            print "configuration(%s) has not item(%s)!"%(configuration,item,)
             return None
 
 

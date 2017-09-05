@@ -38,7 +38,7 @@ class  logParser(object):
                 self._errorLogs.append(absolute_path)
 
     def _readLog(self,file):
-        print file
+        # print file
         with open(file,"rb") as f:
             lines = f.readlines()
         data = "".join(lines)
@@ -83,7 +83,9 @@ class  logParser(object):
             self._parsed_class_count.update({__class:self._classItem.count(__class)})
 
 
-    def getResult(self):
+    def getLogParsedResult(self,logPath):
+        self.logPath = logPath
+        self.parseErrorLog()
         return self._parsed_class_content,self._parsed_class_count
 
 
