@@ -5,6 +5,7 @@ from framework.libraries.library import list2stringAndFormat
 from framework.modules.configuration import ConfigManagerInstance
 import time
 from htmltemplate import *
+import re
 class html(object):
     def __init__(self):
         super(html,self).__init__()
@@ -104,7 +105,15 @@ class html(object):
                     testpointFIXSTEP = '<font color="#d0d0d0">NA</font>'
                 testpointFIXSTEPHtml = testpointFIXSTEP.replace("\n","</br>")
                 testpointLog = TESTPOINT[testpoint]["LOG"]
-                testpointLogHtml = testpointLog.replace("\n","</br>")
+                testpointLogHtml = testpointLog
+                pattern = re.compile(r"\<.+\>")
+                match = pattern.finditer(testpointLog)
+                if match:
+                    for m in match:
+                        className = m.group()
+                        testpointLogHtml = testpointLogHtml.replace(className,'<font color="#FFB90F">%s</font>'%className)
+
+                testpointLogHtml = testpointLogHtml.replace("\n", "</br>")
                 testpointHtml = "<i>%s<i>"%testpoint.strip("{}")
                 attribute = """
                     
