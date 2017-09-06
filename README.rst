@@ -44,9 +44,9 @@ Example:
 python runner.py --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 
 *************************
-development:
+Development:
 *************************
-1.create keyword
+1.Create keyword
 ========================
 new a <keywordName>.py file in keywords folder:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -56,11 +56,11 @@ class keywordName(object):
     def getExample(self):
         return "example"
 
-2.create testpoint 
+2.Create testpoint 
 ==================
 new a <testPointName>.py file in testpoint folder:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-from framework.variable.variable import STATUS
+from framework.variable.variable import STATUS,LEVEL
 
 from _BaseTestPoint import _BaseTestPoint
 
@@ -87,7 +87,7 @@ Note:   **self.level** is option, it's enum type , value is **LEVLE.CRITICAL** o
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Note:   **self.IMPACT** , **self.RCA** and **self.FIXSTEP** is option, it's list type.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-3. create case
+3. Create case
 ==============
 new a <caseName>.py file in case folder:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
