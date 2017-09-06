@@ -99,7 +99,7 @@ class caseName(_BaseCase):
     """
 
     def __init__(self):
-        super(DiskCheck,self).__init__()
+        super(caseName,self).__init__()
 
         self.passCondition = "{testPointName} is True"
 
