@@ -1,28 +1,30 @@
 # -*- coding: utf-8 -*-
 import sys,os
-from framework.libraries.library import ExecuteCommond,singleton
+from framework.libraries.library import singleton
 from framework.log.logger import logger
+from keywords._BaseKeyword import _BaseKeyword
 @singleton
-class Configuration(object):
+class Configuration(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self._command = ExecuteCommond().shell_command
         self._cache = {}
         self.logger = logger()
     def _get_config_content(self,configuration):
-        command = "cat %s |grep -v '#'"%configuration
-        result = self._command(command)
-        with open(configuration,"r") as f:
-            _lines = f.readlines()
+        command = "cat %s|grep -v '#'"%configuration
+        stdout = self.execute_command(command)
+        if not stdout:
+            print "execute command: %s  , return: %s"%(command,stdout)
+            return ""
         lines = []
+        _lines = stdout.split("\n")
         for line in _lines:
             if "#" not in line:
                 lines.append(line)
-        result = "".join(lines)
+        result = "\n".join(lines)
         return result
     def _convert_to_map(self,content):
         config_map = {}
-        for line in content.split(os.linesep):
+        for line in content.split("\n"):
             if "=" in line :
                 equalMark = line.index("=")
                 key = line[:equalMark].strip()
@@ -47,7 +49,7 @@ class Configuration(object):
             return config_map[item]
         else:
             print "configuration(%s) has not item(%s)!"%(configuration,item,)
-            return None
+            return ""
 
 
 

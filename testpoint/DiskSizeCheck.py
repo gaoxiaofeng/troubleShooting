@@ -8,6 +8,9 @@ class DiskSizeCheck(_BaseTestPoint):
 
     def _checkpoint(self):
         diskSize = self.get_disk_usage_size()
+        if not diskSize:
+            #disSize = {}
+            self.status = STATUS.FAIL
         for key in diskSize:
             if diskSize[key] == "100":
                 self.status = STATUS.FAIL

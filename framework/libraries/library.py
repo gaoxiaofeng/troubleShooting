@@ -78,10 +78,10 @@ class ExecuteCommond(object):
             raise Exception(err)
         return stdout
 
-    def shell_command(self,command):
+    def shell_command(self,command,checkerr=False):
         shell =Popen([command] ,stdout=PIPE, stdin=PIPE,stderr = PIPE,shell = True)
         stdout, err = shell.communicate()
-        if err:
+        if checkerr and err:
             raise Exception(err)
         return stdout
 class _GetchUnix(object):

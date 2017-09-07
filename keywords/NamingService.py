@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-from framework.libraries.library import ExecuteCommond,singleton
+from framework.libraries.library import singleton
 import re
+from keywords._BaseKeyword import _BaseKeyword
 
 def Strip(c):
     return c.strip()
 
 @singleton
-class NamingService(object):
+class NamingService(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.jar_command = ExecuteCommond().jar_command
         self._GetIORFromNS_Path = "/opt/oss/NSN-nbi3gc/simulator/"
         self._GetIORFromNS_Jar = "GetIORFromNS.jar"
         self._irp_registed = {}
@@ -21,8 +21,8 @@ class NamingService(object):
         else:
             return []
     def _list(self):
-
-        stdout = self.jar_command(self._GetIORFromNS_Path,self._GetIORFromNS_Jar,"-l")
+        command = "cd %s;java -jar %s -l"%(self._GetIORFromNS_Path,self._GetIORFromNS_Jar)
+        stdout = self.execute_command(command)
         self._parse_list(stdout)
 
     def _parse_list(self,content):

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from framework.libraries.library import ExecuteCommond,singleton
+from framework.libraries.library import singleton
+from keywords._BaseKeyword import _BaseKeyword
 import  sys,os
 @singleton
-class Keytool(object):
+class Keytool(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.execute_command = ExecuteCommond().shell_command
     def get_cert_and_key_from_keystore(self,keystore,passwd):
         return  self._keytool_list(keystore,passwd)
     def _keytool_list(self,keystore,passwd):
@@ -27,13 +27,14 @@ class Keytool(object):
                 certs_map.update(self._parse_cert(content))
             if "PrivateKeyEntry" in content:
                 key_map.update(self._parse_cert(content))
-
+        print "cert:",certs_map
+        print "key:",key_map
         return  certs_map,key_map
 
 
     def _parse_cert(self,content):
         cert_map = {}
-        for line in content.split(os.linesep):
+        for line in content.split("\n"):
             if "Alias name" in line:
                 alias = line[line.index(":")+1:].strip()
             if "MD5" in line:

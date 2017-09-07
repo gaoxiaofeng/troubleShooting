@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
-from framework.libraries.library import ExecuteCommond,singleton
-
+from framework.libraries.library import singleton
+from keywords._BaseKeyword import _BaseKeyword
 
 @singleton
-class Smanager(object):
+class Smanager(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.shell_script = ExecuteCommond().shell_script
         self._path = "/etc/init.d/"
-        self._nbi3gc = "nbi3gc"
-        self._nbi3gcom = "nbi3gcom"
+        self._nbi3gc = "/etc/init.d/nbi3gc"
+        self._nbi3gcom = "/etc/init.d/nbi3gcom"
         self._status_map = {}
     def _nbi3gc_status(self):
-
-        stdout = self.shell_script(self._path,self._nbi3gc,"status")
+        command = "%s status"%self._nbi3gc
+        stdout = self.execute_command(command)
         if "running" in stdout:
             self._status_map.update({"nbi3gc":True})
         else:
             self._status_map.update({"nbi3gc": False})
     def _nbi3gcom_status(self):
-        stdout = self.shell_script(self._path,self._nbi3gcom,"status")
+        command = "%s status"%self._nbi3gcom
+        stdout = self.execute_command(command)
         if "running" in stdout:
             self._status_map.update({"nbi3gcom":True})
         else:

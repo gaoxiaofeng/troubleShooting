@@ -5,7 +5,7 @@ class LogParser(_BaseCase):
     """
     def __init__(self):
         super(LogParser,self).__init__()
-        self.passCondition = "{nbi3gcLogParse}"
+        self.passCondition = "{nbi3gcERRORLogParse}"
         self.tags = "n17.8 regression"
 
 

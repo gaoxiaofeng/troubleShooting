@@ -9,8 +9,7 @@ class nbiKeyStoreShouldBeMatched(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
         self.level = LEVEL.CRITICAL
-        # self.needRestartNbi3gcAfterFixed = True
-        # self.needRestartNbi3gcomAfterFixed = True
+
         self.nbi3gc_cert = "/d/oss/global/certificate/nbi3gc/nbi3gc.crt"
         self.nbi3gcom_cert = "/d/oss/global/certificate/nbi3gcom/nbi3gcom.crt"
     def _checkpoint(self):
@@ -20,6 +19,7 @@ class nbiKeyStoreShouldBeMatched(_BaseTestPoint):
         self._nbi3gcom_keystore_path = self.get_value_from_configuration(NBI3GCOM_PROPERTIES,keystorePathItem)
         self._nbi3gc_keystore_passwd = self.get_value_from_configuration(NBI3GC_MF_JACORB_PROPERTIES,keystorePasswdItem)
         self._nbi3gcom_keystore_passwd = self.get_value_from_configuration(NBI3GCOM_PROPERTIES,keystorePasswdItem)
+
         nbi3gc_keystore_cert_dict,nbi3gc_keystore_key_dict = self.get_cert_and_key_from_keystore(self._nbi3gc_keystore_path,self._nbi3gc_keystore_passwd)
         nbi3gc_private_key_alias = nbi3gc_keystore_key_dict.keys()[0]
         nbi3gc_private_key_value =  nbi3gc_keystore_key_dict[nbi3gc_private_key_alias]

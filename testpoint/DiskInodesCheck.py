@@ -8,6 +8,9 @@ class DiskInodesCheck(_BaseTestPoint):
 
     def _checkpoint(self):
         diskInodes = self.get_disk_usage_inodes()
+        if not diskInodes:
+            #diskInodes = {}
+            self.status = STATUS.FAIL
         for key in diskInodes:
             if diskInodes[key] == "100":
                 self.status = STATUS.FAIL

@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
-from framework.libraries.library import ExecuteCommond,singleton
+from framework.libraries.library import singleton
+from keywords._BaseKeyword import _BaseKeyword
 import re
 
 @singleton
-class Smx(object):
+class Smx(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.shell_script = ExecuteCommond().shell_script
         self._path = "/opt/oss/NSN-nbi3gc/bin/"
-        self._smx = "smx-clt"
+        self._smx = "/opt/oss/NSN-nbi3gc/bin/smx-clt"
         self._status_map = {}
         self._status = None
     def _nbi3gc_smx_status(self):
 
-        stdout = self.shell_script(self._path,self._smx,"status","1")
+        command = "%s status 1"%self._smx
+        stdout = self.execute_command(command)
         pattern = re.compile(r"(^\S+) +(\S+) +(\S+ *\S*)\s", re.M | re.S)
 
         for m in pattern.finditer(stdout):

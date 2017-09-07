@@ -101,15 +101,10 @@ class Remote(object):
         for child_folder in child_folders:
             if child_folder.startswith("."):
                 continue
-            if child_folder.endswith(".pyc"):
-                continue
-            if child_folder.endswith(".html"):
-                continue
-            if child_folder.endswith(".log"):
-                continue
             child_folder_absolutely = os.path.join(folder,child_folder)
             if os.path.isfile(child_folder_absolutely):
-                self._localFile.append(child_folder_absolutely)
+                if child_folder_absolutely.endswith(".py") or child_folder_absolutely.endswith(".conf"):
+                    self._localFile.append(child_folder_absolutely)
             elif os.path.isdir(child_folder_absolutely):
                 self._localFolder.append(child_folder_absolutely)
                 self._list_local_folder(child_folder_absolutely)

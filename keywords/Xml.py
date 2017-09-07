@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
-from framework.libraries.library import ExecuteCommond,singleton
+from framework.libraries.library import singleton
+from keywords._BaseKeyword import _BaseKeyword
 import xml.etree.ElementTree as ET
 
 
 @singleton
-class Xml(object):
+class Xml(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
+        self.data = None
+
     def get_dict_from_xml(self,fileName):
         # deep is 2
-        with open(fileName,"r") as f:
-            data = f.read()
+        command = "cat %s"%fileName
+        data = self.execute_command(command)
+
         root = ET.fromstring(data)
         dict = {}
         for child in root:

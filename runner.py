@@ -48,6 +48,11 @@ if __name__ == "__main__":
     ConfigManagerInstance.config = {"Report":options.report}
     ConfigManagerInstance.config = {"Include":options.include}
     ConfigManagerInstance.config = {"Exclude":options.exclude}
+    ConfigManagerInstance.config = {"Host":options.Host}
+    ConfigManagerInstance.config = {"Port":options.Port}
+    ConfigManagerInstance.config = {"User":options.User}
+    ConfigManagerInstance.config = {"Password":options.Password}
+
     if options.Host:
         #remote mode
         host = options.Host
@@ -68,15 +73,16 @@ if __name__ == "__main__":
             raise Exception("user is mandatory")
         if not password:
             raise Exception("password is mandatory")
-        from framework.remote.remote import Remote
-        remote = Remote()
-        remote.open_connection(host,port=port, username=user, password=password)
-        remote.remoteRunning()
-        remote.close_connection()
-        _endTime = time.time()
-        print "Total cost time: %.3f s"%(_endTime-_startTime)
+        # from framework.remote.remote import Remote
+        # remote = Remote()
+        # remote.open_connection(host,port=port, username=user, password=password)
+        # remote.remoteRunning()
+        # remote.close_connection()
+
+    if False:
+        pass
     else:
-        redirection()
+        # redirection()
         print "current system is %s" % _system_
         CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
 
@@ -133,3 +139,5 @@ if __name__ == "__main__":
                 OutPut().stop()
         else:
             print "unsupport system %s"%_system_
+        _endTime = time.time()
+        print "Total cost time: %.3f s"%(_endTime-_startTime)

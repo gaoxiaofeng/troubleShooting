@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-from framework.libraries.library import ExecuteCommond,singleton
+from framework.libraries.library import singleton
 from framework.variable.variable import *
+from keywords._BaseKeyword import _BaseKeyword
 @singleton
-class IRPAgentMgr(object):
+class IRPAgentMgr(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.shell_script = ExecuteCommond().shell_script
-        self._IRPAgentMgr_Path = "/opt/oss/NSN-nbi3gc/bin/"
-        self._IRPAgentMgr = "nbi3gc_IRPAgentMgr.sh"
+        self._IRPAgentMgr_Path = "/opt/oss/NSN-nbi3gc/bin/nbi3gc_IRPAgentMgr.sh"
         self._proxy_deployed_status = {}
     def get_proxy_deploy_status(self,proxyid):
         if self._proxy_deployed_status == {}:
@@ -17,8 +16,8 @@ class IRPAgentMgr(object):
         else:
             return False
     def _list(self):
-
-        stdout = self.shell_script(self._IRPAgentMgr_Path,self._IRPAgentMgr,"l")
+        command = "sh %s l"%self._IRPAgentMgr_Path
+        stdout = self.execute_command(command)
         self._parse_list(stdout)
 
     def _parse_list(self,content):

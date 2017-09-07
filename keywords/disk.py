@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-from framework.libraries.library import ExecuteCommond,singleton
+from framework.libraries.library import singleton
 import re
+from keywords._BaseKeyword import _BaseKeyword
 @singleton
-class Disk(object):
+class Disk(_BaseKeyword):
     def __init__(self):
         super(self.__class__,self).__init__()
-        self.shell_command = ExecuteCommond().shell_command
         self._diskSize = {}
         self._diskInodes = {}
     def _listSize(self):
         command = "df -hP | awk '{print $5 $NF}'"
-        stdout = self.shell_command(command)
+        stdout = self.execute_command(command)
         pattern = re.compile(r"(^\d+)%(\S+)",re.I|re.M)
         _list = pattern.findall(stdout)
         __list = []
@@ -22,7 +22,7 @@ class Disk(object):
         self._diskSize = dict(__list)
     def _listInodes(self):
         command = "df -iP | awk '{print $5 $NF}'"
-        stdout = self.shell_command(command)
+        stdout = self.execute_command(command)
         pattern = re.compile(r"(^\d+)%(\S+)",re.I|re.M)
         _list = pattern.findall(stdout)
         __list = []
