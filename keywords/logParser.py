@@ -18,6 +18,8 @@ class  logParser(_BaseKeyword):
         self._parsed_class_content = {}
         self.temp =  os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"framework","temp")
 
+
+
     @property
     def log4j(self):
         return self._log4j
@@ -86,10 +88,13 @@ class  logParser(_BaseKeyword):
             if os.path.isdir(_path):
                 os.rmdir(_path)
 
-
+    def _initTempfolder(self):
+        if not os.path.isdir(self.temp):
+            os.mkdir(self.temp)
 
     def parseErrorLog(self):
         if self.remote:
+            self._initTempfolder()
             self._cleanTemp()
             self._downloadLog()
         self._listErrorLog(self.temp if self.remote else self.logPath)
