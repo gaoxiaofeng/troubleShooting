@@ -29,8 +29,8 @@ If you already have `Python <http://python.org>`_  with `PIP <https://pypi.pytho
     pip install troubleshooting-framework
 
 Alternatively you can get Robot Framework source code by downloading the source
-distribution from PyPI_ and extracting it, or by cloning the project repository
-from GitHub_. After that you can install the framework with::
+distribution from PyPI and extracting it, or by cloning the project repository
+from GitHub. After that you can install the framework with::
 
     python setup.py install
 
