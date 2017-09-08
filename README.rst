@@ -38,9 +38,11 @@ from GitHub. After that you can install the framework with::
 ********
 Example:
 ********
+
 pyts --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 
 pyts.bat --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
+
 *************************
 Development:
 *************************
