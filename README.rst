@@ -38,8 +38,9 @@ from GitHub. After that you can install the framework with::
 ********
 Example:
 ********
-python runner.py --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
+pyts --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 
+pyts.bat --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 *************************
 Development:
 *************************
@@ -47,7 +48,7 @@ Development:
 ========================
 new a <keywordName>.py file in keywords folder:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-from keywords._BaseKeyword import _BaseKeyword
+from troubleshooting.framework.template._BaseKeyword import _BaseKeyword
 
 class keywordName(_BaseKeyword):
     def __init__(self):
@@ -61,7 +62,7 @@ new a <testPointName>.py file in testpoint folder:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 from framework.variable.variable import STATUS,LEVEL
 
-from _BaseTestPoint import _BaseTestPoint
+from troubleshooting.framework.template._BaseTestPoint import _BaseTestPoint
 
 class testPointName(_BaseTestPoint):
     def __init__(self):
@@ -90,7 +91,7 @@ Note:   **self.IMPACT** , **self.RCA** and **self.FIXSTEP** is option, it's list
 ==============
 new a <caseName>.py file in case folder:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-from _BaseCase import _BaseCase
+from troubleshooting.framework.template._BaseCase import _BaseCase
 
 class caseName(_BaseCase):
     """
