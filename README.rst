@@ -11,7 +11,9 @@ TroubleShooting Framework is a generic open source test-analysis-fix automation 
 TroubleShooting Framework is operating system and application independent. The core framework is implemented using Python, supports Python 2.6 and Python 2.7, and run also on Jython,IronPython and Pypy. 
 TroubleShooting Framework project is hosted on GitHub where you can find source code, an issue tracker, and some further documentation. 
 
-`License Apache License 2.0 <http://www.apache.org/licenses/LICENSE-2.0.html>`_
+.. image:: https://img.shields.io/pypi/l/robotframework.svg
+   :target: http://www.apache.org/licenses/LICENSE-2.0.html
+   :alt: License
 
 
 
