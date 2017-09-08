@@ -1,0 +1,2 @@
+include src/bin/pyts*
+include LICENSE.txt README.rst MANIFEST.in
