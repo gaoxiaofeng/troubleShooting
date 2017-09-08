@@ -16,7 +16,7 @@ class  logParser(_BaseKeyword):
         self._classItem = []
         self._parsed_class_count = {}
         self._parsed_class_content = {}
-        self.temp =  os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"framework","temp")
+        self.temp =  os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),".temp")
 
 
 
