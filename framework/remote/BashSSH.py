@@ -68,7 +68,7 @@ class BaseSSH(object):
         else:
             raise Exception("fail to sftp put file(%s) due to this file Not Found. "%localFile)
     def get(self,remoteFile,localFile):
-        print "download remote file %s --> %s"%(remoteFile,localFile)
+        # print "download remote file %s --> %s"%(remoteFile,localFile)
         self._sftp_get(remoteFile,localFile)
     def close_connection(self):
         self._close()

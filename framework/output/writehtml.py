@@ -17,7 +17,7 @@ class html(object):
         data += HTML_HEAD
         data +="""
 <body bgcolor = "#E9EAEE">
-<h1 align="center">3GPP Corba FM Sniffer Report</h1>
+<h1 align="center">TroubleShooting Framework Report</h1>
 <p><i>%s</i></p>
 	<table width="100%%" border="2" class="bordered">
 		<thead>

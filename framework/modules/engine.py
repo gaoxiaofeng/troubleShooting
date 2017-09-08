@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from framework.library.library import singleton
+from framework.libraries.library import singleton
 from framework.log.logger import logger
 class EngineException(Exception):
     pass

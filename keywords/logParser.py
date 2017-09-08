@@ -61,7 +61,7 @@ class  logParser(_BaseKeyword):
 
     def _downloadLog(self):
         zipName = "log_%s.zip"%int(time.time())
-        command = "zip -r %s %s;"%(zipName,self.logPath)
+        command = "zip -r %s %s/oss_error*.log;"%(zipName,self.logPath)
         stdout = self.execute_command(command)
         localPath = os.path.join(self.temp,zipName)
         self.download(zipName,localPath)
@@ -73,10 +73,11 @@ class  logParser(_BaseKeyword):
         for _file in zfile.namelist():
             if _file.endswith("/"):
                 continue
-            __file = _file.replace(self.logPath[1:],"")
-            if "/" in __file:
-                continue
-            _filePath = os.path.join(path,__file)
+            if "/" in _file:
+                __fileName = _file.split("/")[-1]
+            else:
+                __fileName = _file
+            _filePath = os.path.join(path,__fileName)
             with open(_filePath,"w") as f:
                 f.write(zfile.read(_file))
 

@@ -31,8 +31,8 @@ if __name__ == "__main__":
     opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default=22)
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
     opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="arthur")
-    opt.add_option("--sync",dest="sync",help="yes/no,default is yes",default="yes")
-    opt.add_option("--console", dest="console", help="set console to on/off,default is on", default="on")
+    # opt.add_option("--sync",dest="sync",help="yes/no,default is yes",default="yes")
+    # opt.add_option("--console", dest="console", help="set console to on/off,default is on", default="on")
     opt.add_option("--name",dest="name",help="select the case to run by name")
     opt.add_option("--include",dest="include",help="""select cases to run by tag, Tags can also be combined together with  `AND` and `OR` .
     Example: --include=coolANDhot""")
@@ -42,8 +42,8 @@ if __name__ == "__main__":
 
     options, args = opt.parse_args()
 
-    ConfigManagerInstance.config = {"Console":True if options.console == "on" else False}
-    ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
+    # ConfigManagerInstance.config = {"Console":True if options.console == "on" else False}
+    # ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
     ConfigManagerInstance.config = {"Name":options.name}
     ConfigManagerInstance.config = {"Report":options.report}
     ConfigManagerInstance.config = {"Include":options.include}
@@ -79,9 +79,7 @@ if __name__ == "__main__":
         # remote.remoteRunning()
         # remote.close_connection()
 
-    if False:
-        pass
-    else:
+    if 1:
         # redirection()
         print "current system is %s" % _system_
         CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
@@ -100,7 +98,6 @@ if __name__ == "__main__":
             PD = ProgressDialog(caseNameListLength)
             PD.start()
             try:
-
                 for i,caseName in enumerate(caseNameList):
                     # i += 1
                     PD.set(i)
