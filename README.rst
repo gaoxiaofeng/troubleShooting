@@ -23,13 +23,8 @@ TroubleShooting Framework project is hosted on GitHub where you can find source 
 Installation
 *************
 
-<<<<<<< HEAD
+
 If you already have `Python <http://python.org>`_  with `PIP <https://pypi.python.org/pypi/pip/>`_ installed,you can simply run::
-=======
-If you already have `Python <http://python.org>`_
- with `PIP <https://pypi.python.org/pypi/pip/>`_
- installed,you can simply run::
->>>>>>> 6eff6ce464d77fba29efe27c645156d622b5589e
 
     pip install troubleshooting-framework
 
