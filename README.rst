@@ -11,29 +11,9 @@ TroubleShooting Framework is a generic open source test-analysis-fix automation 
 TroubleShooting Framework is operating system and application independent. The core framework is implemented using Python, supports Python 2.6 and Python 2.7, and run also on Jython,IronPython and Pypy. 
 TroubleShooting Framework project is hosted on GitHub where you can find source code, an issue tracker, and some further documentation. 
 
+`License Apache License 2.0 <http://www.apache.org/licenses/LICENSE-2.0.html>`_
 
 
-******
-Usage:
-******
-Usage: runner.py [options]
-
-Options:
-  --version            show program's version number and exit
-  -h, --help           show this help message and exit
-  --host=HOST          host for remote connection
-  --port=PORT          port for remote connection ,defaut port is 22
-  --user=USER          user for remote connection , default user is root
-  --password=PASSWORD  password for remote connection , default password is
-                       arthur
-  --name=NAME          select the case to run by name
-  --include=INCLUDE    select cases to run by tag, Tags can also be combined
-                       together with  `AND` and `OR` .     Example:
-                       --include=coolANDhot
-  --exclude=EXCLUDE    select cases not to run by tag. Tags can also be
-                       combined together with  `AND` and `OR` .     Example:
-                       --include=coolORhot
-  --report=REPORT      HTML report file, default is report.html
 
   
 ********
@@ -110,12 +90,39 @@ Note:   **self.passCondition** is mandatory, it's condition of case pass.
 Note:   **self.tags** is option, it's a string and fragment by space.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+******
+Usage:
+******
+Usage: runner.py [options]
+
+Options:
+  --version            show program's version number and exit
+  -h, --help           show this help message and exit
+  --host=HOST          host for remote connection
+  --port=PORT          port for remote connection ,defaut port is 22
+  --user=USER          user for remote connection , default user is root
+  --password=PASSWORD  password for remote connection , default password is
+                       arthur
+  --name=NAME          select the case to run by name
+  --include=INCLUDE    select cases to run by tag, Tags can also be combined
+                       together with  `AND` and `OR` .     Example:
+                       --include=coolANDhot
+  --exclude=EXCLUDE    select cases not to run by tag. Tags can also be
+                       combined together with  `AND` and `OR` .     Example:
+                       --include=coolORhot
+  --report=REPORT      HTML report file, default is report.html
 
 
-
-***********
-Contact me:
-***********
+*********************
+Support And Contact:
+*********************
 
 zeus.gao@foxmail.com
+
+*******
+License
+*******
+
+
+TroubleShooting Framework is open source software provided under the Apache License 2.0. TroubleShooting Framework documentation and other similar content use the Creative Commons Attribution 3.0 Unported license. Most libraries and tools in the ecosystem are also open source, but they may use different licenses.
 
