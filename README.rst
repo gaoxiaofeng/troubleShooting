@@ -50,9 +50,11 @@ Development:
 ========================
 new a <keywordName>.py file in keywords folder:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-class keywordName(object):
+from keywords._BaseKeyword import _BaseKeyword
+
+class keywordName(_BaseKeyword):
     def __init__(self):
-        super(self.__class__,self).__init__()
+        super(,self).__init__()
     def getExample(self):
         return "example"
 
