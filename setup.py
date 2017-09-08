@@ -15,7 +15,7 @@ if WINDOWS:
 with open(join(CURDIR,"src","troubleshooting","framework","version","version.py"),"rb") as f:
     exec(f.read())
 setup(
-    name="TroubleShooting Framework",
+    name="troubleshooting-framework",
     version=VERSION,
     packages=find_packages(where=SRC),
     scripts=SCRIPTS,
