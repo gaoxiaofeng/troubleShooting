@@ -19,7 +19,20 @@ TroubleShooting Framework project is hosted on GitHub where you can find source 
    :target: http://www.apache.org/licenses/LICENSE-2.0.html
    :alt: License
 
+*************
+Installation
+*************
 
+If you already have Python_ with `pip <http://pip-installer.org>`_ installed,
+you can simply run::
+
+    pip install troubleshooting-framework
+
+Alternatively you can get Robot Framework source code by downloading the source
+distribution from PyPI_ and extracting it, or by cloning the project repository
+from GitHub_. After that you can install the framework with::
+
+    python setup.py install
 
   
 ********

@@ -6,7 +6,7 @@ import os
 CURDIR = dirname(abspath(__file__))
 SRC = join(CURDIR,"src")
 sys.path.append(SRC)
-SCRIPTS = [join(SRC,"bin","pyts")]
+SCRIPTS = [join(SRC,"bin"),join(SRC,"bin","pyts")]
 WINDOWS = os.sep == '\\'
 if WINDOWS:
     SCRIPTS.append(join(SRC,"bin","pyts.bat"))
@@ -36,6 +36,6 @@ setup(
     description="This is an troubleShooting Framework Package",
     license="Apache License 2.0",
     keywords="troubleshooting gaoxiaofeng",
-    url="",  # project home page, if any
+    url="https://github.com/gaoxiaofeng/troubleShooting",  # project home page, if any
     # could also include long_description, download_url, classifiers, etc.
 )
