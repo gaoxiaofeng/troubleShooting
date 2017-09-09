@@ -54,6 +54,7 @@ def run_cli(*args):
     ConfigManagerInstance.config = {"Port":options.Port}
     ConfigManagerInstance.config = {"User":options.User}
     ConfigManagerInstance.config = {"Password":options.Password}
+    ConfigManagerInstance.config = {"SYSTEM":_system_}
 
     if options.Host:
         #remote mode

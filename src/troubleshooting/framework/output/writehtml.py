@@ -155,25 +155,25 @@ class html(object):
 	</table>
 """
 
-        with open("framework-trace.log", "r") as f:
-            _lines = f.readlines()
-            lines = []
-            for line in _lines:
-                if "^^^^" in line:
-                    continue
-                if line.startswith("|"):
-                    line = line[1:]
-                if "|logger" in line:
-                    line = line.replace("|logger","")
-                lines.append(line)
+        # with open("framework-trace.log", "r") as f:
+        #     _lines = f.readlines()
+        #     lines = []
+        #     for line in _lines:
+        #         if "^^^^" in line:
+        #             continue
+        #         if line.startswith("|"):
+        #             line = line[1:]
+        #         if "|logger" in line:
+        #             line = line.replace("|logger","")
+        #         lines.append(line)
 
 
-        content = "".join(lines)
-        content = content.replace("\n", "</br>")
-        content = content.replace("|","&nbsp;&nbsp;&nbsp;&nbsp;")
-        HTML_LOG = '<div style="display:none" name="log" style="font-size:12px"><i>' + content + '</i></div>'
+        # content = "".join(lines)
+        # content = content.replace("\n", "</br>")
+        # content = content.replace("|","&nbsp;&nbsp;&nbsp;&nbsp;")
+        # HTML_LOG = '<div style="display:none" name="log" style="font-size:12px"><i>' + content + '</i></div>'
         data += BUTTON
-        data += HTML_LOG
+        # data += HTML_LOG
         data += BODY_AFTER
         data += HTML_AFTER
         with open(ConfigManagerInstance.config["Report"],"w") as f:

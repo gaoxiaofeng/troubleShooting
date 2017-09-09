@@ -146,11 +146,13 @@ class CaseManager(BaseManager):
         caseRunnerEntry = "%s.%s"%(case,"run")
         caseRunner = self.get_keyword(caseRunnerEntry)
         while 1:
-            print "-" * 40
-            sys.stdout.write(r"%25s"%case)
+            if ConfigManagerInstance.config["SYSTEM"] == SYSTEM.WINDOWS:
+                print "-" * 40
+                sys.stdout.write(r"%25s"%case)
             result,behavior = caseRunner(RERUN)
-            sys.stdout.write(r"%15s"%("Done"+os.linesep))
-            print "-" * 40
+            if ConfigManagerInstance.config["SYSTEM"] == SYSTEM.WINDOWS:
+                sys.stdout.write(r"%15s"%("Done"+os.linesep))
+                print "-" * 40
             if behavior == BEHAVIOR.CONTINUE:
                 break
             elif behavior == BEHAVIOR.RUNAGAIN:

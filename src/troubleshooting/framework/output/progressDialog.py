@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from troubleshooting.framework.output.output import OutPut
-from troubleshooting.framework.modules.configuration import  ConfigManagerInstance
-from threading import  Thread
+from threading import Thread
 from troubleshooting.framework.variable.variable import *
 class ProgressDialog(Thread):
     def __init__(self,total):
@@ -10,7 +9,7 @@ class ProgressDialog(Thread):
         self._total = total
         self._done = 0
         self._ratio = 0
-        self._RUN = ConfigManagerInstance.config["Console"]
+        self._RUN = True
         self.printf = OutPut().printf
     def set(self):
         return self._done
@@ -25,14 +24,12 @@ class ProgressDialog(Thread):
             done = "#"*int(self._ratio*PROGREES_LENHTH)
             undone = " " *(PROGREES_LENHTH - int(self._ratio*PROGREES_LENHTH))
             content = "\rProgress:[%s%s]  %s/%s"%(done,undone,self._done,self._total)
-            # sys.stdout.write("\rProgress:[%s%s]  %s/%s"%(done,undone,self._done,self._total))
-            # sys.stdout.flush()
             self.printf(content)
             if self._done == self._total:
                 break
             time.sleep(0.01)
         if self._RUN:
-            # sys.stdout.write( "\tSuccess.\n")
-            self.printf("\tDone.\n")
+            self.printf(content)
+            self.printf("\tDone!\n")
     def stop(self):
         self._RUN = False

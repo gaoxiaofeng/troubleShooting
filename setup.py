@@ -47,7 +47,7 @@ setup(
 
     # Project uses reStructuredText, so ensure that the docutils get
     # installed or upgraded on the target machine
-    install_requires=[''],
+    install_requires=['paramiko'],
     package_dir  = {'': 'src'},
     package_data={
         # If any package contains *.txt or *.rst files, include them:
