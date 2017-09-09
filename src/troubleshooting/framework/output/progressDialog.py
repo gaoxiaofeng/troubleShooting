@@ -29,6 +29,9 @@ class ProgressDialog(Thread):
                 break
             time.sleep(0.01)
         if self._RUN:
+            done = "#"*int(self._ratio*PROGREES_LENHTH)
+            undone = " " *(PROGREES_LENHTH - int(self._ratio*PROGREES_LENHTH))
+            content = "\rProgress:[%s%s]  %s/%s"%(done,undone,self._done,self._total)
             self.printf(content)
             self.printf("\tDone!\n")
     def stop(self):
