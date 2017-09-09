@@ -1,13 +1,3 @@
-
-NBI3GC_SIMULATOR_PATH = "/opt/oss/NSN-nbi3gc/simulator"
-NBI3GC_BIN_PATH = "/opt/oss/NSN-nbi3gc/bin/smx-clt"
-NBI3GC_MF_JACORB_PROPERTIES = "/opt/oss/NSN-nbi3gc/smx/common-conf/orb/jacorb.properties"
-NBI3GC_PROXY1_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-1/jacorb.properties"
-NBI3GC_PROXY2_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-2/jacorb.properties"
-NBI3GC_PROXY3_JACORB_PROPERTIES = "/etc/opt/oss/global/NSN-nbi3gc/conf/proxy-3/jacorb.properties"
-NBI3GCOM_PROPERTIES = "/opt/oss/Nokia-nbi3gcom/etc/jacorb.properties"
-NBI3GC_SIMULATOR_PROPERTIES = "/opt/oss/NSN-nbi3gc/simulator/etc/jacorb.properties"
-
 NOEXIST = "NOEXIST"
 
 LINEMODE = 1

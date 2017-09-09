@@ -37,7 +37,7 @@ class welcome(object):
                 |  | |                ||    /
                 |  | |                ||  |
                 |  | |                ||  |
-                |  | |                ||  |     3GPP Corba FM Sniffer
+                |  | |                ||  |     TroubleShooting Framework
                (__/_/                ((__/"""
         self.printf(graph)
     def loadCasePrint(self,caseNameList):

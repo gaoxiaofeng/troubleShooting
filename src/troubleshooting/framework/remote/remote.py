@@ -148,7 +148,7 @@ class Remote(object):
 
 if __name__ == "__main__":
     r = Remote()
-    r.open_connection("10.91.65.149",username=r"root",password=r"arthur")
+    r.open_connection("192.168.1.1",username=r"gaoxiaofeng",password=r"whoisyourdaddy")
     r.remoteRunning()
     r.close_connection()
 

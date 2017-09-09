@@ -39,7 +39,7 @@ class TagPattern(object):
 
 
 if __name__ == "__main__":
-    tags = "NotRun  Nbi3gc Nbi3gcom"
-    pattern = "Nbi3gcORbi3gcom"
+    tags = "example"
+    pattern = "exORexample"
     match = TagPattern(pattern).match(tags)
     print match
