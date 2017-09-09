@@ -28,20 +28,13 @@ If you already have `Python <http://python.org>`_  with `PIP <https://pypi.pytho
 
     pip install troubleshooting-framework
 
-Alternatively you can get Robot Framework source code by downloading the source
+Alternatively you can get TroubleShooting Framework source code by downloading the source
 distribution from PyPI and extracting it, or by cloning the project repository
 from GitHub. After that you can install the framework with::
 
     python setup.py install
 
   
-********
-Example:
-********
-
-pyts --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
-
-pyts.bat --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 
 *************************
 Development:
@@ -115,7 +108,6 @@ Note:   **self.tags** is option, it's a string and fragment by space.
 ******
 Usage:
 ******
-Usage: runner.py [options]
 
 Options:
   --version            show program's version number and exit
@@ -133,6 +125,19 @@ Options:
                        combined together with  `AND` and `OR` .     Example:
                        --include=coolORhot
   --report=REPORT      HTML report file, default is report.html
+
+
+********
+Example:
+********
+
+you can simple run::
+
+    pyts --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
+
+if you are working on Windows, you can use pyts.bat::
+
+    pyts.bat --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 
 
 *********************
