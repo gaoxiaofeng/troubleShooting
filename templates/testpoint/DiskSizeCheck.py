@@ -14,7 +14,7 @@ class DiskSizeCheck(_BaseTestPoint):
         for key in diskSize:
             if diskSize[key] == "100":
                 self.status = STATUS.FAIL
-                self.IMPACT.append("no enough disk space in nbi3gc node")
+                self.IMPACT.append("no enough disk space in this node")
                 self.RCA.append("%s is full"%key)
                 self.FIXSTEP.append("clean for %s"%key)
             else:

@@ -14,7 +14,7 @@ class DiskInodesCheck(_BaseTestPoint):
         for key in diskInodes:
             if diskInodes[key] == "100":
                 self.status = STATUS.FAIL
-                self.IMPACT.append("no enough disk inodes in nbi3gc node")
+                self.IMPACT.append("no enough disk inodes in this node")
                 self.RCA.append("%s is full"%key)
                 self.FIXSTEP.append("clean for %s"%key)
             else:

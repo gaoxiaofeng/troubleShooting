@@ -1,7 +1,7 @@
 from troubleshooting.framework.template._BaseCase import _BaseCase
 class DiskCheck(_BaseCase):
     """
-    To Check NBI3GC node disk usage.
+    To Check linux disk usage.
     """
     def __init__(self):
         super(DiskCheck,self).__init__()

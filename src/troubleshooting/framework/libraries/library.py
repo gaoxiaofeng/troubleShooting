@@ -166,7 +166,5 @@ def  getFileMd5(filename):
 
 
 if __name__ == "__main__":
-    command = ExecuteCommond()
-    stdout = command.jar_command("/opt/oss/NSN-nbi3gc/simulator","AlarmIRPSim.jar","-o=get_alarm_list")
-    print stdout
+    pass
 
