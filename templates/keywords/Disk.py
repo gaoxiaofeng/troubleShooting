@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from troubleshooting.framework.libraries.library import singleton
 import re
-from troubleshooting.framework.template._BaseKeyword import _BaseKeyword
+from troubleshooting.framework.template.Keyword import *
 @singleton
-class Disk(_BaseKeyword):
+class Disk(Keyword):
     def __init__(self):
         super(self.__class__,self).__init__()
         self._diskSize = {}

@@ -87,7 +87,7 @@ class html(object):
                     """
             for testpoint in TESTPOINT:
                 testpointStatus = TESTPOINT[testpoint]["STATUS"]
-                testpointStatusHtml = '<font color="green"><b><i>%s</i></b></font>' % STATUS.PASS.lower() if testpointStatus else '<font color="red"><b><i>%s</i></b></font>' % STATUS.FAIL.lower()
+                testpointStatusHtml = '<font color="green"><b><i>%s</i></b></font>' % STATUS.PASS.value.lower() if testpointStatus else '<font color="red"><b><i>%s</i></b></font>' % STATUS.FAIL.value.lower()
                 testpointImpact = TESTPOINT[testpoint]["IMPACT"]
                 testpointImpact = list2stringAndFormat(testpointImpact)
                 if not testpointImpact:

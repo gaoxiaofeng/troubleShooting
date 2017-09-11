@@ -1,5 +1,5 @@
-from troubleshooting.framework.template._BaseCase import _BaseCase
-class DiskCheck(_BaseCase):
+from troubleshooting.framework.template.Case import Case
+class DiskCheck(Case):
     """
     To Check linux disk usage.
     """

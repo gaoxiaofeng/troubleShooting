@@ -95,7 +95,7 @@ def run_cli(*args):
         OutPut().start()
         caseNameList = CaseManagerInstance.get_keyword()
         caseNameListLength = len(caseNameList)
-        if _system_ == SYSTEM.LINUX:
+        if _system_ == SYSTEM.LINUX.value:
             welcome()
             welcome().loadCasePrint(caseNameList)
             PD = ProgressDialog(caseNameListLength)
@@ -125,7 +125,7 @@ def run_cli(*args):
                     if PD.is_alive() is False:
                         break
                 OutPut().stop()
-        elif _system_ == SYSTEM.WINDOWS:
+        elif _system_ == SYSTEM.WINDOWS.value:
             try:
 
                 for caseName in caseNameList:

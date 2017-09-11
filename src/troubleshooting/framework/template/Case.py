@@ -5,13 +5,17 @@ from troubleshooting.framework.variable.variable import *
 from troubleshooting.framework.libraries.library import parseRule,RemoveDuplicates
 from troubleshooting.framework.output.output import OutPutQueue
 from troubleshooting.framework.exception.exception import CaseManagerException
-
-class _BaseCase(object):
+try:
+    #import project config.variable
+    from config.variable import *
+except:
+    print "WARN: failed to import config.variable"
+class Case(object):
     """
-    this is basecase class.
+    this is case template class.
     """
     def __init__(self):
-        super(_BaseCase,self).__init__()
+        super(Case,self).__init__()
         self.passCondition = None
         self.logger = logger()
         self.status = STATUS.NOTRUN
@@ -151,4 +155,4 @@ class _BaseCase(object):
 
 
 if __name__ == "__main__":
-    obj = _BaseCase()
+    obj = Case()

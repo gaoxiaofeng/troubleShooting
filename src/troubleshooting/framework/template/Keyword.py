@@ -1,9 +1,14 @@
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
 from troubleshooting.framework.remote.client import client
 from troubleshooting.framework.libraries.library import ExecuteCommond
-class _BaseKeyword(object):
+try:
+    #import project config.variable
+    from config.variable import *
+except:
+    print "WARN: failed to import config.variable"
+class Keyword(object):
     def __init__(self):
-        super(_BaseKeyword,self).__init__()
+        super(Keyword,self).__init__()
         self.remote = True if ConfigManagerInstance.config["Host"] else False
         self.host = ConfigManagerInstance.config["Host"]
         self.port = ConfigManagerInstance.config["Port"]

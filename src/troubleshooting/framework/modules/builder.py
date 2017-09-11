@@ -58,8 +58,7 @@ class BuilderFactory(object):
     def __init__(self):
         super(BuilderFactory,self).__init__()
     def getBuilder(self,name):
-
-        search_dir = join(RUN_FOLDER,name)
+        search_dir = join(RUN_FOLDER,name.value)
         if name == LAYER.KeyWords:
             return KeywordBuilder(search_dir)
         elif name ==  LAYER.TestPoint:

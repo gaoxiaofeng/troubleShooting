@@ -5,10 +5,15 @@ from troubleshooting.framework.output.output import OutPutQueue
 from troubleshooting.framework.libraries.library import parseRule,RemoveDuplicates
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.log.internalLog import internalLog
+try:
+    #import project config.variable
+    from config.variable import *
+except:
+    print "WARN: failed to import config.variable"
 import sys
-class _BaseTestPoint(object):
+class TestPoint(object):
     def __init__(self):
-        super(_BaseTestPoint,self).__init__()
+        super(TestPoint,self).__init__()
         self.keywordManager = ManagerFactory().getManager(LAYER.KeyWords)
         self.logger = logger()
         self.status = STATUS.NOTRUN
