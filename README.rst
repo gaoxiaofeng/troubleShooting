@@ -39,10 +39,19 @@ from GitHub. After that you can install the framework with::
 *************************
 Development:
 *************************
-1.Create keyword
-========================
-new a <keywordName>.py file in keywords folder:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Create a project
+===================
+
+you can simply run::
+
+    pytsmgr --operation=startProject --project=<MyProject> --directory=<ProjectDirectory>
+
+
+2. Add a keyword
+==================
+new a <keywordName>.py file in <ProjectDirectory>/<MyProject>/keywords folder:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 from troubleshooting.framework.template._BaseKeyword import _BaseKeyword
 
 class keywordName(_BaseKeyword):
@@ -51,10 +60,11 @@ class keywordName(_BaseKeyword):
     def getExample(self):
         return "example"
 
-2.Create testpoint 
+3. Add a testpoint 
 ==================
-new a <testPointName>.py file in testpoint folder:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+new a <testPointName>.py file in <ProjectDirectory>/<MyProject>/testpoint folder:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 from framework.variable.variable import STATUS,LEVEL
 
 from troubleshooting.framework.template._BaseTestPoint import _BaseTestPoint
@@ -82,10 +92,11 @@ Note:   **self.level** is option, it's enum type , value is **LEVLE.CRITICAL** o
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Note:   **self.IMPACT** , **self.RCA** and **self.FIXSTEP** is option, it's list type.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-3. Create case
+4. Add a case
 ==============
-new a <caseName>.py file in case folder:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+new a <caseName>.py file in <ProjectDirectory>/<MyProject>/case folder:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 from troubleshooting.framework.template._BaseCase import _BaseCase
 
 class caseName(_BaseCase):
@@ -108,6 +119,10 @@ Note:   **self.tags** is option, it's a string and fragment by space.
 ******
 Usage:
 ******
+
+first,switch folder to  <ProjectDirectory>/<MyProject>/ , you can simple run::
+==============================================================================
+pyts --host=<IP> 
 
 Options:
   --version            show program's version number and exit
@@ -152,4 +167,4 @@ License
 
 
 TroubleShooting Framework is open source software provided under the Apache License 2.0. TroubleShooting Framework documentation and other similar content use the Creative Commons Attribution 3.0 Unported license. Most libraries and tools in the ecosystem are also open source, but they may use different licenses.
-
+^
