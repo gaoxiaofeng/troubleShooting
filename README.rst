@@ -121,9 +121,8 @@ Usage:
 ******
 
 Switch folder to  <ProjectDirectory>/<MyProject>/ , you can simple run::
-==============================================================================
 
-    pyts --host=<IP> 
+    pyts --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 
 Options:
   --version            show program's version number and exit
@@ -142,18 +141,6 @@ Options:
                        --include=coolORhot
   --report=REPORT      HTML report file, default is report.html
 
-
-********
-Example:
-********
-
-you can simple run::
-
-    pyts --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
-
-if you are working on Windows, you can use pyts.bat::
-
-    pyts.bat --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
 
 
 *********************
