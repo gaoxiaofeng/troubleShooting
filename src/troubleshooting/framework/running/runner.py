@@ -24,7 +24,6 @@ signal.signal(signal.SIGINT, onsignal_int)
 
 #Logger = logger()
 def run_cli(*args):
-
     _startTime = time.time()
     _system_ =  platform.system().lower()
     opt = OptionParser(version=VERSION)

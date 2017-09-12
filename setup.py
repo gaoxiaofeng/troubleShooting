@@ -9,10 +9,11 @@ from distutils.command.install_scripts import install_scripts
 CURDIR = dirname(abspath(__file__))
 SRC = join(CURDIR,"src")
 sys.path.append(SRC)
-SCRIPTS = [join(SRC,"bin","pyts")]
+SCRIPTS = [join(SRC,"bin",pyfile) for pyfile in ("pyts","pytsmgr")]
 WINDOWS = os.sep == '\\'
 if WINDOWS:
     SCRIPTS.append(join(SRC,"bin","pyts.bat"))
+    SCRIPTS.append(join(SRC,"bin","pytsmgr.bat"))
 class custom_install_scripts(install_scripts):
 
     def run(self):
@@ -21,10 +22,10 @@ class custom_install_scripts(install_scripts):
             self._replace_interpreter_in_bat_files()
 
     def _replace_interpreter_in_bat_files(self):
-        print "replacing interpreter in robot.bat and rebot.bat."
+        print "replacing interpreter in pyts.bat and pytsmgr.bat"
         interpreter = list2cmdline([sys.executable])
         for path in self.get_outputs():
-            if path.endswith('pyts.bat'):
+            if path.endswith('pyts.bat') or path.endswith('ptysmgr.bat'):
                 with open(path, 'r') as input:
                     replaced = input.read().replace('python', interpreter)
                 with open(path, 'w') as output:
