@@ -120,9 +120,10 @@ Note:   **self.tags** is option, it's a string and fragment by space.
 Usage:
 ******
 
-first,switch folder to  <ProjectDirectory>/<MyProject>/ , you can simple run::
+Switch folder to  <ProjectDirectory>/<MyProject>/ , you can simple run::
 ==============================================================================
-pyts --host=<IP> 
+
+    pyts --host=<IP> 
 
 Options:
   --version            show program's version number and exit
