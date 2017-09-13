@@ -9,7 +9,6 @@ DetailMode = 2
 PROGREES_LENHTH = 50
 
 try:
-    raise Exception()
     from enum import Enum,unique
     @unique
     class LEVEL(Enum):

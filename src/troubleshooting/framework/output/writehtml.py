@@ -94,6 +94,7 @@ class html(object):
                     testpointImpact = '<font color="#d0d0d0">NA</font>'
                 testpointImpactHtml = testpointImpact.replace("\n","</br>")
                 testpointLevel =  TESTPOINT[testpoint]["LEVEL"]
+                testpointLevelHtml = testpointLevel.value
                 testpointDescribe = TESTPOINT[testpoint]["DESCRIBE"]
                 testpointRCA = TESTPOINT[testpoint]["RCA"]
                 testpointRCA = list2stringAndFormat(testpointRCA)
@@ -142,8 +143,7 @@ class html(object):
                             </td>
                     </tr>
 
-"""%(testpointHtml,testpointStatusHtml,testpointLevel,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml,testpointLogHtml)
-
+"""%(testpointHtml,testpointStatusHtml,testpointLevelHtml,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml,testpointLogHtml)
                 data += attribute
             data += """
                 </table>
