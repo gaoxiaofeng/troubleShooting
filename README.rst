@@ -72,6 +72,7 @@ from troubleshooting.framework.template._BaseTestPoint import _BaseTestPoint
 class testPointName(_BaseTestPoint):
     def __init__(self):
         super(self.__class__,self).__init__()
+		
         self.level = LEVLE.CRITICAL
 
     def _checkpoint(self):
