@@ -272,7 +272,7 @@ for(var i=0;i<nologs.length;i++)
 HTML_HEAD = """
 
 <head>
-<title>3GPP Corba FM Sniffer Report</title>
+<title>TroubleShooting Framework Report</title>
 <style>
 table{ border:1;border-collapse:collapse;}
 td{ font:normal 12px/17px Arial;padding:2px;}
