@@ -30,7 +30,7 @@ class ExceptionHandler(Handler):
         super(ExceptionHandler,self).__init__()
     def handle(self,content):
         if "Exception" in content:
-            content = COLOUR.Red + content + COLOUR.End
+            content = COLOUR.Red.value + content + COLOUR.End.value
         super(ExceptionHandler,self).handle(content)
 
 
@@ -45,7 +45,7 @@ class ReservedWordHandler(Handler):
     def handle(self,content):
         for reservedWord in self.reservedWordList:
             if reservedWord in content:
-                content = content.replace(reservedWord, COLOUR.Blue + reservedWord + COLOUR.End)
+                content = content.replace(reservedWord, COLOUR.Blue.value + reservedWord + COLOUR.End.value)
         super(ReservedWordHandler, self).handle(content)
 
 
@@ -59,7 +59,7 @@ class HighLightHandler(Handler):
         if match_highLight:
             highLight = match_highLight.group(1)
             highLight_strip = highLight.strip("{}")
-            content = content.replace(highLight, COLOUR.HighLight + highLight_strip + COLOUR.End)
+            content = content.replace(highLight, COLOUR.HighLight.value + highLight_strip + COLOUR.End.value)
         super(HighLightHandler, self).handle(content)
 
 class Client(object):

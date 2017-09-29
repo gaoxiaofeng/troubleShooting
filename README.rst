@@ -133,7 +133,7 @@ Options:
   --user=USER          user for remote connection , default user is root
   --password=PASSWORD  password for remote connection , default password is
                        arthur
-  --name=NAME          select the case to run by name
+  --case=CASE          select the case to run by case name
   --include=INCLUDE    select cases to run by tag, Tags can also be combined
                        together with  `AND` and `OR` .     Example:
                        --include=coolANDhot

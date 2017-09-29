@@ -17,7 +17,7 @@ Options:
                        arthur
   --sync=SYNC          yes/no,default is yes
   --console=CONSOLE    set console to on/off,default is on
-  --name=NAME          select the case to run by name
+  --case=CASE          select the case to run by case name
   --include=INCLUDE    select cases to run by tag, Tags can also be combined
                        together with  `AND` and `OR` .     Example:
                        --include=coolANDhot

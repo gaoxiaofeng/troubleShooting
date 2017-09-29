@@ -70,9 +70,9 @@ class report(object):
         self.printf("*"*_width*3 + "****")
         left = " "*((_width - 6)/2)
         right = " "*(_width - 6 - (_width - 6)/2)
-        graph = "*" + left + COLOUR.Blue + "Tested" + COLOUR.End + right
-        graph += "*" + left + COLOUR.Blue + "Passed" + COLOUR.End + right
-        graph += "*" + left + COLOUR.Blue + "Failed" + COLOUR.End + right + "*"
+        graph = "*" + left + COLOUR.Blue.value + "Tested" + COLOUR.End.value + right
+        graph += "*" + left + COLOUR.Blue.value + "Passed" + COLOUR.End.value + right
+        graph += "*" + left + COLOUR.Blue.value + "Failed" + COLOUR.End.value + right + "*"
         self.printf(graph)
         # self.printf("*%sTested%s*%sPassed%s*%sFailed%s*"%(left,right,left,right,left,right))
         self.printf("*" * _width*3 + "****")
@@ -80,16 +80,16 @@ class report(object):
         Tested = str(len(successReportList)+len(failureReportList))
         Tested = " "*((_width - len(Tested))/2) + Tested + " "*(_width - len(Tested)-(_width - len(Tested))/2)
         Passed = str(len(successReportList))
-        Passed = " " * ((_width - len(Passed)) / 2 )+ COLOUR.Green + Passed + COLOUR.End + " " * (_width - len(Passed) - (_width - len(Passed)) / 2)
+        Passed = " " * ((_width - len(Passed)) / 2 )+ COLOUR.Green.value + Passed + COLOUR.End.value + " " * (_width - len(Passed) - (_width - len(Passed)) / 2)
         Failed = str(len(failureReportList))
-        Failed = " " * ((_width - len(Failed)) / 2) + COLOUR.Red + Failed + COLOUR.End + " " * (_width - len(Failed) - (_width - len(Failed)) / 2)
+        Failed = " " * ((_width - len(Failed)) / 2) + COLOUR.Red.value + Failed + COLOUR.End.value + " " * (_width - len(Failed) - (_width - len(Failed)) / 2)
 
         self.printf("*%s*%s*%s*"%(Tested,Passed,Failed))
         self.printf("*" * _width * 3 + "****")
         _title = "Case Deail List"
         self.printf("*" + " "*((_width*3 +2 - len(_title))/2) + _title + " "*((_width*3 +2) - len(_title) - ((_width*3 +2 - len(_title))/2)) + "*")
         _title = "The item containing `+` can be expanded."
-        self.printf("*" + COLOUR.Yellow + _title + COLOUR.End + " "* +(_width*3+2-len(_title)) + "*")
+        self.printf("*" + COLOUR.Yellow.value + _title + COLOUR.End.value + " "* +(_width*3+2-len(_title)) + "*")
         self.printf("*" * _width * 3 + "****")
         ShortCut = "ShortCut"
         ShortCut = " " * ((_width - len(ShortCut)) / 2) + ShortCut + " " * (_width - len(ShortCut) - (_width - len(ShortCut)) / 2)
@@ -171,8 +171,8 @@ class report(object):
         self.printf("*" * (self._width * 3 + 4))
     def writeReport(self):
         html().write()
-        graph = """The Report was saved as ./%s"""%ConfigManagerInstance.config["Report"]
-        self.printf(graph)
+        # graph = """The Report was saved as ./%s"""%ConfigManagerInstance.config["Report"]
+        # self.printf(graph)
 
 
 

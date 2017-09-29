@@ -6,24 +6,32 @@ from troubleshooting.framework.output.output import OutPut
 from troubleshooting.framework.output.welcome import welcome
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.version.version import VERSION
-import time
-import signal
 from optparse import OptionParser
 from troubleshooting.framework.output.progressDialog import  ProgressDialog
 from troubleshooting.framework.output.report import report
 import traceback
 from troubleshooting.framework.output.Print import *
+from troubleshooting.framework.output.browser import Browser
 import platform
 import sys,os
+import time
+import signal
 sys.path.append(os.getcwd())
 def onsignal_int(a,b):
-    OutPut().stop()
+    global PD
+    try:
+        PD.stop()
+    except:
+        pass
+    finally:
+        OutPut().stop()
     print '\nExit'
     sys.exit(0)
 signal.signal(signal.SIGINT, onsignal_int)
 
 #Logger = logger()
 def run_cli(*args):
+    global PD
     _startTime = time.time()
     _system_ =  platform.system().lower()
     opt = OptionParser(version=VERSION)
@@ -34,7 +42,7 @@ def run_cli(*args):
     opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="arthur")
     # opt.add_option("--sync",dest="sync",help="yes/no,default is yes",default="yes")
     # opt.add_option("--console", dest="console", help="set console to on/off,default is on", default="on")
-    opt.add_option("--name",dest="name",help="select the case to run by name")
+    opt.add_option("--case",dest="case",help="select the case to run by case name")
     opt.add_option("--include",dest="include",help="""select cases to run by tag, Tags can also be combined together with  `AND` and `OR` .
     Example: --include=coolANDhot""")
     opt.add_option("--exclude",dest="exclude",help="""select cases not to run by tag. Tags can also be combined together with  `AND` and `OR` .
@@ -45,7 +53,7 @@ def run_cli(*args):
 
     # ConfigManagerInstance.config = {"Console":True if options.console == "on" else False}
     # ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
-    ConfigManagerInstance.config = {"Name":options.name}
+    ConfigManagerInstance.config = {"Case":options.case}
     ConfigManagerInstance.config = {"Report":options.report}
     ConfigManagerInstance.config = {"Include":options.include}
     ConfigManagerInstance.config = {"Exclude":options.exclude}
@@ -83,7 +91,7 @@ def run_cli(*args):
 
     if 1:
         # redirection()
-        print "current system is %s" % _system_
+        # print "current system is %s" % _system_
         CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
 
         builderfactory = BuilderFactory()
@@ -140,5 +148,12 @@ def run_cli(*args):
             print "unsupport system %s"%_system_
         _endTime = time.time()
         print "Total cost time: %.3f s"%(_endTime-_startTime)
+        if ConfigManagerInstance.config["SYSTEM"] == SYSTEM.WINDOWS.value:
+            try:
+                Browser().openLocalReport(ConfigManagerInstance.config["Report"])
+            except:
+                print "Report save as %s"%ConfigManagerInstance.config["Report"]
+        else:
+            print "Report save as %s" % ConfigManagerInstance.config["Report"]
 if __name__ == "__main__":
     run_cli(sys.argv[1:])

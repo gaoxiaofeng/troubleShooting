@@ -127,8 +127,8 @@ class CaseManager(BaseManager):
         self.__case_record = {}
     def run_case(self,case):
         RERUN = False
-        if ConfigManagerInstance.config["Name"]:
-            if ConfigManagerInstance.config["Name"] != case:
+        if ConfigManagerInstance.config["Case"]:
+            if ConfigManagerInstance.config["Case"] != case:
                 return  BEHAVIOR.CONTINUE
         if ConfigManagerInstance.config["Include"]:
             #process include tags

@@ -178,3 +178,4 @@ class html(object):
         data += HTML_AFTER
         with open(ConfigManagerInstance.config["Report"],"w") as f:
             f.write(data)
+
