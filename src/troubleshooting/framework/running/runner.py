@@ -12,6 +12,7 @@ from troubleshooting.framework.output.report import report
 import traceback
 from troubleshooting.framework.output.Print import *
 from troubleshooting.framework.output.browser import Browser
+from troubleshooting.framework.remote.client import client
 import platform
 import sys,os
 import time
@@ -83,6 +84,11 @@ def run_cli(*args):
             raise Exception("user is mandatory")
         if not password:
             raise Exception("password is mandatory")
+
+        if not client().test_connection(host,port,user,password):
+            print "failed to connect remote machine!"
+            sys.exit(1)
+
         # from framework.remote.remote import Remote
         # remote = Remote()
         # remote.open_connection(host,port=port, username=user, password=password)
@@ -134,7 +140,8 @@ def run_cli(*args):
                 OutPut().stop()
         elif _system_ == SYSTEM.WINDOWS.value:
             try:
-
+                welcome()
+                welcome().loadCasePrint(caseNameList)
                 for caseName in caseNameList:
                     behavior =  CaseManagerInstance.run_case(caseName)
                     if behavior == BEHAVIOR.EXIT:

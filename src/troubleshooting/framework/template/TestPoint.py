@@ -5,13 +5,14 @@ from troubleshooting.framework.output.output import OutPutQueue
 from troubleshooting.framework.libraries.library import parseRule,RemoveDuplicates
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.log.internalLog import internalLog
+from threading import Thread
 try:
     #import project config.variable
     from config.variable import *
 except:
     print "WARN: failed to import config.variable"
 import sys
-class TestPoint(object):
+class TestPoint(Thread):
     def __init__(self):
         super(TestPoint,self).__init__()
         self.keywordManager = ManagerFactory().getManager(LAYER.KeyWords)
@@ -25,6 +26,8 @@ class TestPoint(object):
         self.level = LEVEL.NOCRITICAL
         self._load_keyword()
         self.log = internalLog()
+        self.timeout = "30s"
+        self.internalLog = ""
     def _redirect(self):
         self._stdout = sys.stdout
         sys.stdout = self.log
@@ -44,6 +47,11 @@ class TestPoint(object):
         keyword = self.keywordManager.get_keyword(keywordName)
         return  keyword
 
+    def get_attribute(self,attribute):
+        if  self.__dict__.has_key(attribute):
+            return self.__dict__[attribute]
+        else:
+            raise Exception("%s has not attribute %s"%(self.__class__.__name__,attribute))
     def _printf(self,message):
         if self._ToPrint:
             OutPutQueue.put(message)
@@ -71,9 +79,15 @@ class TestPoint(object):
 
         self.RCA = RemoveDuplicates(self.RCA)
         self.IMPACT = RemoveDuplicates(self.IMPACT)
-        internalLog = self.log.getContent()
-        return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.__doc__,internalLog
+        self.internalLog = self.log.getContent()
+        # return self.passed,self.level,self.RCA,self.IMPACT,self.FIXSTEP,self.__doc__,self.internalLog
 
+    def getResult(self):
+        if self.isAlive():
+            return
+        else:
+            return self.passed, self.RCA, self.IMPACT, self.FIXSTEP, self.__doc__, self.internalLog
 
-
+    def terminate(self):
+        raise RuntimeError("raise SystemExit from terminate commands")
 

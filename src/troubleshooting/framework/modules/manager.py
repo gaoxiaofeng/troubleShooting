@@ -2,10 +2,11 @@
 from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.exception.exception import *
 from troubleshooting.framework.variable.variable import *
-from troubleshooting.framework.libraries.library import singleton
+from troubleshooting.framework.libraries.library import singleton,convertTime
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
 from troubleshooting.framework.modules.tags import TagPattern
 import sys,os
+import time
 class BaseManager(object):
     '''
     base manager
@@ -98,12 +99,36 @@ class  TestPointManager(BaseManager):
                 testPoint = testPoint.strip("{")
             if "}" in testPoint:
                 testPoint = testPoint.strip("}")
-            testPointfull = "%s.%s"%(testPoint,"run")
-            testPointRunner = self.get_keyword(testPointfull)
-            status,level,rcaList,impactList,fixStepList,describe,internalLog = testPointRunner(firstTestPoint)
+            testPointRunner = self.get_keyword("%s.%s"%(testPoint,"start"))
+            testPointGetResult = self.get_keyword("%s.%s"%(testPoint,"getResult"))
+            testPointIsAlive =  self.get_keyword("%s.%s"%(testPoint,"isAlive"))
+            testPointKill = self.get_keyword("%s.%s"%(testPoint,"terminate"))
+            testPointWaitForExist = self.get_keyword("%s.%s"%(testPoint,"join"))
+            testPointAttribute = self.get_keyword("%s.%s"%(testPoint,"get_attribute"))
+            testPointTimeout = testPointAttribute("timeout")
+            testPointLevel =  testPointAttribute("level")
+            start_time = time.time()
+            expiration_time = start_time + convertTime(testPointTimeout)
+            # testPointRunner(firstTestPoint)
+            testPointRunner()
+            while time.time() < expiration_time:
+                result = testPointGetResult()
+                if result is not None:
+                    status,rcaList,impactList,fixStepList,describe,internalLog = result
+                    break
+
+            if result is None:
+                if testPointIsAlive():
+                    try:
+                        testPointKill()
+                    except Exception,e:
+                        print e
+                    finally:
+                        testPointWaitForExist()
+                status, rcaList, impactList, fixStepList, describe, internalLog = False,["testpoint running timeout [%s]"%testPointTimeout],[],[],"",""
             if firstTestPoint:
                 firstTestPoint = False
-            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":level,"DESCRIBE":describe,"LOG":internalLog}
+            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":testPointLevel,"DESCRIBE":describe,"LOG":internalLog}
             #{"Security_001":{"STATUS":True,"RCA":[,],"IMPACT":[,],"FIXSTEP":[],"LEVEL":"XXXX","DESCRIBE":"xxxx"}}
         self.testPoint_record = statusDict
         return statusDict
