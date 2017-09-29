@@ -25,7 +25,7 @@ class custom_install_scripts(install_scripts):
         print "replacing interpreter in pyts.bat and pytsmgr.bat"
         interpreter = list2cmdline([sys.executable])
         for path in self.get_outputs():
-            if path.endswith('pyts.bat') or path.endswith('ptysmgr.bat'):
+            if path.endswith('pyts.bat') or path.endswith('pytsmgr.bat'):
                 with open(path, 'r') as input:
                     replaced = input.read().replace('python', interpreter)
                 with open(path, 'w') as output:
