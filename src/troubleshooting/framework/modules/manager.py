@@ -116,7 +116,9 @@ class  TestPointManager(BaseManager):
                 if result is not None:
                     status,rcaList,impactList,fixStepList,describe,internalLog = result
                     break
-
+            end_time = time.time()
+            cost_time = int(end_time - start_time)
+            cost_time_string = "%s sec"%cost_time
             if result is None:
                 if testPointIsAlive():
                     try:
@@ -128,7 +130,7 @@ class  TestPointManager(BaseManager):
                 status, rcaList, impactList, fixStepList, describe, internalLog = False,["testpoint running timeout [%s]"%testPointTimeout],[],[],"",""
             if firstTestPoint:
                 firstTestPoint = False
-            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":testPointLevel,"DESCRIBE":describe,"LOG":internalLog}
+            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":testPointLevel,"DESCRIBE":describe,"LOG":internalLog,"TIMEOUT":testPointTimeout,"COST":cost_time_string}
             #{"Security_001":{"STATUS":True,"RCA":[,],"IMPACT":[,],"FIXSTEP":[],"LEVEL":"XXXX","DESCRIBE":"xxxx"}}
         self.testPoint_record = statusDict
         return statusDict

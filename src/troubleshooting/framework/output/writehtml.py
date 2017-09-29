@@ -116,7 +116,9 @@ class html(object):
                         testpointLogHtml = testpointLogHtml.replace(className,'<font color="#FFB90F">%s</font>'%className)
 
                 testpointLogHtml = testpointLogHtml.replace("\n", "</br>")
-                testpointHtml = "<i>%s<i>"%testpoint.strip("{}")
+                testpointTimeout = TESTPOINT[testpoint]["TIMEOUT"]
+                testpointCost = TESTPOINT[testpoint]["COST"]
+                testpointHtml = '<i title="Timeout: %s\nCostTime: %s">%s<i>'%(testpointTimeout,testpointCost,testpoint.strip("{}"))
                 attribute = """
                     
                     <tr>
