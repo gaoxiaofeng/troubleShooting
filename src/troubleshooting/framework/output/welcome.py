@@ -9,8 +9,7 @@ class welcome(object):
         super(self.__class__,self).__init__()
         self.printf = OutPut().echo
         self._totalWidth =  ConfigManagerInstance.config["report_total_width"]
-        self._welcome()
-    def _welcome(self):
+    def logo(self):
         graph = r"""
 ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗
 ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝
@@ -39,8 +38,13 @@ class welcome(object):
                (__/_/                ((__/"""
         self.printf(graph)
     def loadCasePrint(self,caseNameList):
-        graph = "Load %s cases..."%len(caseNameList)
+        graph = "Found %s cases..."%len(caseNameList)
         self.printf(graph)
-        graph = "Running..."
+        graph = "Loading..."
         self.printf(graph)
 
+    def ListCasePrint(self,caseNameList):
+        for caseName in caseNameList:
+            caseName = "%40s"%caseName
+            self.printf("*"*40)
+            self.printf(caseName)

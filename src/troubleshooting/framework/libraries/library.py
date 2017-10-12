@@ -197,6 +197,14 @@ def convertTime(Timestr):
         Time += _secs_int
 
     return Time
+def getRandomString(lengh):
+    import random
+    source = "abcdefghijklmnopqlstuvwxyz"
+    result = []
+    for i in range(lengh):
+        result.append(random.choice(source))
+    return "".join(result)
+
 
 
 if __name__ == "__main__":

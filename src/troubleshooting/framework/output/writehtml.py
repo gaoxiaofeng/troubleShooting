@@ -2,9 +2,11 @@
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.variable.variable import *
 from troubleshooting.framework.libraries.library import list2stringAndFormat
+from troubleshooting.framework.libraries.system import createDir
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
 from troubleshooting.framework.output.Print import CONSOLE
 import time
+import os,sys
 from htmltemplate import *
 import re
 class html(object):
@@ -156,28 +158,12 @@ class html(object):
 		</tbody>
 	</table>
 """
-
-        # with open("framework-trace.log", "r") as f:
-        #     _lines = f.readlines()
-        #     lines = []
-        #     for line in _lines:
-        #         if "^^^^" in line:
-        #             continue
-        #         if line.startswith("|"):
-        #             line = line[1:]
-        #         if "|logger" in line:
-        #             line = line.replace("|logger","")
-        #         lines.append(line)
-
-
-        # content = "".join(lines)
-        # content = content.replace("\n", "</br>")
-        # content = content.replace("|","&nbsp;&nbsp;&nbsp;&nbsp;")
-        # HTML_LOG = '<div style="display:none" name="log" style="font-size:12px"><i>' + content + '</i></div>'
         data += BUTTON
         # data += HTML_LOG
         data += BODY_AFTER
         data += HTML_AFTER
+        reportDir = os.path.dirname(ConfigManagerInstance.config["Report"])
+        createDir(reportDir)
         with open(ConfigManagerInstance.config["Report"],"w") as f:
             f.write(data)
 

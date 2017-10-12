@@ -12,7 +12,10 @@ class logger(object):
     def __init__(self):
         fileName = "framework-trace.log"
         if os.path.isfile(fileName):
-            os.remove(fileName)
+            try:
+                os.remove(fileName)
+            except Exception,e:
+                raise IOError(e)
         self._log = logging.getLogger(self.__class__.__name__)
         self._log.setLevel(logging.DEBUG)
         fh = logging.FileHandler(fileName)

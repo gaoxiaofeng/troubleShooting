@@ -117,7 +117,7 @@ class  TestPointManager(BaseManager):
                     status,rcaList,impactList,fixStepList,describe,internalLog = result
                     break
             end_time = time.time()
-            cost_time = int(end_time - start_time)
+            cost_time = float("%.2f"%(end_time - start_time))
             cost_time_string = "%s sec"%cost_time
             if result is None:
                 if testPointIsAlive():

@@ -128,6 +128,8 @@ Switch folder to  <ProjectDirectory>/<MyProject>/ , you can simple run::
 Options:
   --version            show program's version number and exit
   -h, --help           show this help message and exit
+  -l, --list           print list of cases
+  --clean              remove all report directory
   --host=HOST          host for remote connection
   --port=PORT          port for remote connection ,defaut port is 22
   --user=USER          user for remote connection , default user is root

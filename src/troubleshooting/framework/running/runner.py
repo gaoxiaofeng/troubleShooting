@@ -13,6 +13,8 @@ import traceback
 from troubleshooting.framework.output.Print import *
 from troubleshooting.framework.output.browser import Browser
 from troubleshooting.framework.remote.client import client
+from troubleshooting.framework.libraries.library import getRandomString
+from troubleshooting.framework.libraries.system import clean
 import platform
 import sys,os
 import time
@@ -36,7 +38,8 @@ def run_cli(*args):
     _startTime = time.time()
     _system_ =  platform.system().lower()
     opt = OptionParser(version=VERSION)
-
+    opt.add_option("-l","--list", dest="List", help="print list of cases",action="store_true")
+    opt.add_option("--clean", dest="Clean", help="remove all report directory", action="store_true")
     opt.add_option("--host",dest="Host",help="host for remote connection")
     opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default=22)
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
@@ -51,11 +54,11 @@ def run_cli(*args):
     opt.add_option("--report",dest="report",help="HTML report file, default is report.html",default="report.html")
 
     options, args = opt.parse_args()
-
+    reportFile = os.path.join((getRandomString(5) + ".d"),options.report)
     # ConfigManagerInstance.config = {"Console":True if options.console == "on" else False}
     # ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
     ConfigManagerInstance.config = {"Case":options.case}
-    ConfigManagerInstance.config = {"Report":options.report}
+    ConfigManagerInstance.config = {"Report":reportFile}
     ConfigManagerInstance.config = {"Include":options.include}
     ConfigManagerInstance.config = {"Exclude":options.exclude}
     ConfigManagerInstance.config = {"Host":options.Host}
@@ -63,7 +66,20 @@ def run_cli(*args):
     ConfigManagerInstance.config = {"User":options.User}
     ConfigManagerInstance.config = {"Password":options.Password}
     ConfigManagerInstance.config = {"SYSTEM":_system_}
-
+    if options.List:
+        CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
+        builderfactory = BuilderFactory()
+        # builderfactory.getBuilder(LAYER.KeyWords).builder()
+        # builderfactory.getBuilder(LAYER.TestPoint).builder()
+        builderfactory.getBuilder(LAYER.Case).builder()
+        caseNameList = CaseManagerInstance.get_keyword()
+        welcome()
+        welcome().loadCasePrint(caseNameList)
+        welcome().ListCasePrint(caseNameList)
+        return
+    if options.Clean:
+        clean()
+        return
     if options.Host:
         #remote mode
         host = options.Host
@@ -87,13 +103,7 @@ def run_cli(*args):
 
         if not client().test_connection(host,port,user,password):
             print "failed to connect remote machine!"
-            sys.exit(1)
-
-        # from framework.remote.remote import Remote
-        # remote = Remote()
-        # remote.open_connection(host,port=port, username=user, password=password)
-        # remote.remoteRunning()
-        # remote.close_connection()
+            return
 
     if 1:
         # redirection()
@@ -110,6 +120,7 @@ def run_cli(*args):
         caseNameListLength = len(caseNameList)
         if _system_ == SYSTEM.LINUX.value:
             welcome()
+            welcome().logo()
             welcome().loadCasePrint(caseNameList)
             PD = ProgressDialog(caseNameListLength)
             PD.start()
@@ -141,6 +152,7 @@ def run_cli(*args):
         elif _system_ == SYSTEM.WINDOWS.value:
             try:
                 welcome()
+                welcome().logo()
                 welcome().loadCasePrint(caseNameList)
                 for caseName in caseNameList:
                     behavior =  CaseManagerInstance.run_case(caseName)
