@@ -12,7 +12,7 @@ class client(object):
             ssh = SSHLibrary()
             ssh.open_connection(host=host,port=port,username=user,password=password)
             self._connection_cache.update({host:ssh})
-            print self._connection_cache
+            # print self._connection_cache
             return ssh
     def test_connection(self,host,port,user,password):
         status = None

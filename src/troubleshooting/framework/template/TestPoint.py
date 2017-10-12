@@ -6,6 +6,7 @@ from troubleshooting.framework.libraries.library import parseRule,RemoveDuplicat
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.log.internalLog import internalLog
 from threading import Thread
+import traceback
 try:
     #import project config.variable
     from config.variable import *
@@ -69,9 +70,8 @@ class TestPoint(Thread):
         try:
             self._checkpoint()
         except Exception,e:
-            # self.logger.error("testPoint `%s` failed, reason is %s"%(self.__class__.__name__,e))
-            self.IMPACT.append("Throw Exception,reason is %s"%e)
-            self.RCA.append(e)
+            self.IMPACT.append("TestPoint Throw Exception!")
+            self.RCA.append(traceback.format_exc())
             self.status = STATUS.FAIL
         finally:
             # self.logger.info("TestPoint(%s) result is [%s]" % (self.__class__.__name__, self.status))
