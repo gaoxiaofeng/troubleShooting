@@ -40,6 +40,7 @@ try:
         Case = "case"
         TestPoint = "testpoint"
         KeyWords = "keywords"
+        Recovery = "recovery"
     @unique
     class SYSTEM(Enum):
         WINDOWS = "windows"
@@ -85,7 +86,8 @@ except:
                 HighLight="\033[1;35m")
     LAYER = enum(Case="case", \
                 TestPoint="testpoint", \
-                KeyWords="keywords")
+                KeyWords="keywords", \
+                Recovery="recovery")
 
     SYSTEM = enum(WINDOWS="windows",\
                 LINUX="linux")

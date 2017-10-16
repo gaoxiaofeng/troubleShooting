@@ -79,8 +79,11 @@ class html(object):
                             <th width="35%%" name="nolog">
                                <b>Root Cause</b>
                             </th>
-                            <th width="35%%" name="nolog">
+                            <th width="15%%" name="nolog">
                                <b>Fix Method</b>
+                            </th>
+                            <th width="20%%" name="nolog">
+                               <b>Auto Fix Method</b>
                             </th>
                             <th style="display:none;" width="85%%" name="log">
                                <b>LOG</b>
@@ -108,6 +111,24 @@ class html(object):
                 if not testpointFIXSTEP:
                     testpointFIXSTEP = '<font color="#d0d0d0">NA</font>'
                 testpointFIXSTEPHtml = testpointFIXSTEP.replace("\n","</br>")
+                testpointAutoFixStep = TESTPOINT[testpoint]["AUTOFIXSTEP"]
+
+                if not testpointAutoFixStep:
+                    testpointAutoFixStep = '<font color="#d0d0d0">NA</font>'
+                else:
+                    if ConfigManagerInstance.config["Host"]:
+                        ip = ConfigManagerInstance.config["Host"]
+                        user = ConfigManagerInstance.config["User"]
+                        passwd = ConfigManagerInstance.config["Password"]
+                        host = " --host=%s "%ip
+                        if user != "root":
+                            host += " --user=%s "%user
+                        if passwd != "arthur":
+                            host += " --password=%s "%passwd
+                        testpointAutoFixStep = "pyts %s -r %s" %(host, ",".join(testpointAutoFixStep))
+
+                testpointAutoFixStepHtml = testpointAutoFixStep.replace("\n","</br>")
+
                 testpointLog = TESTPOINT[testpoint]["LOG"]
                 testpointLogHtml = testpointLog
                 pattern = re.compile(r"\<.+\>")
@@ -142,12 +163,15 @@ class html(object):
                             <td name="nolog">
                                <i>%s</i>
                             </td>
+                            <td name="nolog">
+                               <i>%s</i>
+                            </td>
                             <td style="display:none" name="log">
                                <i>%s</i>
                             </td>
                     </tr>
 
-"""%(testpointHtml,testpointStatusHtml,testpointLevelHtml,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml,testpointLogHtml)
+"""%(testpointHtml,testpointStatusHtml,testpointLevelHtml,testpointImpactHtml,testpointRCAHtml,testpointFIXSTEPHtml,testpointAutoFixStepHtml,testpointLogHtml)
                 data += attribute
             data += """
                 </table>

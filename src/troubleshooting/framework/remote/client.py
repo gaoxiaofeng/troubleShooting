@@ -1,5 +1,6 @@
 from troubleshooting.framework.remote.SSHLibrary import SSHLibrary
 from troubleshooting.framework.libraries.library import singleton
+import sys
 @singleton
 class client(object):
     def __init__(self):
@@ -17,12 +18,18 @@ class client(object):
     def test_connection(self,host,port,user,password):
         status = None
         try:
+            sys.stdout.write("Framework: connecting to remote machine..")
+            sys.stdout.flush()
             ssh = SSHLibrary()
             ssh.open_connection(host=host, port=port, username=user, password=password)
         except Exception,e:
+            sys.stdout.write("\t[Failed]\n")
+            sys.stdout.flush()
             print e
             return False
         else:
             return True
         finally:
+            sys.stdout.write("\t[OK]\n")
+            sys.stdout.flush()
             ssh.close_connection()

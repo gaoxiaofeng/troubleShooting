@@ -114,7 +114,7 @@ class  TestPointManager(BaseManager):
             while time.time() < expiration_time:
                 result = testPointGetResult()
                 if result is not None:
-                    status,rcaList,impactList,fixStepList,describe,internalLog = result
+                    status,rcaList,impactList,fixStepList,autoFixStepList,describe,internalLog = result
                     break
             end_time = time.time()
             cost_time = float("%.2f"%(end_time - start_time))
@@ -127,10 +127,10 @@ class  TestPointManager(BaseManager):
                         print e
                     finally:
                         testPointWaitForExist()
-                status, rcaList, impactList, fixStepList, describe, internalLog = False,["testpoint running timeout [%s]"%testPointTimeout],[],[],"",""
+                status, rcaList, impactList, fixStepList,autoFixStepList, describe, internalLog = False,["testpoint running timeout [%s]"%testPointTimeout],[],[],[],"",""
             if firstTestPoint:
                 firstTestPoint = False
-            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"LEVEL":testPointLevel,"DESCRIBE":describe,"LOG":internalLog,"TIMEOUT":testPointTimeout,"COST":cost_time_string}
+            statusDict["{%s}" % testPoint] = {"STATUS":status,"RCA":rcaList,"IMPACT":impactList,"FIXSTEP":fixStepList,"AUTOFIXSTEP":autoFixStepList,"LEVEL":testPointLevel,"DESCRIBE":describe,"LOG":internalLog,"TIMEOUT":testPointTimeout,"COST":cost_time_string}
             #{"Security_001":{"STATUS":True,"RCA":[,],"IMPACT":[,],"FIXSTEP":[],"LEVEL":"XXXX","DESCRIBE":"xxxx"}}
         self.testPoint_record = statusDict
         return statusDict
@@ -146,6 +146,19 @@ class  TestPointManager(BaseManager):
 class  KeywordManager(BaseManager):
     def __init__(self):
         super(self.__class__,self).__init__()
+
+@singleton
+class  RecoveryManager(BaseManager):
+    def __init__(self):
+        super(self.__class__,self).__init__()
+    def run_recovery(self,recovery,*args):
+
+        recoveryRunnerEntry = "%s.%s"%(recovery,"run")
+        recoveryRunner = self.get_keyword(recoveryRunnerEntry)
+        result = recoveryRunner(*args)
+        return result
+
+
 
 @singleton
 class CaseManager(BaseManager):
@@ -213,6 +226,8 @@ class ManagerFactory(object):
             return  TestPointManager()
         elif name == LAYER.Case:
             return  CaseManager()
+        elif name == LAYER.Recovery:
+            return RecoveryManager()
         else:
             return  None
 

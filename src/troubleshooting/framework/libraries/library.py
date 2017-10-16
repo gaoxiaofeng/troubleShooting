@@ -205,6 +205,29 @@ def getRandomString(lengh):
         result.append(random.choice(source))
     return "".join(result)
 
+def isSublist(parentlist,sublist):
+    for elem in sublist:
+        if elem not in parentlist:
+            return False
+    return True
+def compareList(left,right):
+    diff = []
+    for elem in right:
+        if elem not in left:
+            diff.append(elem)
+    return diff
+def parseRecoveryArgs(argsString):
+    import re
+    recoverStepsParsed = []
+    recoverSteps = argsString.split(",")
+    pattern = re.compile(r"([\d\w_]+)\(*([\d\w_;]*)\)*", re.I)
+    for step in recoverSteps:
+        match = pattern.match(step)
+        if match:
+            method = match.group(1)
+            args = match.group(2)
+            recoverStepsParsed.append({"method":method,"args": args})
+    return recoverStepsParsed
 
 
 if __name__ == "__main__":

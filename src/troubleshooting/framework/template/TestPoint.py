@@ -24,6 +24,7 @@ class TestPoint(Thread):
         self.RCA = []
         self.IMPACT = []
         self.FIXSTEP = []
+        self.AUTOFIEXSTEP = []
         self.level = LEVEL.NOCRITICAL
         self._load_keyword()
         self.log = internalLog()
@@ -86,7 +87,7 @@ class TestPoint(Thread):
         if self.isAlive():
             return
         else:
-            return self.passed, self.RCA, self.IMPACT, self.FIXSTEP, self.__doc__, self.internalLog
+            return self.passed, self.RCA, self.IMPACT, self.FIXSTEP,self.AUTOFIEXSTEP, self.__doc__, self.internalLog
 
     def terminate(self):
         raise RuntimeError("raise SystemExit from terminate commands")

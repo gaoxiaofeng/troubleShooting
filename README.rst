@@ -143,7 +143,8 @@ Options:
                        combined together with  `AND` and `OR` .     Example:
                        --include=coolORhot
   --report=REPORT      HTML report file, default is report.html
-
+  -r RECOVERY, --recovery=RECOVERY
+                        try to recovery problem
 
 
 *********************

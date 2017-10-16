@@ -13,8 +13,9 @@ import traceback
 from troubleshooting.framework.output.Print import *
 from troubleshooting.framework.output.browser import Browser
 from troubleshooting.framework.remote.client import client
-from troubleshooting.framework.libraries.library import getRandomString
+from troubleshooting.framework.libraries.library import getRandomString,isSublist,compareList,parseRecoveryArgs
 from troubleshooting.framework.libraries.system import clean
+from troubleshooting.framework.log.logger import logger
 import platform
 import sys,os
 import time
@@ -44,19 +45,15 @@ def run_cli(*args):
     opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default=22)
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
     opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="arthur")
-    # opt.add_option("--sync",dest="sync",help="yes/no,default is yes",default="yes")
-    # opt.add_option("--console", dest="console", help="set console to on/off,default is on", default="on")
     opt.add_option("--case",dest="case",help="select the case to run by case name")
     opt.add_option("--include",dest="include",help="""select cases to run by tag, Tags can also be combined together with  `AND` and `OR` .
     Example: --include=coolANDhot""")
     opt.add_option("--exclude",dest="exclude",help="""select cases not to run by tag. Tags can also be combined together with  `AND` and `OR` .
     Example: --include=coolORhot""")
     opt.add_option("--report",dest="report",help="HTML report file, default is report.html",default="report.html")
-
+    opt.add_option("-r","--recovery", dest="recovery", help="try to recovery problem")
     options, args = opt.parse_args()
     reportFile = os.path.join((getRandomString(5) + ".d"),options.report)
-    # ConfigManagerInstance.config = {"Console":True if options.console == "on" else False}
-    # ConfigManagerInstance.config = {"Sync":True if options.sync == "yes" else False}
     ConfigManagerInstance.config = {"Case":options.case}
     ConfigManagerInstance.config = {"Report":reportFile}
     ConfigManagerInstance.config = {"Include":options.include}
@@ -102,10 +99,9 @@ def run_cli(*args):
             raise Exception("password is mandatory")
 
         if not client().test_connection(host,port,user,password):
-            print "failed to connect remote machine!"
             return
 
-    if 1:
+    if options.recovery is None:
         # redirection()
         # print "current system is %s" % _system_
         CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
@@ -174,5 +170,43 @@ def run_cli(*args):
                 print "Report save as %s"%ConfigManagerInstance.config["Report"]
         else:
             print "Report save as %s" % ConfigManagerInstance.config["Report"]
+    if options.recovery:
+        recoverSteps = parseRecoveryArgs(options.recovery)
+        recoverStepsName = [step["method"] for step in recoverSteps]
+        RecoveryManagerInstance = ManagerFactory().getManager(LAYER.Recovery)
+        builderfactory = BuilderFactory()
+        builderfactory.getBuilder(LAYER.Recovery).builder()
+        recoveryList = RecoveryManagerInstance.get_keyword()
+
+
+        if isSublist(recoveryList,recoverStepsName):
+            print "Framework: try to fix problem."
+            for i,step in enumerate(recoverSteps):
+                stepName = step["method"]
+                stepArgs = step["args"].split(";")
+                sys.stdout.write("Framework: step %s.  %20s"%(i+1,stepName))
+                sys.stdout.flush()
+                try:
+                    status = RecoveryManagerInstance.run_recovery(stepName,*stepArgs)
+                except Exception,e:
+                    logger().error(traceback.format_exc())
+                    status = STATUS.FAIL
+                    sys.stdout.write("\t[%s]\n" %status)
+                    sys.stdout.flush()
+                    print "Framework: ERROR message save in log file."
+                else:
+                    sys.stdout.write("\t[%s]\n"%status)
+                    sys.stdout.flush()
+                finally:
+                    if status == STATUS.FAIL:
+                        print "Framework: recovery failed!"
+                        return
+            print "Framework: recovery successfully!"
+
+        else:
+            print "Framework: unkown recovery steps : %s"%compareList(recoveryList,recoverStepsName)
+
+
+
 if __name__ == "__main__":
     run_cli(sys.argv[1:])

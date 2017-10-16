@@ -54,6 +54,13 @@ class CaseBuilder(Builder):
         self.import_dict = folder
         self.Manager = ManagerFactory().getManager(LAYER.Case)
 
+class RecoveryBuilder(Builder):
+    def __init__(self,folder):
+        super(RecoveryBuilder,self).__init__()
+        self.import_dict = folder
+        self.Manager = ManagerFactory().getManager(LAYER.Recovery)
+
+
 class BuilderFactory(object):
     def __init__(self):
         super(BuilderFactory,self).__init__()
@@ -65,6 +72,8 @@ class BuilderFactory(object):
             return TestPointBuilder(search_dir)
         elif name == LAYER.Case:
             return  CaseBuilder(search_dir)
+        elif name == LAYER.Recovery:
+            return RecoveryBuilder(search_dir)
         else :
             return  None
 
