@@ -10,12 +10,20 @@ def singleton(cls,*args,**kw):
 @singleton
 class logger(object):
     def __init__(self):
-        fileName = "framework-trace.log"
-        if os.path.isfile(fileName):
-            try:
-                os.remove(fileName)
-            except Exception,e:
-                raise IOError(e)
+        i = 0
+        while 1:
+
+            fileName = "framework-trace-%s.log"%i
+            if os.path.isfile(fileName):
+                try:
+                    os.remove(fileName)
+                    break
+                except Exception,e:
+                    i += 1
+                else:
+                    break
+            else:
+                break
         self._log = logging.getLogger(self.__class__.__name__)
         self._log.setLevel(logging.DEBUG)
         fh = logging.FileHandler(fileName)

@@ -16,3 +16,8 @@ def clean(path=os.getcwd()):
                     shutil.rmtree(absolute_path)
                 except Exception,e:
                     print "failed to remove %s"%absolute_path
+def copyFile(old,new):
+    with open(old, "rb") as f:
+        content = f.read()
+    with open(new, "wb") as f:
+        f.write(content)

@@ -7,6 +7,7 @@ from troubleshooting.framework.modules.configuration import ConfigManagerInstanc
 from troubleshooting.framework.output.Print import CONSOLE
 import time
 import os,sys
+from os.path import  join,abspath,dirname
 from htmltemplate import *
 import re
 class html(object):
@@ -117,15 +118,19 @@ class html(object):
                     testpointAutoFixStep = '<font color="#d0d0d0">NA</font>'
                 else:
                     if ConfigManagerInstance.config["Host"]:
-                        ip = ConfigManagerInstance.config["Host"]
+                        hash = ConfigManagerInstance.config["__ReportHash__"]
+                        host = ConfigManagerInstance.config["Host"]
+                        port = ConfigManagerInstance.config["Port"]
                         user = ConfigManagerInstance.config["User"]
-                        passwd = ConfigManagerInstance.config["Password"]
-                        host = " --host=%s "%ip
-                        if user != "root":
-                            host += " --user=%s "%user
-                        if passwd != "arthur":
-                            host += " --password=%s "%passwd
-                        testpointAutoFixStep = "pyts %s -r %s" %(host, ",".join(testpointAutoFixStep))
+                        password = ConfigManagerInstance.config["Password"]
+                        cwd =ConfigManagerInstance.config["__ProjectCWD__"]
+                        recovery = {"ProjectDir":cwd,"Host":host,"Port":port,"User":user,"Password":password,"Recovery":",".join(testpointAutoFixStep)}
+                        testpointAutoFixStep = """
+                        <form action="/cgi-bin/post.py"  method="post">
+                        <input type="text" name="recovery" value="%s">
+                        <input type="submit" value="auto recovery" />
+                        </form>
+                        """%(recovery)
 
                 testpointAutoFixStepHtml = testpointAutoFixStep.replace("\n","</br>")
 
