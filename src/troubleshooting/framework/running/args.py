@@ -21,7 +21,7 @@ def parsedArgs():
     opt.add_option("-r","--recovery", dest="Recovery", help="try to recovery problem")
     options, args = opt.parse_args()
     reportHash = (getRandomString(5) + ".d")
-    reportFile = os.path.join(os.getcwd(),reportHash,options.report)
+    reportFile = os.path.join(os.getcwd(),"www",reportHash,options.report)
     ConfigManagerInstance.config = {"Case":options.case}
     ConfigManagerInstance.config = {"Report":reportFile}
     ConfigManagerInstance.config = {"Include":options.include}

@@ -29,6 +29,7 @@ class html(object):
 		</thead>
 		<tbody>
 """%(self.currenttime,)
+        recovery_id = 1
         for i,caseName in enumerate(self.caseResult):
             i += 1
             caseStatus = self.caseResult[caseName]["STATUS"]
@@ -125,14 +126,22 @@ class html(object):
                         password = ConfigManagerInstance.config["Password"]
                         cwd =ConfigManagerInstance.config["__ProjectCWD__"]
                         recovery = {"ProjectDir":cwd,"Host":host,"Port":port,"User":user,"Password":password,"Recovery":",".join(testpointAutoFixStep)}
+                        # testpointAutoFixStep = """
+                        # <form action="/cgi-bin/post.py"  method="post">
+                        # <input type="hidden" name="recovery" value="%s">
+                        # <input type="submit" value="auto recovery" />
+                        # </form>
+                        # """%(recovery)
                         testpointAutoFixStep = """
-                        <form action="/cgi-bin/post.py"  method="post">
-                        <input type="text" name="recovery" value="%s">
-                        <input type="submit" value="auto recovery" />
+                        <form id="recovery_form_id_%s">
+                        <div id="spin_%s"></div>
+                        <input type="hidden" name="recovery" value="%s">
+                        <input id="recovery_button_id_%s" type="button" value="auto recovery" onclick="uploadRecoveryData(this.form,%s);" />
                         </form>
-                        """%(recovery)
+                        """%(recovery_id,recovery_id,recovery,recovery_id,recovery_id)
+                        recovery_id += 1
 
-                testpointAutoFixStepHtml = testpointAutoFixStep.replace("\n","</br>")
+                testpointAutoFixStepHtml = testpointAutoFixStep
 
                 testpointLog = TESTPOINT[testpoint]["LOG"]
                 testpointLogHtml = testpointLog

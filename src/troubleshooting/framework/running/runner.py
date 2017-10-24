@@ -16,7 +16,7 @@ from troubleshooting.framework.remote.client import client
 # from troubleshooting.framework.libraries.library import getRandomString,isSublist,compareList,parseRecoveryArgs
 from troubleshooting.framework.libraries.system import clean
 from troubleshooting.framework.log.logger import logger
-from troubleshooting.framework.cgi.server import  server
+from troubleshooting.framework.httpserver.server import  server
 from troubleshooting.framework.running.recovery import recovery
 from troubleshooting.framework.running.args import parsedArgs
 import platform
@@ -159,7 +159,7 @@ def run_cli(*args):
                 # Browser().openLocalReport(ConfigManagerInstance.config["Report"])
                 reportHash = ConfigManagerInstance.config["__ReportHash__"]
                 reportName = ConfigManagerInstance.config["__ReportName__"]
-                Browser().openLocalReport("http://localhost:8888/cgi-bin/post.py?reportHash=%s;reportName=%s"%(reportHash,reportName))
+                Browser().openLocalReport("http://localhost:8888/www/cgi-bin/post.py?reportHash=%s&reportName=%s"%(reportHash,reportName))
             except Exception,e:
                 print "Report save as %s"%ConfigManagerInstance.config["Report"]
                 logger().error(traceback.format_exc())
