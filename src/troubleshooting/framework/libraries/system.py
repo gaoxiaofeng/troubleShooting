@@ -30,3 +30,17 @@ def copyFile(old,new):
         content = f.read()
     with open(new, "wb") as f:
         f.write(content)
+def copyDir(left,right):
+    if not  os.path.isdir(left):
+        print "Directory %s is not exist."%left
+        return
+    if not os.path.isdir(right):
+        createDir(right)
+
+    for file in os.listdir(left):
+        left_absolute_path = os.path.join(left, file)
+        right_absolute_path = os.path.join(right,file)
+        if os.path.isfile(left_absolute_path):
+            copyFile(left_absolute_path,right_absolute_path)
+        if os.path.isdir(left_absolute_path):
+            copyDir(left_absolute_path,right_absolute_path)

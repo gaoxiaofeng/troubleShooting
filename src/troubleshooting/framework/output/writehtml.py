@@ -119,27 +119,17 @@ class html(object):
                     testpointAutoFixStep = '<font color="#d0d0d0">NA</font>'
                 else:
                     if ConfigManagerInstance.config["Host"]:
-                        hash = ConfigManagerInstance.config["__ReportHash__"]
+                        reportHash = ConfigManagerInstance.config["__ReportHash__"]
+                        reportName = ConfigManagerInstance.config["__ReportName__"]
                         host = ConfigManagerInstance.config["Host"]
                         port = ConfigManagerInstance.config["Port"]
                         user = ConfigManagerInstance.config["User"]
                         password = ConfigManagerInstance.config["Password"]
                         cwd =ConfigManagerInstance.config["__ProjectCWD__"]
                         recovery = {"ProjectDir":cwd,"Host":host,"Port":port,"User":user,"Password":password,"Recovery":",".join(testpointAutoFixStep)}
-                        # testpointAutoFixStep = """
-                        # <form action="/cgi-bin/post.py"  method="post">
-                        # <input type="hidden" name="recovery" value="%s">
-                        # <input type="submit" value="auto recovery" />
-                        # </form>
-                        # """%(recovery)
                         testpointAutoFixStep = """
-                        <form id="recovery_form_id_%s">
-                        <div id="spin_%s"></div>
-                        <input type="hidden" name="recovery" value="%s">
-                        <input id="recovery_button_id_%s" type="button" value="auto recovery" onclick="uploadRecoveryData(this.form,%s);" />
-                        </form>
-                        """%(recovery_id,recovery_id,recovery,recovery_id,recovery_id)
-                        recovery_id += 1
+                        <iframe scrolling="no" src="/www/iframe/growl-genie.html?recovery=%s&reportHash=%s&reportName=%s"></iframe>
+                        """%(recovery,reportHash,reportName)
 
                 testpointAutoFixStepHtml = testpointAutoFixStep
 

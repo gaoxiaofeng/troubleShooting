@@ -4,7 +4,7 @@ import os
 import urllib
 from os.path import abspath,dirname,join
 from troubleshooting.framework.modules.configuration import  ConfigManagerInstance
-from troubleshooting.framework.libraries.system import createDir,copyFile
+from troubleshooting.framework.libraries.system import createDir,copyFile,copyDir
 from troubleshooting.framework.log.logger import logger
 class CGIHandler(CGIHTTPServer.CGIHTTPRequestHandler):
     cgi_directories = ['/cgi-bin', '/htbin','/www']
@@ -89,7 +89,7 @@ class server(Thread):
         self.home = dirname(abspath(__file__))
     def run(self,port=8888):
         # self.copy_report_to_home()
-        self.deploy_cgi()
+        self.deploy()
         # os.chdir(self.home)
         self.server = BaseHTTPServer.HTTPServer(("",port),CGIHandler )
         self.server.serve_forever()
@@ -106,22 +106,10 @@ class server(Thread):
         finally_report = join(self.home,"index.html")
         with open(finally_report,"wb") as f:
             f.write(content)
-    def deploy_cgi(self):
-        # report = ConfigManagerInstance.config["Report"]
-        # reportDir = dirname(report)
-        cgi_bin_path = join(os.getcwd(),"www","cgi-bin")
-        js_path = join(os.getcwd(),"www","js")
-        createDir(cgi_bin_path)
-        createDir(js_path)
-        cgiOldFile = join(self.home,"www","cgi-bin","post.py")
-        cgiNewFile = join(cgi_bin_path,"post.py")
-        jsOldFile = join(self.home,"www","js","spin.min.js")
-        jsNewFile = join(js_path,"spin.min.js")
-        copyFile(cgiOldFile,cgiNewFile)
-        copyFile(jsOldFile, jsNewFile)
-
-
-
+    def deploy(self):
+        _wwwFiles =  join(self.home,"www")
+        wwwFiles = join(os.getcwd(),"www")
+        copyDir(_wwwFiles,wwwFiles)
 if __name__ == "__main__":
     S = server()
     S.start()

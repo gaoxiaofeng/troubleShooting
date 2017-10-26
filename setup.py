@@ -52,7 +52,7 @@ setup(
     package_dir  = {'': 'src'},
     package_data={
         # If any package contains *.txt or *.rst files, include them:
-        '': ['*.txt', '*.rst','*.conf','*.js'],
+        '': ['*.txt', '*.rst','*.conf','*.js','*.css','*.html','*.eot','*.svg','*.ttf',"*.woff","*.DS_Store"],
         # And include any *.msg files found in the 'hello' package, too:
         'hello': ['*.msg'],
     },

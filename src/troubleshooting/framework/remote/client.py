@@ -28,8 +28,8 @@ class client(object):
             print e
             return False
         else:
-            return True
-        finally:
             sys.stdout.write("\t[OK]\n")
             sys.stdout.flush()
+            return True
+        finally:
             ssh.close_connection()

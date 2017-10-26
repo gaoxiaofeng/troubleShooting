@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<link rel="stylesheet" type="text/css" href="/www/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="/www/css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="/www/css/ns-default.css" />
+		<link rel="stylesheet" type="text/css" href="/www/css/ns-style-growl.css" />
+		<script src="/www/js/modernizr.custom.js"></script>
+		<style type="text/css">
+</style>
+		<!--[if IE]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body class="color-2">
+		<div class="container">
+			<header class="codrops-header">
+			</header>
+			<div class="main clearfix">
+				<div class="column">
+					<button id="notification-trigger" class="progress-button">
+						<span class="content">Auto Recovery</span>
+						<span class="progress"></span>
+					</button>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="/www/js/classie.js"></script>
+		<script src="/www/js/notificationFx.js"></script>
+		<script>
+		function getQueryString(name) {
+			var reg =  new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) return unescape(r[2]); return null;
+		}
+		
+		function uploadRecoveryData()
+		{
+			var uphttp = new XMLHttpRequest();
+			var data = new FormData();
+
+			var reportHash = getQueryString("reportHash");
+			var reportName = getQueryString("reportName");
+			var recovery = getQueryString("recovery");
+
+			data.append("reportHash",reportHash)
+			data.append("reportName",reportName)
+			data.append("recovery",recovery)
+			
+			uphttp.open('POST','/www/cgi-bin/post.py',true);
+			//$("#mb").css("display","block");
+			//var spinner = spin("spin")
+			uphttp.onreadystatechange=function()
+				{
+					if(uphttp.readyState==4&&uphttp.status==200)
+					{
+						//alert("Recovery successfully!")
+						var responseText = uphttp.responseText;
+						var bttn = document.getElementById( 'notification-trigger' );
+						setTimeout( function() {
+
+						classie.remove( bttn, 'active' );
+						
+						// create the notification
+						var notification = new NotificationFx({
+							message : responseText,
+							layout : 'growl',
+							effect : 'genie',
+							type : 'notice', // notice, warning or error
+							onClose : function() {
+								bttn.disabled = true;
+							}
+						});
+
+						// show the notification
+						notification.show();
+
+					}, 1200 );
+
+						//spinner.spin()
+						
+					}
+				}
+
+
+
+			uphttp.send(data);
+
+
+}
+		
+		
+		
+			(function() {
+			
+				
+			
+				var bttn = document.getElementById( 'notification-trigger' );
+
+				// make sure..
+				bttn.disabled = false;
+
+				bttn.addEventListener( 'click', function() {
+					
+					// simulate loading (for demo purposes only)
+					classie.add( bttn, 'active' );
+					uploadRecoveryData();
+					setTimeout( function() {
+					classie.remove( bttn, 'active' );
+						
+						// create the notification
+						var notification = new NotificationFx({
+							message : "start to Auto Recovery...",
+							layout : 'growl',
+							effect : 'genie',
+							type : 'notice', // notice, warning or error
+							onClose : function() {
+								bttn.disabled = true;
+							}
+						});
+
+						// show the notification
+						notification.show();
+
+					}, 1200 );
+					
+					// disable the button (for demo purposes only)
+					this.disabled = true;
+				} );
+			})();
+		</script>
+	</body>
+</html>

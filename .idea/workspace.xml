@@ -15,33 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="runner.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/runner.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="161" column="41" lean-forward="false" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="41" />
-              <folding>
-                <element signature="e#24#106#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="writehtml.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/output/writehtml.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="723">
-              <caret line="202" column="72" lean-forward="false" selection-start-line="202" selection-start-column="66" selection-end-line="202" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="post.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/httpserver/www/cgi-bin/post.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="485">
+              <caret line="131" column="60" lean-forward="false" selection-start-line="131" selection-start-column="60" selection-end-line="131" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -50,21 +28,9 @@
       <file leaf-file-name="htmltemplate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/output/htmltemplate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="359" column="56" lean-forward="false" selection-start-line="359" selection-start-column="54" selection-end-line="359" selection-end-column="56" />
+            <state relative-caret-position="1064">
+              <caret line="342" column="0" lean-forward="false" selection-start-line="342" selection-start-column="0" selection-end-line="342" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/httpserver/server.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="55" column="17" lean-forward="false" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -73,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/version/version.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
+              <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -111,17 +77,15 @@
       <find>is_cgi</find>
       <find>url</find>
       <find>cgi-bin</find>
-      <find>uploadRecoveryData</find>
       <find>cgi_directories</find>
       <find>_url_collapse_path</find>
       <find>log</find>
+      <find>uploadRecoveryData</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/troubleshooting/framework/commands/BaseCommand.py" />
-        <option value="$PROJECT_DIR$/src/troubleshooting/framework/commands/startProject.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/management/__init__.py" />
         <option value="$PROJECT_DIR$/src/bin/pytsmgr.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/running/manager.py" />
@@ -143,7 +107,6 @@
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/template/Keyword.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/variable/variable.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/modules/builder.py" />
-        <option value="$PROJECT_DIR$/src/troubleshooting/framework/remote/client.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/running/test.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/libraries/library.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/template/Recovery.py" />
@@ -155,30 +118,33 @@
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/log/logger.py" />
         <option value="C:/Python27/Lib/site-packages/troubleshooting_framework-1.2.4.16-py2.7.egg/troubleshooting/framework/modules/Import.py" />
         <option value="C:/Python27/Lib/site-packages/troubleshooting_framework-1.2.4.16-py2.7.egg/troubleshooting/framework/running/recovery.py" />
-        <option value="$PROJECT_DIR$/src/troubleshooting/framework/running/recovery.py" />
         <option value="$PROJECT_DIR$/../../trunk/ci2.0/NBI_NBI3GC/nbi3gc/implementation/robot/remote-test/src/lib/NBIComponent/FTP_Client.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/cgi/cgi-bin/post.py" />
         <option value="$PROJECT_DIR$/../../trunk/ci2.0/NBI_NBI3GC/nbi3gc/implementation/robot/remote-test/src/testcases/Release6/_Variables/NBI_Common_Variable.py" />
         <option value="$PROJECT_DIR$/../../trunk/ci2.0/NBI_NBI3GC/nbi3gc/implementation/robot/remote-test/src/conf/env_setup.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/cgi/server.py" />
-        <option value="$PROJECT_DIR$/src/troubleshooting/framework/output/writehtml.py" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/running/runner.py" />
         <option value="$PROJECT_DIR$/../nbi3gc_troubleshooting/test.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/running/args.py" />
+        <option value="$PROJECT_DIR$/src/troubleshooting/framework/remote/client.py" />
+        <option value="$PROJECT_DIR$/../nbi3gc_troubleshooting/testpoint/Nbi3gcomServiceCheck.py" />
+        <option value="$PROJECT_DIR$/src/troubleshooting/framework/httpserver/www/cgi-bin/post.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/libraries/system.py" />
-        <option value="$PROJECT_DIR$/src/troubleshooting/framework/output/htmltemplate.py" />
+        <option value="$PROJECT_DIR$/src/troubleshooting/framework/running/recovery.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/src/troubleshooting/framework/httpserver/server.py" />
-        <option value="$PROJECT_DIR$/src/troubleshooting/framework/version/version.py" />
         <option value="$PROJECT_DIR$/../nbi3gc_troubleshooting/case/ServiceStatusCheck.py" />
+        <option value="$PROJECT_DIR$/src/troubleshooting/framework/output/writehtml.py" />
+        <option value="$PROJECT_DIR$/src/troubleshooting/framework/output/htmltemplate.py" />
+        <option value="$PROJECT_DIR$/src/troubleshooting/framework/version/version.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1592" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -337,6 +303,32 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="remote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="troubleShooting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="troubleShooting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="troubleshooting" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="framework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="output" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -420,40 +412,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="troubleShooting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="troubleShooting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="troubleshooting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="httpserver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -749,10 +707,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1592" y="-8" width="1936" height="1096" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20758693" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24968314" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -787,15 +745,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/test.py" />
     <entry file="file://C:/Python27/Lib/site-packages/troubleshooting_framework-1.2.4.15-py2.7.egg/troubleshooting/framework/libraries/library.py" />
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/remote/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="39" lean-forward="false" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/libraries/library.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3808">
@@ -859,6 +809,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4021">
           <caret line="545" column="16" lean-forward="false" selection-start-line="545" selection-start-column="8" selection-end-line="545" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -887,13 +838,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="69" column="25" lean-forward="false" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/recovery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="24" column="48" lean-forward="false" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -980,16 +924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="44" column="20" lean-forward="false" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/BaseHTTPServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1022,58 +956,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/runner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="161" column="41" lean-forward="false" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="41" />
-          <folding>
-            <element signature="e#24#106#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/args.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="46" lean-forward="false" selection-start-line="23" selection-start-column="46" selection-end-line="23" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/output/writehtml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="723">
-          <caret line="202" column="72" lean-forward="false" selection-start-line="202" selection-start-column="66" selection-end-line="202" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/libraries/system.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/httpserver/www/cgi-bin/post.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/output/htmltemplate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="359" column="56" lean-forward="false" selection-start-line="359" selection-start-column="54" selection-end-line="359" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/CGIHTTPServer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="786">
@@ -1082,10 +964,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/remote/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="33" column="16" lean-forward="false" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/runner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="86" column="39" lean-forward="false" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="39" />
+          <folding>
+            <element signature="e#24#106#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/libraries/system.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="32" column="11" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/args.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="37" column="4" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/httpserver/www/cgi-bin/post.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="28" column="38" lean-forward="false" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/running/recovery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="41" column="18" lean-forward="false" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/httpserver/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="55" column="17" lean-forward="false" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="17" />
+        <state relative-caret-position="706">
+          <caret line="108" column="21" lean-forward="false" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
@@ -1095,7 +1037,31 @@
     <entry file="file://$PROJECT_DIR$/../nbi3gc_troubleshooting/case/ServiceStatusCheck.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <caret line="9" column="43" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../nbi3gc_troubleshooting/testpoint/Nbi3gcomServiceCheck.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="20" column="18" lean-forward="true" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/output/writehtml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="131" column="60" lean-forward="false" selection-start-line="131" selection-start-column="60" selection-end-line="131" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/output/htmltemplate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1064">
+          <caret line="342" column="0" lean-forward="false" selection-start-line="342" selection-start-column="0" selection-end-line="342" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1103,7 +1069,7 @@
     <entry file="file://$PROJECT_DIR$/src/troubleshooting/framework/version/version.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="19" lean-forward="false" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
+          <caret line="0" column="18" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
           <folding />
         </state>
       </provider>

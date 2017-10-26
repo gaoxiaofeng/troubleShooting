@@ -3,147 +3,149 @@
 MAINCSS = """
 
 <style type="text/css">
-			*{margin: 0;padding: 0;}
-			body {
-				padding: 40px 100px;
-			}
-			.demo {
-			width: 600px;
-			margin: 40px auto;
-			font-family: 'trebuchet MS', 'Lucida sans', Arial;
-			font-size: 14px;
-			color: #444;
-			}
+*{margin: 0;padding: 0;}
+body {
+    padding: 40px 100px;
+    }
+.demo {
+    width: 600px;
+    margin: 40px auto;
+    font-family: 'trebuchet MS', 'Lucida sans', Arial;
+    font-size: 14px;
+    color: #444;
+    }
 
-			table {
-				*border-collapse: collapse; /* IE7 and lower */
-				border-spacing: 0;
-				width: 100%;
-			}
-			/*========bordered table========*/
-			.bordered {
-				border: solid #ccc 3px;
-				-moz-border-radius: 6px;
-				-webkit-border-radius: 6px;
-				border-radius: 6px;
-				-webkit-box-shadow: 0 1px 1px #ccc;
-				-moz-box-shadow: 0 1px 1px #ccc;
-				box-shadow: 0 1px 1px #ccc;
-			}
+table {
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    width: 100%;
+    }
+    /*========bordered table========*/
+.bordered {
+        border: solid #ccc 3px;
+        -moz-border-radius: 6px;
+        -webkit-border-radius: 6px;
+        border-radius: 6px;
+        -webkit-box-shadow: 0 1px 1px #ccc;
+        -moz-box-shadow: 0 1px 1px #ccc;
+        box-shadow: 0 1px 1px #ccc;
+    }
 
-			.bordered tr {
-				-o-transition: all 0.1s ease-in-out;
-				-webkit-transition: all 0.1s ease-in-out;
-				-moz-transition: all 0.1s ease-in-out;
-				-ms-transition: all 0.1s ease-in-out;
-				transition: all 0.1s ease-in-out;
-			}
-			.bordered .highlight,
-			.bordered tr:hover {
-				background: #FCFDFE;
-			}
-			.bordered td,
-			.bordered th {
-				border-left: 2px solid #ccc;
-				border-top: 2px solid #ccc;
-				padding: 10px;
-				text-align: left;
-			}
-			.bordered th {
-				//background-color: #dce9f9;
-				background-color: #dce9f9;
-				background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
-				background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-				background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-				background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-				background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
-				background-image: linear-gradient(top, #ebf3fc, #dce9f9);
-				filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9);
-				-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9)";
-				-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-				-moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-				box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-				border-top: none;
-				text-shadow: 0 1px 0 rgba(255,255,255,.5);
-			}
-			.bordered td:first-child,
-			.bordered th:first-child {
-				border-left: none;
-			}
-			.bordered th:first-child {
-				-moz-border-radius: 6px 0 0 0;
-				-webkit-border-radius: 6px 0 0 0;
-				border-radius: 6px 0 0 0;
-			}
-			.bordered th:last-child {
-				-moz-border-radius: 0 6px 0 0;
-				-webkit-border-radius: 0 6px 0 0;
-				border-radius: 0 6px 0 0;
-			}
-			.bordered tr:last-child td:first-child {
-				-moz-border-radius: 0 0 0 6px;
-				-webkit-border-radius: 0 0 0 6px;
-				border-radius: 0 0 0 6px;
-			}
-			.bordered tr:last-child td:last-child {
-				-moz-border-radius: 0 0 6px 0;
-				-webkit-border-radius: 0 0 6px 0;
-				border-radius: 0 0 6px 0;
-			}
-			/*----------------------*/
-			.zebra td,
-			.zebra th {
-				padding: 10px;
-				border-bottom: 1px solid #f2f2f2;
-			}
-			.zebra .alternate,
-			.zebra tbody tr:nth-child(even) {
-				background: #f5f5f5;
-				-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-				-moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-				box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-			}
-			.zebra th {
-				text-align: left;
-				text-shadow: 0 1px 0 rgba(255,255,255,.5);
-				border-bottom: 1px solid #ccc;
-				background-color: #eee;
-				background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#eee));
-				background-image: -webkit-linear-gradient(top, #f5f5f5, #eee);
-				background-image: -moz-linear-gradient(top, #f5f5f5, #eee);
-				background-image: -ms-linear-gradient(top, #f5f5f5, #eee);
-				background-image: -o-linear-gradient(top, #f5f5f5, #eee);
-				background-image: linear-gradient(top, #f5f5f5, #eee);
-				filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#f5f5f5, endColorstr=#eeeeee);
-				-ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#f5f5f5, endColorstr=#eeeeee)";
-			}
-			.zebra th:first-child {
-				-moz-border-radius: 6px 0 0 0;
-				-webkit-border-radius: 6px 0 0 0;
-				border-radius: 6px 0 0 0;
-			}
-			.zebra th:last-child {
-				-moz-border-radius: 0 6px 0 0;
-				-webkit-border-radius: 0 6px 0 0;
-				border-radius: 0 6px 0 0;
-			}
-			.zebra tfoot td {
-				border-bottom: 0;
-				border-top: 1px solid #fff;
-				background-color: #f1f1f1;
-			}
-			.zebra tfoot td:first-child {
-				-moz-border-radius: 0 0 0 6px;
-				-webkit-border-radius: 0 0 0 6px;
-				border-radius: 0 0 0 6px;
-			}
-			.zebra tfoot td:last-child {
-				-moz-border-radius: 0 0 6px 0;
-				-webkit-border-radius: 0 0 6px 0;
-				border-radius: 0 0 6px 0;
-			}
+.bordered tr {
+        -o-transition: all 0.1s ease-in-out;
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -ms-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+        }
+.bordered .highlight,
+.bordered tr:hover {
+    background: #FCFDFE;
+    }
+.bordered td,
+.bordered th {
+    border-left: 2px solid #ccc;
+    border-top: 2px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    }
+.bordered th {
+    //background-color: #dce9f9;
+    background-color: #dce9f9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: linear-gradient(top, #ebf3fc, #dce9f9);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9)";
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.bordered td:first-child,
+.bordered th:first-child {
+    border-left: none;
+    }
+.bordered th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+    }
+.bordered th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+    }
+.bordered tr:last-child td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+    }
+.bordered tr:last-child td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
+    }
+/*----------------------*/
+.zebra td,
+.zebra th {
+    padding: 10px;
+    border-bottom: 1px solid #f2f2f2;
+    }
+.zebra .alternate,
+.zebra tbody tr:nth-child(even) {
+    background: #f5f5f5;
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    }
+.zebra th {
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    border-bottom: 1px solid #ccc;
+    background-color: #eee;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#eee));
+    background-image: -webkit-linear-gradient(top, #f5f5f5, #eee);
+    background-image: -moz-linear-gradient(top, #f5f5f5, #eee);
+    background-image: -ms-linear-gradient(top, #f5f5f5, #eee);
+    background-image: -o-linear-gradient(top, #f5f5f5, #eee);
+    background-image: linear-gradient(top, #f5f5f5, #eee);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#f5f5f5, endColorstr=#eeeeee);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#f5f5f5, endColorstr=#eeeeee)";
+    }
+.zebra th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+    }
+.zebra th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+    }
+.zebra tfoot td {
+    border-bottom: 0;
+    border-top: 1px solid #fff;
+    background-color: #f1f1f1;
+    }
+.zebra tfoot td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+    }
+.zebra tfoot td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
+    }
 </style>
 """
+
+
 BUTTON ="""
 <section class="model-1">
     <div class="checkbox">
@@ -268,6 +270,9 @@ for(var i=0;i<nologs.length;i++)
 </script>
 """
 
+
+
+
 SPINJS = """
 <script>
 function spin(id) {
@@ -293,57 +298,14 @@ var opts = {
 , hwaccel: false // Whether to use hardware acceleration
 , position: 'absolute' // Element positioning
 }
-var target = document.getElementById("spin_"+id)
+var target = document.getElementById(id)
 var spinner = new Spinner(opts).spin(target);
 return spinner
 }
-
-function getQueryString(name) {
-    var reg =  new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]); return null;
-}
-
-
-
-function uploadRecoveryData(form,id)
-{
-var uphttp = new XMLHttpRequest();
-var data = new FormData(form);
-
-var reportHash = getQueryString("reportHash");
-var reportName = getQueryString("reportName");
-
-data.append("reportHash",reportHash)
-data.append("reportName",reportName)
-
-uphttp.open('POST','/www/cgi-bin/post.py',true);
-var spinner = spin(id)
-uphttp.onreadystatechange=function()
-    {
-        if(uphttp.readyState==4&&uphttp.status==200)
-        {
-            //alert("Recovery successfully!")
-            spinner.spin()
-            document.getElementById("recovery_button_id_"+id).disabled = true;
-        }
-    }
-
-
-
-uphttp.send(data);
-
-
-}
-
-
-
-
 </script>
 """
 
 HTML_HEAD = """
-
 <head>
 <title>TroubleShooting Framework Report</title>
 <style>
@@ -357,7 +319,7 @@ tr{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px soli
 </style>
 <!--   引入jQuery -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
- <script type="text/javascript" src="/www/js/spin.min.js" ></script>
+<script type="text/javascript" src="/www/js/spin.min.js" ></script>
 <script type="text/javascript">
 $(function(){
 $('tr.parent').click(function(){   // 获取父行
@@ -367,7 +329,6 @@ $(this)
 	});
 })
 </script>
-
 %s
 %s
 %s
@@ -381,17 +342,16 @@ $(this)
 """
 
 
-
-
-
 HTML_BEFORE= """
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-"""
+""".strip()
 HTML_AFTER = """
 </html>
 """
 BODY_AFTER = """
+<div id="spin"></div>
 </body>
 """
+
 
