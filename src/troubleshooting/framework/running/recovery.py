@@ -4,6 +4,7 @@ from troubleshooting.framework.variable.variable import *
 from troubleshooting.framework.modules.builder import BuilderFactory
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.log.logger import logger
+from troubleshooting.framework.output.record import  record
 import sys,os
 import traceback
 def recovery(args):
@@ -13,6 +14,7 @@ def recovery(args):
     builderfactory = BuilderFactory()
     builderfactory.getBuilder(LAYER.Recovery).builder()
     recoveryList = RecoveryManagerInstance.get_keyword()
+    caseResult = record().read()
 
     if isSublist(recoveryList, recoverStepsName):
         for i, step in enumerate(recoverSteps):

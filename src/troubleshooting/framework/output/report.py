@@ -6,6 +6,7 @@ from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.variable.variable import  *
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
 from troubleshooting.framework.output.writehtml import html
+from troubleshooting.framework.output.record import record
 @singleton
 class report(object):
     def __init__(self):
@@ -170,7 +171,8 @@ class report(object):
         #         i += 1
         self.printf("*" * (self._width * 3 + 4))
     def writeReport(self):
-        html().write()
+        record().write()
+        # html().write()
         # graph = """The Report was saved as ./%s"""%ConfigManagerInstance.config["Report"]
         # self.printf(graph)
 

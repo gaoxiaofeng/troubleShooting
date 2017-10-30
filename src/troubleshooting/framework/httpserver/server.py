@@ -100,16 +100,33 @@ class server(Thread):
         self.server.shutdown()
         self.terminate()
     def copy_report_to_home(self):
-        report = ConfigManagerInstance.config["Report"]
-        with open(report,"rb") as f:
+        index_template = join(self.home,"www","index.html")
+        with open(index_template,"rb") as f:
             content = f.read()
-        finally_report = join(self.home,"index.html")
-        with open(finally_report,"wb") as f:
+        content = self.replace_template(content)
+        report = ConfigManagerInstance.config["Report"]
+        with open(report,"wb") as f:
             f.write(content)
+
+    def replace_template(self,content):
+
+        content = content.replace("{Host}", ConfigManagerInstance.config["Host"])
+        content = content.replace("{User}", ConfigManagerInstance.config["User"])
+        content = content.replace("{Port}", ConfigManagerInstance.config["Port"])
+        content = content.replace("{Password}", ConfigManagerInstance.config["Password"])
+        content = content.replace("{__ReportName__}", ConfigManagerInstance.config["__ReportName__"])
+        content = content.replace("{__ReportHash__}",ConfigManagerInstance.config["__ReportHash__"])
+        __ProjectCWD__ = ConfigManagerInstance.config["__ProjectCWD__"]
+        __ProjectCWD__ = __ProjectCWD__.replace('\\','/')
+        content = content.replace("{__ProjectCWD__}",__ProjectCWD__)
+
+        return content
+
     def deploy(self):
         _wwwFiles =  join(self.home,"www")
         wwwFiles = join(os.getcwd(),"www")
         copyDir(_wwwFiles,wwwFiles)
+        self.copy_report_to_home()
 if __name__ == "__main__":
     S = server()
     S.start()

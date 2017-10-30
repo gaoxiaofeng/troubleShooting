@@ -24,7 +24,7 @@ class Case(object):
         self._Impact = {}
         self._RCA = {}
         self._FixMethod = {}
-        self.referenceDocument = None
+        self.referenceDocument = ""
         self.tags = ""
 
     def _printf(self,message):
@@ -63,26 +63,24 @@ class Case(object):
     def run(self,RERUN=False):
         self._readConfig()
         self._check_status()
-        self._SetFailureLevel()
+        self._SetCaseLevel()
         self._LoadImpact()
         self._LoadRCA()
-        self._LoadFixMethod()
-        result = {"STATUS": self.passed,"FAILURELEVEL":self.FailureLevel,"IMPACT":self._Impact,\
-                  "DESCRIPTION":self.__doc__.strip() if self.__doc__ is not None else self.__doc__,\
+        # self._LoadFixMethod()
+        result = {"STATUS": self.passed,"LEVEL":self.CaseLevel,"IMPACT":self._Impact,\
+                  "DESCRIPTION":"" if self.__doc__ is  None else self.__doc__.strip(),\
                   "RCA":self._RCA,"FIXMETHOD":self._FixMethod,"REFERENCE":self.referenceDocument,\
                   "TESTPOINT":self._checkPointStatusDict,"TAGS":self.tags}
 
         return result,BEHAVIOR.CONTINUE
-    def _SetFailureLevel(self):
-        _level = None
+    def _SetCaseLevel(self):
+        self.CaseLevel = None
         for TestPointName in self._checkPointStatusDict:
-            if self._checkPointStatusDict[TestPointName]["STATUS"] is False:
-                if self._checkPointStatusDict[TestPointName]["LEVEL"] is LEVEL.CRITICAL:
-                    _level = LEVEL.CRITICAL
-                    break
-                else:
-                    _level = LEVEL.NOCRITICAL
-        self.FailureLevel = _level
+            if self._checkPointStatusDict[TestPointName]["LEVEL"] is LEVEL.CRITICAL:
+                self.CaseLevel = LEVEL.CRITICAL
+                break
+            else:
+                self.CaseLevel = LEVEL.NOCRITICAL
 
 
 

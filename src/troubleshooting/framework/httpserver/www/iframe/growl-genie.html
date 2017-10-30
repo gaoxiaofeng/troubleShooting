@@ -44,11 +44,23 @@
 
 			var reportHash = getQueryString("reportHash");
 			var reportName = getQueryString("reportName");
-			var recovery = getQueryString("recovery");
+			var Recovery = getQueryString("Recovery");
+			var ProjectDir = getQueryString("ProjectDir");
+			var Host = getQueryString("Host");
+			var Port = getQueryString("Port");
+			var User = getQueryString("User");
+			var Password = getQueryString("Password");
+
 
 			data.append("reportHash",reportHash)
 			data.append("reportName",reportName)
-			data.append("recovery",recovery)
+			data.append("Recovery",Recovery)
+			data.append("ProjectDir",ProjectDir)
+			data.append("Host",Host)
+			data.append("Port",Port)
+			data.append("User",User)
+			data.append("Password",Password)
+
 			
 			uphttp.open('POST','/www/cgi-bin/post.py',true);
 			//$("#mb").css("display","block");

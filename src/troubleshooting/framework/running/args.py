@@ -9,7 +9,7 @@ def parsedArgs():
     opt.add_option("-l","--list", dest="List", help="print list of cases",action="store_true")
     opt.add_option("--clean", dest="Clean", help="remove all report directory", action="store_true")
     opt.add_option("--host",dest="Host",help="host for remote connection")
-    opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default=22)
+    opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default="22")
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
     opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="arthur")
     opt.add_option("--case",dest="case",help="select the case to run by case name")

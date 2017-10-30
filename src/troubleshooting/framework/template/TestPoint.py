@@ -87,7 +87,7 @@ class TestPoint(Thread):
         if self.isAlive():
             return
         else:
-            return self.passed, self.RCA, self.IMPACT, self.FIXSTEP,self.AUTOFIEXSTEP, self.__doc__, self.internalLog
+            return self.passed, self.RCA, self.IMPACT, self.FIXSTEP,self.AUTOFIEXSTEP,"" if self.__doc__ is  None else self.__doc__.strip(), self.internalLog
 
     def terminate(self):
         raise RuntimeError("raise SystemExit from terminate commands")

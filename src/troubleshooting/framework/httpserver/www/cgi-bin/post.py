@@ -10,18 +10,18 @@ homeDir = dirname(dirname(abspath(__file__)))
 
 
 
-if form.has_key("recovery"):
+if form.has_key("Recovery"):
     #recovery mode
+    ProjectDir = form.getvalue("ProjectDir").replace("/",os.path.sep)
 
-
-    args = form.getvalue("recovery")
-    args = eval(args)
-    sys.path.append(args["ProjectDir"])
-    ConfigManagerInstance.config = {"Recovery":args["Recovery"]}
-    ConfigManagerInstance.config = {"Host": args["Host"]}
-    ConfigManagerInstance.config = {"Port": args["Port"]}
-    ConfigManagerInstance.config = {"User": args["User"]}
-    ConfigManagerInstance.config = {"Password": args["Password"]}
+    sys.path.append(ProjectDir)
+    ConfigManagerInstance.config = {"Recovery":form.getvalue("Recovery")}
+    ConfigManagerInstance.config = {"Host": form.getvalue("Host")}
+    ConfigManagerInstance.config = {"Port": form.getvalue("Port")}
+    ConfigManagerInstance.config = {"User": form.getvalue("User")}
+    ConfigManagerInstance.config = {"Password": form.getvalue("Password")}
+    ConfigManagerInstance.config = {"__ReportHash__": form.getvalue("reportHash")}
+    ConfigManagerInstance.config = {"__ProjectCWD__": form.getvalue("ProjectDir")}
 
     if ConfigManagerInstance.config["Recovery"]:
         print "Content-Type: text/html"  # HTML is following

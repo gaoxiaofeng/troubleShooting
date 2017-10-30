@@ -12,7 +12,7 @@ class Recovery(object):
         super(Recovery,self).__init__()
         self.remote = True if ConfigManagerInstance.config["Host"] else False
         self.host = ConfigManagerInstance.config["Host"]
-        self.port = ConfigManagerInstance.config["Port"]
+        self.port = int(ConfigManagerInstance.config["Port"])
         self.user = ConfigManagerInstance.config["User"]
         self.password = ConfigManagerInstance.config["Password"]
         self.ssh = None
