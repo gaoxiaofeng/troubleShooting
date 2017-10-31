@@ -14,17 +14,6 @@ tr{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px soli
 <!--   引入jQuery -->
 <script src="/www/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/www/js/spin.min.js" ></script>
-<script type="text/javascript">
-$(function(){
-$('tr.parent').click(function(){   // 获取父行
-$(this)
-//	.toggleClass("selected")   // 添加/删除高亮
-	.siblings('.child_'+this.id).toggle();  // 隐藏/显示所谓的子行
-	});
-})
-</script>
-
-
 <style type="text/css">
 *{margin: 0;padding: 0;}
 body {
@@ -291,9 +280,11 @@ for(var i=0;i<nologs.length;i++)
 
 (function()
 {
+var oData = new Date();
+var getTime = oData.getTime();
 
 $.ajax({
-      url:'/www/{__ReportHash__}/data.xml',
+      url:'/www/{__ReportHash__}/data.xml?time='+getTime,
       type: 'GET',
       dataType: 'xml',
       success:function(xml)
@@ -311,10 +302,21 @@ $.ajax({
 				C_REFERENCE = '<font color="#d0d0d0">NA</font>'
 
 			}
+			if (C_STATUS == 'PASS'){
+				C_Color = "#27ae60" 
+			}
+			else if (C_STATUS == 'FAIL'){
+				C_Color = "#FF3030" 
+			}
+			else if (C_STATUS == 'FIXED'){
+				C_Color = "#729DBF" 
+			}	
+			else{
+				C_Color = "#00a2d3" 	
+			}
 
 
-
-			var CASE_BODY = '<tr  bgcolor="#FF3030" class="parent" id="row_'+ i +'">'+'<td colspan="1">'+ C_NAME + '</td><td>'+ C_STATUS  +'</td><td colspan="1"></td></tr>' +
+			var CASE_BODY = '<tr  bgcolor="'+ C_Color +'" class="parent" id="row_'+ i +'">'+'<td colspan="1">'+ C_NAME + '</td><td>'+ C_STATUS  +'</td><td colspan="1"></td></tr>' +
 							 '<tr class="child_row_'+ i +'" style="display:none"><td>Description</td><td></td><td>'+ C_DESCRIPTION +'</td></tr>' +
 							 ' <tr class="child_row_'+ i +'" style="display:none"><td>Reference</td><td></td><td>'+ C_REFERENCE +'</td></tr>' +
 							 '<tr class="child_row_'+ i +'" style="display:none"><td>Tags</td><td></td><td>' + C_TAGS  + '</td></tr>'
@@ -348,7 +350,7 @@ $.ajax({
 				var T_STATUS_COLOR = "red";
 			}
 			else{
-				var T_STATUS_COLOR = "yellow";
+				var T_STATUS_COLOR = "blue";
 			}
 			var T_IMPACT = $(this).children("IMPACT").text();
 			var T_DESCRIBE = $(this).children("DESCRIBE").text();
@@ -373,6 +375,7 @@ $.ajax({
 			else{
 				T_AUTOFIXSTEP = '<iframe scrolling="no" src="/www/iframe/growl-genie.html?'+
 								'Recovery='+T_AUTOFIXSTEP +
+								'&TestPoint='+ T_NAME + 
 								'&ProjectDir={__ProjectCWD__}'+
 								'&Host={Host}'+
 								'&Port={Port}'+
@@ -416,22 +419,24 @@ $.ajax({
 
 
 
+		//click to control page	
+		$('tr.parent').click(function(){   // get parent node
+			$(this)
+			//	.toggleClass("selected")   // 添加/删除高亮
+			.siblings('.child_'+this.id).toggle();  // display or not display
+		});
+			
+					
 
 		}
 	   })
+	   
+
 
 })();
+
+
 </script>
-
-
-
-
-
-
-
-
-
-
 
 </head>
 

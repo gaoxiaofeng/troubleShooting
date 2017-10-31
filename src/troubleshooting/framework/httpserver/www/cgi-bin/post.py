@@ -22,6 +22,7 @@ if form.has_key("Recovery"):
     ConfigManagerInstance.config = {"Password": form.getvalue("Password")}
     ConfigManagerInstance.config = {"__ReportHash__": form.getvalue("reportHash")}
     ConfigManagerInstance.config = {"__ProjectCWD__": form.getvalue("ProjectDir")}
+    ConfigManagerInstance.config = {"R_TestPoint": form.getvalue("TestPoint") }
 
     if ConfigManagerInstance.config["Recovery"]:
         print "Content-Type: text/html"  # HTML is following

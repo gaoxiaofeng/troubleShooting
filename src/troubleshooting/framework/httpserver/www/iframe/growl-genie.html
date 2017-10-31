@@ -15,7 +15,7 @@
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-	<body class="color-2">
+	<body class="color-12">
 		<div class="container">
 			<header class="codrops-header">
 			</header>
@@ -50,6 +50,7 @@
 			var Port = getQueryString("Port");
 			var User = getQueryString("User");
 			var Password = getQueryString("Password");
+			var TestPoint = getQueryString("TestPoint");
 
 
 			data.append("reportHash",reportHash)
@@ -60,6 +61,7 @@
 			data.append("Port",Port)
 			data.append("User",User)
 			data.append("Password",Password)
+			data.append("TestPoint",TestPoint)
 
 			
 			uphttp.open('POST','/www/cgi-bin/post.py',true);
@@ -82,6 +84,7 @@
 							layout : 'growl',
 							effect : 'genie',
 							type : 'notice', // notice, warning or error
+							ttl : 9000,	
 							onClose : function() {
 								bttn.disabled = true;
 							}
@@ -90,7 +93,9 @@
 						// show the notification
 						notification.show();
 
-					}, 1200 );
+					}, 3000 );
+						setTimeout(function() {parent.location.reload();},5000);
+						
 
 						//spinner.spin()
 						
@@ -125,10 +130,11 @@
 						
 						// create the notification
 						var notification = new NotificationFx({
-							message : "start to Auto Recovery...",
+							message : "<p>Start to Auto Recovery...</p>",
 							layout : 'growl',
 							effect : 'genie',
 							type : 'notice', // notice, warning or error
+							ttl : 9000,																	
 							onClose : function() {
 								bttn.disabled = true;
 							}
@@ -137,7 +143,7 @@
 						// show the notification
 						notification.show();
 
-					}, 1200 );
+					}, 3000 );
 					
 					// disable the button (for demo purposes only)
 					this.disabled = true;

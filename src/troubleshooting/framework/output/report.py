@@ -171,7 +171,7 @@ class report(object):
         #         i += 1
         self.printf("*" * (self._width * 3 + 4))
     def writeReport(self):
-        record().write()
+        record().create()
         # html().write()
         # graph = """The Report was saved as ./%s"""%ConfigManagerInstance.config["Report"]
         # self.printf(graph)

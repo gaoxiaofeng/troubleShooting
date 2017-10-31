@@ -11,7 +11,7 @@ class record(object):
         super(record,self).__init__()
         self.caseResult = ManagerFactory().getManager(LAYER.Case).case_record
         self.recordPath = join(ConfigManagerInstance.config["__ProjectCWD__"],"www",ConfigManagerInstance.config["__ReportHash__"],"data.xml")
-    def write(self):
+    def create(self):
         createDir(dirname(self.recordPath))
         root = ET.Element("root")
         for caseName in self.caseResult:
@@ -65,9 +65,72 @@ class record(object):
                 T_RCA.text = RCA
 
         tree = ET.ElementTree(root)
-        tree.write(self.recordPath)
+        self.write_xml(tree)
 
-    def read(self):
-        pass
+    def read_xml(self):
+        tree = ET.ElementTree()
+        tree.parse(self.recordPath)
 
+        return tree
+    def change_node_properties(self,nodelist,kv_map):
+        for node in nodelist:
+            for key in kv_map:
+                node.set(key,kv_map.get(key))
+
+    def update_testpoint_status(self,testpointName,updatedStatus="FIXED"):
+        tree = self.read_xml()
+        all_testpoints_nodes = self.find_nodes(tree,"case/testpoint")
+        selected_testpoint_nodes = self.get_nodes_by_properties(all_testpoints_nodes,{"NAME":testpointName})
+        self.change_node_properties(selected_testpoint_nodes,{"STATUS":updatedStatus})
+        self.delete_error_message(selected_testpoint_nodes)
+        self.update_case_status(tree)
+        self.write_xml(tree)
+
+    def write_xml(self,tree):
+        tree.write(self.recordPath,encoding="utf-8",xml_declaration=True)
+
+    def delete_nodes_text(self,nodes):
+        for node in nodes:
+            node.text = ""
+    def get_nodes_by_properties(self,nodelist,kv_map):
+        result_nodes = []
+        for node in nodelist:
+            if self.if_match(node,kv_map):
+                result_nodes.append(node)
+        return result_nodes
+
+    def delete_error_message(self,nodes):
+        for node in nodes:
+            self.delete_nodes_text(self.find_nodes(node, "IMPACT"))
+            self.delete_nodes_text(self.find_nodes(node, "FIXSTEP"))
+            self.delete_nodes_text(self.find_nodes(node, "AUTOFIXSTEP"))
+            self.delete_nodes_text(self.find_nodes(node, "RCA"))
+
+
+
+    def if_match(self,node,kv_map):
+        for key in kv_map:
+            if node.get(key) != kv_map.get(key):
+                return False
+        return True
+
+    def find_nodes(self,tree,path):
+        return  tree.findall(path)
+
+    def update_case_status(self,tree):
+        case_nodes = self.find_nodes(tree,"case")
+        for case_node in case_nodes:
+            testpoint_status = []
+            testpoint_nodes = self.find_nodes(case_node,"testpoint")
+            for testpoint_node in testpoint_nodes:
+                status = testpoint_node.get("STATUS")
+                testpoint_status.append(status)
+            if "FAIL" in testpoint_status:
+                case_status = "FAIL"
+            elif "FIXED" in testpoint_status:
+                case_status = "FIXED"
+            else:
+                case_status = "PASS"
+
+            self.change_node_properties([case_node], {"STATUS": case_status})
 

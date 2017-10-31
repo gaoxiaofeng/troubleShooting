@@ -5,6 +5,7 @@ from troubleshooting.framework.modules.builder import BuilderFactory
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.output.record import  record
+from troubleshooting.framework.modules.configuration import  ConfigManagerInstance
 import sys,os
 import traceback
 def recovery(args):
@@ -14,7 +15,8 @@ def recovery(args):
     builderfactory = BuilderFactory()
     builderfactory.getBuilder(LAYER.Recovery).builder()
     recoveryList = RecoveryManagerInstance.get_keyword()
-    caseResult = record().read()
+
+
 
     if isSublist(recoveryList, recoverStepsName):
         for i, step in enumerate(recoverSteps):
@@ -36,7 +38,8 @@ def recovery(args):
             print "<p>Recovery Failed!</p>"
 
         else:
-
+            record().update_testpoint_status(ConfigManagerInstance.config["R_TestPoint"])
             print "<p>Recovery Successfully!</p>"
+
     else:
         print "Unkown Recovery Steps : %s" % compareList(recoveryList, recoverStepsName)
