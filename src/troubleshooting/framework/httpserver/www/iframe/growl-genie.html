@@ -84,7 +84,7 @@
 							layout : 'growl',
 							effect : 'genie',
 							type : 'notice', // notice, warning or error
-							ttl : 9000,	
+							ttl : 5000,
 							onClose : function() {
 								bttn.disabled = true;
 							}
@@ -94,7 +94,7 @@
 						notification.show();
 
 					}, 3000 );
-						setTimeout(function() {parent.location.reload();},5000);
+						setTimeout(function() {window.parent.updateData();},5000);
 						
 
 						//spinner.spin()
@@ -134,7 +134,7 @@
 							layout : 'growl',
 							effect : 'genie',
 							type : 'notice', // notice, warning or error
-							ttl : 9000,																	
+							ttl : 5000,
 							onClose : function() {
 								bttn.disabled = true;
 							}

@@ -233,7 +233,7 @@ section {
 }
 
 .column:first-child {
-	box-shadow: inset -1px 0 0 rgba(0,0,0,0.1);
+	/* box-shadow: inset -1px 0 0 rgba(0,0,0,0.1); */
 	text-align: right;
 }
 
@@ -349,7 +349,7 @@ section {
 
 	.column:first-child {
 		text-align: center;
-		box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
+		/*box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);*/
 	}
 }
 

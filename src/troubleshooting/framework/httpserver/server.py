@@ -7,7 +7,7 @@ from troubleshooting.framework.modules.configuration import  ConfigManagerInstan
 from troubleshooting.framework.libraries.system import createDir,copyFile,copyDir
 from troubleshooting.framework.log.logger import logger
 class CGIHandler(CGIHTTPServer.CGIHTTPRequestHandler):
-    cgi_directories = ['/cgi-bin', '/htbin','/www']
+    cgi_directories = ['/www/cgi-bin']
     def log_message(self, format, *args):
         logger().info(format%args)
     def is_cgi(self):

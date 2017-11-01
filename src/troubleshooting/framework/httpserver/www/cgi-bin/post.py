@@ -39,10 +39,16 @@ else:
 
         print "Content-Type: text/html"     # HTML is following
         print                               # blank line, end of headers
-
-        with open(index_page,"rb") as f:
-            print f.read()
+        try:
+            with open(index_page,"rb") as f:
+                print f.read()
+        except IOError,e:
+            error_page = join(homeDir,"others","404.html")
+            with open(error_page,"rb") as f:
+                print f.read()
     else:
         print "Content-Type: text/html"     # HTML is following
         print                               # blank line, end of headers
-        print "<h>Error:    args `reportHash` and  `reportName` are  mandatory!</h>"
+        error_page = join(homeDir, "others", "404.html")
+        with open(error_page, "rb") as f:
+            print f.read()
