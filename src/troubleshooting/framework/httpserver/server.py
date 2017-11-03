@@ -4,8 +4,9 @@ import os
 import urllib
 from os.path import abspath,dirname,join
 from troubleshooting.framework.modules.configuration import  ConfigManagerInstance
-from troubleshooting.framework.libraries.system import createDir,copyFile,copyDir
+from troubleshooting.framework.libraries.system import copyDir,removeFile
 from troubleshooting.framework.log.logger import logger
+import traceback
 class CGIHandler(CGIHTTPServer.CGIHTTPRequestHandler):
     cgi_directories = ['/www/cgi-bin']
     def log_message(self, format, *args):
@@ -99,14 +100,16 @@ class server(Thread):
         # self.terminate()
         self.server.shutdown()
         self.terminate()
-    def copy_report_to_home(self):
-        index_template = join(self.home,"www","index.html")
+    def move_report_to_home(self):
+        index_template = join(dirname(dirname(ConfigManagerInstance.config["Report"])),"index.html")
         with open(index_template,"rb") as f:
             content = f.read()
         content = self.replace_template(content)
         report = ConfigManagerInstance.config["Report"]
         with open(report,"wb") as f:
             f.write(content)
+        removeFile(index_template)
+
 
     def replace_template(self,content):
 
@@ -120,13 +123,24 @@ class server(Thread):
         __ProjectCWD__ = __ProjectCWD__.replace('\\','/')
         content = content.replace("{__ProjectCWD__}",__ProjectCWD__)
 
+        with open(join(dirname(ConfigManagerInstance.config["Report"]),"data.xml"),"rb") as f:
+            xml = f.read()
+        xml = xml.replace("'",'"')
+        xml = xml.replace("\r\n","\\n\\\n")
+        xml = xml.replace("\n", "\\n\\\n")
+        xml = xml.replace("\r", "\\n\\\n")
+        content = content.replace("{DATA.XML}",xml)
+
+        with open(join(self.home,"www","js","jquery-3.2.1.min.js")) as f:
+            jquery = f.read()
+        content = content.replace("{JQEURY}",jquery)
         return content
 
     def deploy(self):
         _wwwFiles =  join(self.home,"www")
         wwwFiles = join(os.getcwd(),"www")
         copyDir(_wwwFiles,wwwFiles)
-        self.copy_report_to_home()
+        self.move_report_to_home()
 if __name__ == "__main__":
     S = server()
     S.start()

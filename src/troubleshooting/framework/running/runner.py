@@ -159,7 +159,7 @@ def run_cli(*args):
                 # Browser().openLocalReport(ConfigManagerInstance.config["Report"])
                 reportHash = ConfigManagerInstance.config["__ReportHash__"]
                 reportName = ConfigManagerInstance.config["__ReportName__"]
-                Browser().openLocalReport("http://localhost:8888/www/cgi-bin/post.py?reportHash=%s&reportName=%s"%(reportHash,reportName))
+                Browser().openLocalReport("http://localhost:8888/www/cgi-bin/index.py?reportHash=%s&reportName=%s"%(reportHash,reportName))
             except Exception,e:
                 print "Report save as %s"%ConfigManagerInstance.config["Report"]
                 logger().error(traceback.format_exc())

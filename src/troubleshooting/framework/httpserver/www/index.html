@@ -12,8 +12,7 @@ tr{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px soli
 //.selected{ background:#FF6500;color:#fff;}
 </style>
 <!--   引入jQuery -->
-<script src="/www/js/jquery-3.2.1.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="/www/js/spin.min.js" ></script>
+
 <style type="text/css">
 *{margin: 0;padding: 0;}
 body {
@@ -229,14 +228,16 @@ table {
 }
 </style>
 
-
+<script>
+{JQEURY}
+</script>
 <script>
 function checkboxOnclick(checkbox){
 
 if ( checkbox.checked == true){
 
 //Action for checked
-//document.getElementsById("log").style.display="";//显示
+//document.getElementsById("log").style.display="";
 var logs = document.getElementsByName("log")
 var nologs = document.getElementsByName("nolog")
 for(var i=0;i<logs.length;i++)
@@ -263,33 +264,27 @@ for(var i=0;i<nologs.length;i++)
  nologs[i].style.display="";
     }
 
-
-//Action for not checked
-//document.getElementsById("log").style.display="none";//隐藏
 }}
 
 </script>
 
-
-
-
-
 <script>
 
+function loadXmlString(){
+
+var text = '{DATA.XML}';
+var xml = $.parseXML(text);
+return xml
+}
 
 
-function updateData()
-{
-var oData = new Date();
-var getTime = oData.getTime();
+function parseXml(xml){
 
-$.ajax({
-      url:'/www/{__ReportHash__}/data.xml?time='+getTime,
-      type: 'GET',
-      dataType: 'xml',
-      success:function(xml)
-	  {
 	  	$("#caseReport").empty()
+		var FORM_HEAD = '<thead><tr ><th width="15%">CaseName</th><th width="5%" >Status</th><th width="80%">Attribute</th></tr></thead>'
+		var FORM_BODY = '<tbody>'
+		$("#caseReport").append(FORM_HEAD)
+		$("#caseReport").append(FORM_BODY)
 		$(xml).find("case").each(function(i){
 			var C_NAME = $(this).attr("NAME");
 			var C_LEVEL = $(this).attr("LEVEL");
@@ -316,13 +311,13 @@ $.ajax({
 				C_Color = "#00a2d3" 	
 			}
 
-
+			
 			var CASE_BODY = '<tr  bgcolor="'+ C_Color +'" class="parent" id="row_'+ i +'">'+'<td colspan="1">'+ C_NAME + '</td><td>'+ C_STATUS  +'</td><td colspan="1"></td></tr>' +
 							 '<tr class="child_row_'+ i +'" style="display:none"><td>Description</td><td></td><td>'+ C_DESCRIPTION +'</td></tr>' +
 							 ' <tr class="child_row_'+ i +'" style="display:none"><td>Reference</td><td></td><td>'+ C_REFERENCE +'</td></tr>' +
 							 '<tr class="child_row_'+ i +'" style="display:none"><td>Tags</td><td></td><td>' + C_TAGS  + '</td></tr>'
 
-
+			
 			$("#caseReport").append(CASE_BODY)
 
 			var TESTPOINT_HEAD = '<tr class="child_row_'+ i +'" style="display:none">'+
@@ -408,9 +403,13 @@ $.ajax({
 
 			var TESTPOINT_HEAD_OFF = '</table></td></tr>'
 			var TESTPOINT_FORM = TESTPOINT_HEAD + TESTPOINT_BODY + TESTPOINT_HEAD_OFF
+			var FORM_BODY_OFF = '</tbody>'
 
 			$("#caseReport").append(TESTPOINT_FORM)
-
+			$("#caseReport").append(FORM_BODY_OFF)
+			var logSwitch = '<div class="checkbox"><input type="checkbox"  onclick="checkboxOnclick(this)"/><label></label></div>'
+			$("#logSwitch").empty();
+			$("#logSwitch").append(logSwitch);
 
 
 
@@ -429,14 +428,41 @@ $.ajax({
 			
 					
 
+
+
+
+
+}
+
+function updateData()
+{
+var oData = new Date();
+var getTime = oData.getTime();
+
+$.ajax({
+      url:'/www/{__ReportHash__}/data.xml?time='+getTime,
+      type: 'GET',
+      dataType: 'xml',
+      success:function(xml)
+	  {
+		parseXml(xml);
 		}
 	   })
 	   
 
-
 };
 
+if (window.location.protocol == 'file:')
+{
+var xml = loadXmlString();
+parseXml(xml);
+}
+else
+{
 updateData();
+}
+
+
 
 </script>
 
@@ -446,21 +472,8 @@ updateData();
 <body bgcolor = "#E9EAEE">
 <h1 align="center">TroubleShooting Framework Report</h1>
 <p><i>2017-10-27 16:53:17 China Standard Time</i></p>
-	<table width="100%" border="2" class="bordered">
-		<thead>
-			<tr ><th width="15%">CaseName</th><th width="5%" >Status</th><th width="80%">Attribute</th></tr>
-		</thead>
-		<tbody id="caseReport">
-
-		</tbody>
-	</table>
-
-<section class="model-1">
-    <div class="checkbox">
-        <input type="checkbox"  onclick="checkboxOnclick(this)"/>
-        <label></label>
-    </div>
-</section>
+<table id="caseReport" width="100%" border="2" class="bordered"></table>
+<div id="logSwitch" class="model-1"></div>
 <div id="spin"></div>
 </body>
 

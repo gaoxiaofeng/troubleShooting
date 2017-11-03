@@ -1,5 +1,7 @@
 import sys,os
 import shutil
+import traceback
+from troubleshooting.framework.log.logger import logger
 def createDir(path):
     if not os.path.isdir(path):
         try:
@@ -10,7 +12,12 @@ def removeDir(path):
     try:
         shutil.rmtree(path)
     except Exception, e:
-        print "failed to remove %s" % path
+        logger().error(traceback.format_exc())
+def removeFile(path):
+    try:
+        os.remove(path)
+    except Exception,e:
+        logger().error(traceback.format_exc())
 def clean(path=os.getcwd()):
     for file in os.listdir(path):
         absolute_path = os.path.join(path, file)
