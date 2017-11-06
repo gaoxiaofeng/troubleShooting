@@ -220,7 +220,7 @@ def parseRecoveryArgs(argsString):
     import re
     recoverStepsParsed = []
     recoverSteps = argsString.split(",")
-    pattern = re.compile(r"([\d\w_]+)\(*([\d\w_;]*)\)*", re.I)
+    pattern = re.compile(r"([\d\w_]+)\(*([^\(\)]*)\)*", re.I)
     for step in recoverSteps:
         match = pattern.match(step)
         if match:
@@ -232,4 +232,5 @@ def parseRecoveryArgs(argsString):
 
 if __name__ == "__main__":
     # print convertTime("1 h 1 mins 1sec")
+    # print parseRecoveryArgs("touchFile(/home/testfile_  haha.txt)")
     pass

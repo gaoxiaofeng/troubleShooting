@@ -16,7 +16,10 @@ if form.has_key("Recovery"):
 
     sys.path.append(ProjectDir)
     ConfigManagerInstance.config = {"Recovery":form.getvalue("Recovery")}
-    ConfigManagerInstance.config = {"Host": form.getvalue("Host")}
+    if form.getvalue("Host") == "localhost":
+        ConfigManagerInstance.config = {"Host": None}
+    else:
+        ConfigManagerInstance.config = {"Host": form.getvalue("Host")}
     ConfigManagerInstance.config = {"Port": form.getvalue("Port")}
     ConfigManagerInstance.config = {"User": form.getvalue("User")}
     ConfigManagerInstance.config = {"Password": form.getvalue("Password")}

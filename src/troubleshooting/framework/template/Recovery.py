@@ -2,6 +2,9 @@ from troubleshooting.framework.modules.configuration import ConfigManagerInstanc
 from troubleshooting.framework.remote.client import client
 from troubleshooting.framework.libraries.library import ExecuteCommond
 from troubleshooting.framework.variable.variable import *
+from troubleshooting.framework.log.internalLog import internalLog
+import sys
+import traceback
 try:
     #import project config.variable
     from config.variable import *
@@ -17,10 +20,25 @@ class Recovery(object):
         self.password = ConfigManagerInstance.config["Password"]
         self.ssh = None
         self.local = None
+        self.log = internalLog()
+        self.internalLog = ""
+    def _redirect(self):
+        self._stdout = sys.stdout
+        sys.stdout = self.log
+    def _recover(self):
+        if self._stdout:
+            sys.stdout = self._stdout
     def run(self,*args):
-        status = self.action(*args)
-        return  status
-
+        try:
+            self._redirect()
+            status = self.action(*args)
+        except Exception,e:
+            print traceback.format_exc()
+            status = STATUS.FAIL
+        finally:
+            self._recover()
+            self.internalLog = self.log.getContent()
+        return  status,self.internalLog
     def _open_connection(self):
         self.ssh = client().open_connection(host=self.host,port=self.port,user=self.user,password=self.password)
     def _remote_execute_command(self,command,checkerr = False):

@@ -53,7 +53,7 @@ Options:
 
         project_path = join(directory,project)
         self.mkdir( project_path)
-        initFiles = [join(project_path,foler,"__init__.py") for foler in ("case","testpoint","keywords","config")]
+        initFiles = [join(project_path,foler,"__init__.py") for foler in ("case","testpoint","keywords","config","lib","recovery")]
         for initFile in initFiles:
             self.create_file(initFile)
         variableFile = join(project_path,"config","variable.py")

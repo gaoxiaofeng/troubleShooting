@@ -19,10 +19,10 @@ class BaseSSH(object):
         stdin,stdout,stderr = self._ssh.exec_command(command)
         if not checkerr:
             return stdout.read()
-        if stderr:
-            raise Exception("exec remote command error: %s"%stderr)
+        if stderr.read():
+            raise Exception("exec remote command error: %s"%stderr.read())
         else:
-            return stdout
+            return stdout.read()
     def _openSftp(self):
         t = paramiko.Transport(sock=(self._host,self._port))
         t.connect(username=self._username,password=self._password)

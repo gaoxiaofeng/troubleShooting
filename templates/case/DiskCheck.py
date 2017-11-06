@@ -5,8 +5,8 @@ class DiskCheck(Case):
     """
     def __init__(self):
         super(DiskCheck,self).__init__()
-        self.passCondition = "{DiskSizeCheck} and {DiskInodesCheck}"
-        self.tags = "n17.8 regression"
+        self.passCondition = "{DiskSizeCheck} and {DiskInodesCheck} and {ShouldBeExistTestFile}"
+        self.tags = "template"
 
 
 

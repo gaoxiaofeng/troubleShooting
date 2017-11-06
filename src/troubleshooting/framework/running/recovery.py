@@ -10,6 +10,7 @@ import sys,os
 import traceback
 def recovery(args):
     recoverSteps = parseRecoveryArgs(args)
+    logger().info("recovery steps: %s"%recoverSteps)
     recoverStepsName = [step["method"] for step in recoverSteps]
     RecoveryManagerInstance = ManagerFactory().getManager(LAYER.Recovery)
     builderfactory = BuilderFactory()
@@ -25,7 +26,7 @@ def recovery(args):
 
 
             try:
-                status = RecoveryManagerInstance.run_recovery(stepName, *stepArgs)
+                status,Log = RecoveryManagerInstance.run_recovery(stepName, *stepArgs)
             except Exception, e:
                 logger().error(traceback.format_exc())
                 status = STATUS.FAIL
@@ -39,6 +40,7 @@ def recovery(args):
 
         else:
             record().update_testpoint_status(ConfigManagerInstance.config["R_TestPoint"])
+            record().update_testpoint_log(ConfigManagerInstance.config["R_TestPoint"],Log)
             print "<p>Recovery Successfully!</p>"
 
     else:

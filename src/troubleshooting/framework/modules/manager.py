@@ -155,8 +155,9 @@ class  RecoveryManager(BaseManager):
 
         recoveryRunnerEntry = "%s.%s"%(recovery,"run")
         recoveryRunner = self.get_keyword(recoveryRunnerEntry)
-        result = recoveryRunner(*args)
-        return result
+        result,Log = recoveryRunner(*args)
+
+        return result,Log
 
 
 

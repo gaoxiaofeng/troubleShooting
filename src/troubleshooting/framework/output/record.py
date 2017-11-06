@@ -85,13 +85,24 @@ class record(object):
         self.delete_error_message(selected_testpoint_nodes)
         self.update_case_status(tree)
         self.write_xml(tree)
-
+    def update_testpoint_log(self,testpointName,Log):
+        tree = self.read_xml()
+        all_testpoints_nodes = self.find_nodes(tree,"case/testpoint")
+        selected_testpoint_nodes = self.get_nodes_by_properties(all_testpoints_nodes,{"NAME":testpointName})
+        self.update_nodes_logs(selected_testpoint_nodes,Log)
+        self.write_xml(tree)
     def write_xml(self,tree):
         tree.write(self.recordPath,encoding="utf-8",xml_declaration=True)
 
     def delete_nodes_text(self,nodes):
         for node in nodes:
             node.text = ""
+    def update_nodes_logs(self,nodes,log):
+        for node in nodes:
+            log_nodes = self.find_nodes(node,"LOG")
+            for log_node in log_nodes:
+                log_node.text = log
+
     def get_nodes_by_properties(self,nodelist,kv_map):
         result_nodes = []
         for node in nodelist:

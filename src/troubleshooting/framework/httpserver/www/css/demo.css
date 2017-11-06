@@ -267,7 +267,8 @@ section {
 	line-height: 4;
 	overflow: hidden;
 	border-radius: 5px;
-	background: rgba(0,0,0,0.2);
+	/*background: rgba(0,0,0,0.2);*/
+	background: #27ae60;
 }
 
 .progress-button .content {

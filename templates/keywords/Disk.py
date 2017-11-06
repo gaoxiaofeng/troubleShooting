@@ -2,6 +2,7 @@
 from troubleshooting.framework.libraries.library import singleton
 import re
 from troubleshooting.framework.template.Keyword import *
+import traceback
 @singleton
 class Disk(Keyword):
     def __init__(self):
@@ -43,6 +44,17 @@ class Disk(Keyword):
     def get_disk_usage_inodes(self):
         self._list()
         return self._diskInodes
+    def is_exist_file(self,path):
+        command = "ls %s"%path
+        try:
+            stdout = self.execute_command(command,checkerr = True)
+        except Exception,e:
+            print "raise exception : %s"%traceback.format_exc()
+            # file not exist
+            return False
+        else:
+            #file exist
+            return  True
 
 
 if __name__ == "__main__":

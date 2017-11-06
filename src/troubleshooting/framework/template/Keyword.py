@@ -29,9 +29,9 @@ class Keyword(object):
             self.local =  ExecuteCommond()
         stdout = self.local.shell_command(command,checkerr=checkerr)
         return stdout
-    def execute_command(self,command):
+    def execute_command(self,command,checkerr = False):
         if self.remote:
-            stdout = self._remote_execute_command(command)
+            stdout = self._remote_execute_command(command,checkerr=checkerr)
             return stdout
         else:
             stdout = self._local_execute_command(command)

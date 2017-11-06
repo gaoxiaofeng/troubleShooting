@@ -112,8 +112,11 @@ class server(Thread):
 
 
     def replace_template(self,content):
+        if ConfigManagerInstance.config["Host"]:
+            content = content.replace("{Host}", ConfigManagerInstance.config["Host"])
+        else:
+            content = content.replace("{Host}", "localhost")
 
-        content = content.replace("{Host}", ConfigManagerInstance.config["Host"])
         content = content.replace("{User}", ConfigManagerInstance.config["User"])
         content = content.replace("{Port}", ConfigManagerInstance.config["Port"])
         content = content.replace("{Password}", ConfigManagerInstance.config["Password"])
