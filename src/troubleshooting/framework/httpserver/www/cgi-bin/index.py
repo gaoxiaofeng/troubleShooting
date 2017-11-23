@@ -4,6 +4,8 @@ from troubleshooting.framework.running.recovery import recovery
 from os.path import abspath,dirname,join
 import cgi
 import os,sys
+from troubleshooting.framework.libraries.system import get_FileCreateTime,get_FileModifyTime
+from troubleshooting.framework.libraries.parsexml import parsexml
 
 form = cgi.FieldStorage()
 homeDir = dirname(dirname(abspath(__file__)))
@@ -37,8 +39,8 @@ if form.has_key("Recovery"):
 
 else:
     #generate mode
-    if form.has_key("reportHash") and form.has_key("reportName"):
-        index_page = join(homeDir, form.getvalue("reportHash"), form.getvalue("reportName"))
+    if form.has_key("reportHash"):
+        index_page = join(homeDir, form.getvalue("reportHash"), "report.html")
 
         print "Content-Type: text/html"     # HTML is following
         print                               # blank line, end of headers
@@ -52,6 +54,25 @@ else:
     else:
         print "Content-Type: text/html"     # HTML is following
         print                               # blank line, end of headers
-        error_page = join(homeDir, "others", "404.html")
-        with open(error_page, "rb") as f:
-            print f.read()
+        if not form.has_key("reportHash"):
+            hashlink = []
+            for _fileName in os.listdir(homeDir):
+                if _fileName.endswith(".d"):
+                    _filepath = join(homeDir,_fileName)
+                    fileCreateTime = get_FileCreateTime(_filepath)
+                    fileModifyTime = get_FileModifyTime(_filepath)
+                    dataxmlpath = join(_filepath,"data.xml")
+                    pass_num,fail_num = parsexml().get_cases_status(dataxmlpath)
+                    hashlink.append('<li><div>%s</div><a href="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s">report linkage (pass %s/fail %s)</a></li>'%(fileCreateTime,_fileName,pass_num,fail_num))
+            linkage = "</br>".join(hashlink)
+
+            html = """
+        <html>
+        <head>
+        </head>
+        <body>
+        %s
+        </body>
+        </html>
+        """%linkage
+            print html

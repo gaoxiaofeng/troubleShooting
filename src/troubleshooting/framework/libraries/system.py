@@ -2,6 +2,7 @@ import sys,os
 import shutil
 import traceback
 from troubleshooting.framework.log.logger import logger
+import time
 def createDir(path):
     if not os.path.isdir(path):
         try:
@@ -51,3 +52,14 @@ def copyDir(left,right):
             copyFile(left_absolute_path,right_absolute_path)
         if os.path.isdir(left_absolute_path):
             copyDir(left_absolute_path,right_absolute_path)
+def TimeStampToTime(timestamp):
+    timeStruct = time.localtime(timestamp)
+    return  time.strftime("%Y-%m-%d %H:%M:%S",timeStruct)
+def get_FileCreateTime(path):
+    filepath = unicode(path,"utf8")
+    t = os.path.getctime(filepath)
+    return  TimeStampToTime(t)
+def get_FileModifyTime(path):
+    filepath = unicode(path,"utf8")
+    t = os.path.getmtime(filepath)
+    return TimeStampToTime(t)

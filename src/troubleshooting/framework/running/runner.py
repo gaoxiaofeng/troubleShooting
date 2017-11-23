@@ -63,6 +63,25 @@ def run_cli(*args):
     if ConfigManagerInstance.config["Clean"]:
         clean()
         return
+    if ConfigManagerInstance.config["ReadOnly"]:
+        try:
+            cigServer = server(skip_deploy = True)
+            threandList.append(cigServer)
+            cigServer.start()
+            print "init ReadOnly mode successfully."
+            linkage = "http://localhost:8888/www/cgi-bin/index.py"
+            if ConfigManagerInstance.config["SYSTEM"] == SYSTEM.WINDOWS.value:
+                Browser().openLocalReport(linkage)
+            else:
+                print "[Tips]:please visit the webpage %s"%linkage
+        except Exception,e:
+            print "Can not init ReadOnly mode."
+            logger().error(traceback.format_exc())
+        finally:
+            while 1:
+                time.sleep(0.1)
+
+        return
     if ConfigManagerInstance.config["Host"]:
         #remote mode
         host = ConfigManagerInstance.config["Host"]
@@ -156,10 +175,8 @@ def run_cli(*args):
                 cigServer = server()
                 threandList.append(cigServer)
                 cigServer.start()
-                # Browser().openLocalReport(ConfigManagerInstance.config["Report"])
                 reportHash = ConfigManagerInstance.config["__ReportHash__"]
-                reportName = ConfigManagerInstance.config["__ReportName__"]
-                Browser().openLocalReport("http://localhost:8888/www/cgi-bin/index.py?reportHash=%s&reportName=%s"%(reportHash,reportName))
+                Browser().openLocalReport("http://localhost:8888/www/cgi-bin/index.py?reportHash=%s"%reportHash)
             except Exception,e:
                 print "Report save as %s"%ConfigManagerInstance.config["Report"]
                 logger().error(traceback.format_exc())

@@ -84,15 +84,18 @@ def _url_collapse_path(path):
 
     return collapsed_path
 class server(Thread):
-    def __init__(self):
+    def __init__(self,port=8888,skip_deploy=False):
         super(server,self).__init__()
         self.server = None
         self.home = dirname(abspath(__file__))
-    def run(self,port=8888):
+        self.port = port
+        self.skip_deploy = skip_deploy
+    def run(self):
         # self.copy_report_to_home()
+
         self.deploy()
         # os.chdir(self.home)
-        self.server = BaseHTTPServer.HTTPServer(("",port),CGIHandler )
+        self.server = BaseHTTPServer.HTTPServer(("",self.port),CGIHandler )
         self.server.serve_forever()
     def terminate(self):
         raise RuntimeError("raise SystemExit from terminate commands")
@@ -143,7 +146,8 @@ class server(Thread):
         _wwwFiles =  join(self.home,"www")
         wwwFiles = join(os.getcwd(),"www")
         copyDir(_wwwFiles,wwwFiles)
-        self.move_report_to_home()
+        if not self.skip_deploy:
+            self.move_report_to_home()
 if __name__ == "__main__":
     S = server()
     S.start()

@@ -351,7 +351,7 @@ function parseXml(xml){
 			var T_IMPACT = $(this).children("IMPACT").text();
 			var T_DESCRIBE = $(this).children("DESCRIBE").text();
 			var T_FIXSTEP = $(this).children("FIXSTEP").text();
-			var T_LOG = $(this).children("LOG").text();
+			var T_LOG = $(this).children("LOG").text().replace(/\n/g,"</br>");
 			var T_TIMEOUT = $(this).children("TIMEOUT").text();
 			var T_COST = $(this).children("COST").text();
 			var T_AUTOFIXSTEP = $(this).children("AUTOFIXSTEP").text();
@@ -385,7 +385,7 @@ function parseXml(xml){
 			}
 			
 			TESTPOINT_BODY += '<tr>'+
-								'<td><i title="Timeout: 30s CostTime: 1.74 sec">' + T_NAME + '</i></td>'+
+								'<td><i title="Timeout: ' + T_TIMEOUT + ' CostTime: ' + T_COST + ' sec">' + T_NAME + '</i></td>'+
 								'<td><i><font color="'+ T_STATUS_COLOR +'"><b><i>'+ T_STATUS +'</i></b></font></i></td>' +
 								'<td><i>'+ T_LEVEL +'</i></td>'+
 								'<td name="nolog"><i>'+ T_IMPACT +'</i></td>' +
