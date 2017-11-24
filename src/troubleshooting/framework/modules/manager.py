@@ -205,6 +205,28 @@ class CaseManager(BaseManager):
 
         self.case_record = {case:result}
         return  behavior
+
+
+    def is_need_to_run(self,case):
+        if ConfigManagerInstance.config["Case"]:
+            if ConfigManagerInstance.config["Case"] != case:
+                return False
+
+        if ConfigManagerInstance.config["Include"]:
+            #process include tags
+            patterns = ConfigManagerInstance.config["Include"]
+            tags = self.get_keyword("%s.getTags"%case)()
+            if not TagPattern(patterns).match(tags):
+                return False
+
+        if ConfigManagerInstance.config["Exclude"]:
+            #process exclude tags
+            patterns = ConfigManagerInstance.config["Exclude"]
+            tags = self.get_keyword("%s.getTags"%case)()
+            if TagPattern(patterns).match(tags):
+                return False
+
+        return  True
     @property
     def case_record(self):
         return self.__case_record

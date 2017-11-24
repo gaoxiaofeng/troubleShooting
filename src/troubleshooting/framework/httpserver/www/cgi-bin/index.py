@@ -40,7 +40,7 @@ if form.has_key("Recovery"):
 else:
     #generate mode
     if form.has_key("reportHash"):
-        index_page = join(homeDir, form.getvalue("reportHash"), "report.html")
+        index_page = join(homeDir, form.getvalue("reportHash"), "index.html")
 
         print "Content-Type: text/html"     # HTML is following
         print                               # blank line, end of headers
@@ -73,7 +73,7 @@ else:
                 fileModifyTime = get_FileModifyTime(_filepath)
                 dataxmlpath = join(_filepath,"data.xml")
                 pass_num,fail_num = parsexml().get_cases_status(dataxmlpath)
-                hashlink.append('<div>%s<a href="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s"><iframe  src="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s" width="100%%" height="300" scrolling="no"></iframe >Detail Page(pass %s/fail %s)</a></div>'%(fileCreateTime,_fileName,_fileName,pass_num,fail_num))
+                hashlink.append('<div>%s<a href="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s">Detail Page(pass %s/fail %s)</a></div>'%(fileCreateTime,_fileName,pass_num,fail_num))
             linkage = "</br>".join(hashlink)
 
             html = """

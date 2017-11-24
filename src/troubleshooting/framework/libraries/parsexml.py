@@ -13,7 +13,10 @@ class parsexml(object):
     def get_cases_status(self,path):
         pass_num = 0
         fail_num = 0
-        tree = self.read_xml(path)
+        try:
+            tree = self.read_xml(path)
+        except Exception,e:
+            return 0,0
         case_nodes = self.find_nodes(tree,"case")
         for case_node in case_nodes:
             status = case_node.get("STATUS")

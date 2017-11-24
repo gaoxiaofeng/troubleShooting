@@ -7,6 +7,7 @@ from troubleshooting.framework.variable.variable import  *
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
 from troubleshooting.framework.output.writehtml import html
 from troubleshooting.framework.output.record import record
+from os.path import join,dirname,sep
 @singleton
 class report(object):
     def __init__(self):
@@ -36,7 +37,7 @@ class report(object):
                 # report = "    [%s]    %sSuccess"%(i,_caseName)
                 successReportList.append(caseName)
             else:
-                level = self.caseResult[caseName]["FAILURELEVEL"]
+                level = self.caseResult[caseName]["LEVEL"]
 
                 _Failure = "(+)Fail" if level is LEVEL.CRITICAL else "(+)Warn"
                 # report = "    [%s]    %sFailure (+)" % (i, _caseName)
@@ -119,8 +120,8 @@ class report(object):
         Description = self.caseResult[caseName]['DESCRIPTION']
         CriticalRCA =  self.caseResult[caseName]['RCA']['CriticalRCA']
         NoCriticalRCA =  self.caseResult[caseName]['RCA']['NoCriticalRCA']
-        CriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['CriticalFixMethod']
-        NoCriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['NoCriticalFixMethod']
+        # CriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['CriticalFixMethod']
+        # NoCriticalFixMethod = self.caseResult[caseName]['FIXMETHOD']['NoCriticalFixMethod']
         ReferenceDocument = self.caseResult[caseName]['REFERENCE']
         self.printf("*"*(self._width*3+4))
         self.printf("|*CaseName:\t{%s}"%caseName)
@@ -172,9 +173,10 @@ class report(object):
         self.printf("*" * (self._width * 3 + 4))
     def writeReport(self):
         record().create()
-        # html().write()
-        # graph = """The Report was saved as ./%s"""%ConfigManagerInstance.config["Report"]
-        # self.printf(graph)
+        html().write()
+        reportPath = ConfigManagerInstance.config["Report"]
+        graph = """The Report was saved as %s"""%reportPath
+        self.printf(graph)
 
 
 

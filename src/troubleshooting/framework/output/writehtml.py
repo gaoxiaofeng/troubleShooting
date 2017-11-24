@@ -47,7 +47,7 @@ class html(object):
             if caseStatus:
                 data += parent_pass
             else:
-                _level = self.caseResult[caseName]["FAILURELEVEL"]
+                _level = self.caseResult[caseName]["LEVEL"]
                 if _level is LEVEL.CRITICAL:
                     data += parent_fail
                 else:
@@ -192,6 +192,7 @@ class html(object):
         data += HTML_AFTER
         reportDir = os.path.dirname(ConfigManagerInstance.config["Report"])
         createDir(reportDir)
-        with open(ConfigManagerInstance.config["Report"],"w") as f:
+        reportPath = ConfigManagerInstance.config["Report"]
+        with open(reportPath,"w") as f:
             f.write(data)
 

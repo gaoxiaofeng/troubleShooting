@@ -108,7 +108,7 @@ class server(Thread):
         with open(index_template,"rb") as f:
             content = f.read()
         content = self.replace_template(content)
-        report = ConfigManagerInstance.config["Report"]
+        report = join(dirname(ConfigManagerInstance.config["Report"]),"index.html")
         with open(report,"wb") as f:
             f.write(content)
         removeFile(index_template)

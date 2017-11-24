@@ -19,6 +19,7 @@ from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.httpserver.server import  server
 from troubleshooting.framework.running.recovery import recovery
 from troubleshooting.framework.running.args import parsedArgs
+from troubleshooting.framework.libraries.filter import filterCaselist
 import platform
 import sys,os
 import time
@@ -118,17 +119,19 @@ def run_cli(*args):
 
         OutPut().start()
         caseNameList = CaseManagerInstance.get_keyword()
-        caseNameListLength = len(caseNameList)
+        caseNameList_NeedRun = filterCaselist(caseNameList)
+
+        caseNameListLength = len(caseNameList_NeedRun)
         if ConfigManagerInstance.config["SYSTEM"] == SYSTEM.LINUX.value:
             welcome()
             welcome().logo()
-            welcome().loadCasePrint(caseNameList)
+            welcome().loadCasePrint(caseNameList_NeedRun)
             PD = ProgressDialog(caseNameListLength)
             PD.start()
             threandList.append(PD)
 
             try:
-                for i,caseName in enumerate(caseNameList):
+                for i,caseName in enumerate(caseNameList_NeedRun):
                     # i += 1
                     PD.set(i)
                     behavior =  CaseManagerInstance.run_case(caseName)
@@ -156,8 +159,8 @@ def run_cli(*args):
             try:
                 welcome()
                 welcome().logo()
-                welcome().loadCasePrint(caseNameList)
-                for caseName in caseNameList:
+                welcome().loadCasePrint(caseNameList_NeedRun)
+                for caseName in caseNameList_NeedRun:
                     behavior =  CaseManagerInstance.run_case(caseName)
                     if behavior == BEHAVIOR.EXIT:
                         break
