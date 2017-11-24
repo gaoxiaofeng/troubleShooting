@@ -63,3 +63,7 @@ def get_FileModifyTime(path):
     filepath = unicode(path,"utf8")
     t = os.path.getmtime(filepath)
     return TimeStampToTime(t)
+def get_FileCreateTimeStamp(path):
+    filepath = unicode(path,"utf8")
+    t = os.path.getctime(filepath)
+    return t

@@ -4,7 +4,7 @@ from troubleshooting.framework.running.recovery import recovery
 from os.path import abspath,dirname,join
 import cgi
 import os,sys
-from troubleshooting.framework.libraries.system import get_FileCreateTime,get_FileModifyTime
+from troubleshooting.framework.libraries.system import get_FileCreateTime,get_FileModifyTime,get_FileCreateTimeStamp
 from troubleshooting.framework.libraries.parsexml import parsexml
 
 form = cgi.FieldStorage()
@@ -56,14 +56,24 @@ else:
         print                               # blank line, end of headers
         if not form.has_key("reportHash"):
             hashlink = []
+            index = []
+            filepathDict = {}
             for _fileName in os.listdir(homeDir):
                 if _fileName.endswith(".d"):
                     _filepath = join(homeDir,_fileName)
-                    fileCreateTime = get_FileCreateTime(_filepath)
-                    fileModifyTime = get_FileModifyTime(_filepath)
-                    dataxmlpath = join(_filepath,"data.xml")
-                    pass_num,fail_num = parsexml().get_cases_status(dataxmlpath)
-                    hashlink.append('<li><div>%s</div><a href="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s">report linkage (pass %s/fail %s)</a></li>'%(fileCreateTime,_fileName,pass_num,fail_num))
+                    fileCreateTimeStamp = get_FileCreateTimeStamp(_filepath)
+                    index.append(fileCreateTimeStamp)
+                    filepathDict[str(fileCreateTimeStamp)] = _filepath
+            index.sort()
+            for _index in index:
+                _filepath = filepathDict[str(_index)]
+                _fileName = _filepath.split(os.path.sep)[-1]
+
+                fileCreateTime = get_FileCreateTime(_filepath)
+                fileModifyTime = get_FileModifyTime(_filepath)
+                dataxmlpath = join(_filepath,"data.xml")
+                pass_num,fail_num = parsexml().get_cases_status(dataxmlpath)
+                hashlink.append('<div>%s<a href="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s"><iframe  src="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s" width="100%%" height="300" scrolling="no"></iframe >Detail Page(pass %s/fail %s)</a></div>'%(fileCreateTime,_fileName,_fileName,pass_num,fail_num))
             linkage = "</br>".join(hashlink)
 
             html = """
