@@ -34,7 +34,7 @@ from GitHub. After that you can install the framework with::
 
     python setup.py install
 
-  
+A benefit of using pip is that it automatically installs paramiko and PyCrypto modules that troubleshooting-framework requires on Python. Using pip on Windows with Python works too, but you need to first install PyCrypto module manually.  
 
 *************************
 Development:
@@ -123,28 +123,9 @@ Usage:
 
 Switch folder to  <ProjectDirectory>/<MyProject>/ , you can simple run::
 
-    pyts --host=192.168.10.10  --include=exampleANDsmoke --exclude=NoRunORdisable
+    pyts --host=192.168.10.10  --user=root --password=root  --include=exampleANDsmoke --exclude=NoRunORdisable
 
-Options:
-  --version            show program's version number and exit
-  -h, --help           show this help message and exit
-  -l, --list           print list of cases
-  --clean              remove all report directory
-  --host=HOST          host for remote connection
-  --port=PORT          port for remote connection ,defaut port is 22
-  --user=USER          user for remote connection , default user is root
-  --password=PASSWORD  password for remote connection , default password is
-                       arthur
-  --case=CASE          select the case to run by case name
-  --include=INCLUDE    select cases to run by tag, Tags can also be combined
-                       together with  `AND` and `OR` .     Example:
-                       --include=coolANDhot
-  --exclude=EXCLUDE    select cases not to run by tag. Tags can also be
-                       combined together with  `AND` and `OR` .     Example:
-                       --include=coolORhot
-  --report=REPORT      HTML report file, default is report.html
-  -r RECOVERY, --recovery=RECOVERY
-                        try to recovery problem
+
 
 
 *********************
