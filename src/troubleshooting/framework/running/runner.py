@@ -5,22 +5,17 @@ from troubleshooting.framework.modules.builder import BuilderFactory
 from troubleshooting.framework.output.output import OutPut
 from troubleshooting.framework.output.welcome import welcome
 from troubleshooting.framework.modules.manager import ManagerFactory
-# from troubleshooting.framework.version.version import VERSION
-from optparse import OptionParser
 from troubleshooting.framework.output.progressDialog import  ProgressDialog
 from troubleshooting.framework.output.report import report
 import traceback
-from troubleshooting.framework.output.Print import *
 from troubleshooting.framework.output.browser import Browser
 from troubleshooting.framework.remote.client import client
-# from troubleshooting.framework.libraries.library import getRandomString,isSublist,compareList,parseRecoveryArgs
 from troubleshooting.framework.libraries.system import clean
 from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.httpserver.server import  server
 from troubleshooting.framework.running.recovery import recovery
 from troubleshooting.framework.running.args import parsedArgs
 from troubleshooting.framework.libraries.filter import filterCaselist
-import platform
 import sys,os
 import time
 import signal
@@ -53,8 +48,6 @@ def run_cli(*args):
     if ConfigManagerInstance.config["List"]:
         CaseManagerInstance = ManagerFactory().getManager(LAYER.Case)
         builderfactory = BuilderFactory()
-        # builderfactory.getBuilder(LAYER.KeyWords).builder()
-        # builderfactory.getBuilder(LAYER.TestPoint).builder()
         builderfactory.getBuilder(LAYER.Case).builder()
         caseNameList = CaseManagerInstance.get_keyword()
         welcome()

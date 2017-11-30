@@ -1,10 +1,6 @@
 from troubleshooting.framework.output.output import OutPut
-from troubleshooting.framework.version.version import VERSION
-from optparse import OptionParser
 import os,sys
 import signal
-import platform
-import time
 from troubleshooting.framework.management.client import client
 def onsignal_int(a,b):
     OutPut().stop()

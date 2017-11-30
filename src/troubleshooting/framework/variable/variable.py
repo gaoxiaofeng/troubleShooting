@@ -66,13 +66,6 @@ except:
 
 
 
-
-
-    #
-    # def enum(**enums):
-    #     return type("Enum", (), enums)
-
-
     LEVEL = enum(CRITICAL="critical", NOCRITICAL="noCritical")
     STATUS = enum(PASS="PASS", FAIL="FAIL", NOTRUN="NOT_RUN")
     BEHAVIOR = enum(CONTINUE="continue", RUNAGAIN="runAgain", EXIT="exit", NEXT="Next")

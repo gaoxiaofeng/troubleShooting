@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import  paramiko
 import os
-from troubleshooting.framework.libraries.library import getFileMd5
+from troubleshooting.framework.libraries.system import getFileMd5
 import sys
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
 class Remote(object):

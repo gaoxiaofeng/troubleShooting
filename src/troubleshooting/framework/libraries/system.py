@@ -1,6 +1,8 @@
-import sys,os
+# -*- coding: utf-8 -*-
+import os
 import shutil
 import traceback
+import hashlib
 from troubleshooting.framework.log.logger import logger
 import time
 def createDir(path):
@@ -67,3 +69,11 @@ def get_FileCreateTimeStamp(path):
     filepath = unicode(path,"utf8")
     t = os.path.getctime(filepath)
     return t
+def  getFileMd5(filename):
+    if not os.path.isfile(filename):
+        raise Exception("failed to get file md5, reason :%s is not a file"%filename)
+    myhash = hashlib.md5()
+    with open(filename,"rb") as f:
+        content = f.read()
+        myhash.update(content)
+    return  myhash.hexdigest()

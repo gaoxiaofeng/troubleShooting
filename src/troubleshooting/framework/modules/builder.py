@@ -5,8 +5,7 @@ from os import listdir,getcwd,sep
 from troubleshooting.framework.modules.Import import Import
 from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.variable.variable import  *
-from troubleshooting.framework.output.Print import CONSOLE
-import sys
+
 RUN_FOLDER = getcwd()
 
 class Builder(object):

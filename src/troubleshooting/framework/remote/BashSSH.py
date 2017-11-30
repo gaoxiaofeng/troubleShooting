@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import  paramiko
 import os
-from troubleshooting.framework.libraries.library import getFileMd5
+from troubleshooting.framework.libraries.system import getFileMd5
 class BaseSSH(object):
     def __init__(self):
         super(BaseSSH,self).__init__()

@@ -2,7 +2,8 @@
 from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.exception.exception import *
 from troubleshooting.framework.variable.variable import *
-from troubleshooting.framework.libraries.library import singleton,convertTime
+from troubleshooting.framework.libraries.library import singleton
+from troubleshooting.framework.libraries.baseTime import convertTime
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
 from troubleshooting.framework.modules.tags import TagPattern
 import sys,os

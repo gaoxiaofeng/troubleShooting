@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from optparse import  OptionParser
 from troubleshooting.framework.version.version import VERSION
-from troubleshooting.framework.libraries.library import getRandomString,isSublist,compareList,parseRecoveryArgs
+from troubleshooting.framework.libraries.baseString import getRandomString
 import sys,os,platform
 from troubleshooting.framework.modules.configuration import  ConfigManagerInstance
 def parsedArgs():
@@ -12,14 +13,12 @@ def parsedArgs():
     opt.add_option("--host",dest="Host",help="host for remote connection")
     opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default="22")
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
-    opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="arthur")
+    opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="root")
     opt.add_option("--case",dest="case",help="select the case to run by case name")
     opt.add_option("--include",dest="include",help="""select cases to run by tag, Tags can also be combined together with  `AND` and `OR` .
     Example: --include=coolANDhot""")
     opt.add_option("--exclude",dest="exclude",help="""select cases not to run by tag. Tags can also be combined together with  `AND` and `OR` .
     Example: --include=coolORhot""")
-    # opt.add_option("--report",dest="report",help="HTML report file, default is report.html",default="report.html")
-    # opt.add_option("-r","--recovery", dest="Recovery", help="try to recovery problem")
     opt.add_option("-r", "--recovery", dest="Recovery")
     options, args = opt.parse_args()
     reportHash = (getRandomString(5) + ".d")

@@ -2,7 +2,8 @@
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.variable.variable import *
-from troubleshooting.framework.libraries.library import parseRule,RemoveDuplicates
+from troubleshooting.framework.libraries.baseString import parseRule
+from troubleshooting.framework.libraries.baseList import RemoveDuplicates
 from troubleshooting.framework.output.output import OutPutQueue
 from troubleshooting.framework.exception.exception import CaseManagerException
 try:

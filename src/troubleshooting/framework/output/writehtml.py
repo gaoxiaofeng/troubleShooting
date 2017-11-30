@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.variable.variable import *
-from troubleshooting.framework.libraries.library import list2stringAndFormat
+from troubleshooting.framework.libraries.baseList import list2stringAndFormat
 from troubleshooting.framework.libraries.system import createDir
 from troubleshooting.framework.modules.configuration import ConfigManagerInstance
-from troubleshooting.framework.output.Print import CONSOLE
 import time
 import os,sys
-from os.path import  join,abspath,dirname
 from htmltemplate import *
 import re
 class html(object):

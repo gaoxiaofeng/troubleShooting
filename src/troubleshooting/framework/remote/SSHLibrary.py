@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from troubleshooting.framework.remote.BashSSH import BaseSSH
 class SSHLibrary(BaseSSH):
     def __init__(self):

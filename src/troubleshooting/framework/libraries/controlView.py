@@ -1,8 +1,43 @@
 # -*- coding: utf-8 -*-
 from troubleshooting.framework.output.output import OutPutQueue
 from troubleshooting.framework.variable.variable import *
-from troubleshooting.framework.libraries.library import Getch
 import  re
+
+
+class _GetchUnix(object):
+    def __init__(self):
+        super(_GetchUnix, self).__init__()
+    def __call__(self):
+        import tty, sys, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd,termios.TCSADRAIN,old_settings)
+        return ch
+
+class _GetchWindows(object):
+    def __init__(self):
+        super(_GetchWindows, self).__init__()
+        import msvcrt
+    def __call__(self):
+        return raw_input()
+
+
+class Getch(object):
+    def __init__(self):
+        super(Getch,self).__init__()
+        try:
+            self.impl = _GetchWindows()
+        except ImportError:
+            self.impl = _GetchUnix()
+    def __call__(self):
+        return  self.impl()
+
+
+
 class ControlView(object):
     def __init__(self,mode = LISTMODE,width = 20):
         super(ControlView, self).__init__()

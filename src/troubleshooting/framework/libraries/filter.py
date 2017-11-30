@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.variable.variable import *
 
