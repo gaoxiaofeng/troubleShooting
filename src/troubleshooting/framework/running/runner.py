@@ -16,6 +16,7 @@ from troubleshooting.framework.httpserver.server import  server
 from troubleshooting.framework.running.recovery import recovery
 from troubleshooting.framework.running.args import parsedArgs
 from troubleshooting.framework.libraries.filter import filterCaselist
+import getpass
 import sys,os
 import time
 import signal
@@ -81,7 +82,7 @@ def run_cli(*args):
         host = ConfigManagerInstance.config["Host"]
         port = ConfigManagerInstance.config["Port"]
         user = ConfigManagerInstance.config["User"]
-        password = ConfigManagerInstance.config["Password"]
+
         if user != "root":
             print "WARN: Access right is not enough."
         try:
@@ -94,9 +95,11 @@ def run_cli(*args):
             raise Exception("port is mandatory")
         if not user:
             raise Exception("user is mandatory")
-        if not password:
-            raise Exception("password is mandatory")
-
+        while 1:
+            password = getpass.getpass("password:  ")
+            if password:
+                break
+        ConfigManagerInstance.config["Password"] = password
         if not client().test_connection(host,port,user,password):
             return
 

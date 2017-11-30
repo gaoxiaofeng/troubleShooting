@@ -13,7 +13,7 @@ def parsedArgs():
     opt.add_option("--host",dest="Host",help="host for remote connection")
     opt.add_option("--port",dest="Port",help="port for remote connection ,defaut port is 22",default="22")
     opt.add_option("--user", dest="User", help="user for remote connection , default user is root", default="root")
-    opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="root")
+    # opt.add_option("--password", dest="Password", help="password for remote connection , default password is arthur", default="root")
     opt.add_option("--case",dest="case",help="select the case to run by case name")
     opt.add_option("--include",dest="include",help="""select cases to run by tag, Tags can also be combined together with  `AND` and `OR` .
     Example: --include=coolANDhot""")
@@ -30,7 +30,7 @@ def parsedArgs():
     ConfigManagerInstance.config = {"Host":options.Host}
     ConfigManagerInstance.config = {"Port":options.Port}
     ConfigManagerInstance.config = {"User":options.User}
-    ConfigManagerInstance.config = {"Password":options.Password}
+    # ConfigManagerInstance.config = {"Password":options.Password}
     ConfigManagerInstance.config = {"SYSTEM":_system_}
     ConfigManagerInstance.config = {"List":options.List}
     ConfigManagerInstance.config = {"Clean": options.Clean}
