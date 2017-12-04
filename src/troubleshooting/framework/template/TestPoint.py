@@ -91,4 +91,6 @@ class TestPoint(Thread):
 
     def terminate(self):
         raise RuntimeError("raise SystemExit from terminate commands")
+    def stop(self):
+        self.terminate()
 

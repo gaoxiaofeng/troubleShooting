@@ -2,10 +2,7 @@ from troubleshooting.framework.output.output import OutPut
 import os,sys
 import signal
 from troubleshooting.framework.management.client import client
-def onsignal_int(a,b):
-    OutPut().stop()
-    print '\nExit'
-    sys.exit(0)
+from troubleshooting.framework.libraries.signal import onsignal_int
 signal.signal(signal.SIGINT, onsignal_int)
 
 

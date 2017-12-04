@@ -1,6 +1,6 @@
 import BaseHTTPServer,CGIHTTPServer
 from threading import  Thread
-import os
+import os,time
 import urllib
 from os.path import abspath,dirname,join
 from troubleshooting.framework.modules.configuration import  ConfigManagerInstance
@@ -102,6 +102,7 @@ class server(Thread):
     def stop(self):
         # self.terminate()
         self.server.shutdown()
+        time.sleep(2)
         self.terminate()
     def move_report_to_home(self):
         index_template = join(dirname(dirname(ConfigManagerInstance.config["Report"])),"index.html")

@@ -8,6 +8,7 @@ from troubleshooting.framework.modules.configuration import ConfigManagerInstanc
 from troubleshooting.framework.modules.tags import TagPattern
 import sys,os
 import time
+from troubleshooting.framework.modules.thread import ThreadManager
 class BaseManager(object):
     '''
     base manager
@@ -32,6 +33,7 @@ class BaseManager(object):
         else:
             instanceMethod = self._parse_instance(instance)
             self.__registry[className] = instanceMethod
+            # print "class:%s, method:%s"%(className,instanceMethod)
     def register(self,instance):
         """
         register the class.
@@ -43,14 +45,14 @@ class BaseManager(object):
         else:
             raise BaseManagerException("BaseManager.register: args must be a class/object.")
     def _parse_instance(self,instance):
-        instaceMethod = {}
+        instanceMethod = {}
         for attr in dir(instance):
             if not attr.startswith("_"):
                 keyword = getattr(instance,attr)
                 if  callable(keyword):
-                    instaceMethod[attr] = keyword
-
-        return instaceMethod
+                    instanceMethod[attr] = keyword
+        instanceMethod["self"] = instance
+        return instanceMethod
     def get_keyword(self,keywordName=None):
         if keywordName == None:
             return  self._registry
@@ -100,18 +102,14 @@ class  TestPointManager(BaseManager):
                 testPoint = testPoint.strip("{")
             if "}" in testPoint:
                 testPoint = testPoint.strip("}")
-            testPointRunner = self.get_keyword("%s.%s"%(testPoint,"start"))
+            testPointEntry = self.get_keyword("%s.self"%(testPoint))
             testPointGetResult = self.get_keyword("%s.%s"%(testPoint,"getResult"))
-            testPointIsAlive =  self.get_keyword("%s.%s"%(testPoint,"isAlive"))
-            testPointKill = self.get_keyword("%s.%s"%(testPoint,"terminate"))
-            testPointWaitForExist = self.get_keyword("%s.%s"%(testPoint,"join"))
             testPointAttribute = self.get_keyword("%s.%s"%(testPoint,"get_attribute"))
             testPointTimeout = testPointAttribute("timeout")
             testPointLevel =  testPointAttribute("level")
             start_time = time.time()
             expiration_time = start_time + convertTime(testPointTimeout)
-            # testPointRunner(firstTestPoint)
-            testPointRunner()
+            testPointThreadno = ThreadManager().start(testPointEntry)
             while time.time() < expiration_time:
                 result = testPointGetResult()
                 if result is not None:
@@ -121,13 +119,9 @@ class  TestPointManager(BaseManager):
             cost_time = float("%.2f"%(end_time - start_time))
             cost_time_string = "%s sec"%cost_time
             if result is None:
-                if testPointIsAlive():
-                    try:
-                        testPointKill()
-                    except Exception,e:
-                        print e
-                    finally:
-                        testPointWaitForExist()
+                # for timeout
+                ThreadManager().stop(testPointThreadno)
+                ThreadManager().join(testPointThreadno)
                 status, rcaList, impactList, fixStepList,autoFixStepList, describe, internalLog = False,["testpoint running timeout [%s]"%testPointTimeout],[],[],[],"",""
             if firstTestPoint:
                 firstTestPoint = False
