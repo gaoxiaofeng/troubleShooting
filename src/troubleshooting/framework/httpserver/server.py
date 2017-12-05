@@ -7,6 +7,7 @@ from troubleshooting.framework.modules.configuration import  ConfigManagerInstan
 from troubleshooting.framework.libraries.system import copyDir,removeFile
 from troubleshooting.framework.log.logger import logger
 import traceback
+from SocketServer import ThreadingMixIn
 class CGIHandler(CGIHTTPServer.CGIHTTPRequestHandler):
     cgi_directories = ['/www/cgi-bin']
     def log_message(self, format, *args):
@@ -83,6 +84,9 @@ def _url_collapse_path(path):
     collapsed_path = "/".join(splitpath)
 
     return collapsed_path
+
+class ThreadingHttpServer(ThreadingMixIn,BaseHTTPServer.HTTPServer):
+    pass
 class server(Thread):
     def __init__(self,port=8888,skip_deploy=False):
         super(server,self).__init__()
@@ -95,7 +99,7 @@ class server(Thread):
 
         self.deploy()
         # os.chdir(self.home)
-        self.server = BaseHTTPServer.HTTPServer(("",self.port),CGIHandler )
+        self.server = ThreadingHttpServer(("",self.port),CGIHandler )
         self.server.serve_forever()
     def terminate(self):
         raise RuntimeError("raise SystemExit from terminate commands")
