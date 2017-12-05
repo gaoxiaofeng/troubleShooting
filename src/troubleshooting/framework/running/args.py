@@ -103,8 +103,7 @@ class ReadOnlyHandle(BaseHandle):
         if ConfigManagerInstance.config["ReadOnly"]:
             try:
                 cigServer = server(skip_deploy=True)
-                ThreadManager().append(cigServer)
-                cigServer.start()
+                ThreadManager().start(cigServer)
                 print "init ReadOnly mode successfully."
                 linkage = "http://localhost:8888/www/cgi-bin/index.py"
                 if ConfigManagerInstance.config["SYSTEM"] == SYSTEM.WINDOWS.value:
