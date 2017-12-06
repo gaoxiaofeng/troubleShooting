@@ -52,6 +52,7 @@ else:
             with open(error_page,"rb") as f:
                 print f.read()
     else:
+        list_page = join(homeDir,"list.html")
         print "Content-Type: text/html"     # HTML is following
         print                               # blank line, end of headers
         if not form.has_key("reportHash"):
@@ -65,6 +66,7 @@ else:
                     index.append(fileCreateTimeStamp)
                     filepathDict[str(fileCreateTimeStamp)] = _filepath
             index.sort()
+            reportLines = []
             for _index in index:
                 _filepath = filepathDict[str(_index)]
                 _fileName = _filepath.split(os.path.sep)[-1]
@@ -73,16 +75,26 @@ else:
                 fileModifyTime = get_FileModifyTime(_filepath)
                 dataxmlpath = join(_filepath,"data.xml")
                 pass_num,fail_num = parsexml().get_cases_status(dataxmlpath)
-                hashlink.append('<div>%s<a href="http://localhost:8888/www/cgi-bin/index.py?reportHash=%s">Detail Page(pass %s/fail %s)</a></div>'%(fileCreateTime,_fileName,pass_num,fail_num))
-            linkage = "</br>".join(hashlink)
+                status = "%s PASS / %s FAIL"%(pass_num,fail_num)
+                url = "http://localhost:8888/www/cgi-bin/index.py?reportHash=%s"%_fileName
+                reportLine = """
+                	<tr>
+								<td><h3><a href="%s">This is Troubleshooting Report</a></h3></td>
+								<td>%s</td>
+								<td><a href="%s">%s</a></td>
+								<td><a href="#" class="ico del">Delete</a></td>
+							</tr>
+                """%(url,fileCreateTime,url,status)
+                reportLines.append(reportLine)
 
-            html = """
-        <html>
-        <head>
-        </head>
-        <body>
-        %s
-        </body>
-        </html>
-        """%linkage
-            print html
+            reportLinesStr = "\n".join(reportLines)
+
+            try:
+                with open(list_page,"rb") as f:
+                    content = f.read()
+                    content = content.replace("{REPORTLIST}",reportLinesStr)
+                    print content
+            except IOError,e:
+                error_page = join(homeDir, "others", "404.html")
+                with open(error_page, "rb") as f:
+                    print f.read()

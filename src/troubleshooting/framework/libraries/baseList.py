@@ -25,3 +25,8 @@ def RemoveDuplicates(list):
         if elem not in finalList:
             finalList.append(elem)
     return finalList
+def anyElement2StringForList(List):
+    return map(anyConvertToString,List)
+
+def anyConvertToString(o):
+    return str(o)

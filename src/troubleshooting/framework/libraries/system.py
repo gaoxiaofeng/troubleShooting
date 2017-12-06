@@ -4,7 +4,9 @@ import shutil
 import traceback
 import hashlib
 from troubleshooting.framework.log.logger import logger
+from troubleshooting.framework.libraries.baseList import anyElement2StringForList
 import time
+from  os.path import join,dirname,abspath
 def createDir(path):
     if not os.path.isdir(path):
         try:
@@ -34,6 +36,31 @@ def clean(path=os.getcwd()):
             if file == "www":
                 #clean for cig-bin directory
                 removeDir(absolute_path)
+def auto_clean(path=join(os.getcwd(),"www")):
+    reportindexList = []
+    reportDict = {}
+
+    for file in os.listdir(path):
+        absolute_path = os.path.join(path, file)
+        if os.path.isdir(absolute_path):
+            if len(file) == 7 and file.endswith(".d"):
+                fileCreateTimeStamp = get_FileCreateTimeStamp(absolute_path)
+                reportindexList.append(fileCreateTimeStamp)
+                reportDict[str(fileCreateTimeStamp)] = absolute_path
+    if len(reportindexList) > 10:
+        reportindexList.sort()
+        reportindexList = anyElement2StringForList(reportindexList)
+        need_delete_number = len(reportindexList) - 10
+        for index in range(need_delete_number):
+            need_delete_file_path = reportDict[reportindexList[index]]
+            removeDir(need_delete_file_path)
+
+
+
+
+
+
+
 
 def copyFile(old,new):
     with open(old, "rb") as f:

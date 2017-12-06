@@ -86,7 +86,19 @@ def _url_collapse_path(path):
     return collapsed_path
 
 class ThreadingHttpServer(ThreadingMixIn,BaseHTTPServer.HTTPServer):
-    pass
+    def handle_error(self, request, client_address):
+        """Handle an error gracefully.  May be overridden.
+
+        The default is to print a traceback and continue.
+
+        """
+        errorMessage = []
+        errorMessage.append('-'*40)
+        errorMessage.append('Exception happened during processing of request from'+str(client_address))
+        errorMessage.append(traceback.format_exc())
+        errorMessage.append('-'*40)
+        logger().error("\n".join(errorMessage))
+
 class server(Thread):
     def __init__(self,port=8888,skip_deploy=False):
         super(server,self).__init__()

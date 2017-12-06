@@ -8,7 +8,7 @@ from troubleshooting.framework.libraries.baseString import getRandomString
 from troubleshooting.framework.modules.configuration import  ConfigManagerInstance
 from troubleshooting.framework.modules.manager import ManagerFactory
 from troubleshooting.framework.output.welcome import welcome
-from troubleshooting.framework.libraries.system import clean
+from troubleshooting.framework.libraries.system import clean,auto_clean
 from troubleshooting.framework.modules.thread import ThreadManager
 from troubleshooting.framework.log.logger import logger
 from troubleshooting.framework.httpserver.server import  server
@@ -70,7 +70,12 @@ class ParseArgsHandle(BaseHandle):
 
         super(ParseArgsHandle,self).handle()
 
-
+class AutoCleanEnvHandle(BaseHandle):
+    def __init__(self):
+        super(AutoCleanEnvHandle,self).__init__()
+    def handle(self):
+        auto_clean()
+        super(AutoCleanEnvHandle,self).handle()
 
 
 class ListHandle(BaseHandle):
@@ -242,13 +247,15 @@ class ArgsHandleClient(object):
         super(ArgsHandleClient,self).__init__()
     def handle(self):
         h0 = ParseArgsHandle()
+        h0_5 = AutoCleanEnvHandle()
         h1 = ListHandle()
         h2 = CleanHandle()
         h3 = ReadOnlyHandle()
         h4 = TestConnectionForRemoteHandle()
         h5 = DoDetectHandle()
         h6 = DoRecoveryHandle()
-        h0.successor = h1
+        h0.successor = h0_5
+        h0_5.successor = h1
         h1.successor = h2
         h2.successor = h3
         h3.successor = h4
