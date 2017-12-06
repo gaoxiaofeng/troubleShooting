@@ -117,8 +117,11 @@ class server(Thread):
         raise RuntimeError("raise SystemExit from terminate commands")
     def stop(self):
         # self.terminate()
+
+
         self.server.shutdown()
-        time.sleep(2)
+        time.sleep(1)
+        self.server.shutdown_request()
         self.terminate()
     def move_report_to_home(self):
         index_template = join(dirname(dirname(ConfigManagerInstance.config["Report"])),"index.html")
