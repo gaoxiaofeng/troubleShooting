@@ -39,7 +39,8 @@ def clean(path=os.getcwd()):
 def auto_clean(path=join(os.getcwd(),"www")):
     reportindexList = []
     reportDict = {}
-
+    if not os.path.exists(path):
+        return
     for file in os.listdir(path):
         absolute_path = os.path.join(path, file)
         if os.path.isdir(absolute_path):
